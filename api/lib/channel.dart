@@ -1,3 +1,4 @@
+import './controller/controller.dart';
 import 'api.dart';
 
 /// This type initializes an application.
@@ -29,10 +30,8 @@ class ApiChannel extends ApplicationChannel {
     // Prefer to use `link` instead of `linkFunction`.
     // See: https://aqueduct.io/docs/http/request_controller/
     router
-      .route("/example")
-      .linkFunction((request) async {
-        return Response.ok({"key": "value"});
-      });
+      .route("/resume")
+      .link(() => ResumeController());
 
     return router;
   }
