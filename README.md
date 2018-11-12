@@ -1,4 +1,4 @@
-# chrismeyers,info
+# chrismeyers.info
 This is the codebase for my personal website currently located at <https://chrismeyers.info>
 
 ## Credit
