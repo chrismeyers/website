@@ -1,24 +1,19 @@
 import 'dart:io';
 
 class ResumeParser {
-  List<String> _lines;
-  Map<String, List<String>> _rawSections;
+  final List<String> _lines;
+  final Map<String, List<String>> _rawSections;
 
-  ResumeParser(String path) {
-    _lines = File(path).readAsLinesSync();
+  ResumeParser(String path) :
+    _lines = File(path).readAsLinesSync(),
     _rawSections = {};
-    _parseLatexFile();
-  }
 
-  List<String> get lines => _lines;
-  Map<String, List<String>> get rawSections => _rawSections;
-
-  void _parseLatexFile() {
+  void parseLatexFile() {
     const String beginPattern = "% BEGIN ";
     const String endPattern = "% END ";
     String section = "";
 
-    for(String line in lines) {
+    for(String line in _lines) {
       line = line.trim();
       if(line.contains(beginPattern)) { // New section
         section = line.substring(beginPattern.length);

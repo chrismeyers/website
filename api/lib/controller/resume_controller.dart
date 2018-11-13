@@ -6,6 +6,7 @@ class ResumeController extends ResourceController {
   @Operation.get()
   Future<Response> getResume() async {
     final ResumeParser parser = ResumeParser("../resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.tex");
+    parser.parseLatexFile();
 
     return Response.ok({
       "experience": parser.parseComplexSection("Experience"),
