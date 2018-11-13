@@ -52,49 +52,5 @@ export default {
 </script>
 
 <style scoped>
-.section-header {
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
 
-.content {
-  -webkit-margin-bottom-collapse: separate; /* Fixes margin-bottom for non-chrome browsers */
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-}
-
-.content-text {
-  padding: 10px 5px 10px 5px;
-}
-
-.dt-mod {
-  margin-top: 15px;
-}
-
-.dt-links {
-  margin-bottom: 5px;
-}
-
-.first-header {
-  margin-top: 0px;
-}
-
-.content {
-  -webkit-flex: 1;
-  flex: 1;
-}
-
-.content-text {
-  padding: 10px 15px;
-  max-width: 1595px; /* Max width = 1920, adjusted for margins and nav. Does not account for scroll bars. */
-  margin: 0 auto; /* Centers content if width is greater than 1920px. */
-}
-
-.section-header-size {
-  height: 90px;
-  line-height: 90px;
-  font-size: 40px;
-  text-align: center;
-}
 </style>

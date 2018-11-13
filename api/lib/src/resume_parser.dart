@@ -38,21 +38,23 @@ class ResumeParser {
     }
   }
 
-  List<Map<String, List<List<String>>>> parseComplexSection(String section) {
+  List<Map<String, dynamic>> parseComplexSection(String section) {
     const String firstLinePattern = '{\\textbf{';
     const String secondLinePattern = '{\\emph{';
     const String endPattern = '}}';
     const String infoPattern = '\\item';
     const String sameCompanyPattern = '% Same Company';
 
-    final List<Map<String, List<List<String>>>> items = [];
+    final List<Map<String, dynamic>> items = [];
 
-    List<List<String>> firstLine = [];
+    List<String> firstLine = [];
     List<List<String>> secondLine = [];
     List<List<String>> info = [];
 
     List<String> currentSecondLine = [];
     List<String> currentInfo = [];
+
+    int id = -1;
 
     for(int i = 0; i < _rawSections[section].length; i++) {
       final String line = _rawSections[section][i].trim();
@@ -62,12 +64,7 @@ class ResumeParser {
         final int endPatternIndex = line.indexOf(endPattern);
         final String cleaned = _cleanString(line.substring(beginPatternIndex, endPatternIndex).replaceAll(endPattern, ""));
 
-        if(firstLine.length == 1) {
-          firstLine[0].add(cleaned);
-        }
-        else {
-          firstLine.add([cleaned]);
-        }
+        firstLine.add(cleaned);
       }
       else if(line.startsWith(secondLinePattern)){
         final int beginPatternIndex = line.indexOf(secondLinePattern) + secondLinePattern.length;
@@ -92,7 +89,8 @@ class ResumeParser {
           info.add(List<String>.from(currentInfo));
 
           items.add({
-            "firstLine": List<List<String>>.from(firstLine),
+            "id": ++id,
+            "firstLine": List<String>.from(firstLine),
             "secondLine": List<List<String>>.from(secondLine),
             "info": List<List<String>>.from(info)
           });
@@ -114,7 +112,8 @@ class ResumeParser {
     secondLine.add(List<String>.from(currentSecondLine));
     info.add(List<String>.from(currentInfo));
     items.add({
-      "firstLine": List<List<String>>.from(firstLine),
+      "id": ++id,
+      "firstLine": List<String>.from(firstLine),
       "secondLine": List<List<String>>.from(secondLine),
       "info": List<List<String>>.from(info)
     });
@@ -142,7 +141,7 @@ class ResumeParser {
 
     output = output.replaceAll("\\CPP", "C++");
     output = output.replaceAll("\\break", "");
-    output = output.replaceAll("--", "&ndash");
+    output = output.replaceAll("--", "&ndash;");
     output = output.replaceAll("\\", "");
 
     return output;
