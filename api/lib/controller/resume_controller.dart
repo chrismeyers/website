@@ -11,7 +11,8 @@ class ResumeController extends ResourceController {
     return Response.ok({
       "experience": parser.parseComplexSection("Experience"),
       "education": parser.parseComplexSection("Education"),
-      "skills": parser.parseListSection("TechnicalSkills")
+      "skills": parser.parseListSection("TechnicalSkills"),
+      "lastModified": parser.lastModified.millisecondsSinceEpoch / 1000
     });
   }
 }

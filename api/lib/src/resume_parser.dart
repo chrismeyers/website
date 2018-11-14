@@ -3,10 +3,14 @@ import 'dart:io';
 class ResumeParser {
   final List<String> _lines;
   final Map<String, List<String>> _rawSections;
+  final DateTime _lastModified;
 
   ResumeParser(String path) :
     _lines = File(path).readAsLinesSync(),
-    _rawSections = {};
+    _rawSections = {},
+    _lastModified = File(path).lastModifiedSync();
+
+  DateTime get lastModified => _lastModified;
 
   void parseLatexFile() {
     const String beginPattern = "% BEGIN ";
