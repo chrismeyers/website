@@ -49,8 +49,6 @@ class ResumeParser {
     List<String> currentSecondLine = [];
     List<String> currentInfo = [];
 
-    int id = -1;
-
     for(int i = 0; i < _rawSections[section].length; i++) {
       final String line = _rawSections[section][i].trim();
 
@@ -84,7 +82,6 @@ class ResumeParser {
           info.add(List<String>.from(currentInfo));
 
           items.add({
-            "id": ++id,
             "firstLine": List<String>.from(firstLine),
             "secondLine": List<List<String>>.from(secondLine),
             "info": List<List<String>>.from(info)
@@ -107,7 +104,6 @@ class ResumeParser {
     secondLine.add(List<String>.from(currentSecondLine));
     info.add(List<String>.from(currentInfo));
     items.add({
-      "id": ++id,
       "firstLine": List<String>.from(firstLine),
       "secondLine": List<List<String>>.from(secondLine),
       "info": List<List<String>>.from(info)
