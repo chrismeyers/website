@@ -4,46 +4,52 @@
 
     <div class="content-text">
       <h2 class="top">Experience</h2>
-      <div v-for="job in experience" :key="job.id">
-        <div class="left-column company">{{ job.firstLine[0] }}</div>
-        <div class="right-column location">{{ job.firstLine[1] }}</div>
-
-        <div v-for="(position, i) in job.secondLine" :key="position.id">
-          <div class="left-column sub-left-column job-title">{{ job.secondLine[i][0] }}</div>
-          <div class="right-column tenure" v-html="job.secondLine[i][1]"></div>
-          <div class="remove-bullets" v-for="entry in job.info[i]" :key="entry.id">
-            <ul class="more-info">
-              <div class="more-info">{{ entry }}</div>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <template v-for="job in experience">
+        <ul :key="job.id">
+          <li class="left-column company" v-html="job.firstLine[0]"></li>
+          <li class="right-column location" v-html="job.firstLine[1]"></li>
+          <template v-for="(secondLine, i) in job.secondLine">
+            <li class="left-column sub-left-column job-title" :class="{ 'same-company-spacing': i > 0 }" :key="secondLine.id" v-html="secondLine[0]"></li>
+            <li class="right-column tenure" :class="{ 'same-company-spacing': i > 0 }" :key="secondLine.id" v-html="secondLine[1]"></li>
+            <li class="remove-bullets" :key="secondLine.id">
+              <ul class="more-info">
+                <template v-for="info in job.info[i]">
+                  <li class="more-info" :key="info.id" v-html="info"></li>
+                </template>
+              </ul>
+            </li>
+          </template>
+        </ul>
+      </template>
 
       <br /> <hr>
 
       <h2>Education</h2>
-      <div v-for="school in education" :key="school.id">
-        <div class="left-column school">{{ school.firstLine[0] }}</div>
-        <div class="right-column location">{{ school.firstLine[1] }}</div>
-
-        <div v-for="degree in school.secondLine" :key="degree.id">
-          <div class="left-column sub-left-column degree">{{ degree[0] }}</div>
-          <div class="right-column tenure" v-html="degree[1]"></div>
-        </div>
-      </div>
+      <template v-for="school in education">
+        <ul :key="school.id">
+            <li class="left-column school" v-html="school.firstLine[0]"></li>
+            <li class="right-column location" v-html="school.firstLine[1]"></li>
+            <template v-for="secondLine in school.secondLine">
+              <li class="left-column sub-left-column degree" :key="secondLine.id" v-html="secondLine[0]"></li>
+              <li class="right-column tenure" :key="secondLine.id" v-html="secondLine[1]"></li>
+            </template>
+        </ul>
+      </template>
 
       <br /> <hr>
 
       <h2>Technical Skills</h2>
       <ul>
-        <li v-for="skill in skills" :key="skill.id">{{ skill }}</li>
+        <template v-for="skill in skills">
+          <li :key="skill.id">{{ skill }}</li>
+        </template>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import ResumeApi from "@/utils/api/resume";
 
 export default {
   name: 'Resume',
@@ -55,13 +61,13 @@ export default {
     }
   },
   mounted() {
-    axios.get(`http://localhost:8888/resume`)
-    .then(response => {
-      var resume = response.data
-      this.experience = resume['experience']
-      this.education = resume['education']
-      this.skills = resume['skills']
-    })
+    ResumeApi.getResume().then(
+      resume => {
+        this.experience = resume.data.experience
+        this.education = resume.data.education
+        this.skills = resume.data.skills
+      }
+    )
   }
 }
 </script>
@@ -71,7 +77,7 @@ export default {
   list-style-type: none;
 }
 
-@media screen and (min-width: 860px) {
+@media screen and (min-width: 912px) {
   ul {
     overflow: hidden;
   }
@@ -108,7 +114,7 @@ export default {
   }
 }
 
-@media screen and (max-width: 806px) {
+@media screen and (max-width: 911px) {
   .company, .school {
     font-weight: bold;
   }
