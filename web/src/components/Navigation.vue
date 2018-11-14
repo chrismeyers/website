@@ -5,10 +5,10 @@
         <router-link class="nav-link" to="/"><a id="banner-small"><img src="@/assets/images/logos/meyers-logo-green.svg" alt="Chris Meyers. Developer, Tech enthusiast." class="banner-img" title="Home"></a></router-link>
       </div>
       <ul class="side-nav-items">
-        <li><a class="section-title-about header-link"><router-link class="nav-link" to="/">About</router-link></a></li>
-        <li><a class="section-title-resume header-link"><router-link class="nav-link" to="/resume">Résumé</router-link></a></li>
-        <li><a class="section-title-builds header-link"><router-link class="nav-link" to="/builds">Builds</router-link></a></li>
-        <li><a class="section-title-projects header-link"><router-link class="nav-link" to="/projects">Projects</router-link></a></li>
+        <li><router-link class="nav-link" :class="{ 'nav-selected': path == '/' }" to="/">About</router-link></li>
+        <li><router-link class="nav-link" :class="{ 'nav-selected': path == '/resume' }" to="/resume">Résumé</router-link></li>
+        <li><router-link class="nav-link" :class="{ 'nav-selected': path == '/builds' }" to="/builds">Builds</router-link></li>
+        <li><router-link class="nav-link" :class="{ 'nav-selected': path == '/projects' }" to="/projects">Projects</router-link></li>
       </ul>
 
       <div>
@@ -26,15 +26,31 @@ export default {
   components: {
     /* eslint-disable vue/no-unused-components */
     Footer
+  },
+  data() {
+    return {
+      path: null
+    }
+  },
+  mounted() {
+    this.path = this.$route.path
+  },
+  watch: {
+    '$route.path' (path) {
+      this.path = path
+    }
   }
 }
 </script>
 
 <style scoped>
-.headerLink {
+.nav-link {
   color: #000000;
   text-decoration: none;
-  font-family: 'Open Sans', sans-serif;
+}
+
+.nav-selected {
+  color: #5bb75b !important;
 }
 
 #banner {
@@ -177,9 +193,8 @@ export default {
   height: 70px;
   font-size: 33px;
 }
-.side-nav-items > li > :hover {
+.side-nav-items > li > a:hover {
   color: #5bb75b !important;
-  cursor: pointer;
 }
 
 .overlay {
