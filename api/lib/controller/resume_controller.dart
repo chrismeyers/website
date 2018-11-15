@@ -12,7 +12,7 @@ class ResumeController extends ResourceController {
       "experience": parser.parseComplexSection("Experience"),
       "education": parser.parseComplexSection("Education"),
       "skills": parser.parseListSection("TechnicalSkills"),
-      "lastModified": parser.lastModified.millisecondsSinceEpoch / 1000
+      "lastModified": parser.lastModified.millisecondsSinceEpoch
     });
   }
 }

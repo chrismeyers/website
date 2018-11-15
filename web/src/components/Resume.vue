@@ -44,6 +44,8 @@
           <li :key="skill.id">{{ skill }}</li>
         </template>
       </ul>
+
+      <span class="timestamp">Last updated on: {{ lastModified }}</span>
     </div>
   </div>
 </template>
@@ -57,7 +59,8 @@ export default {
     return {
       experience: null,
       education: null,
-      skills: null
+      skills: null,
+      lastModified: null
     }
   },
   mounted() {
@@ -66,6 +69,7 @@ export default {
         this.experience = resume.data.experience
         this.education = resume.data.education
         this.skills = resume.data.skills
+        this.lastModified = new Date(resume.data.lastModified).toString()
       }
     )
   }
