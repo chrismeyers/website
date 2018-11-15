@@ -6,6 +6,8 @@ import 'api.dart';
 /// Override methods in this class to set up routes and initialize services like
 /// database connections. See http://aqueduct.io/docs/http/channel/.
 class ApiChannel extends ApplicationChannel {
+  ManagedContext context;
+
   /// Initialize services in this method.
   ///
   /// Implement this method to initialize services, read values from [options]
@@ -15,6 +17,18 @@ class ApiChannel extends ApplicationChannel {
   @override
   Future prepare() async {
     logger.onRecord.listen((rec) => print("$rec ${rec.error ?? ""} ${rec.stackTrace ?? ""}"));
+
+    final config = MyConfiguration(options.configurationFilePath);
+
+    final dataModel = ManagedDataModel.fromCurrentMirrorSystem();
+    final psc = PostgreSQLPersistentStore.fromConnectionInfo(
+        config.database.username,
+        config.database.password,
+        config.database.host,
+        config.database.port,
+        config.database.databaseName);
+
+    context = ManagedContext(dataModel, psc);
   }
 
   /// Construct the request channel.
@@ -27,12 +41,24 @@ class ApiChannel extends ApplicationChannel {
   Controller get entryPoint {
     final router = Router();
 
-    // Prefer to use `link` instead of `linkFunction`.
-    // See: https://aqueduct.io/docs/http/request_controller/
     router
       .route("/resume")
       .link(() => ResumeController());
 
+    router
+      .route("/build")
+      .link(() => BuildController(context));
+
+    router
+      .route("/image/[:id]")
+      .link(() => ImageController(context));
+
     return router;
   }
+}
+
+class MyConfiguration extends Configuration {
+  MyConfiguration(String configPath) : super.fromFile(File(configPath));
+
+  DatabaseConfiguration database;
 }
