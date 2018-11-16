@@ -18,10 +18,10 @@ class ApiChannel extends ApplicationChannel {
   Future prepare() async {
     logger.onRecord.listen((rec) => print("$rec ${rec.error ?? ""} ${rec.stackTrace ?? ""}"));
 
-    final config = MyConfiguration(options.configurationFilePath);
+    final MyConfiguration config = MyConfiguration(options.configurationFilePath);
 
-    final dataModel = ManagedDataModel.fromCurrentMirrorSystem();
-    final psc = PostgreSQLPersistentStore.fromConnectionInfo(
+    final ManagedDataModel dataModel = ManagedDataModel.fromCurrentMirrorSystem();
+    final PostgreSQLPersistentStore psc = PostgreSQLPersistentStore.fromConnectionInfo(
         config.database.username,
         config.database.password,
         config.database.host,
@@ -39,14 +39,14 @@ class ApiChannel extends ApplicationChannel {
   /// This method is invoked after [prepare].
   @override
   Controller get entryPoint {
-    final router = Router();
+    final Router router = Router();
 
     router
       .route("/resume")
       .link(() => ResumeController());
 
     router
-      .route("/build")
+      .route("/build/[:id]")
       .link(() => BuildController(context));
 
     router
