@@ -3,10 +3,10 @@ import 'package:api/api.dart';
 import 'package:api/model/build.dart';
 import 'package:api/model/image.dart';
 
-class BuildController extends ResourceController {
+class BuildsController extends ResourceController {
   ManagedContext context;
 
-  BuildController(this.context);
+  BuildsController(this.context);
 
   @Operation.get()
   Future<Response> getBuilds() async {
@@ -36,11 +36,11 @@ class BuildController extends ResourceController {
       final Query<Build> queryAddData = Query<Build>(transaction)
         ..values.date = body["date"] as String
         ..values.cpu = body["cpu"] as String
-        ..values.cool = (body["cool"] == null) ? null : body["cool"] as String
+        ..values.cool = body["cool"] as String
         ..values.mobo = body["mobo"] as String
         ..values.ram = body["ram"] as String
         ..values.hdd = body["hdd"] as String
-        ..values.ssd = (body["ssd"] == null) ? null : body["ssd"] as String
+        ..values.ssd = body["ssd"] as String
         ..values.gpu = body["gpu"] as String;
       final Build build = await queryAddData.insert();
 
@@ -77,14 +77,6 @@ class BuildController extends ResourceController {
         ..where((b) => b.id).equalTo(id);
       final Build build = await queryUpdateData.updateOne();
 
-      // Get the image that was originally related to this build and nullify
-      // the relationship.
-      final Query<Image> queryOrigImage = Query<Image>(transaction)
-        ..where((i) => i.build.id).equalTo(build.id)
-        ..values.build.id = null;
-      await queryOrigImage.updateOne();
-
-      // Set the new relation.
       final Query<Image> queryRelateImage = Query<Image>(transaction)
         ..where((i) => i.id).equalTo(imageId)
         ..values.build.id = build.id;

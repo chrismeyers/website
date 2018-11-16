@@ -46,12 +46,12 @@ class ApiChannel extends ApplicationChannel {
       .link(() => ResumeController());
 
     router
-      .route("/build/[:id]")
-      .link(() => BuildController(context));
+      .route("/builds/[:id]")
+      .link(() => BuildsController(context));
 
     router
-      .route("/image/[:id]")
-      .link(() => ImageController(context));
+      .route("/images/[:id]")
+      .link(() => ImagesController(context));
 
     return router;
   }

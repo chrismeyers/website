@@ -2,10 +2,10 @@ import 'package:aqueduct/aqueduct.dart';
 import 'package:api/api.dart';
 import 'package:api/model/image.dart';
 
-class ImageController extends ResourceController {
+class ImagesController extends ResourceController {
   ManagedContext context;
 
-  ImageController(this.context);
+  ImagesController(this.context);
 
   @Operation.get()
   Future<Response> getImages() async {

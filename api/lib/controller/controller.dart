@@ -1,3 +1,3 @@
-export './build_controller.dart';
-export './image_controller.dart';
+export './builds_controller.dart';
+export './images_controller.dart';
 export './resume_controller.dart';
