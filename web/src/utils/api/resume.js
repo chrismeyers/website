@@ -4,7 +4,7 @@ export default {
   // GET Methods
   getResume() {
     return axios
-      .get("/resume")
+      .get("/public/resume")
       .then(response => {
         return response;
       })
