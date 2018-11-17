@@ -8,6 +8,7 @@ import Projects from '@/components/Projects'
 Vue.use(VueRouter)
 
 export default new VueRouter({
+  mode: 'history',
   routes: [
     {
       path: '/',
