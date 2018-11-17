@@ -2,28 +2,10 @@ import 'package:aqueduct/aqueduct.dart';
 import 'package:api/api.dart';
 import 'package:api/model/image.dart';
 
-class ImagesController extends ResourceController {
+class ImagesAdminController extends ResourceController {
   ManagedContext context;
 
-  ImagesController(this.context);
-
-  @Operation.get()
-  Future<Response> getImages() async {
-    final Query<Image> query = Query<Image>(context);
-    final List<Image> allImages = await query.fetch();
-
-    return Response.ok(allImages);
-  }
-
-  @Operation.get("id")
-  Future<Response> getImage(@Bind.path("id") int id) async {
-    final Query<Image> query = Query<Image>(context)
-      ..where((i) => i.id).equalTo(id);
-
-    final Image image = await query.fetchOne();
-
-    return Response.ok(image);
-  }
+  ImagesAdminController(this.context);
 
   @Operation.post()
   Future<Response> addImage() async {
@@ -57,7 +39,11 @@ class ImagesController extends ResourceController {
     final Query<Image> query = Query<Image>(context)
       ..where((i) => i.id).equalTo(id);
 
-    await query.delete();
+    final int numDeleted = await query.delete();
+
+    if(numDeleted == 0) {
+      return Response.notFound(body: {"message": "image id $id does not exist"});
+    }
 
     return Response.ok({"id": id});
   }

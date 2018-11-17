@@ -1,8 +1,8 @@
 import 'package:aqueduct/managed_auth.dart';
 import 'package:api/model/user.dart';
 import './controller/controller.dart';
-import 'api.dart';
 import './src/api_config.dart';
+import 'api.dart';
 
 /// This type initializes an application.
 ///
@@ -58,16 +58,26 @@ class ApiChannel extends ApplicationChannel {
       .link(() => AuthController(authServer));
 
     router
-      .route("/resume")
+      .route("/public/resume")
       .link(() => ResumeController());
 
     router
-      .route("/builds/[:id]")
-      .link(() => BuildsController(context));
+      .route("/admin/images/[:id]")
+      .link(() => Authorizer.bearer(authServer))
+      .link(() => ImagesAdminController(context));
 
     router
-      .route("/images/[:id]")
-      .link(() => ImagesController(context));
+      .route("/public/images/[:id]")
+      .link(() => ImagesPublicController(context));
+
+    router
+      .route("/admin/builds/[:id]")
+      .link(() => Authorizer.bearer(authServer))
+      .link(() => BuildsAdminController(context));
+
+    router
+      .route("/public/builds/[:id]")
+      .link(() => BuildsPublicController(context));
 
     return router;
   }
