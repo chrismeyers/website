@@ -1,12 +1,17 @@
+import 'package:aqueduct/managed_auth.dart';
+import 'package:api/model/user.dart';
 import './controller/controller.dart';
 import 'api.dart';
+import './src/api_config.dart';
 
 /// This type initializes an application.
 ///
 /// Override methods in this class to set up routes and initialize services like
 /// database connections. See http://aqueduct.io/docs/http/channel/.
 class ApiChannel extends ApplicationChannel {
+  AuthServer authServer;
   ManagedContext context;
+  ApiConfig config;
 
   /// Initialize services in this method.
   ///
@@ -18,7 +23,7 @@ class ApiChannel extends ApplicationChannel {
   Future prepare() async {
     logger.onRecord.listen((rec) => print("$rec ${rec.error ?? ""} ${rec.stackTrace ?? ""}"));
 
-    final MyConfiguration config = MyConfiguration(options.configurationFilePath);
+    config = ApiConfig(options.configurationFilePath);
 
     final ManagedDataModel dataModel = ManagedDataModel.fromCurrentMirrorSystem();
     final PostgreSQLPersistentStore psc = PostgreSQLPersistentStore.fromConnectionInfo(
@@ -29,6 +34,9 @@ class ApiChannel extends ApplicationChannel {
         config.database.databaseName);
 
     context = ManagedContext(dataModel, psc);
+
+    final AuthServerDelegate authStorage = ManagedAuthDelegate<User>(context);
+    authServer = AuthServer(authStorage);
   }
 
   /// Construct the request channel.
@@ -40,6 +48,14 @@ class ApiChannel extends ApplicationChannel {
   @override
   Controller get entryPoint {
     final Router router = Router();
+
+    router
+      .route("/auth/register")
+      .link(() => RegisterController(context, authServer, config));
+
+    router
+      .route("/auth/token")
+      .link(() => AuthController(authServer));
 
     router
       .route("/resume")
@@ -55,10 +71,4 @@ class ApiChannel extends ApplicationChannel {
 
     return router;
   }
-}
-
-class MyConfiguration extends Configuration {
-  MyConfiguration(String configPath) : super.fromFile(File(configPath));
-
-  DatabaseConfiguration database;
 }
