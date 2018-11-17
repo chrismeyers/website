@@ -6,8 +6,8 @@
       <span>My name is Chris Meyers and I am a Software Engineer and technology enthusiast. Here's a quick list of things you should know about me:</span>
 
       <ul>
-        <li>I studied Computer Science at <a class="fancytxt" href="http://www.rowan.edu/" target="_blank">Rowan University</a> in Glassboro, NJ and earned a Bachelor of Science in Computer Science.</li>
-        <li>Currently, I am employed as a Software Engineer at <a class="fancytxt" href="http://asrcfederal.com/afms" target="_blank">ASRC Federal Mission Solutions</a>.</li>
+        <li>I studied Computer Science at <a class="fancytxt" href="https://www.rowan.edu/" target="_blank">Rowan University</a> in Glassboro, NJ and earned a Bachelor of Science in Computer Science.</li>
+        <li>Currently, I am employed as a Software Engineer at <a class="fancytxt" href="https://asrcfederal.com/afms" target="_blank">ASRC Federal Mission Solutions</a>.</li>
         <li>Some of my professional interests include:
           <ul>
             <li>Software Development, Web Development, Computer Networking</li>
@@ -15,7 +15,7 @@
         </li>
         <li>My hobbies include:
           <ul>
-              <li>Photography, reading, <a href="#builds" class="fancytxt">building custom computers</a>, playing video games</li>
+              <li>Photography, reading, <a href="/builds" class="fancytxt">building custom computers</a>, playing video games</li>
           </ul>
         </li>
         <li>I am the owner of this <a data-fancybox="gallery_clark" href="images/v6/clark/DSC_1564-6.jpg" title="Clark the Corgi" class="fancytxt no-outline">majestic beast</a>.</li>
