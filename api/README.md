@@ -1,29 +1,29 @@
 # api
 
-## Project setup
+## Install dependencies
 ```
-npm install
-```
-
-### Run the application in development mode
-```
-npm run dev
+yarn
 ```
 
-### Run the application in production mode
+### Run development server (server automatically restarts when files are saved)
 ```
-npm start
+yarn dev
+```
+
+### Run production server
+```
+yarn start
 ```
 
 ### Run tests
 ```
-npm test
+yarn test
 ```
 
 ### Lint and fix files
 ```
-npm run lint
-npm run lint:fix
+yarn lint
+yarn lint:fix
 ```
 
 ## Setup
