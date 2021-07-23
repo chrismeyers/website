@@ -1,9 +1,9 @@
 FROM node:16.3.0-slim as build-stage
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+COPY package.json yarn.lock ./
+RUN yarn
 COPY ./ .
-RUN npm run build
+RUN yarn build
 
 FROM nginx:1.21.0 as production-stage
 RUN mkdir /app

@@ -4,9 +4,9 @@ WORKDIR /resume
 ADD resume/ ./
 
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
+COPY package.json yarn.lock ./
+RUN yarn --production
 COPY ./ .
 
 EXPOSE 8888
-CMD ["node", "src/server.js"]
+CMD [ "node", "src/server.js" ]
