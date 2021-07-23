@@ -1,4 +1,4 @@
-FROM node:16.3.0-slim as build-stage
+FROM node:16.5.0-slim as build-stage
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn
