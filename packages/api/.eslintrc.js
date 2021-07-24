@@ -7,7 +7,7 @@ module.exports = {
   extends: ['airbnb-base', 'plugin:prettier/recommended'],
   rules: {
     'prefer-const': 'warn',
-    'no-underscore-dangle': { allowAfterThis: true },
+    'no-underscore-dangle': ['error', { allowAfterThis: true }],
   },
   parserOptions: {
     ecmaVersion: 2021,

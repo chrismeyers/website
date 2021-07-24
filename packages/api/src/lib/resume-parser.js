@@ -69,7 +69,7 @@ class ResumeParser {
         const beginPatternIndex =
           line.indexOf(firstLinePattern) + firstLinePattern.length;
         const endPatternIndex = line.indexOf(endPattern);
-        const cleaned = this.cleanString(
+        const cleaned = ResumeParser.cleanString(
           line
             .substring(beginPatternIndex, endPatternIndex)
             .replaceAll(endPattern, ''),
@@ -81,7 +81,7 @@ class ResumeParser {
         const beginPatternIndex =
           line.indexOf(secondLinePattern) + secondLinePattern.length;
         const endPatternIndex = line.indexOf(endPattern);
-        const cleaned = this.cleanString(
+        const cleaned = ResumeParser.cleanString(
           line
             .substring(beginPatternIndex, endPatternIndex)
             .replaceAll(endPattern, ''),
@@ -90,7 +90,7 @@ class ResumeParser {
 
         currentSecondLine.push(cleaned);
       } else if (line.startsWith(infoPattern)) {
-        const cleaned = this.cleanString(
+        const cleaned = ResumeParser.cleanString(
           line.substring(infoPattern.length + 1),
           removeInlineComments,
         );
@@ -138,13 +138,13 @@ class ResumeParser {
         let cleaned = '';
 
         if (subItem) {
-          cleaned = this.cleanString(
+          cleaned = ResumeParser.cleanString(
             line.substring(circleItemPattern.length + 1),
             removeInlineComments,
           );
           items[count - 1].subItems.push(cleaned);
         } else {
-          cleaned = this.cleanString(
+          cleaned = ResumeParser.cleanString(
             line.substring(itemPattern.length + 1),
             removeInlineComments,
           );
@@ -188,7 +188,7 @@ class ResumeParser {
     };
   }
 
-  cleanString(input, removeInlineComments) {
+  static cleanString(input, removeInlineComments) {
     let output = input.trim();
 
     if (removeInlineComments) {
