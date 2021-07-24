@@ -1,15 +1,16 @@
 const createProjectRepository = ({ dataLoader: loader }) => {
-  const active = async () => {
-    const data = await loader('builds');
-    return data.filter((b) => b.active);
-  };
+  const type = 'builds';
 
-  const findById = async (id) => {
-    const data = await loader('builds');
-    return data.find((b) => b.id === id && b.active);
+  return {
+    active: async () => {
+      const data = await loader(type);
+      return data.filter((b) => b.active);
+    },
+    findById: async (id) => {
+      const data = await loader(type);
+      return data.find((b) => b.id === id && b.active);
+    },
   };
-
-  return { active, findById };
 };
 
 module.exports = createProjectRepository;
