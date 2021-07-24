@@ -1,10 +1,13 @@
 const fs = require('fs').promises;
 
-const createResumeParser = async ({ resumePath: path }) => {
-  const rawSections = {};
+class ResumeParser {
+  constructor({ resumePath }) {
+    this.path = resumePath;
+    this._rawSections = {};
+  }
 
-  const load = async () => {
-    const data = await fs.readFile(path, 'utf8');
+  async load() {
+    const data = await fs.readFile(this.path, 'utf8');
     const lines = data.split('\n');
 
     const beginPattern = '% BEGIN';
@@ -23,37 +26,21 @@ const createResumeParser = async ({ resumePath: path }) => {
         section = trimmedLine.substring(beginPattern.length + 1);
       } else if (section !== '' && !trimmedLine.includes(endPattern)) {
         // Between begin and end
-        if (section in rawSections) {
-          const values = rawSections[section];
+        if (section in this._rawSections) {
+          const values = this._rawSections[section];
           values.push(trimmedLine);
-          rawSections[section] = values;
+          this._rawSections[section] = values;
         } else {
-          rawSections[section] = [trimmedLine];
+          this._rawSections[section] = [trimmedLine];
         }
       } else {
         // Between end and begin
         section = '';
       }
     });
-  };
+  }
 
-  const cleanString = (input, removeInlineComments) => {
-    let output = input.trim();
-
-    if (removeInlineComments) {
-      // This regex skips escaped percent signs by using negative lookbehind
-      output = output.split(new RegExp(/(?<!\\)%/))[0].trim();
-    }
-
-    output = output.replaceAll(String.raw`\CPP`, 'C++');
-    output = output.replaceAll(String.raw`\break`, '');
-    output = output.replaceAll('--', '&ndash;');
-    output = output.replaceAll(String.raw({ raw: '\\' }), '');
-
-    return output;
-  };
-
-  const parseComplexSection = (section, removeInlineComments = true) => {
+  parseComplexSection(section, removeInlineComments = true) {
     const urlPattern = '% URL';
     const firstLinePattern = String.raw`{\textbf{`;
     const secondLinePattern = String.raw`{\emph{`;
@@ -72,7 +59,7 @@ const createResumeParser = async ({ resumePath: path }) => {
     let currentSecondLine = [];
     let currentInfo = [];
 
-    rawSections[section].forEach((line) => {
+    this._rawSections[section].forEach((line) => {
       if (line.startsWith(urlPattern)) {
         const beginPatternIndex =
           line.indexOf(urlPattern) + urlPattern.length + 1;
@@ -82,7 +69,7 @@ const createResumeParser = async ({ resumePath: path }) => {
         const beginPatternIndex =
           line.indexOf(firstLinePattern) + firstLinePattern.length;
         const endPatternIndex = line.indexOf(endPattern);
-        const cleaned = cleanString(
+        const cleaned = this.cleanString(
           line
             .substring(beginPatternIndex, endPatternIndex)
             .replaceAll(endPattern, ''),
@@ -94,7 +81,7 @@ const createResumeParser = async ({ resumePath: path }) => {
         const beginPatternIndex =
           line.indexOf(secondLinePattern) + secondLinePattern.length;
         const endPatternIndex = line.indexOf(endPattern);
-        const cleaned = cleanString(
+        const cleaned = this.cleanString(
           line
             .substring(beginPatternIndex, endPatternIndex)
             .replaceAll(endPattern, ''),
@@ -103,7 +90,7 @@ const createResumeParser = async ({ resumePath: path }) => {
 
         currentSecondLine.push(cleaned);
       } else if (line.startsWith(infoPattern)) {
-        const cleaned = cleanString(
+        const cleaned = this.cleanString(
           line.substring(infoPattern.length + 1),
           removeInlineComments,
         );
@@ -130,9 +117,9 @@ const createResumeParser = async ({ resumePath: path }) => {
     });
 
     return items;
-  };
+  }
 
-  const parseListSection = (section, removeInlineComments = true) => {
+  parseListSection(section, removeInlineComments = true) {
     const itemPattern = String.raw`\item`;
     const circleItemPattern = String.raw`\item[$\circ$]`;
     const beginSubPattern = String.raw`\begin{itemize*}`;
@@ -142,7 +129,7 @@ const createResumeParser = async ({ resumePath: path }) => {
     let subItem = false;
     let count = 0;
 
-    rawSections[section].forEach((line) => {
+    this._rawSections[section].forEach((line) => {
       if (line.startsWith(beginSubPattern)) {
         subItem = true;
       } else if (line.startsWith(endSubPattern)) {
@@ -151,13 +138,13 @@ const createResumeParser = async ({ resumePath: path }) => {
         let cleaned = '';
 
         if (subItem) {
-          cleaned = cleanString(
+          cleaned = this.cleanString(
             line.substring(circleItemPattern.length + 1),
             removeInlineComments,
           );
           items[count - 1].subItems.push(cleaned);
         } else {
-          cleaned = cleanString(
+          cleaned = this.cleanString(
             line.substring(itemPattern.length + 1),
             removeInlineComments,
           );
@@ -168,14 +155,14 @@ const createResumeParser = async ({ resumePath: path }) => {
     });
 
     return items;
-  };
+  }
 
-  const getLanguages = () => {
+  getLanguages() {
     const languagesPattern = '% LANGUAGES';
     // Splits the language lists on commas, except within parentheses
     const regexp = new RegExp(/(?!\(.*),(?![^(]*?\))/);
     const langMap = {};
-    const skills = parseListSection('TechnicalSkills', false);
+    const skills = this.parseListSection('TechnicalSkills', false);
 
     skills.forEach((skill) => {
       if (skill.mainItem.includes(languagesPattern)) {
@@ -185,10 +172,10 @@ const createResumeParser = async ({ resumePath: path }) => {
     });
 
     return langMap;
-  };
+  }
 
-  const getMostRecentJob = () => {
-    const job = parseComplexSection('Experience')[0];
+  getMostRecentJob() {
+    const job = this.parseComplexSection('Experience')[0];
 
     const dates = job.secondLine[0][1].split('&ndash;').map((d) => d.trim());
 
@@ -199,17 +186,29 @@ const createResumeParser = async ({ resumePath: path }) => {
       title: job.secondLine[0][0].split(',')[0],
       dates,
     };
-  };
+  }
 
-  // Initialization
-  await load();
+  cleanString(input, removeInlineComments) {
+    let output = input.trim();
 
-  return {
-    parseComplexSection,
-    parseListSection,
-    getLanguages,
-    getMostRecentJob,
-  };
+    if (removeInlineComments) {
+      // This regex skips escaped percent signs by using negative lookbehind
+      output = output.split(new RegExp(/(?<!\\)%/))[0].trim();
+    }
+
+    output = output.replaceAll(String.raw`\CPP`, 'C++');
+    output = output.replaceAll(String.raw`\break`, '');
+    output = output.replaceAll('--', '&ndash;');
+    output = output.replaceAll(String.raw({ raw: '\\' }), '');
+
+    return output;
+  }
+}
+
+const createResumeParser = async ({ resumePath }) => {
+  const parser = new ResumeParser({ resumePath });
+  await parser.load();
+  return parser;
 };
 
 module.exports = createResumeParser;
