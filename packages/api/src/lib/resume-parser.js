@@ -1,11 +1,8 @@
 const fs = require('fs').promises;
 
-class ResumeParser {
-  constructor({ resumePath }) {
-    this.path = resumePath;
-    this._rawSections = {};
-  }
-
+const buildResumeParser = ({ resumePath }) => ({
+  path: resumePath,
+  rawSections: {},
   async load() {
     const data = await fs.readFile(this.path, 'utf8');
     const lines = data.split('\n');
@@ -26,20 +23,19 @@ class ResumeParser {
         section = trimmedLine.substring(beginPattern.length + 1);
       } else if (section !== '' && !trimmedLine.includes(endPattern)) {
         // Between begin and end
-        if (section in this._rawSections) {
-          const values = this._rawSections[section];
+        if (section in this.rawSections) {
+          const values = this.rawSections[section];
           values.push(trimmedLine);
-          this._rawSections[section] = values;
+          this.rawSections[section] = values;
         } else {
-          this._rawSections[section] = [trimmedLine];
+          this.rawSections[section] = [trimmedLine];
         }
       } else {
         // Between end and begin
         section = '';
       }
     });
-  }
-
+  },
   parseComplexSection(section, removeInlineComments = true) {
     const urlPattern = '% URL';
     const firstLinePattern = String.raw`{\textbf{`;
@@ -59,7 +55,7 @@ class ResumeParser {
     let currentSecondLine = [];
     let currentInfo = [];
 
-    this._rawSections[section].forEach((line) => {
+    this.rawSections[section].forEach((line) => {
       if (line.startsWith(urlPattern)) {
         const beginPatternIndex =
           line.indexOf(urlPattern) + urlPattern.length + 1;
@@ -69,7 +65,7 @@ class ResumeParser {
         const beginPatternIndex =
           line.indexOf(firstLinePattern) + firstLinePattern.length;
         const endPatternIndex = line.indexOf(endPattern);
-        const cleaned = ResumeParser.cleanString(
+        const cleaned = this.cleanString(
           line
             .substring(beginPatternIndex, endPatternIndex)
             .replaceAll(endPattern, ''),
@@ -81,7 +77,7 @@ class ResumeParser {
         const beginPatternIndex =
           line.indexOf(secondLinePattern) + secondLinePattern.length;
         const endPatternIndex = line.indexOf(endPattern);
-        const cleaned = ResumeParser.cleanString(
+        const cleaned = this.cleanString(
           line
             .substring(beginPatternIndex, endPatternIndex)
             .replaceAll(endPattern, ''),
@@ -90,7 +86,7 @@ class ResumeParser {
 
         currentSecondLine.push(cleaned);
       } else if (line.startsWith(infoPattern)) {
-        const cleaned = ResumeParser.cleanString(
+        const cleaned = this.cleanString(
           line.substring(infoPattern.length + 1),
           removeInlineComments,
         );
@@ -117,8 +113,7 @@ class ResumeParser {
     });
 
     return items;
-  }
-
+  },
   parseListSection(section, removeInlineComments = true) {
     const itemPattern = String.raw`\item`;
     const circleItemPattern = String.raw`\item[$\circ$]`;
@@ -129,7 +124,7 @@ class ResumeParser {
     let subItem = false;
     let count = 0;
 
-    this._rawSections[section].forEach((line) => {
+    this.rawSections[section].forEach((line) => {
       if (line.startsWith(beginSubPattern)) {
         subItem = true;
       } else if (line.startsWith(endSubPattern)) {
@@ -138,13 +133,13 @@ class ResumeParser {
         let cleaned = '';
 
         if (subItem) {
-          cleaned = ResumeParser.cleanString(
+          cleaned = this.cleanString(
             line.substring(circleItemPattern.length + 1),
             removeInlineComments,
           );
           items[count - 1].subItems.push(cleaned);
         } else {
-          cleaned = ResumeParser.cleanString(
+          cleaned = this.cleanString(
             line.substring(itemPattern.length + 1),
             removeInlineComments,
           );
@@ -155,8 +150,7 @@ class ResumeParser {
     });
 
     return items;
-  }
-
+  },
   getLanguages() {
     const languagesPattern = '% LANGUAGES';
     // Splits the language lists on commas, except within parentheses
@@ -172,8 +166,7 @@ class ResumeParser {
     });
 
     return langMap;
-  }
-
+  },
   getMostRecentJob() {
     const job = this.parseComplexSection('Experience')[0];
 
@@ -186,9 +179,8 @@ class ResumeParser {
       title: job.secondLine[0][0].split(',')[0],
       dates,
     };
-  }
-
-  static cleanString(input, removeInlineComments) {
+  },
+  cleanString(input, removeInlineComments) {
     let output = input.trim();
 
     if (removeInlineComments) {
@@ -202,11 +194,11 @@ class ResumeParser {
     output = output.replaceAll(String.raw({ raw: '\\' }), '');
 
     return output;
-  }
-}
+  },
+});
 
 const createResumeParser = async ({ resumePath }) => {
-  const parser = new ResumeParser({ resumePath });
+  const parser = buildResumeParser({ resumePath });
   await parser.load();
   return parser;
 };
