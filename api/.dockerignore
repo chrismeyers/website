@@ -1,6 +1,0 @@
-.dockerignore
-Dockerfile
-scripts/
-**/node_modules
-build/
-README.md

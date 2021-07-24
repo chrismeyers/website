@@ -14,6 +14,7 @@ module.exports = {
         __dirname,
         '..',
         '..',
+        '..',
         'resume',
         'LaTeX',
         'Meyers_Chris',
