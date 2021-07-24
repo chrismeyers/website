@@ -1,4 +1,4 @@
-const createProjectRepository = (loader) => {
+const createProjectRepository = ({ dataLoader: loader }) => {
   const active = async () => {
     const data = await loader('projects');
     return data.filter((p) => p.active);

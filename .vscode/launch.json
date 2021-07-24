@@ -11,7 +11,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "cwd": "${workspaceFolder}/api",
+      "cwd": "${workspaceFolder}/packages/api",
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["dev"],
       "outputCapture": "std"

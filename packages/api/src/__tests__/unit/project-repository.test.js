@@ -5,7 +5,7 @@ describe('Project Repository', () => {
   let repo;
 
   beforeEach(async () => {
-    repo = await createProjectRepository(mockDataLoader);
+    repo = await createProjectRepository({ dataLoader: mockDataLoader });
   });
 
   it('returns all active projects', async () => {

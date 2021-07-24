@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 
-const createResumeParser = async (path) => {
+const createResumeParser = async ({ resumePath: path }) => {
   const rawSections = {};
 
   const load = async () => {

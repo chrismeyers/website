@@ -5,8 +5,8 @@ describe('Resume Parser', () => {
   let parser;
 
   beforeEach(async () => {
-    parser = await createResumeParser(
-      path.join(
+    parser = await createResumeParser({
+      resumePath: path.join(
         __dirname,
         '..',
         '..',
@@ -15,7 +15,7 @@ describe('Resume Parser', () => {
         'resume',
         'test_resume.tex',
       ),
-    );
+    });
   });
 
   describe('full', () => {
