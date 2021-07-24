@@ -9,25 +9,25 @@ describe('Project Repository', () => {
   });
 
   it('returns all active projects', async () => {
-    const data = await repo.active();
+    const data = repo.active();
 
     expect(data).toHaveLength(1);
   });
 
   it('returns an active project', async () => {
-    const data = await repo.findById(1);
+    const data = repo.findById(1);
 
     expect(data.id).toBe(1);
   });
 
   it('does not return an inactive project', async () => {
-    const data = await repo.findById(2);
+    const data = repo.findById(2);
 
     expect(data).toBeUndefined();
   });
 
   it('does not return a project that does not exist', async () => {
-    const data = await repo.findById(1337);
+    const data = repo.findById(1337);
 
     expect(data).toBeUndefined();
   });

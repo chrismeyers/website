@@ -1,16 +1,9 @@
-const createProjectRepository = ({ dataLoader: loader }) => {
-  const type = 'builds';
+const createRepository = require('./repository');
 
-  return {
-    active: async () => {
-      const data = await loader(type);
-      return data.filter((b) => b.active);
-    },
-    findById: async (id) => {
-      const data = await loader(type);
-      return data.find((b) => b.id === id && b.active);
-    },
-  };
+const createBuildRepository = async ({ dataLoader }) => {
+  const repo = createRepository({ dataLoader });
+  await repo.load('builds');
+  return repo;
 };
 
-module.exports = createProjectRepository;
+module.exports = createBuildRepository;

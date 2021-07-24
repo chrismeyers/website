@@ -7,8 +7,8 @@ const createResumeParser = require('./lib/resume-parser');
 
 module.exports = {
   dataLoader: asValue(dataLoader),
-  projectRepository: asFunction(createProjectRepository),
-  buildRepository: asFunction(createBuildRepository),
+  projectRepository: asFunction(createProjectRepository).singleton(),
+  buildRepository: asFunction(createBuildRepository).singleton(),
   resumePath: asValue(
     path.join(
       __dirname,
@@ -21,5 +21,5 @@ module.exports = {
       'Meyers_Chris_Resume.tex',
     ),
   ),
-  resumeParser: asFunction(createResumeParser),
+  resumeParser: asFunction(createResumeParser).singleton(),
 };

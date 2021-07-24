@@ -12,8 +12,8 @@ module.exports = async (app) => {
     },
     handler: async (request, reply) => {
       try {
-        const repo = request.diScope.resolve('buildRepository');
-        return { items: await repo.active() };
+        const repo = await request.diScope.resolve('buildRepository');
+        return { items: repo.active() };
       } catch (error) {
         return reply.internalServerError('Unable to load data');
       }
@@ -31,8 +31,8 @@ module.exports = async (app) => {
       const { id } = request.params;
 
       try {
-        const repo = request.diScope.resolve('buildRepository');
-        const build = await repo.findById(id);
+        const repo = await request.diScope.resolve('buildRepository');
+        const build = repo.findById(id);
 
         if (build) return build;
 
