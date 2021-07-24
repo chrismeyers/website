@@ -26,16 +26,16 @@ do
     cd /home/chris/www/chrismeyers-website
 
     echo "[DEPLOY] Syncing credentials"
-    rsync -av /home/chris/creds/chrismeyers-website/web/ web/
-    rsync -av /home/chris/creds/chrismeyers-website/api/ api/
+    rsync -av /home/chris/creds/chrismeyers-website/web/ packages/web/
+    rsync -av /home/chris/creds/chrismeyers-website/api/ packages/api/
 
     echo "[DEPLOY] Building 'web' image and running container"
-    web/scripts/build.sh
-    web/scripts/run.sh -d --restart always
+    scripts/web/build.sh
+    scripts/web/run.sh -d --restart always
 
     echo "[DEPLOY] Building 'api' image and running container"
-    api/scripts/build.sh
-    api/scripts/run.sh -d --restart always
+    scripts/api/build.sh
+    scripts/api/run.sh -d --restart always
   else
     echo "Ref $ref successfully received. Doing nothing: only the main branch may be deployed on this server."
   fi
