@@ -11,4 +11,4 @@ COPY packages/api/ ./packages/api/
 WORKDIR /app/packages/api
 
 EXPOSE 8888
-CMD [ "yarn", "workspace", "api", "start" ]
+CMD [ "node", "src/server.js" ]
