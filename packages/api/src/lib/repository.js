@@ -1,14 +1,23 @@
-const createRepository = ({ dataLoader }) => ({
-  data: {},
-  async load(type) {
-    this.data = await dataLoader(type);
-  },
-  active() {
-    return this.data.filter((item) => item.active);
-  },
-  findById(id) {
-    return this.data.find((item) => item.id === id && item.active);
-  },
-});
+const createRepository = ({ dataLoader }) => {
+  let data = {};
+
+  const load = async (type) => {
+    data = await dataLoader(type);
+  };
+
+  const active = () => {
+    return data.filter((item) => item.active);
+  };
+
+  const findById = (id) => {
+    return data.find((item) => item.id === id && item.active);
+  };
+
+  return {
+    load,
+    active,
+    findById,
+  };
+};
 
 module.exports = createRepository;
