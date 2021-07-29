@@ -17,15 +17,28 @@ let element;
 if (isIE) {
   element = (
     <div style={{ marginLeft: 20 }}>
-      <h1>Limited Functionality Mode</h1>
+      <h1>Welcome to my website!</h1>
       <p>
-        Due to the limitations of Internet Explorer, this website is unable to
-        fully load. For a better browsing experience, please visit this website
-        on a different browser, if possible.
+        Hey, my name is Chris Meyers and I am a software engineer and technology
+        enthusiast. Due to the limitations of Internet Explorer, this website is
+        unable to fully load. For a better browsing experience, please visit
+        this website on a different web browser, if possible. Some good web
+        browser alternatives are:
       </p>
+      <ul>
+        <li>
+          <a href="https://www.google.com/chrome/">Google Chrome</a>
+        </li>
+        <li>
+          <a href="https://www.mozilla.org/firefox/">Firefox</a>
+        </li>
+        <li>
+          <a href="https://www.microsoft.com/edge/">Microsoft Edge</a>
+        </li>
+      </ul>
       <p>
-        If using a different browser is not possible, please use the following
-        links for more information about me, or contact me directly via email:
+        If using a different web browser is not possible, please use the
+        following links for more information about me:
       </p>
       <ul>
         <li>
@@ -34,10 +47,11 @@ if (isIE) {
         <li>
           <a href={LINKEDIN_URL}>LinkedIn</a>
         </li>
-        <li>
-          <a href={MAILTO_HREF}>Email</a>
-        </li>
       </ul>
+      <p>
+        If you have any other questions, feel free to contact me directly via{' '}
+        <a href={MAILTO_HREF}>email</a>.
+      </p>
     </div>
   );
 } else {
