@@ -276,7 +276,7 @@ const Prompt = ({ themeProps }) => {
   useEffect(() => {
     // eslint-disable-next-line no-console
     console.info(
-      `%c[${window.location.host}] Prefer a CLI? Press the tilde (~) key and type \`help\` for usage.`,
+      `%c[${window.location.host}] Prefer a CLI? Press the tilde (~) key when focused on the website and type \`help\` for usage.`,
       'font-size: 16px; background-color: rgba(0,0,0,0.85); color: #00CC00; font-family: "Courier New", Courier, monospace;',
     );
   }, []);
