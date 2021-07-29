@@ -49,8 +49,8 @@ if (isIE) {
         </li>
       </ul>
       <p>
-        If you have any other questions, feel free to contact me directly via{' '}
-        <a href={MAILTO_HREF}>email</a>.
+        If you have any questions, comments, or would like to work together on a
+        project, please <a href={MAILTO_HREF}>send me a message</a>.
       </p>
     </div>
   );
