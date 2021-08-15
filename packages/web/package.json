@@ -5,8 +5,8 @@
   "scripts": {
     "start": "PORT=8080 react-scripts start",
     "build": "rimraf ./build && react-scripts build",
-    "test": "react-scripts test",
-    "test:ci": "CI=true react-scripts test --runInBand --ci --coverage",
+    "test": "react-scripts test --verbose --watchAll=false",
+    "test:ci": "CI=true react-scripts test --runInBand --ci --coverage --verbose",
     "eject": "react-scripts eject",
     "lint": "eslint . --ext .js,.jsx --max-warnings 0",
     "lint:fix": "eslint . --fix  --ext .js,.jsx"
