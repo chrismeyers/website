@@ -4,7 +4,6 @@ import './css/mobile-nav.css';
 import logo from '../assets/images/logos/meyers-logo-green.svg';
 import Footer from './Footer';
 import useClickOutside from '../hooks/useClickOutside';
-import EventEmitter, { EVENT_MENU_CLOSE } from '../events';
 
 const MobileNav = ({ themeProps }) => {
   const [menuDisplayed, setMenuDisplayed] = useState(null);
@@ -12,21 +11,11 @@ const MobileNav = ({ themeProps }) => {
   const menuRef = useRef(null);
   const menuIconRef = useRef(null);
 
-  useClickOutside(menuRef, EVENT_MENU_CLOSE, [menuIconRef]);
+  useClickOutside(menuRef, () => setMenuDisplayed(false), [menuIconRef]);
 
   useEffect(() => {
-    menuDisplayed
-      ? EventEmitter.subscribe(EVENT_MENU_CLOSE, () => setMenuDisplayed(false))
-      : EventEmitter.unsubscribe(EVENT_MENU_CLOSE);
-  }, [menuDisplayed]);
-
-  useEffect(() => {
-    menuDisplayed ? setMenuDisplayed(!menuDisplayed) : setMenuDisplayed(false);
-  }, [location]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    return () => EventEmitter.unsubscribe(EVENT_MENU_CLOSE);
-  }, []);
+    setMenuDisplayed(false);
+  }, [location]);
 
   return (
     <nav className="mobile">
