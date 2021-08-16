@@ -6,7 +6,7 @@ import Footer from './Footer';
 import useClickOutside from '../hooks/useClickOutside';
 
 const MobileNav = ({ themeProps }) => {
-  const [menuDisplayed, setMenuDisplayed] = useState(null);
+  const [menuDisplayed, setMenuDisplayed] = useState(false);
   const location = useLocation();
   const menuRef = useRef(null);
   const menuIconRef = useRef(null);
@@ -39,7 +39,7 @@ const MobileNav = ({ themeProps }) => {
                   menuDisplayed ? 'is-active' : ''
                 }`}
                 type="button"
-                onClick={() => setMenuDisplayed(!menuDisplayed)}
+                onClick={() => setMenuDisplayed((prev) => !prev)}
                 aria-label="Menu"
                 aria-controls="navigation"
               >
