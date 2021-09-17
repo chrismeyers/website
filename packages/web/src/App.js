@@ -53,6 +53,7 @@ function App() {
       </Router>
       <Footer themeProps={themeProps} />
       <ToastContainer
+        theme={themeProps.theme}
         position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}

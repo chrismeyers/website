@@ -24,17 +24,11 @@ const Prompt = ({ themeProps }) => {
     down: '&#9660;',
   };
 
-  const ECHO_LEVELS = useMemo(
-    () => [
-      toast.TYPE.INFO,
-      toast.TYPE.SUCCESS,
-      toast.TYPE.WARNING,
-      toast.TYPE.ERROR,
-      toast.TYPE.DEFAULT,
-      toast.TYPE.DARK,
-    ],
+  const ECHO_TYPES = useMemo(
+    () => ['info', 'success', 'warning', 'error', 'default'],
     [],
   );
+  const ECHO_THEMES = useMemo(() => ['light', 'dark', 'colored'], []);
 
   const scrollOutputWindowToBottom = useCallback(() => {
     if (outputWindowRef.current) {
@@ -117,17 +111,28 @@ const Prompt = ({ themeProps }) => {
 
   const echo = useCallback(
     (args) => {
-      let level = toast.TYPE.INFO;
-      if (args[0].startsWith('--')) {
-        const proposed = args.shift().substring(2);
-        if (ECHO_LEVELS.includes(proposed)) {
-          level = proposed;
-        }
-      }
+      let type = 'info';
+      let theme = themeProps.theme;
+      let parts = [...args];
 
-      toast(args.join(' '), { type: level });
+      parts = parts
+        .map((part) => {
+          if (part.startsWith('--type=')) {
+            const proposed = part.split('=')[1];
+            if (ECHO_TYPES.includes(proposed)) type = proposed;
+            return null;
+          } else if (part.startsWith('--theme=')) {
+            const proposed = part.split('=')[1];
+            if (ECHO_THEMES.includes(proposed)) theme = proposed;
+            return null;
+          }
+          return part;
+        })
+        .filter((part) => part);
+
+      toast(parts.join(' '), { type, theme });
     },
-    [ECHO_LEVELS],
+    [themeProps, ECHO_TYPES, ECHO_THEMES],
   );
 
   const cd = useCallback(
@@ -161,17 +166,23 @@ const Prompt = ({ themeProps }) => {
   const help = useCallback(() => {
     clearOutput();
 
-    const levels = ECHO_LEVELS.reduce((acc, cur) => `${acc}, ${cur}`);
-    const themes = Object.values(THEMES).reduce((acc, cur) => `${acc}, ${cur}`);
+    const echoTypes = ECHO_TYPES.reduce((acc, cur) => `${acc}, ${cur}`);
+    const echoThemes = ECHO_THEMES.reduce((acc, cur) => `${acc}, ${cur}`);
+    const siteThemes = Object.values(THEMES).reduce(
+      (acc, cur) => `${acc}, ${cur}`,
+    );
 
+    // prettier-ignore
     setOutput(`usage: command [arg1] [arg2] ...
   Available commands:
-  echo   - prints args to toast notification of optional type
-           (options: ${levels})
-           e.g. echo --${ECHO_LEVELS[0]} Hello World
+  echo   - prints args to toast notification of optional type and theme
+           types: ${echoTypes}
+           themes: ${echoThemes}
+           e.g. echo --type=${ECHO_TYPES[0]} --theme=${ECHO_THEMES[0]} Hello World
   cd     - navigates to the given arg
   toggle - toggles the output window
-  theme  - sets the theme to the arg (options: ${themes})
+  theme  - sets the website theme to the arg
+           themes: ${siteThemes}
            e.g. theme ${Object.values(THEMES)[0]}
   exit   - closes the command prompt
   help   - prints this message
@@ -179,7 +190,7 @@ const Prompt = ({ themeProps }) => {
     if (!outputWindowVisible) {
       showOutputWindow(false);
     }
-  }, [ECHO_LEVELS, outputWindowVisible, showOutputWindow]);
+  }, [ECHO_TYPES, ECHO_THEMES, outputWindowVisible, showOutputWindow]);
 
   const run = useCallback(
     ({ cmd = null, event = null, recordHistory = true }) => {
