@@ -30,6 +30,12 @@ const Prompt = ({ themeProps }) => {
   );
   const ECHO_THEMES = useMemo(() => ['light', 'dark', 'colored'], []);
 
+  const scrollOutputWindowToTop = useCallback(() => {
+    if (outputWindowRef.current) {
+      outputWindowRef.current.scrollTop = 0;
+    }
+  }, []);
+
   const scrollOutputWindowToBottom = useCallback(() => {
     if (outputWindowRef.current) {
       outputWindowRef.current.scrollTop = outputWindowRef.current.scrollHeight;
@@ -37,14 +43,13 @@ const Prompt = ({ themeProps }) => {
   }, []);
 
   const showOutputWindow = useCallback(
-    (scrollToBottom = true) => {
+    ({ top = false, bottom = false }) => {
       setOutputWindowVisible(true);
       setArrowDirection('down');
-      if (scrollToBottom) {
-        setTimeout(() => scrollOutputWindowToBottom(), 0);
-      }
+      if (top) setTimeout(() => scrollOutputWindowToTop(), 0);
+      if (bottom) setTimeout(() => scrollOutputWindowToBottom(), 0);
     },
-    [scrollOutputWindowToBottom],
+    [scrollOutputWindowToBottom, scrollOutputWindowToTop],
   );
 
   const hideOutputWindow = () => {
@@ -64,7 +69,9 @@ const Prompt = ({ themeProps }) => {
   }, []);
 
   const toggleOutputWindow = useCallback(() => {
-    outputWindowVisible ? hideOutputWindow() : showOutputWindow();
+    outputWindowVisible
+      ? hideOutputWindow()
+      : showOutputWindow({ bottom: true });
   }, [outputWindowVisible, showOutputWindow]);
 
   const setTheme = useCallback(
@@ -187,10 +194,9 @@ const Prompt = ({ themeProps }) => {
   exit   - closes the command prompt
   help   - prints this message
   `);
-    if (!outputWindowVisible) {
-      showOutputWindow(false);
-    }
-  }, [ECHO_TYPES, ECHO_THEMES, outputWindowVisible, showOutputWindow]);
+
+    showOutputWindow({ top: true });
+  }, [ECHO_TYPES, ECHO_THEMES, showOutputWindow]);
 
   const run = useCallback(
     ({ cmd = null, event = null, recordHistory = true }) => {
