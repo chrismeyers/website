@@ -6973,6 +6973,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-jest@npm:^24.4.2":
+  version: 24.4.2
+  resolution: "eslint-plugin-jest@npm:24.4.2"
+  dependencies:
+    "@typescript-eslint/experimental-utils": ^4.0.1
+  peerDependencies:
+    "@typescript-eslint/eslint-plugin": ">= 4"
+    eslint: ">=5"
+  peerDependenciesMeta:
+    "@typescript-eslint/eslint-plugin":
+      optional: true
+  checksum: de00fa7464860a189841cf767eda6607ec53e8b839d2317f80561751580c3976a04af509f1b771808b56e88316ffc31309b9e58aeac7ac55ffdea8ed3f4626f1
+  languageName: node
+  linkType: hard
+
 "eslint-plugin-jsx-a11y@npm:^6.3.1":
   version: 6.4.1
   resolution: "eslint-plugin-jsx-a11y@npm:6.4.1"
@@ -17556,6 +17571,8 @@ resolve@^2.0.0-next.3:
     delayed-scroll-restoration-polyfill: ^0.1.1
     eslint: ^7.32.0
     eslint-config-prettier: ^8.3.0
+    eslint-config-react-app: ^6.0.0
+    eslint-plugin-jest: ^24.4.2
     eslint-plugin-prettier: ^3.4.0
     lodash: ^4.17.21
     nock: ^13.1.1
