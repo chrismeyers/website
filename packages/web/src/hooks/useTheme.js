@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { THEMES, SYSTEM_THEME_DARK_MEDIA_QUERY } from '../utils/constants';
+import { getCssVar } from '../utils/styles';
 
 const useTheme = () => {
   const [theme, setTheme] = useState(localStorage.getItem('theme'));
@@ -48,13 +49,8 @@ const useTheme = () => {
     };
   }, []);
 
-  const mainThemeColor = getComputedStyle(document.documentElement)
-    .getPropertyValue('--main-theme-color')
-    .trim();
-
-  const lightModeToggleColor = getComputedStyle(document.documentElement)
-    .getPropertyValue('--light-mode-toggle-bg-color')
-    .trim();
+  const mainThemeColor = getCssVar('--main-theme-color');
+  const lightModeToggleColor = getCssVar('--light-mode-toggle-bg-color');
 
   const toggleTheme = () => {
     if (theme === THEMES.LIGHT) {

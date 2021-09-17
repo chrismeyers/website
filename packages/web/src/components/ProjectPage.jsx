@@ -8,6 +8,7 @@ import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg'
 import { ReactComponent as PlayIcon } from '../assets/images/icons/play.svg';
 import ProjectsAPI from '../utils/api/projects';
 import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
+import { getCssVar } from '../utils/styles';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
@@ -151,6 +152,11 @@ const ProjectPage = () => {
                             thumbnails: {
                               showThumbnails: false,
                             },
+                            buttons: {
+                              showAutoplayButton: false,
+                              showNextButton: false,
+                              showPrevButton: false,
+                            },
                           }}
                         >
                           {project.images.map((image, index) => (
@@ -179,6 +185,9 @@ const ProjectPage = () => {
                           options={{
                             settings: {
                               downloadedFileName: buildDownloadFileName(),
+                            },
+                            progressBar: {
+                              fillColor: getCssVar('--main-theme-color'),
                             },
                           }}
                         >
