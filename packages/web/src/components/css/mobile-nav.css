@@ -28,13 +28,14 @@ nav.mobile {
 .small-nav-logo {
   height: 30px;
   width: 113px;
-  left: 10px;
-  position: absolute;
   padding-top: 15px;
+  margin: 0 auto;
 }
 
 .menu-icon {
-  float: right;
+  position: fixed;
+  top: 0;
+  right: 0;
 }
 
 .menu-overlay {
