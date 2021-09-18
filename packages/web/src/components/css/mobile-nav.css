@@ -58,7 +58,7 @@ nav.mobile {
   but if the number of menu items ever expands to trigger the max-height, this
   will have to be reworked. */
   max-height: 50%;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .menu:hover {
   cursor: pointer;
