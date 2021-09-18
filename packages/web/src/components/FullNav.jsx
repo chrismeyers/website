@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import './css/full-nav.css';
-import logo from '../assets/images/logos/meyers-logo-green.svg';
+import { ReactComponent as Logo } from '../assets/images/logos/meyers-logo-green.svg';
 
 const FullNav = () => {
   const location = useLocation();
@@ -8,16 +8,15 @@ const FullNav = () => {
   return (
     <nav>
       <div id="full-menu">
-        <div className="side-nav-logo">
-          <Link className="nav-link banner" to="/">
-            <img
-              src={logo}
+        <Link to="/">
+          <span className="side-nav-logo">
+            <Logo
               alt="Chris Meyers. Developer, Tech enthusiast."
               className="banner-img"
               title="Home"
             />
-          </Link>
-        </div>
+          </span>
+        </Link>
         <ul className="side-nav-items">
           <li>
             <Link

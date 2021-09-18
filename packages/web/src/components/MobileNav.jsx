@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './css/mobile-nav.css';
-import logo from '../assets/images/logos/meyers-logo-green.svg';
+import { ReactComponent as Logo } from '../assets/images/logos/meyers-logo-green.svg';
 import Footer from './Footer';
 import useClickOutside from '../hooks/useClickOutside';
 
@@ -21,12 +21,11 @@ const MobileNav = ({ themeProps }) => {
     <nav className="mobile">
       <div id="mobile-menu">
         <div className="header">
-          <div className="logo">
-            <Link className="small-nav-logo" to="/">
-              <img
-                src={logo}
+          <div className="small-nav-logo">
+            <Link to="/">
+              <Logo
                 alt="Chris Meyers. Developer, Tech enthusiast."
-                className="banner-img"
+                className="banner-img-small"
                 title="Home"
               />
             </Link>

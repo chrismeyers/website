@@ -150,12 +150,6 @@ h2.top {
 }
 
 /******************** COMMON NAV *******************/
-.banner img {
-  width: 100%;
-  display: inline-block;
-  padding-top: 10px;
-}
-
 .nav-link {
   color: var(--font-color);
   text-decoration: none;
