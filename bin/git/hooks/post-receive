@@ -30,12 +30,12 @@ do
     rsync -av /home/chris/creds/chrismeyers-website/api/ packages/api/
 
     echo "[DEPLOY] Building 'web' image and running container"
-    scripts/web/build.sh
-    scripts/web/run.sh -d --restart always
+    bin/docker/web/build.sh
+    bin/docker/web/run.sh -d --restart always
 
     echo "[DEPLOY] Building 'api' image and running container"
-    scripts/api/build.sh
-    scripts/api/run.sh -d --restart always
+    bin/docker/api/build.sh
+    bin/docker/api/run.sh -d --restart always
   else
     echo "Ref $ref successfully received. Doing nothing: only the main branch may be deployed on this server."
   fi

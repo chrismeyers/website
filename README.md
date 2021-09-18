@@ -33,14 +33,14 @@ This project is a monorepo and uses [Yarn workspaces](https://yarnpkg.com/featur
 ```sh
 # Additional docker build arguments can be passed through such as:
 #   --no-cache (do not use cache when building image)
-$ scripts/<package>/build.sh
+$ bin/docker/<package>/build.sh
 ```
 
 ### Run
 ```sh
 # Additional docker run arguments can be passed through such as:
 #   -d (detached - run container in background)
-$ scripts/<package>/run.sh
+$ bin/docker/<package>/run.sh
 ```
 
 ## Deployment
