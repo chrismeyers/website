@@ -66,4 +66,6 @@ $ git push production main
     - [react-loading-skeleton](https://github.com/dvtng/react-loading-skeleton) for loading animations
     - [delayed-scroll-restoration-polyfill](https://github.com/janpaul123/delayed-scroll-restoration-polyfill) to restore scroll location on browser back and forward navigation
   - [hamburgers](https://jonsuh.com/hamburgers/) to animate the hamburger menu icon
-  - [Fastify](https://www.fastify.io/) as a backend API framework
+  + [Fastify](https://www.fastify.io/) as a backend API framework
+    - [awilix](https://github.com/jeffijoe/awilix) as a dependency injection (DI) container
+- See each `package.json` for the full list
