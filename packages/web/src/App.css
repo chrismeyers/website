@@ -149,6 +149,10 @@ h2.top {
   padding: 3px;
 }
 
+.prevent-scroll {
+  overflow: hidden;
+}
+
 /******************** COMMON NAV *******************/
 .nav-link {
   color: var(--font-color);

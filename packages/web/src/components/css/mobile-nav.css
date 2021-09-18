@@ -53,6 +53,12 @@ nav.mobile {
   font-size: x-large;
   position: fixed;
   width: 100%;
+  /* There's a bug in Safari and iOS where the in-menu footer doesn't show up
+  when the max-height is triggered. This isn't a problem with the current menu,
+  but if the number of menu items ever expands to trigger the max-height, this
+  will have to be reworked. */
+  max-height: 50%;
+  overflow-y: scroll;
 }
 .menu:hover {
   cursor: pointer;

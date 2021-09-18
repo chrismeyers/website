@@ -4,6 +4,7 @@ import './css/mobile-nav.css';
 import { ReactComponent as Logo } from '../assets/images/logos/meyers-logo-green.svg';
 import Footer from './Footer';
 import useClickOutside from '../hooks/useClickOutside';
+import { setBodyScrollable } from '../utils/styles';
 
 const MobileNav = ({ themeProps }) => {
   const [menuDisplayed, setMenuDisplayed] = useState(false);
@@ -16,6 +17,14 @@ const MobileNav = ({ themeProps }) => {
   useEffect(() => {
     setMenuDisplayed(false);
   }, [location]);
+
+  useEffect(() => {
+    setBodyScrollable(!menuDisplayed);
+  }, [menuDisplayed]);
+
+  useEffect(() => {
+    return () => setBodyScrollable(true);
+  }, []);
 
   return (
     <nav className="mobile">
