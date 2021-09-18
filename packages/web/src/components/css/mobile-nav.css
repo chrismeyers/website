@@ -12,11 +12,8 @@ nav.mobile {
 }
 
 .header {
-  display: flex;
   height: 100%;
   width: 100%;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .banner-img-small {
@@ -29,8 +26,15 @@ nav.mobile {
 }
 
 .small-nav-logo {
-  height: 60%;
-  margin-left: 15px;
+  height: 30px;
+  width: 113px;
+  left: 10px;
+  position: absolute;
+  padding-top: 15px;
+}
+
+.menu-icon {
+  float: right;
 }
 
 .menu-overlay {
