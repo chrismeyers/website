@@ -9,11 +9,8 @@ describe('Resume Parser', () => {
       resumePath: path.join(
         __dirname,
         '..',
-        '..',
-        '__mocks__',
-        'data',
-        'resume',
-        'test_resume.tex',
+        '__fixtures__',
+        'test-resume.latex',
       ),
     });
   });

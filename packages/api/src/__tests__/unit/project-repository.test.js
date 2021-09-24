@@ -1,11 +1,11 @@
 const createProjectRepository = require('../../lib/project-repository');
-const mockDataLoader = require('../../__mocks__/mock-data-loader');
+const testDataLoader = require('../__fixtures__/test-data-loader');
 
 describe('Project Repository', () => {
   let repo;
 
   beforeEach(async () => {
-    repo = await createProjectRepository({ dataLoader: mockDataLoader });
+    repo = await createProjectRepository({ dataLoader: testDataLoader });
   });
 
   it('returns all active projects', async () => {

@@ -1,19 +1,19 @@
 const { asFunction } = require('awilix');
 const createApp = require('../../app');
-const mockContainer = require('../../__mocks__/mock-container');
+const testContainer = require('../__fixtures__/test-container');
 
 describe('Resume API Endpoints', () => {
   let app;
 
   beforeEach(async () => {
-    app = await createApp(mockContainer);
+    app = await createApp(testContainer);
   });
 
   afterEach(() => app.close());
 
   it('handles data loading errors when attempting to get full resume', async () => {
     app = await createApp({
-      ...mockContainer,
+      ...testContainer,
       resumeParser: asFunction(() => null),
     });
 
@@ -67,7 +67,7 @@ describe('Resume API Endpoints', () => {
 
   it('handles data loading errors when attempting to get resume summary', async () => {
     app = await createApp({
-      ...mockContainer,
+      ...testContainer,
       resumeParser: asFunction(() => null),
     });
 

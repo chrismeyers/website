@@ -1,3 +1,5 @@
+% The file extension is .latex to prevent attempting to build a PDF on save
+
 \input{test_settings}
 
 \begin{document}
