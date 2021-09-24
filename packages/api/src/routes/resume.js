@@ -1,5 +1,7 @@
 const S = require('fluent-json-schema');
 
+/** @typedef {import('../lib/resume-parser').ResumeParser} ResumeParser */
+
 module.exports = async (app) => {
   app.get('/resume', {
     schema: {
@@ -9,6 +11,7 @@ module.exports = async (app) => {
     },
     handler: async (request, reply) => {
       try {
+        /** @type ResumeParser */
         const parser = await request.diScope.resolve('resumeParser');
 
         return {
@@ -30,6 +33,7 @@ module.exports = async (app) => {
     },
     handler: async (request, reply) => {
       try {
+        /** @type ResumeParser */
         const parser = await request.diScope.resolve('resumeParser');
 
         return {

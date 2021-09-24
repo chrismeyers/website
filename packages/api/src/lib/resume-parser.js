@@ -1,5 +1,14 @@
 const fs = require('fs').promises;
 
+/**
+ * @typedef ResumeParser
+ * @property {() => Promise<void>} load
+ * @property {(section: string, removeInlineComments?: boolean) => any[]} parseComplexSection
+ * @property {(section: string, removeInlineComments?: boolean) => any[]} parseListSection
+ * @property {() => any} getLanguages
+ * @property {() => any} getMostRecentJob
+ */
+
 const resumeParser = ({ resumePath }) => {
   const rawSections = {};
 
