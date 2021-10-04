@@ -16,12 +16,12 @@ if ('scrollRestoration' in window.history) {
 let element;
 if (isIE) {
   element = (
-    <div style={{ marginLeft: 20 }}>
+    <div style={{ marginLeft: 20, marginRight: 20 }}>
       <h1>Welcome to my (limited) website!</h1>
       <p>
         Hey, my name is Chris Meyers and I am a software engineer and technology
         enthusiast. Due to the limitations of Internet Explorer, this website is
-        unable to fully load. Please visit this website on a different web
+        unable to fully load. Please visit this website in a different web
         browser for a better experience. Some good web browser alternatives are:
       </p>
       <ul>
