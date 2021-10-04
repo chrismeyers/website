@@ -17,13 +17,12 @@ let element;
 if (isIE) {
   element = (
     <div style={{ marginLeft: 20 }}>
-      <h1>Welcome to my website!</h1>
+      <h1>Welcome to my (limited) website!</h1>
       <p>
         Hey, my name is Chris Meyers and I am a software engineer and technology
         enthusiast. Due to the limitations of Internet Explorer, this website is
-        unable to fully load. For a better browsing experience, please visit
-        this website on a different web browser, if possible. Some good web
-        browser alternatives are:
+        unable to fully load. Please visit this website on a different web
+        browser for a better experience. Some good web browser alternatives are:
       </p>
       <ul>
         <li>
@@ -37,17 +36,10 @@ if (isIE) {
         </li>
       </ul>
       <p>
-        If using a different web browser is not possible, please use the
-        following links for more information about me:
+        If using a different web browser is not possible, you can find more
+        information about me on <a href={GITHUB_URL}>GitHub</a> and{' '}
+        <a href={LINKEDIN_URL}>LinkedIn</a>.
       </p>
-      <ul>
-        <li>
-          <a href={GITHUB_URL}>GitHub</a>
-        </li>
-        <li>
-          <a href={LINKEDIN_URL}>LinkedIn</a>
-        </li>
-      </ul>
       <p>
         If you have any questions, comments, or would like to work together on a
         project, please <a href={MAILTO_HREF}>send me a message</a>.
