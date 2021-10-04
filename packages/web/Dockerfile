@@ -1,4 +1,4 @@
-FROM node:16.9.1-slim as build-stage
+FROM node:16.10.0-slim as build-stage
 
 WORKDIR /app
 COPY .yarn/ ./.yarn
