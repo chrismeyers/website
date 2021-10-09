@@ -138,21 +138,21 @@ const AboutPage = () => {
 
             <ul>
               <li>
-                Desktop and command-line interface (CLI) applications:
-                {languages && languages.desktop && (
-                  <ul data-testid="desktop-languages">
-                    {languages.desktop.map((item, index) => (
-                      <li key={`desktop-${index}`}>{item}</li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-              <li>
                 Websites, web applications, and APIs:
                 {languages && languages.web && (
                   <ul data-testid="web-languages">
                     {languages.web.map((item, index) => (
                       <li key={`web-${index}`}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+              <li>
+                Desktop and command-line interface (CLI) applications:
+                {languages && languages.desktop && (
+                  <ul data-testid="desktop-languages">
+                    {languages.desktop.map((item, index) => (
+                      <li key={`desktop-${index}`}>{item}</li>
                     ))}
                   </ul>
                 )}
