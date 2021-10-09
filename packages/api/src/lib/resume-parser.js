@@ -57,6 +57,10 @@ const resumeParser = ({ resumePath }) => {
     output = output.replaceAll(String.raw`\CPP`, 'C++');
     output = output.replaceAll(String.raw`\break`, '');
     output = output.replaceAll('--', '&ndash;');
+    output = output.replaceAll(
+      String.raw`\textsuperscript{\textregistered}`,
+      '&reg;',
+    );
     output = output.replaceAll(String.raw({ raw: '\\' }), '');
 
     return output;

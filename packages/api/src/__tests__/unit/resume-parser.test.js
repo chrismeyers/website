@@ -33,7 +33,7 @@ describe('Resume Parser', () => {
       expect(items[0].secondLine[1][1]).toBe('Jan. 1234 &ndash; May 1234');
 
       expect(items[0].info).toHaveLength(2);
-      expect(items[0].info[0]).toEqual(['Item 1', 'Item 2']);
+      expect(items[0].info[0]).toEqual(['Item 1', 'Item 2&reg;']);
       expect(items[0].info[1]).toEqual(['Item 1']);
 
       expect(items[1].url).toBe('https://company2.com');
