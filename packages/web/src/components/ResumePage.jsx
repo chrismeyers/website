@@ -104,9 +104,8 @@ const ResumePage = () => {
                               <li
                                 className="more-info"
                                 key={`job-info-item-${i}-${j}-${k}`}
-                              >
-                                {info}
-                              </li>
+                                dangerouslySetInnerHTML={{ __html: info }}
+                              ></li>
                             ))}
                           </ul>
                         </li>
