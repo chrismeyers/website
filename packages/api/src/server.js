@@ -12,6 +12,11 @@ const start = async () => {
       },
     });
 
+    // Load singletons into memory on server startup
+    await app.diContainer.resolve('projectRepository');
+    await app.diContainer.resolve('buildRepository');
+    await app.diContainer.resolve('resumeParser');
+
     const port = app.config.PORT;
     const addr = app.config.ADDR;
 
