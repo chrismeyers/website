@@ -77,4 +77,4 @@ const obj = {
   ],
 };
 
-module.exports = async (type = null) => (type ? obj[type] : obj);
+module.exports = async (type) => obj[type];
