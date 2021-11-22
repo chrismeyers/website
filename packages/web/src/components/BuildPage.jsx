@@ -74,6 +74,10 @@ const BuildPage = () => {
                   <div className="build-specs">
                     <dl>
                       <dt className="dt-mod">
+                        <b>GPU</b>
+                      </dt>
+                      <dd>{build.gpu}</dd>
+                      <dt className="dt-mod">
                         <b>CPU</b>
                       </dt>
                       <dd>{build.cpu}</dd>
@@ -93,10 +97,6 @@ const BuildPage = () => {
                         <b>RAM</b>
                       </dt>
                       <dd>{build.ram}</dd>
-                      <dt className="dt-mod">
-                        <b>HDD</b>
-                      </dt>
-                      <dd>{build.hdd}</dd>
                       {build.ssd !== null && (
                         <>
                           <dt className="dt-mod">
@@ -105,10 +105,14 @@ const BuildPage = () => {
                           <dd>{build.ssd}</dd>
                         </>
                       )}
-                      <dt className="dt-mod">
-                        <b>GPU</b>
-                      </dt>
-                      <dd>{build.gpu}</dd>
+                      {build.hdd !== null && (
+                        <>
+                          <dt className="dt-mod">
+                            <b>HDD</b>
+                          </dt>
+                          <dd>{build.hdd}</dd>
+                        </>
+                      )}
                     </dl>
                   </div>
                   {build.image && (
