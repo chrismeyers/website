@@ -5,5 +5,5 @@ module.exports = {
     '<rootDir>/node_modules/',
     '<rootDir>/src/__tests__/__fixtures__/*',
   ],
-  setupFilesAfterEnv: ['jest-extended'],
+  setupFilesAfterEnv: ['jest-extended/all'],
 };
