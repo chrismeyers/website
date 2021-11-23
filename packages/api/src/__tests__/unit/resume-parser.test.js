@@ -73,13 +73,13 @@ describe('Resume Parser', () => {
 
       expect(items).toHaveLength(5);
 
-      expect(items[0].mainItem).toBe('Lanuguage list 100%:');
+      expect(items[0].mainItem).toBe('Language list 100%:');
       expect(items[0].subItems).toHaveLength(1);
       expect(items[0].subItems[0]).toBe(
         'Language 1 (Something 1, Something 2), Language 2, Language 3',
       );
 
-      expect(items[1].mainItem).toBe('Lanuguage list 2:');
+      expect(items[1].mainItem).toBe('Language list 2:');
       expect(items[1].subItems).toHaveLength(1);
       expect(items[1].subItems[0]).toBe('Language 4, Language 5 (Something 3)');
 
