@@ -51,7 +51,7 @@ const resumeParser = ({ resumePath }) => {
 
     if (removeInlineComments) {
       // This regex skips escaped percent signs by using negative lookbehind
-      output = output.split(new RegExp(/(?<!\\)%/))[0].trim();
+      output = output.split(/(?<!\\)%/)[0].trim();
     }
 
     output = output.replaceAll(String.raw`\CPP`, 'C++');
@@ -186,7 +186,7 @@ const resumeParser = ({ resumePath }) => {
   const getLanguages = () => {
     const languagesPattern = '% LANGUAGES';
     // Splits the language lists on commas, except within parentheses
-    const regexp = new RegExp(/(?!\(.*),(?![^(]*?\))/);
+    const regexp = /(?!\(.*),(?![^(]*?\))/;
     const langMap = {};
     const skills = parseListSection('TechnicalSkills', false);
 

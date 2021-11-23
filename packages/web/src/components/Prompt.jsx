@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { toast } from 'react-toastify';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './css/prompt.css';
 import { THEMES } from '../utils/constants';
 
@@ -16,7 +16,7 @@ const Prompt = ({ themeProps }) => {
   const outputWindowRef = useRef(null);
   const promptRef = useRef(null);
 
-  const routerHistory = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const ARROWS = {
@@ -161,9 +161,9 @@ const Prompt = ({ themeProps }) => {
         return;
       }
 
-      routerHistory.push(path);
+      navigate(path);
     },
-    [location.pathname, routerHistory],
+    [location.pathname, navigate],
   );
 
   const exit = useCallback(() => {
