@@ -21,7 +21,7 @@ const Loading = ({ lines = 5, header = false }) => {
         <></>
       ) : (
         <SkeletonTheme
-          color={loadingColor}
+          baseColor={loadingColor}
           highlightColor={loadingHighlightColor}
         >
           {header ? <Skeleton count={1} height={50} /> : <></>}

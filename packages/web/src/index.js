@@ -50,6 +50,7 @@ if (isIE) {
   const App = lazy(() => import('./App'));
   const SimpleReactLightbox = lazy(() => import('simple-react-lightbox'));
   import('./assets/vendor/hamburgers/hamburgers.min.css');
+  import('react-loading-skeleton/dist/skeleton.css');
 
   element = (
     <React.StrictMode>
