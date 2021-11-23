@@ -1,4 +1,4 @@
-import Switch from 'react-switch';
+import Routes from 'react-switch';
 import './css/footer.css';
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
 import { ReactComponent as LinkedInIcon } from '../assets/images/icons/linkedin.svg';
@@ -54,7 +54,7 @@ const Footer = ({ themeProps, inMenu = false }) => {
         <div className="footer-bullets">&bull;</div>
 
         <div className="footer-theme">
-          <Switch
+          <Routes
             onChange={themeProps.toggleTheme}
             checked={themeProps.theme === THEMES.DARK}
             onColor={themeProps.mainThemeColor}

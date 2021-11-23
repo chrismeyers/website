@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { isMobile as isMobileDevice } from 'react-device-detect';
@@ -26,29 +26,15 @@ function App() {
     <>
       <Router>
         {isMobile ? <MobileNav themeProps={themeProps} /> : <FullNav />}
-        <Switch>
-          <Route exact path="/">
-            <AboutPage />
-          </Route>
-          <Route exact path="/resume">
-            <ResumePage />
-          </Route>
-          <Route exact path="/projects">
-            <ProjectsPage />
-          </Route>
-          <Route exact path="/projects/:id">
-            <ProjectPage />
-          </Route>
-          <Route exact path="/builds">
-            <BuildsPage />
-          </Route>
-          <Route exact path="/builds/:id">
-            <BuildPage />
-          </Route>
-          <Route>
-            <NotFoundPage />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/" element={<AboutPage />} />
+          <Route path="/resume" element={<ResumePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:id" element={<ProjectPage />} />
+          <Route path="/builds" element={<BuildsPage />} />
+          <Route path="/builds/:id" element={<BuildPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
         {isMobile === true ? <></> : <Prompt themeProps={themeProps} />}
       </Router>
       <Footer themeProps={themeProps} />
