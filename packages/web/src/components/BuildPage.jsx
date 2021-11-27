@@ -110,18 +110,22 @@ const BuildPage = () => {
                           <dt className="dt-mod">
                             <b>HDD</b>
                           </dt>
-                          <dd>{build.hdd}</dd>
+                          {build.hdd.split(',').map((hdd, index) => (
+                            <dd key={`${build.id}-hdd-${index}`}>
+                              {hdd.trim()}
+                            </dd>
+                          ))}
                         </>
                       )}
+                      <dt className="dt-mod">
+                        <b>Case</b>
+                      </dt>
+                      <dd>{build.case}</dd>
+                      <dt className="dt-mod">
+                        <b>PSU</b>
+                      </dt>
+                      <dd>{build.psu}</dd>
                     </dl>
-                    <dt className="dt-mod">
-                      <b>Case</b>
-                    </dt>
-                    <dd>{build.case}</dd>
-                    <dt className="dt-mod">
-                      <b>PSU</b>
-                    </dt>
-                    <dd>{build.psu}</dd>
                   </div>
                   {build.image && (
                     <div className="build-pic">
