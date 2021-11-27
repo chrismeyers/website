@@ -104,6 +104,27 @@
         "pos": 1,
         "orient": "port"
       }
+    },
+    {
+      "id": 6,
+      "active": true,
+      "displayDate": "November 2021 - Built for myself",
+      "startedDate": "2021-11-26T00:00:00.000Z",
+      "cpu": "AMD Ryzen 9 5900X @ 3.7 GHz",
+      "cool": "Corsair H150i Elite Capellix 360mm",
+      "mobo": "Asus Republic of Gamers Strix X570-E",
+      "ram": "32GB Corsair Vengeance RGB Pro 3200MHz",
+      "hdd": "Western Digital Blue 2TB @ 7200rpm",
+      "ssd": "Samsung 980 PRO PCIe 4.0 NVMe 1TB",
+      "gpu": "Asus ROG Strix GeForce RTX 2080 Ti 11GB",
+      "image": {
+        "id": 34,
+        "path": "/images/builds/myBuild2021.jpg",
+        "thumbnail": null,
+        "title": "My Computer 2021",
+        "pos": 1,
+        "orient": "port"
+      }
     }
   ],
   "projects": [
