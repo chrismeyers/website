@@ -22,6 +22,8 @@ const buildResponseSchema = S.object()
   .prop('hdd', S.string())
   .prop('ssd', S.anyOf([S.string(), S.null()]))
   .prop('gpu', S.string())
+  .prop('case', S.string())
+  .prop('psu', S.string())
   .prop('image', imageSchema);
 
 const projectResponseSchema = S.object()

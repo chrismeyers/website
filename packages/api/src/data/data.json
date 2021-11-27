@@ -12,6 +12,8 @@
       "hdd": "WD5000AAKX 500GB @ 7200rpm",
       "ssd": null,
       "gpu": "XFX Radeon 6870 1GB",
+      "case": "NZXT Phantom Full-Tower",
+      "psu": "Corsair TX750 80 Plus Bronze",
       "image": {
         "id": 1,
         "path": "/images/builds/mattBuild.jpg",
@@ -33,6 +35,8 @@
       "hdd": "WD6400AAKS 640GB @ 7200rpm, ST31000524AS 1TB @ 7200rpm",
       "ssd": "Samsung 850 Pro 256GB",
       "gpu": "EVGA GeForce GTX 670 FTW 2GB",
+      "case": "Rosewill Blackhawk Mid-Tower",
+      "psu": "Corsair HX750 80 Plus Gold",
       "image": {
         "id": 2,
         "path": "/images/builds/myBuild2013.jpg",
@@ -54,6 +58,8 @@
       "hdd": "ST1000DM003 1TB @ 7200rpm",
       "ssd": "Kingston HyperX 3K 120GB",
       "gpu": "EVGA GeForce GTX 770 SuperClocked 2GB",
+      "case": "Cooler Master HAF 932 Advanced Full-Tower",
+      "psu": "Corsair HX750 80 Plus Gold",
       "image": {
         "id": 3,
         "path": "/images/builds/markBuild.jpg",
@@ -75,6 +81,8 @@
       "hdd": "Western Digital Blue 1TB @ 7200rpm",
       "ssd": "Samsung 850 EVO 500GB",
       "gpu": "EVGA GeForce GTX 980 Ti 6GB",
+      "case": "Corsair Obsidian 750D Full-Tower",
+      "psu": "Corsair HX1000i 80 Plus Platinum",
       "image": {
         "id": 4,
         "path": "/images/builds/myBuild2016_liquid.jpg",
@@ -96,6 +104,8 @@
       "hdd": "Western Digital Blue 1TB @ 7200rpm",
       "ssd": "Samsung 960 EVO M.2 500GB",
       "gpu": "EVGA GeForce GTX 1080 Ti FTW3 11GB",
+      "case": "Corsair Obsidian 750D Full-Tower",
+      "psu": "Corsair RM750x 80 Plus Gold",
       "image": {
         "id": 5,
         "path": "/images/builds/jamesBuild.jpg",
@@ -117,6 +127,8 @@
       "hdd": "Western Digital Blue 2TB @ 7200rpm",
       "ssd": "Samsung 980 PRO PCIe 4.0 NVMe 1TB",
       "gpu": "Asus ROG Strix GeForce RTX 2080 Ti 11GB",
+      "case": "Corsair 5000D Airflow Mid-Tower",
+      "psu": "Corsair RM850x 80 Plus Gold",
       "image": {
         "id": 34,
         "path": "/images/builds/myBuild2021.jpg",
