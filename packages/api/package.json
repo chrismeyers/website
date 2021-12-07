@@ -16,7 +16,7 @@
   "dependencies": {
     "awilix": "^6.0.0",
     "dotenv": "^10.0.0",
-    "fastify": "^3.24.0",
+    "fastify": "^3.24.1",
     "fastify-autoload": "^3.9.0",
     "fastify-awilix": "^1.2.0",
     "fastify-cors": "^6.0.2",
@@ -26,15 +26,15 @@
     "fluent-json-schema": "^3.0.1"
   },
   "devDependencies": {
-    "eslint": "^8.3.0",
+    "eslint": "^8.4.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^4.0.0",
-    "jest": "^27.3.1",
-    "jest-extended": "^1.1.0",
+    "jest": "^27.4.3",
+    "jest-extended": "^1.2.0",
     "nodemon": "^2.0.15",
     "pino-pretty": "^6.0.0",
-    "prettier": "2.4.1"
+    "prettier": "2.5.1"
   }
 }
