@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import './css/full-nav.css';
-import { ReactComponent as Logo } from '../assets/images/logos/meyers-logo-green.svg';
+import { ReactComponent as Logo } from '../assets/images/logos/v3/ccm-logo.svg';
 
 const FullNav = () => {
   const location = useLocation();

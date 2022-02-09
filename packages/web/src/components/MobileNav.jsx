@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './css/mobile-nav.css';
-import { ReactComponent as Logo } from '../assets/images/logos/meyers-logo-green.svg';
+import { ReactComponent as Logo } from '../assets/images/logos/v3/ccm-logo.svg';
 import Footer from './Footer';
 import useClickOutside from '../hooks/useClickOutside';
 import { setBodyScrollable } from '../utils/styles';
