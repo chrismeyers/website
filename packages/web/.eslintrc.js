@@ -8,5 +8,6 @@ module.exports = {
     'no-console': 'warn',
     'prefer-const': 'warn',
     'import/no-anonymous-default-export': 'off',
+    'testing-library/no-node-access': 'off',
   },
 };
