@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import nock from 'nock';
 import Axios from 'axios';
 import AboutPage from '../../components/AboutPage';
@@ -26,7 +27,7 @@ describe('AboutPage', () => {
         },
       });
 
-    render(<AboutPage />);
+    render(<AboutPage />, { wrapper: MemoryRouter });
 
     await expect(screen.findByTestId('employment')).rejects.toThrow();
   });
@@ -46,7 +47,7 @@ describe('AboutPage', () => {
         },
       });
 
-    render(<AboutPage />);
+    render(<AboutPage />, { wrapper: MemoryRouter });
 
     const employment = await screen.findByTestId('employment');
 
@@ -65,7 +66,7 @@ describe('AboutPage', () => {
       .once()
       .reply(200);
 
-    render(<AboutPage />);
+    render(<AboutPage />, { wrapper: MemoryRouter });
 
     await expect(screen.findByTestId('desktop-languages')).rejects.toThrow();
     await expect(screen.findByTestId('web-languages')).rejects.toThrow();
@@ -89,7 +90,7 @@ describe('AboutPage', () => {
         },
       });
 
-    render(<AboutPage />);
+    render(<AboutPage />, { wrapper: MemoryRouter });
 
     const desktopLanguages = await screen.findByTestId('desktop-languages');
     const webLanguages = await screen.findByTestId('web-languages');
