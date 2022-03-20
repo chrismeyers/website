@@ -1,4 +1,4 @@
-FROM node:16.13.1-slim as builder
+FROM node:16.14.2-slim as builder
 
 WORKDIR /app
 COPY .yarn/ ./.yarn
@@ -8,7 +8,7 @@ RUN yarn workspaces focus web > /dev/null
 COPY packages/web/ ./packages/web/
 RUN yarn workspace web build
 
-FROM nginx:1.21.4
+FROM nginx:1.21.6
 
 RUN mkdir /app
 COPY --from=builder /app/packages/web/build /app
