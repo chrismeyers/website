@@ -3335,7 +3335,7 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     fastify: ^3.27.4
     fastify-autoload: ^3.11.0
-    fastify-awilix: ^1.2.0
+    fastify-awilix: ^1.2.1
     fastify-cors: ^6.0.3
     fastify-env: ^2.1.1
     fastify-helmet: ^7.0.1
@@ -6214,15 +6214,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fastify-awilix@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "fastify-awilix@npm:1.2.0"
+"fastify-awilix@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "fastify-awilix@npm:1.2.1"
   dependencies:
     fastify-plugin: ^3.0.0
   peerDependencies:
     awilix: ">=4.0.0"
     fastify: ^3.0.0
-  checksum: 71ee16d6926eab0174b77ff8927e6a6a5a27c21a30f42e8e54e066555bcb034cf82feb79ba8fafb81ef01b5084ea2b7cd896b8004763f80f6c359ad9a3ba1514
+  checksum: 0d17e8bd7a1db11f56b72f0b3d6fb429b1112c01db288dfb39fda810559c2317e9ea642fcfbc8df9086e5dabb69dad656706768664e6ac3c2cdf5b2aab42c904
   languageName: node
   linkType: hard
 
