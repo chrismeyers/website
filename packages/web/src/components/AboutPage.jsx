@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { SRLWrapper, useLightbox } from 'simple-react-lightbox';
 import ResumeApi from '../utils/api/resume';
@@ -89,11 +90,11 @@ const AboutPage = () => {
                   </li>
                   <li>Photography</li>
                   <li>
-                    <router-link className="fancytxt" to="/builds">
+                    <Link className="fancytxt" to="/builds">
                       Building custom computers
-                    </router-link>
+                    </Link>
                   </li>
-                  <li>Playing video games</li>
+                  <li>Chess</li>
                 </ul>
               </li>
               <li>
