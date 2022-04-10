@@ -1,5 +1,5 @@
 import 'delayed-scroll-restoration-polyfill';
-import React, { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import Axios from 'axios';
 import { isIE } from 'react-device-detect';
@@ -53,13 +53,11 @@ if (isIE) {
   import('react-loading-skeleton/dist/skeleton.css');
 
   element = (
-    <React.StrictMode>
-      <Suspense fallback={<></>}>
-        <SimpleReactLightbox>
-          <App />
-        </SimpleReactLightbox>
-      </Suspense>
-    </React.StrictMode>
+    <Suspense fallback={<></>}>
+      <SimpleReactLightbox>
+        <App />
+      </SimpleReactLightbox>
+    </Suspense>
   );
 }
 
