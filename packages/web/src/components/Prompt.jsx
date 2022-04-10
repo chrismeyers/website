@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import './css/prompt.css';
 import { THEMES } from '../utils/constants';
 
+let CONSOLE_MESSAGE_DISPLAYED = false;
+
 const Prompt = ({ themeProps }) => {
   const [promptVisible, setPromptVisible] = useState(false);
   const [outputWindowVisible, setOutputWindowVisible] = useState(false);
@@ -291,11 +293,15 @@ const Prompt = ({ themeProps }) => {
   }, [command, hidePrompt, next, prev, promptVisible, run]);
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.info(
-      `%c[${window.location.host}] Prefer a CLI? Press the tilde (~) key when focused on the website and type \`help\` for usage.`,
-      'font-size: 16px; background-color: rgba(0,0,0,0.85); color: #00CC00; font-family: "Courier New", Courier, monospace;',
-    );
+    if (!CONSOLE_MESSAGE_DISPLAYED) {
+      // eslint-disable-next-line no-console
+      console.info(
+        `%c[${window.location.host}] Prefer a CLI? Press the tilde (~) key when focused on the website and type \`help\` for usage.`,
+        'font-size: 16px; background-color: rgba(0,0,0,0.85); color: #00CC00; font-family: "Courier New", Courier, monospace;',
+      );
+
+      CONSOLE_MESSAGE_DISPLAYED = true;
+    }
   }, []);
 
   return (
