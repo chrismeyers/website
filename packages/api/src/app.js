@@ -1,10 +1,10 @@
 const path = require('path');
 const fastify = require('fastify');
-const fastifyCors = require('fastify-cors');
-const fastifyHelmet = require('fastify-helmet');
-const fastifyEnv = require('fastify-env');
-const fastifyAutoLoad = require('fastify-autoload');
-const fastifySensible = require('fastify-sensible');
+const fastifyCors = require('@fastify/cors');
+const fastifyHelmet = require('@fastify/helmet');
+const fastifyEnv = require('@fastify/env');
+const fastifyAutoLoad = require('@fastify/autoload');
+const fastifySensible = require('@fastify/sensible');
 const { fastifyAwilixPlugin, diContainer } = require('fastify-awilix');
 const S = require('fluent-json-schema');
 const schemas = require('./lib/schema');
