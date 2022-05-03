@@ -47,7 +47,7 @@ const ProjectPage = () => {
     return () => (isMounted = false);
   }, [id]);
 
-  const restartGIF = () => {
+  const restartGif = () => {
     // Restart the GIF each time it's opened
     setTimeout(() => {
       const gif = document.getElementsByClassName('lg-image')[0];
@@ -143,7 +143,7 @@ const ProjectPage = () => {
                             <Fragment key={image.id}>
                               <div className="gif-overlay" title="Play GIF">
                                 <LightGallery
-                                  onBeforeOpen={() => restartGIF()}
+                                  onBeforeOpen={restartGif}
                                   enableDrag={false}
                                   enableSwipe={false}
                                 >
