@@ -24,7 +24,7 @@ jobs:
         shell: bash
 
     container:
-      image: node:16.14.2-slim
+      image: node:16.15.0-slim
 
     steps:
       - uses: actions/checkout@v2
