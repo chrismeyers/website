@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import lightGallery from 'lightgallery';
@@ -12,11 +12,11 @@ const AboutPage = () => {
   const [loading, setLoading] = useState(true);
   const [mostRecentJob, setMostRecentJob] = useState(null);
   const [languages, setLanguages] = useState(null);
-  const [clarkGallery, setClarkGallery] = useState(null);
+  const clarkGalleryRef = useRef();
 
-  const clarkGalleryRef = useCallback((node) => {
-    if (node !== null) {
-      const gallery = lightGallery(node, {
+  const setClarkGalleryRef = (element) => {
+    if (element !== null) {
+      clarkGalleryRef.current = lightGallery(element, {
         dynamic: true,
         dynamicEl: [
           {
@@ -26,9 +26,8 @@ const AboutPage = () => {
         ],
         plugins: [lgZoom],
       });
-      setClarkGallery(gallery);
     }
-  }, []);
+  };
 
   useEffect(() => {
     let isMounted = true;
@@ -54,7 +53,10 @@ const AboutPage = () => {
     };
     fetchData();
 
-    return () => (isMounted = false);
+    return () => {
+      isMounted = false;
+      clarkGalleryRef.current?.destroy();
+    };
   }, []);
 
   return (
@@ -121,8 +123,8 @@ const AboutPage = () => {
                   className="fancytxt"
                   title="Clark the Corgi"
                   alt="Clark the Corgi"
-                  ref={clarkGalleryRef}
-                  onClick={() => clarkGallery.openGallery()}
+                  ref={setClarkGalleryRef}
+                  onClick={() => clarkGalleryRef.current?.openGallery()}
                 >
                   majestic beast
                 </a>
