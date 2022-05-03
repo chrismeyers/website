@@ -248,6 +248,8 @@ const Prompt = ({ themeProps }) => {
   );
 
   useEffect(() => {
+    if (history[0] === 'help') return;
+
     const gutter = history.length.toString().length + 1;
     const historyString = history
       .slice()
