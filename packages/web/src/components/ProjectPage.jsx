@@ -8,7 +8,10 @@ import { ReactComponent as ExternalLinkIcon } from '../assets/images/icons/link-
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
 import { ReactComponent as PlayIcon } from '../assets/images/icons/play.svg';
 import ProjectsAPI from '../utils/api/projects';
-import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
+import {
+  DEFAULT_DOCUMENT_TITLE,
+  LIGHTGALLERY_LICENSE,
+} from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
@@ -143,6 +146,7 @@ const ProjectPage = () => {
                             <Fragment key={image.id}>
                               <div className="gif-overlay" title="Play GIF">
                                 <LightGallery
+                                  licenseKey={LIGHTGALLERY_LICENSE}
                                   onBeforeOpen={restartGif}
                                   enableDrag={false}
                                   enableSwipe={false}
@@ -167,7 +171,10 @@ const ProjectPage = () => {
                           ))}
                         </>
                       ) : (
-                        <LightGallery plugins={[lgZoom]}>
+                        <LightGallery
+                          licenseKey={LIGHTGALLERY_LICENSE}
+                          plugins={[lgZoom]}
+                        >
                           {project.images.map((image, index) => (
                             <Fragment key={image.id}>
                               {index === 0 ? (

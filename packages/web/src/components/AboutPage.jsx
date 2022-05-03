@@ -4,7 +4,11 @@ import { toast } from 'react-toastify';
 import lightGallery from 'lightgallery';
 import lgZoom from 'lightgallery/plugins/zoom';
 import ResumeApi from '../utils/api/resume';
-import { MAILTO_HREF, DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
+import {
+  MAILTO_HREF,
+  DEFAULT_DOCUMENT_TITLE,
+  LIGHTGALLERY_LICENSE,
+} from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
@@ -17,6 +21,8 @@ const AboutPage = () => {
   const setClarkGalleryRef = (element) => {
     if (element !== null) {
       clarkGalleryRef.current = lightGallery(element, {
+        licenseKey: LIGHTGALLERY_LICENSE,
+        plugins: [lgZoom],
         dynamic: true,
         dynamicEl: [
           {
@@ -24,7 +30,6 @@ const AboutPage = () => {
             subHtml: 'Clark the Corgi',
           },
         ],
-        plugins: [lgZoom],
       });
     }
   };

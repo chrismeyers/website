@@ -5,7 +5,10 @@ import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
 import './css/build.css';
 import BuildsAPI from '../utils/api/builds';
-import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
+import {
+  DEFAULT_DOCUMENT_TITLE,
+  LIGHTGALLERY_LICENSE,
+} from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
@@ -124,7 +127,10 @@ const BuildPage = () => {
                   </div>
                   {build.image && (
                     <div className="build-pic">
-                      <LightGallery plugins={[lgZoom]}>
+                      <LightGallery
+                        licenseKey={LIGHTGALLERY_LICENSE}
+                        plugins={[lgZoom]}
+                      >
                         <a href={build.image.path}>
                           <img
                             src={build.image.path}
