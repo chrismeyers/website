@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
+import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import './css/project.css';
 import { ReactComponent as ExternalLinkIcon } from '../assets/images/icons/link-external.svg';
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
@@ -173,7 +174,8 @@ const ProjectPage = () => {
                       ) : (
                         <LightGallery
                           licenseKey={LIGHTGALLERY_LICENSE}
-                          plugins={[lgZoom]}
+                          plugins={[lgZoom, lgThumbnail]}
+                          thumbnail={true}
                         >
                           {project.images.map((image, index) => (
                             <Fragment key={image.id}>

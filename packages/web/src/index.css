@@ -12,6 +12,14 @@ code {
     monospace;
 }
 
+/* Global lightGallery overrides */
 .lg-container {
   font-family: 'Open-Sans', sans-serif !important;
+}
+
+.lg-thumb-item.active {
+  border-color: var(--main-theme-color) !important;
+}
+.lg-thumb-item:hover {
+  border-color: var(--faded-text-color) !important;
 }
