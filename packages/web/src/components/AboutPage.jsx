@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { SRLWrapper, useLightbox } from 'simple-react-lightbox';
+import lightGallery from 'lightgallery';
+import lgZoom from 'lightgallery/plugins/zoom';
 import ResumeApi from '../utils/api/resume';
 import { MAILTO_HREF, DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import ToastMessage from './ToastMessage';
@@ -11,7 +12,23 @@ const AboutPage = () => {
   const [loading, setLoading] = useState(true);
   const [mostRecentJob, setMostRecentJob] = useState(null);
   const [languages, setLanguages] = useState(null);
-  const { openLightbox } = useLightbox();
+  const [clarkGallery, setClarkGallery] = useState(null);
+
+  const clarkGalleryRef = useCallback((node) => {
+    if (node !== null) {
+      const gallery = lightGallery(node, {
+        dynamic: true,
+        dynamicEl: [
+          {
+            src: '/images/clark/DSC_1564-6.jpg',
+            subHtml: 'Clark the Corgi',
+          },
+        ],
+        plugins: [lgZoom],
+      });
+      setClarkGallery(gallery);
+    }
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -104,33 +121,13 @@ const AboutPage = () => {
                   className="fancytxt"
                   title="Clark the Corgi"
                   alt="Clark the Corgi"
-                  onClick={() => openLightbox()}
+                  ref={clarkGalleryRef}
+                  onClick={() => clarkGallery.openGallery()}
                 >
                   majestic beast
                 </a>
               </li>
             </ul>
-            <SRLWrapper
-              elements={[
-                {
-                  src: '/images/clark/DSC_1564-6.jpg',
-                  caption: 'Clark the Corgi',
-                },
-              ]}
-              options={{
-                settings: {
-                  downloadedFileName: 'clark-the-corgi',
-                },
-                buttons: {
-                  showAutoplayButton: false,
-                  showNextButton: false,
-                  showPrevButton: false,
-                },
-                thumbnails: {
-                  showThumbnails: false,
-                },
-              }}
-            />
 
             <p>
               Over the years, I've gained experience with the following
