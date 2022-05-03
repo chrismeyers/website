@@ -56,16 +56,4 @@ $ git push production main
 ```
 
 ## Credit
-+ The site uses several open source libraries and frameworks, including:
-  + [React](https://reactjs.org) as a frontend JavaScript framework
-    - [react-router](https://reactrouter.com) for SPA routing
-    - [simple-react-lightbox](https://simple-react-lightbox.dev) to make viewing images a lot more pleasant
-    - [react-toastify](https://fkhadra.github.io/react-toastify/introduction) to raise toast notifications
-    - [react-switch](https://github.com/markusenglund/react-switch) to toggle themes
-    - [react-device-detect](https://github.com/duskload/react-device-detect) to determine browser/device capabilities
-    - [react-loading-skeleton](https://github.com/dvtng/react-loading-skeleton) for loading animations
-    - [delayed-scroll-restoration-polyfill](https://github.com/janpaul123/delayed-scroll-restoration-polyfill) to restore scroll location on browser back and forward navigation
-  - [hamburgers](https://jonsuh.com/hamburgers/) to animate the hamburger menu icon
-  + [Fastify](https://www.fastify.io/) as a backend API framework
-    - [awilix](https://github.com/jeffijoe/awilix) as a dependency injection (DI) container
-- See each `package.json` for the full list
+The site uses several open source libraries and frameworks. See each `package.json` within the `packages/` directory for the full list.

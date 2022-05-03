@@ -1,10 +1,14 @@
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { SRLWrapper } from 'simple-react-lightbox';
+import LightGallery from 'lightgallery/react';
+import lgZoom from 'lightgallery/plugins/zoom';
 import './css/build.css';
 import BuildsAPI from '../utils/api/builds';
-import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
+import {
+  DEFAULT_DOCUMENT_TITLE,
+  LIGHTGALLERY_LICENSE,
+} from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
@@ -42,12 +46,6 @@ const BuildPage = () => {
 
     return () => (isMounted = false);
   }, [id]);
-
-  const buildDownloadFileName = () =>
-    build.image.title
-      .toLowerCase()
-      .replaceAll("'", '') // eslint-disable-line quotes
-      .replaceAll(' ', '-');
 
   return (
     <div className="content">
@@ -129,30 +127,20 @@ const BuildPage = () => {
                   </div>
                   {build.image && (
                     <div className="build-pic">
-                      <SRLWrapper
-                        options={{
-                          settings: {
-                            downloadedFileName: buildDownloadFileName(),
-                          },
-                          buttons: {
-                            showAutoplayButton: false,
-                            showNextButton: false,
-                            showPrevButton: false,
-                          },
-                          thumbnails: {
-                            showThumbnails: false,
-                          },
-                        }}
+                      <LightGallery
+                        licenseKey={LIGHTGALLERY_LICENSE}
+                        plugins={[lgZoom]}
                       >
                         <a href={build.image.path}>
                           <img
                             src={build.image.path}
                             className={`build-pic-img-${build.image.orient}`}
                             alt={build.image.title}
+                            data-sub-html={build.image.title}
                             title="Click to enlarge"
                           />
                         </a>
-                      </SRLWrapper>
+                      </LightGallery>
                     </div>
                   )}
                 </div>

@@ -6,13 +6,6 @@ import AboutPage from '../../components/AboutPage';
 
 Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 
-jest.mock('simple-react-lightbox', () => ({
-  useLightbox: () => ({
-    openLightbox: () => null,
-  }),
-  SRLWrapper: () => <></>,
-}));
-
 describe('AboutPage', () => {
   it('excludes employment info is not currently employed', async () => {
     nock(process.env.REACT_APP_API_BASE_URL)

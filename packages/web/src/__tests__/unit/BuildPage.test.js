@@ -5,10 +5,6 @@ import BuildPage from '../../components/BuildPage';
 
 Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 
-jest.mock('simple-react-lightbox', () => ({
-  SRLWrapper: ({ children }) => <div>{children}</div>,
-}));
-
 jest.mock('react-router-dom', () => ({
   useParams: () => ({ id: 1 }),
 }));

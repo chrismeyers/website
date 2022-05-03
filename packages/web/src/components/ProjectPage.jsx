@@ -1,14 +1,18 @@
 import { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { SRLWrapper } from 'simple-react-lightbox';
+import LightGallery from 'lightgallery/react';
+import lgZoom from 'lightgallery/plugins/zoom';
+import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import './css/project.css';
 import { ReactComponent as ExternalLinkIcon } from '../assets/images/icons/link-external.svg';
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
 import { ReactComponent as PlayIcon } from '../assets/images/icons/play.svg';
 import ProjectsAPI from '../utils/api/projects';
-import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
-import { getCssVar } from '../utils/styles';
+import {
+  DEFAULT_DOCUMENT_TITLE,
+  LIGHTGALLERY_LICENSE,
+} from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
@@ -47,16 +51,13 @@ const ProjectPage = () => {
     return () => (isMounted = false);
   }, [id]);
 
-  const buildDownloadFileName = () =>
-    project.title.toLowerCase().replaceAll(' ', '-');
-
-  const restartGIF = () => {
+  const restartGif = () => {
     // Restart the GIF each time it's opened
     setTimeout(() => {
-      const gif = document.getElementsByClassName('SRLImage')[0];
+      const gif = document.getElementsByClassName('lg-image')[0];
 
       if (gif) {
-        document.getElementsByClassName('SRLImage')[0].src = gif.src;
+        document.getElementsByClassName('lg-image')[0].src = gif.src;
       }
     }, 100);
   };
@@ -141,35 +142,25 @@ const ProjectPage = () => {
                   {project.images && project.images.length > 0 && (
                     <div className="project-images">
                       {project.images[0].path.toLowerCase().endsWith('.gif') ? (
-                        <SRLWrapper
-                          callbacks={{
-                            onLightboxOpened: () => restartGIF(),
-                          }}
-                          options={{
-                            settings: {
-                              downloadedFileName: buildDownloadFileName(),
-                            },
-                            thumbnails: {
-                              showThumbnails: false,
-                            },
-                            buttons: {
-                              showAutoplayButton: false,
-                              showNextButton: false,
-                              showPrevButton: false,
-                            },
-                          }}
-                        >
-                          {project.images.map((image, index) => (
+                        <>
+                          {project.images.map((image) => (
                             <Fragment key={image.id}>
                               <div className="gif-overlay" title="Play GIF">
-                                <a href={image.path}>
-                                  <img
-                                    src={image.thumbnail}
-                                    className={`project-images-full-img-${image.orient}`}
-                                    alt={image.title}
-                                    title="Click to enlarge"
-                                  />
-                                </a>
+                                <LightGallery
+                                  licenseKey={LIGHTGALLERY_LICENSE}
+                                  onBeforeOpen={restartGif}
+                                  enableDrag={false}
+                                  enableSwipe={false}
+                                >
+                                  <a href={image.path}>
+                                    <img
+                                      src={image.thumbnail}
+                                      className={`project-images-full-img-${image.orient}`}
+                                      alt={image.title}
+                                      title="Click to enlarge"
+                                    />
+                                  </a>
+                                </LightGallery>
                                 <PlayIcon
                                   name="play"
                                   className="link-image xlarge play-overlay"
@@ -179,17 +170,12 @@ const ProjectPage = () => {
                               </div>
                             </Fragment>
                           ))}
-                        </SRLWrapper>
+                        </>
                       ) : (
-                        <SRLWrapper
-                          options={{
-                            settings: {
-                              downloadedFileName: buildDownloadFileName(),
-                            },
-                            progressBar: {
-                              fillColor: getCssVar('--main-theme-color'),
-                            },
-                          }}
+                        <LightGallery
+                          licenseKey={LIGHTGALLERY_LICENSE}
+                          plugins={[lgZoom, lgThumbnail]}
+                          thumbnail={true}
                         >
                           {project.images.map((image, index) => (
                             <Fragment key={image.id}>
@@ -203,7 +189,10 @@ const ProjectPage = () => {
                                   />
                                 </a>
                               ) : (
-                                <div className="project-images-small">
+                                <div
+                                  className="project-images-small"
+                                  data-src={image.path}
+                                >
                                   <a href={image.path}>
                                     <img
                                       src={image.path}
@@ -216,7 +205,7 @@ const ProjectPage = () => {
                               )}
                             </Fragment>
                           ))}
-                        </SRLWrapper>
+                        </LightGallery>
                       )}
                     </div>
                   )}
