@@ -5,11 +5,13 @@ on:
     paths:
       - .github/workflows/web.yml
       - packages/web/**
+      - yarn.lock
   pull_request:
     branches: [ main ]
     paths:
       - .github/workflows/web.yml
       - packages/web/**
+      - yarn.lock
 
 jobs:
   build:
