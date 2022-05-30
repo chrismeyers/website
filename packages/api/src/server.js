@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv/config');
 const path = require('path');
 const process = require('process');
 const createApp = require('./app');
