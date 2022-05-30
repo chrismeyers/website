@@ -8,7 +8,7 @@ const fastifySensible = require('@fastify/sensible');
 const S = require('fluent-json-schema');
 const schemas = require('./lib/schema');
 
-module.exports = async (opts = {}) => {
+module.exports = async (decorators = [], opts = {}) => {
   const app = fastify(opts);
 
   // Plugins
@@ -37,6 +37,11 @@ module.exports = async (opts = {}) => {
 
   // Schema
   app.addSchema(schemas);
+
+  // Server decorators
+  decorators.forEach(({ name, value }) => {
+    app.decorate(name, value);
+  });
 
   return app;
 };

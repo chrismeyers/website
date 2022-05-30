@@ -7,21 +7,29 @@ describe('Project API Endpoints', () => {
   let app;
 
   beforeEach(async () => {
-    app = await createApp();
-
-    const repos = {
-      builds: createBuildsRepository(testDataLoader),
-      projects: createProjectsRepository(testDataLoader),
-    };
-
-    app.decorateRequest('repos', null);
-    app.addHook('onRequest', (request, reply, done) => {
-      request.repos = repos;
-      done();
-    });
+    app = await createApp([
+      {
+        name: 'repos',
+        value: {
+          builds: createBuildsRepository(testDataLoader),
+          projects: createProjectsRepository(testDataLoader),
+        },
+      },
+    ]);
   });
 
   afterEach(() => app.close());
+
+  it('should return an error when decorators are missing', async () => {
+    app = await createApp();
+
+    const response = await app.inject({
+      method: 'GET',
+      url: '/projects',
+    });
+
+    expect(response.statusCode).toBe(500);
+  });
 
   it('gets all active projects', async () => {
     const response = await app.inject({

@@ -8,7 +8,7 @@ module.exports = async (app) => {
       },
     },
     handler: async (request, reply) => {
-      const { resumeParser: parser } = request;
+      const { resumeParser: parser } = app;
 
       return reply.send({
         experience: parser.parseComplexSection('Experience'),
@@ -25,7 +25,7 @@ module.exports = async (app) => {
       },
     },
     handler: async (request, reply) => {
-      const { resumeParser: parser } = request;
+      const { resumeParser: parser } = app;
 
       return reply.send({
         languages: parser.getLanguages(),

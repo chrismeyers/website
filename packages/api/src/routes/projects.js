@@ -11,7 +11,7 @@ module.exports = async (app) => {
       },
     },
     handler: async (request, reply) => {
-      const { projects } = request.repos;
+      const { projects } = app.repos;
 
       return reply.send({ items: projects.active() });
     },
@@ -26,7 +26,7 @@ module.exports = async (app) => {
     },
     handler: async (request, reply) => {
       const { id } = request.params;
-      const { projects } = request.repos;
+      const { projects } = app.repos;
 
       const project = projects.findById(id);
 

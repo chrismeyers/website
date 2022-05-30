@@ -6,20 +6,28 @@ describe('Resume API Endpoints', () => {
   let app;
 
   beforeEach(async () => {
-    app = await createApp();
-
-    const resumeParser = createResumeParser(
-      path.join(__dirname, '..', '__fixtures__', 'test-resume.latex'),
-    );
-
-    app.decorateRequest('resumeParser', null);
-    app.addHook('onRequest', (request, reply, done) => {
-      request.resumeParser = resumeParser;
-      done();
-    });
+    app = await createApp([
+      {
+        name: 'resumeParser',
+        value: createResumeParser(
+          path.join(__dirname, '..', '__fixtures__', 'test-resume.latex'),
+        ),
+      },
+    ]);
   });
 
   afterEach(() => app.close());
+
+  it('should return an error when decorators are missing', async () => {
+    app = await createApp();
+
+    const response = await app.inject({
+      method: 'GET',
+      url: '/resume',
+    });
+
+    expect(response.statusCode).toBe(500);
+  });
 
   it('gets full resume', async () => {
     const response = await app.inject({
