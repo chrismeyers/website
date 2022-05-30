@@ -2,7 +2,8 @@ require('dotenv/config');
 const path = require('path');
 const process = require('process');
 const createApp = require('./app');
-const createRepos = require('./lib/repository');
+const createBuildsRepository = require('./lib/builds-repository');
+const createProjectsRepository = require('./lib/projects-repository');
 const createResumeParser = require('./lib/resume-parser');
 const dataLoader = require('./lib/data-loader');
 
@@ -15,7 +16,10 @@ const start = async () => {
       },
     });
 
-    const repos = createRepos(dataLoader);
+    const repos = {
+      builds: createBuildsRepository(dataLoader),
+      projects: createProjectsRepository(dataLoader),
+    };
     const resumeParser = createResumeParser(
       path.join(
         __dirname,

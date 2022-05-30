@@ -214,8 +214,10 @@ const resumeParser = ({ resumePath }) => {
   };
 };
 
-module.exports = (resumePath) => {
+const createResumeParser = (resumePath) => {
   const parser = resumeParser({ resumePath });
   parser.load();
   return parser;
 };
+
+module.exports = createResumeParser;

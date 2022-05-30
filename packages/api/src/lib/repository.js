@@ -20,12 +20,4 @@ const createRepository = ({ dataLoader }) => {
   };
 };
 
-module.exports = (dataLoader) => {
-  const builds = createRepository({ dataLoader });
-  builds.load('builds');
-
-  const projects = createRepository({ dataLoader });
-  projects.load('projects');
-
-  return { builds, projects };
-};
+module.exports = createRepository;

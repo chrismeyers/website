@@ -1,5 +1,6 @@
 const createApp = require('../../app');
-const createRepos = require('../../lib/repository');
+const createBuildsRepository = require('../../lib/builds-repository');
+const createProjectsRepository = require('../../lib/projects-repository');
 const testDataLoader = require('../__fixtures__/test-data-loader');
 
 describe('Build API Endpoints', () => {
@@ -8,7 +9,10 @@ describe('Build API Endpoints', () => {
   beforeEach(async () => {
     app = await createApp();
 
-    const repos = createRepos(testDataLoader);
+    const repos = {
+      builds: createBuildsRepository(testDataLoader),
+      projects: createProjectsRepository(testDataLoader),
+    };
 
     app.decorateRequest('repos', null);
     app.addHook('onRequest', (request, reply, done) => {
