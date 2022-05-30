@@ -1,19 +1,10 @@
-const fs = require('fs').promises;
-
-/**
- * @typedef ResumeParser
- * @property {() => Promise<void>} load
- * @property {(section: string, removeInlineComments?: boolean) => any[]} parseComplexSection
- * @property {(section: string, removeInlineComments?: boolean) => any[]} parseListSection
- * @property {() => any} getLanguages
- * @property {() => any} getMostRecentJob
- */
+const fs = require('fs');
 
 const resumeParser = ({ resumePath }) => {
   const rawSections = {};
 
-  const load = async () => {
-    const data = await fs.readFile(resumePath, 'utf8');
+  const load = () => {
+    const data = fs.readFileSync(resumePath, 'utf8');
     const lines = data.split('\n');
 
     const beginPattern = '% BEGIN';
@@ -223,10 +214,8 @@ const resumeParser = ({ resumePath }) => {
   };
 };
 
-const createResumeParser = async ({ resumePath }) => {
+module.exports = (resumePath) => {
   const parser = resumeParser({ resumePath });
-  await parser.load();
+  parser.load();
   return parser;
 };
-
-module.exports = createResumeParser;

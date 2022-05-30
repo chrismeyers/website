@@ -1,21 +1,41 @@
 require('dotenv').config();
+const path = require('path');
 const process = require('process');
 const createApp = require('./app');
-const container = require('./container');
+const createRepos = require('./lib/repository');
+const createResumeParser = require('./lib/resume-parser');
+const dataLoader = require('./lib/data-loader');
 
 const start = async () => {
   try {
-    const app = await createApp(container, {
+    const app = await createApp({
       logger: {
         level: 'info',
         prettyPrint: process.env.NODE_ENV === 'development',
       },
     });
 
-    // Load singletons into memory on server startup
-    await app.diContainer.resolve('projectRepository');
-    await app.diContainer.resolve('buildRepository');
-    await app.diContainer.resolve('resumeParser');
+    const repos = createRepos(dataLoader);
+    const resumeParser = createResumeParser(
+      path.join(
+        __dirname,
+        '..',
+        '..',
+        '..',
+        'resume',
+        'LaTeX',
+        'Meyers_Chris',
+        'Meyers_Chris_Resume.tex',
+      ),
+    );
+
+    app.decorateRequest('repos', null);
+    app.decorateRequest('resumeParser', null);
+    app.addHook('onRequest', (request, reply, done) => {
+      request.repos = repos;
+      request.resumeParser = resumeParser;
+      done();
+    });
 
     const port = app.config.PORT;
     const addr = app.config.ADDR;

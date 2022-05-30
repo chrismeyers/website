@@ -1,7 +1,5 @@
 const S = require('fluent-json-schema');
 
-/** @typedef {import('../lib/repository').Repository} Repository */
-
 module.exports = async (app) => {
   app.get('/builds', {
     schema: {
@@ -14,9 +12,9 @@ module.exports = async (app) => {
     },
     handler: async (request, reply) => {
       try {
-        /** @type Repository */
-        const repo = await request.diScope.resolve('buildRepository');
-        return { items: repo.active() };
+        const { builds } = request.repos;
+
+        return { items: builds.active() };
       } catch (error) {
         return reply.internalServerError('Unable to load data');
       }
@@ -34,9 +32,8 @@ module.exports = async (app) => {
       const { id } = request.params;
 
       try {
-        /** @type Repository */
-        const repo = await request.diScope.resolve('buildRepository');
-        const build = repo.findById(id);
+        const { builds } = request.repos;
+        const build = builds.findById(id);
 
         if (build) return build;
 
