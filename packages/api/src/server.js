@@ -14,6 +14,7 @@ const start = async () => {
         level: 'info',
         prettyPrint: process.env.NODE_ENV === 'development',
       },
+      trustProxy: true,
     });
 
     const repos = {
