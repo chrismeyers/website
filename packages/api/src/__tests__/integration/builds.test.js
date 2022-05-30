@@ -1,34 +1,23 @@
-const { asFunction } = require('awilix');
 const createApp = require('../../app');
-const testContainer = require('../__fixtures__/test-container');
+const createRepos = require('../../lib/repository');
+const testDataLoader = require('../__fixtures__/test-data-loader');
 
 describe('Build API Endpoints', () => {
   let app;
 
   beforeEach(async () => {
-    app = await createApp(testContainer);
+    app = await createApp();
+
+    const repos = createRepos(testDataLoader);
+
+    app.decorateRequest('repos', null);
+    app.addHook('onRequest', (request, reply, done) => {
+      request.repos = repos;
+      done();
+    });
   });
 
   afterEach(() => app.close());
-
-  it('handles data loading errors when attempting to get all active builds', async () => {
-    app = await createApp({
-      ...testContainer,
-      buildRepository: asFunction(() => null),
-    });
-
-    const response = await app.inject({
-      method: 'GET',
-      url: '/builds',
-    });
-
-    expect(response.statusCode).toBe(500);
-    expect(JSON.parse(response.body)).toEqual(
-      expect.objectContaining({
-        message: 'Unable to load data',
-      }),
-    );
-  });
 
   it('gets all active builds', async () => {
     const response = await app.inject({
@@ -62,25 +51,6 @@ describe('Build API Endpoints', () => {
         }),
       ]),
     });
-  });
-
-  it('handles data loading errors when attempting to get a single build', async () => {
-    app = await createApp({
-      ...testContainer,
-      buildRepository: asFunction(() => null),
-    });
-
-    const response = await app.inject({
-      method: 'GET',
-      url: '/builds/1',
-    });
-
-    expect(response.statusCode).toBe(500);
-    expect(JSON.parse(response.body)).toEqual(
-      expect.objectContaining({
-        message: 'Unable to load data',
-      }),
-    );
   });
 
   it('handles an invalid ID', async () => {

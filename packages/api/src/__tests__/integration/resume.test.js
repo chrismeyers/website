@@ -1,34 +1,25 @@
-const { asFunction } = require('awilix');
+const path = require('path');
 const createApp = require('../../app');
-const testContainer = require('../__fixtures__/test-container');
+const createResumeParser = require('../../lib/resume-parser');
 
 describe('Resume API Endpoints', () => {
   let app;
 
   beforeEach(async () => {
-    app = await createApp(testContainer);
+    app = await createApp();
+
+    const resumeParser = createResumeParser(
+      path.join(__dirname, '..', '__fixtures__', 'test-resume.latex'),
+    );
+
+    app.decorateRequest('resumeParser', null);
+    app.addHook('onRequest', (request, reply, done) => {
+      request.resumeParser = resumeParser;
+      done();
+    });
   });
 
   afterEach(() => app.close());
-
-  it('handles data loading errors when attempting to get full resume', async () => {
-    app = await createApp({
-      ...testContainer,
-      resumeParser: asFunction(() => null),
-    });
-
-    const response = await app.inject({
-      method: 'GET',
-      url: '/resume',
-    });
-
-    expect(response.statusCode).toBe(500);
-    expect(JSON.parse(response.body)).toEqual(
-      expect.objectContaining({
-        message: 'Unable to load resume file',
-      }),
-    );
-  });
 
   it('gets full resume', async () => {
     const response = await app.inject({
@@ -61,25 +52,6 @@ describe('Resume API Endpoints', () => {
             subItems: expect.any(Array),
           }),
         ]),
-      }),
-    );
-  });
-
-  it('handles data loading errors when attempting to get resume summary', async () => {
-    app = await createApp({
-      ...testContainer,
-      resumeParser: asFunction(() => null),
-    });
-
-    const response = await app.inject({
-      method: 'GET',
-      url: '/resume/summary',
-    });
-
-    expect(response.statusCode).toBe(500);
-    expect(JSON.parse(response.body)).toEqual(
-      expect.objectContaining({
-        message: 'Unable to load resume file',
       }),
     );
   });

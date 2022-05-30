@@ -11,13 +11,9 @@ module.exports = async (app) => {
       },
     },
     handler: async (request, reply) => {
-      try {
-        const { projects } = request.repos;
+      const { projects } = request.repos;
 
-        return { items: projects.active() };
-      } catch (error) {
-        return reply.internalServerError('Unable to load data');
-      }
+      return reply.send({ items: projects.active() });
     },
   });
 
@@ -30,17 +26,13 @@ module.exports = async (app) => {
     },
     handler: async (request, reply) => {
       const { id } = request.params;
+      const { projects } = request.repos;
 
-      try {
-        const { projects } = request.repos;
-        const project = projects.findById(id);
+      const project = projects.findById(id);
 
-        if (project) return project;
+      if (project) return reply.send(project);
 
-        return reply.notFound(`Project ${id} not found`);
-      } catch (error) {
-        return reply.internalServerError('Unable to load data');
-      }
+      return reply.notFound(`Project ${id} not found`);
     },
   });
 };

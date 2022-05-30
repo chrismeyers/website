@@ -11,13 +11,9 @@ module.exports = async (app) => {
       },
     },
     handler: async (request, reply) => {
-      try {
-        const { builds } = request.repos;
+      const { builds } = request.repos;
 
-        return { items: builds.active() };
-      } catch (error) {
-        return reply.internalServerError('Unable to load data');
-      }
+      return reply.send({ items: builds.active() });
     },
   });
 
@@ -30,17 +26,13 @@ module.exports = async (app) => {
     },
     handler: async (request, reply) => {
       const { id } = request.params;
+      const { builds } = request.repos;
 
-      try {
-        const { builds } = request.repos;
-        const build = builds.findById(id);
+      const build = builds.findById(id);
 
-        if (build) return build;
+      if (build) return reply.send(build);
 
-        return reply.notFound(`Build ${id} not found`);
-      } catch (error) {
-        return reply.internalServerError('Unable to load data');
-      }
+      return reply.notFound(`Build ${id} not found`);
     },
   });
 };
