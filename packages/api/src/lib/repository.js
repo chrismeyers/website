@@ -1,15 +1,8 @@
-/**
- * @typedef Repository
- * @property {(type: string) => Promise<void>} load
- * @property {() => any[]} active
- * @property {(id: number) => (any|undefined)} findById
- */
-
 const createRepository = ({ dataLoader }) => {
   let data = [];
 
-  const load = async (type) => {
-    data = await dataLoader(type);
+  const load = (type) => {
+    data = dataLoader(type);
   };
 
   const active = () => {

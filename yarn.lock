@@ -3688,7 +3688,6 @@ __metadata:
     "@fastify/env": ^3.0.0
     "@fastify/helmet": ^8.0.0
     "@fastify/sensible": ^4.0.0
-    awilix: ^7.0.3
     dotenv: ^16.0.0
     eslint: ^8.14.0
     eslint-config-airbnb-base: ^15.0.0
@@ -3696,7 +3695,6 @@ __metadata:
     eslint-plugin-import: ^2.26.0
     eslint-plugin-prettier: ^4.0.0
     fastify: ^3.29.0
-    fastify-awilix: ^1.2.1
     fluent-json-schema: ^3.1.0
     jest: ^28.0.3
     jest-extended: ^2.0.0
@@ -3927,16 +3925,6 @@ __metadata:
     fastq: ^1.6.1
     queue-microtask: ^1.1.2
   checksum: 9a0aa7208441f5abe49c12741ad7f127283ec749b25f0b941a1c84e8f41e958b86b56a1c6baff5a7b5ae5e713a919f1128702dbcf80a6b17e7dc5b095c85b3bd
-  languageName: node
-  linkType: hard
-
-"awilix@npm:^7.0.3":
-  version: 7.0.3
-  resolution: "awilix@npm:7.0.3"
-  dependencies:
-    camel-case: ^4.1.2
-    fast-glob: ^3.2.11
-  checksum: 2f4251753a60a19a46c4af2fcbba3ea3e062506aea529375e76cd11a29c9231bffd8b352794e8ed7a3710d6a9975fa09889e18dce32f25461cf769cce21197b6
   languageName: node
   linkType: hard
 
@@ -6567,18 +6555,6 @@ __metadata:
   version: 2.1.1
   resolution: "fast-safe-stringify@npm:2.1.1"
   checksum: a851cbddc451745662f8f00ddb622d6766f9bd97642dabfd9a405fb0d646d69fc0b9a1243cbf67f5f18a39f40f6fa821737651ff1bceeba06c9992ca2dc5bd3d
-  languageName: node
-  linkType: hard
-
-"fastify-awilix@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "fastify-awilix@npm:1.2.1"
-  dependencies:
-    fastify-plugin: ^3.0.0
-  peerDependencies:
-    awilix: ">=4.0.0"
-    fastify: ^3.0.0
-  checksum: 0d17e8bd7a1db11f56b72f0b3d6fb429b1112c01db288dfb39fda810559c2317e9ea642fcfbc8df9086e5dabb69dad656706768664e6ac3c2cdf5b2aab42c904
   languageName: node
   linkType: hard
 

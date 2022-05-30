@@ -5,11 +5,10 @@ const fastifyHelmet = require('@fastify/helmet');
 const fastifyEnv = require('@fastify/env');
 const fastifyAutoLoad = require('@fastify/autoload');
 const fastifySensible = require('@fastify/sensible');
-const { fastifyAwilixPlugin, diContainer } = require('fastify-awilix');
 const S = require('fluent-json-schema');
 const schemas = require('./lib/schema');
 
-module.exports = async (container, opts = {}) => {
+module.exports = async (opts = {}) => {
   const app = fastify(opts);
 
   // Plugins
@@ -29,17 +28,6 @@ module.exports = async (container, opts = {}) => {
   });
   app.register(fastifyHelmet);
   app.register(fastifySensible);
-  app.register(fastifyAwilixPlugin, {
-    disposeOnClose: true,
-    disposeOnResponse: true,
-  });
-
-  // Dependency Injection
-  diContainer.register(container);
-  app.addHook('onRequest', (request, reply, done) => {
-    request.diScope.register(container);
-    done();
-  });
 
   // Routes
   app.register(fastifyAutoLoad, {

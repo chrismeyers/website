@@ -1,7 +1,5 @@
 const S = require('fluent-json-schema');
 
-/** @typedef {import('../lib/resume-parser').ResumeParser} ResumeParser */
-
 module.exports = async (app) => {
   app.get('/resume', {
     schema: {
@@ -10,18 +8,13 @@ module.exports = async (app) => {
       },
     },
     handler: async (request, reply) => {
-      try {
-        /** @type ResumeParser */
-        const parser = await request.diScope.resolve('resumeParser');
+      const { resumeParser: parser } = request;
 
-        return {
-          experience: parser.parseComplexSection('Experience'),
-          education: parser.parseComplexSection('Education'),
-          skills: parser.parseListSection('TechnicalSkills'),
-        };
-      } catch (error) {
-        return reply.internalServerError('Unable to load resume file');
-      }
+      return reply.send({
+        experience: parser.parseComplexSection('Experience'),
+        education: parser.parseComplexSection('Education'),
+        skills: parser.parseListSection('TechnicalSkills'),
+      });
     },
   });
 
@@ -32,17 +25,12 @@ module.exports = async (app) => {
       },
     },
     handler: async (request, reply) => {
-      try {
-        /** @type ResumeParser */
-        const parser = await request.diScope.resolve('resumeParser');
+      const { resumeParser: parser } = request;
 
-        return {
-          languages: parser.getLanguages(),
-          mostRecentJob: parser.getMostRecentJob(),
-        };
-      } catch (error) {
-        return reply.internalServerError('Unable to load resume file');
-      }
+      return reply.send({
+        languages: parser.getLanguages(),
+        mostRecentJob: parser.getMostRecentJob(),
+      });
     },
   });
 };

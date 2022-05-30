@@ -1,11 +1,11 @@
-const fs = require('fs').promises;
+const fs = require('fs');
 const path = require('path');
 
-module.exports = async (type = null) => {
-  const data = await fs.readFile(
-    path.join(__dirname, '..', 'data', 'data.json'),
+const dataLoader = (type = null) => {
+  const data = JSON.parse(
+    fs.readFileSync(path.join(__dirname, '..', 'data', 'data.json')),
   );
-  const obj = JSON.parse(data);
-
-  return type ? obj[type] : obj;
+  return type ? data[type] : data;
 };
+
+module.exports = dataLoader;

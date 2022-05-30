@@ -1,7 +1,5 @@
 const S = require('fluent-json-schema');
 
-/** @typedef {import('../lib/repository').Repository} Repository */
-
 module.exports = async (app) => {
   app.get('/builds', {
     schema: {
@@ -13,13 +11,9 @@ module.exports = async (app) => {
       },
     },
     handler: async (request, reply) => {
-      try {
-        /** @type Repository */
-        const repo = await request.diScope.resolve('buildRepository');
-        return { items: repo.active() };
-      } catch (error) {
-        return reply.internalServerError('Unable to load data');
-      }
+      const { builds } = request.repos;
+
+      return reply.send({ items: builds.active() });
     },
   });
 
@@ -32,18 +26,13 @@ module.exports = async (app) => {
     },
     handler: async (request, reply) => {
       const { id } = request.params;
+      const { builds } = request.repos;
 
-      try {
-        /** @type Repository */
-        const repo = await request.diScope.resolve('buildRepository');
-        const build = repo.findById(id);
+      const build = builds.findById(id);
 
-        if (build) return build;
+      if (build) return reply.send(build);
 
-        return reply.notFound(`Build ${id} not found`);
-      } catch (error) {
-        return reply.internalServerError('Unable to load data');
-      }
+      return reply.notFound(`Build ${id} not found`);
     },
   });
 };
