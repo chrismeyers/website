@@ -43,13 +43,16 @@ const start = async () => {
     await app.listen(port, addr);
 
     ['SIGINT', 'SIGTERM'].forEach((signal) => {
-      process.on(signal, async () => {
-        app.log.warn(`Received ${signal}`);
+      process.once(signal, async () => {
+        // eslint-disable-next-line no-console
+        console.warn(`Received ${signal}`);
         try {
           await app.close();
-          app.log.warn('Successfully closed server');
+          // eslint-disable-next-line no-console
+          console.warn('Successfully closed server');
         } catch (error) {
-          app.log.error(error);
+          // eslint-disable-next-line no-console
+          console.error(error);
         }
       });
     });
