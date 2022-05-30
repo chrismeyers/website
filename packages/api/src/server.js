@@ -46,7 +46,7 @@ const start = async () => {
     const port = app.config.PORT;
     const addr = app.config.ADDR;
 
-    await app.listen(port, addr);
+    await app.listen({ port, host: addr });
 
     ['SIGINT', 'SIGTERM'].forEach((signal) => {
       process.once(signal, async () => {
