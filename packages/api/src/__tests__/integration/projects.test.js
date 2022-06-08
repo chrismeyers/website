@@ -76,7 +76,7 @@ describe('Project API Endpoints', () => {
     expect(response.statusCode).toBe(400);
     expect(JSON.parse(response.body)).toEqual(
       expect.objectContaining({
-        message: 'params.id should be number',
+        message: 'params/id must be number',
       }),
     );
   });

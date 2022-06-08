@@ -37,7 +37,12 @@ const start = async () => {
       {
         logger: {
           level: 'info',
-          prettyPrint: process.env.NODE_ENV === 'development',
+          transport: {
+            target:
+              process.env.NODE_ENV === 'development'
+                ? 'pino-pretty'
+                : 'pino/file',
+          },
         },
         trustProxy: true,
       },

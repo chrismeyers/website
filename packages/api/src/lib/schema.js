@@ -1,7 +1,6 @@
 const S = require('fluent-json-schema');
 
 const imageSchema = S.object()
-  .id('#image')
   .prop('id', S.number())
   .prop('path', S.string())
   .prop('thumbnail', S.anyOf([S.string(), S.null()]))
