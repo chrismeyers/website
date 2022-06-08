@@ -22,7 +22,7 @@ jobs:
         shell: bash
 
     container:
-      image: node:16.15.0-slim
+      image: node:16.15.1-slim
 
     steps:
       - uses: actions/checkout@v2
