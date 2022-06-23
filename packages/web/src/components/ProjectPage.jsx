@@ -20,15 +20,8 @@ import Loading from './Loading';
 const ProjectPage = () => {
   const { id } = useParams();
 
-  const { isLoading, data, error } = useQuery(
-    ['projects', id],
-    () => ProjectsAPI.getById(id),
-    {
-      retry: (count, error) => {
-        if ([400, 404].includes(error.statusCode)) return false;
-        return count < 3;
-      },
-    },
+  const { isLoading, data, error } = useQuery(['projects', id], () =>
+    ProjectsAPI.getById(id),
   );
 
   if (error) {
@@ -123,7 +116,7 @@ const ProjectPage = () => {
                     </dl>
                   </div>
 
-                  {data?.images.length > 0 && (
+                  {data?.images?.length > 0 && (
                     <div className="project-images">
                       {data.images[0].path.toLowerCase().endsWith('.gif') ? (
                         <>

@@ -31,7 +31,7 @@ const ResumePage = () => {
         ) : (
           <>
             <h2 className="top">Experience</h2>
-            {data.experience.map((job, i) => (
+            {data?.experience?.map((job, i) => (
               <ul className="italic-spacer" key={`job-${i}`}>
                 <li className="left-column company" key={`job-company-${i}`}>
                   <a className="fancytxt" href={job.url}>
@@ -89,7 +89,7 @@ const ResumePage = () => {
             <hr />
 
             <h2>Education</h2>
-            {data.education.map((school, i) => (
+            {data?.education?.map((school, i) => (
               <ul className="italic-spacer" key={`school-${i}`}>
                 <li className="left-column degree" key={`school-degree-${i}`}>
                   {school.firstLine[0]}
@@ -150,7 +150,7 @@ const ResumePage = () => {
 
             <h2>Technical Skills</h2>
             <ul>
-              {data.skills.map((skill, i) => (
+              {data?.skills?.map((skill, i) => (
                 <li className="skill-wrapper" key={`skill-wrapper-${i}`}>
                   {skill.mainItem}
                   {skill.subItems.length > 0 && (

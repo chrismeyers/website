@@ -22,6 +22,10 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
+      retry: (count, error) => {
+        if ([400, 404].includes(error.statusCode)) return false;
+        return count < 3;
+      },
     },
   },
 });

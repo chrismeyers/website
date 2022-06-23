@@ -78,7 +78,7 @@ const AboutPage = () => {
                 in Glassboro, NJ and earned a Bachelor of Science in Computer
                 Science
               </li>
-              {data.mostRecentJob.employed && (
+              {data?.mostRecentJob?.employed && (
                 <li data-testid="employment">
                   Currently, I am employed as a {data.mostRecentJob.title} at{' '}
                   <a href={data.mostRecentJob.url} className="fancytxt">
@@ -130,7 +130,7 @@ const AboutPage = () => {
             <ul>
               <li>
                 Websites, web applications, and APIs:
-                {data.languages.web && (
+                {data?.languages?.web && (
                   <ul data-testid="web-languages">
                     {data.languages.web.map((item, index) => (
                       <li key={`web-${index}`}>{item}</li>
@@ -140,7 +140,7 @@ const AboutPage = () => {
               </li>
               <li>
                 Desktop and command-line interface (CLI) applications:
-                {data.languages.desktop && (
+                {data?.languages?.desktop && (
                   <ul data-testid="desktop-languages">
                     {data.languages.desktop.map((item, index) => (
                       <li key={`desktop-${index}`}>{item}</li>

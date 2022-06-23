@@ -15,15 +15,8 @@ import Loading from './Loading';
 const BuildPage = () => {
   const { id } = useParams();
 
-  const { isLoading, data, error } = useQuery(
-    ['builds', id],
-    () => BuildsAPI.getById(id),
-    {
-      retry: (count, error) => {
-        if ([400, 404].includes(error.statusCode)) return false;
-        return count < 3;
-      },
-    },
+  const { isLoading, data, error } = useQuery(['builds', id], () =>
+    BuildsAPI.getById(id),
   );
 
   if (error) {

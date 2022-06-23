@@ -1,9 +1,19 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import nock from 'nock';
 import Axios from 'axios';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import ResumePage from '../../components/ResumePage';
 
 Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      cacheTime: 0,
+    },
+  },
+});
 
 describe('ResumePage', () => {
   it('displays experience section correctly', async () => {
@@ -24,7 +34,11 @@ describe('ResumePage', () => {
         ],
       });
 
-    render(<ResumePage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <ResumePage />
+      </QueryClientProvider>,
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -59,7 +73,11 @@ describe('ResumePage', () => {
         ],
       });
 
-    render(<ResumePage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <ResumePage />
+      </QueryClientProvider>,
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -99,7 +117,11 @@ describe('ResumePage', () => {
         ],
       });
 
-    render(<ResumePage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <ResumePage />
+      </QueryClientProvider>,
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -149,7 +171,11 @@ describe('ResumePage', () => {
         ],
       });
 
-    render(<ResumePage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <ResumePage />
+      </QueryClientProvider>,
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -186,7 +212,11 @@ describe('ResumePage', () => {
         ],
       });
 
-    render(<ResumePage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <ResumePage />
+      </QueryClientProvider>,
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -228,7 +258,11 @@ describe('ResumePage', () => {
         ],
       });
 
-    render(<ResumePage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <ResumePage />
+      </QueryClientProvider>,
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Multiple subitems')).toBeInTheDocument();
