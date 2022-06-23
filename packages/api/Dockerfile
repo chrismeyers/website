@@ -4,7 +4,7 @@ WORKDIR /app
 COPY .yarn/ ./.yarn
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY packages/api/package.json ./packages/api/
-RUN yarn workspaces focus api --production --json
+RUN yarn workspaces focus api --production > /dev/null
 COPY resume/ ./resume
 COPY packages/api/ ./packages/api/
 
