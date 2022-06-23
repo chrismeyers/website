@@ -1,32 +1,19 @@
 import axios from 'axios';
-import qs from 'qs';
 import { handleAxiosError } from '../errors/handler';
 
 export default {
   // GET Methods
-  async get(params = {}) {
-    const queryString = qs.stringify(params, {
-      addQueryPrefix: true,
-      strictNullHandling: true,
-    });
-
+  async get() {
     try {
-      const builds = await axios.get(`/builds${queryString}`);
-      return builds;
+      return (await axios.get('/builds')).data;
     } catch (error) {
       throw handleAxiosError(error);
     }
   },
 
-  async getById(id, params = {}) {
-    const queryString = qs.stringify(params, {
-      addQueryPrefix: true,
-      strictNullHandling: true,
-    });
-
+  async getById(id) {
     try {
-      const build = await axios.get(`/builds/${id}${queryString}`);
-      return build;
+      return (await axios.get(`/builds/${id}`)).data;
     } catch (error) {
       throw handleAxiosError(error);
     }

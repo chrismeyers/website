@@ -5,8 +5,7 @@ export default {
   // GET Methods
   async get() {
     try {
-      const resume = await axios.get('/resume');
-      return resume;
+      return (await axios.get('/resume')).data;
     } catch (error) {
       throw handleAxiosError(error);
     }
@@ -14,8 +13,7 @@ export default {
 
   async summary() {
     try {
-      const summary = await axios.get('/resume/summary');
-      return summary;
+      return (await axios.get('/resume/summary')).data;
     } catch (error) {
       throw handleAxiosError(error);
     }

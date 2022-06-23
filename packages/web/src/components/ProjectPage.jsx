@@ -1,6 +1,7 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useQuery } from 'react-query';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
@@ -17,31 +18,26 @@ import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
 const ProjectPage = () => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [project, setProject] = useState({});
-
   const { id } = useParams();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await ProjectsAPI.getById(id);
-        document.title = `Project Details | ${response.data.title} | ${DEFAULT_DOCUMENT_TITLE}`;
-        setError(false);
-        setProject(response.data);
-      } catch (error) {
-        document.title = `Project Details | ${id} | ${DEFAULT_DOCUMENT_TITLE}`;
-        setError(true);
-        toast.error(
-          <ToastMessage title={error.title} message={error.message} />,
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, [id]);
+  const { isLoading, data, error } = useQuery(
+    ['projects', id],
+    () => ProjectsAPI.getById(id),
+    {
+      retry: (count, error) => {
+        if ([400, 404].includes(error.statusCode)) return false;
+        return count < 3;
+      },
+    },
+  );
+
+  if (error) {
+    document.title = `Project Details | ${id} | ${DEFAULT_DOCUMENT_TITLE}`;
+    toast.error(<ToastMessage title={error.title} message={error.message} />);
+  }
+
+  if (data)
+    document.title = `Project Details | ${data.title} | ${DEFAULT_DOCUMENT_TITLE}`;
 
   const restartGif = () => {
     // Restart the GIF each time it's opened
@@ -57,13 +53,13 @@ const ProjectPage = () => {
   return (
     <div className="content">
       <div className="section-header section-header-size">
-        <div className={loading ? 'section-header-loading' : ''}>
-          {loading ? <Loading lines={0} header={true} /> : 'Project Details'}
+        <div className={isLoading ? 'section-header-loading' : ''}>
+          {isLoading ? <Loading lines={0} header={true} /> : 'Project Details'}
         </div>
       </div>
 
       <div className="content-text project">
-        {loading ? (
+        {isLoading ? (
           <Loading lines={10} header={true} />
         ) : (
           <>
@@ -73,47 +69,43 @@ const ProjectPage = () => {
                 <span className="pre highlighted">{id}</span>
               </p>
             ) : (
-              <div className="project" key={project.id}>
-                <h2>{project.title}</h2>
-                <h3>{project.displayDate}</h3>
+              <div className="project" key={data.id}>
+                <h2>{data.title}</h2>
+                <h3>{data.displayDate}</h3>
                 <div className="project-wrapper">
                   <div className="project-description">
                     <dl>
                       <dt className="dt-mod">
                         <b>Language(s)</b>
                       </dt>
-                      <dd
-                        dangerouslySetInnerHTML={{ __html: project.lang }}
-                      ></dd>
+                      <dd dangerouslySetInnerHTML={{ __html: data.lang }}></dd>
 
                       <dt className="dt-mod">
                         <b>Description</b>
                       </dt>
-                      <dd
-                        dangerouslySetInnerHTML={{ __html: project.info }}
-                      ></dd>
+                      <dd dangerouslySetInnerHTML={{ __html: data.info }}></dd>
 
                       <dt className="dt-mod">
                         <b>My Role</b>
                       </dt>
-                      <dd>{project.role}</dd>
+                      <dd>{data.role}</dd>
 
                       <dt className="dt-mod">
                         <b>Status</b>
                       </dt>
-                      <dd>{project.stat}</dd>
+                      <dd>{data.stat}</dd>
 
                       <dt className="dt-mod dt-links">
                         <b>Links</b>
                       </dt>
-                      {project.webUrl !== null && (
+                      {data.webUrl !== null && (
                         <dd className="project-link-image">
                           <ExternalLinkIcon
                             className="link-image small"
                             title="External website"
                             alt="Link to external website"
                           />{' '}
-                          <a href={project.webUrl} className="fancytxt">
+                          <a href={data.webUrl} className="fancytxt">
                             Website
                           </a>
                         </dd>
@@ -124,18 +116,18 @@ const ProjectPage = () => {
                           title="GitHub repository"
                           alt="Link to GitHub repository"
                         />{' '}
-                        <a href={project.codeUrl} className="fancytxt">
+                        <a href={data.codeUrl} className="fancytxt">
                           Code
                         </a>
                       </dd>
                     </dl>
                   </div>
 
-                  {project.images && project.images.length > 0 && (
+                  {data?.images.length > 0 && (
                     <div className="project-images">
-                      {project.images[0].path.toLowerCase().endsWith('.gif') ? (
+                      {data.images[0].path.toLowerCase().endsWith('.gif') ? (
                         <>
-                          {project.images.map((image) => (
+                          {data.images.map((image) => (
                             <Fragment key={image.id}>
                               <div className="gif-overlay" title="Play GIF">
                                 <LightGallery
@@ -169,7 +161,7 @@ const ProjectPage = () => {
                           plugins={[lgZoom, lgThumbnail]}
                           thumbnail={true}
                         >
-                          {project.images.map((image, index) => (
+                          {data.images.map((image, index) => (
                             <Fragment key={image.id}>
                               {index === 0 ? (
                                 <a href={image.path}>

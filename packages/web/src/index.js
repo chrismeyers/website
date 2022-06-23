@@ -1,6 +1,7 @@
 import 'delayed-scroll-restoration-polyfill';
 import { createRoot } from 'react-dom/client';
 import Axios from 'axios';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import './index.css';
 import './assets/vendor/hamburgers/hamburgers.min.css';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -17,9 +18,21 @@ if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
 }
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
 const container = document.getElementById('root');
 const root = createRoot(container);
-root.render(<App />);
+root.render(
+  <QueryClientProvider client={queryClient}>
+    <App />
+  </QueryClientProvider>,
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
