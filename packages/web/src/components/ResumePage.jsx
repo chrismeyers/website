@@ -13,31 +13,23 @@ const ResumePage = () => {
   const [skills, setSkills] = useState(null);
 
   useEffect(() => {
-    let isMounted = true;
-
     document.title = `Résumé | ${DEFAULT_DOCUMENT_TITLE}`;
 
     const fetchData = async () => {
       try {
         const response = await ResumeApi.get();
-        if (isMounted) {
-          setExperience(response.data.experience);
-          setEducation(response.data.education);
-          setSkills(response.data.skills);
-        }
+        setExperience(response.data.experience);
+        setEducation(response.data.education);
+        setSkills(response.data.skills);
       } catch (error) {
         toast.error(
           <ToastMessage title={error.title} message={error.message} />,
         );
       } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+        setLoading(false);
       }
     };
     fetchData();
-
-    return () => (isMounted = false);
   }, []);
 
   return (

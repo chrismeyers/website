@@ -12,29 +12,21 @@ const ProjectsPage = () => {
   const [projects, setProjects] = useState(null);
 
   useEffect(() => {
-    let isMounted = true;
-
     document.title = `Projects | ${DEFAULT_DOCUMENT_TITLE}`;
 
     const fetchData = async () => {
       try {
         const response = await ProjectsAPI.get();
-        if (isMounted) {
-          setProjects(response.data.items);
-        }
+        setProjects(response.data.items);
       } catch (error) {
         toast.error(
           <ToastMessage title={error.title} message={error.message} />,
         );
       } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+        setLoading(false);
       }
     };
     fetchData();
-
-    return () => (isMounted = false);
   }, []);
 
   return (

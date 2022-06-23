@@ -20,16 +20,12 @@ const BuildPage = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    let isMounted = true;
-
     const fetchData = async () => {
       try {
         const response = await BuildsAPI.getById(id);
-        if (isMounted) {
-          document.title = `Build Details | ${response.data.displayDate} | ${DEFAULT_DOCUMENT_TITLE}`;
-          setError(false);
-          setBuild(response.data);
-        }
+        document.title = `Build Details | ${response.data.displayDate} | ${DEFAULT_DOCUMENT_TITLE}`;
+        setError(false);
+        setBuild(response.data);
       } catch (error) {
         document.title = `Build Details | ${id} | ${DEFAULT_DOCUMENT_TITLE}`;
         setError(true);
@@ -37,14 +33,10 @@ const BuildPage = () => {
           <ToastMessage title={error.title} message={error.message} />,
         );
       } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+        setLoading(false);
       }
     };
     fetchData();
-
-    return () => (isMounted = false);
   }, [id]);
 
   return (

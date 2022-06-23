@@ -35,31 +35,24 @@ const AboutPage = () => {
   };
 
   useEffect(() => {
-    let isMounted = true;
-
     document.title = DEFAULT_DOCUMENT_TITLE;
 
     const fetchData = async () => {
       try {
         const response = await ResumeApi.summary();
-        if (isMounted) {
-          setMostRecentJob(response.data.mostRecentJob);
-          setLanguages(response.data.languages);
-        }
+        setMostRecentJob(response.data.mostRecentJob);
+        setLanguages(response.data.languages);
       } catch (error) {
         toast.error(
           <ToastMessage title={error.title} message={error.message} />,
         );
       } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+        setLoading(false);
       }
     };
     fetchData();
 
     return () => {
-      isMounted = false;
       clarkGalleryRef.current?.destroy();
     };
   }, []);

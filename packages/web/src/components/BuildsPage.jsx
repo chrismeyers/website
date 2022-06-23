@@ -12,29 +12,21 @@ const BuildsPage = () => {
   const [builds, setBuilds] = useState(null);
 
   useEffect(() => {
-    let isMounted = true;
-
     document.title = `Builds | ${DEFAULT_DOCUMENT_TITLE}`;
 
     const fetchData = async () => {
       try {
         const response = await BuildsAPI.get();
-        if (isMounted) {
-          setBuilds(response.data.items);
-        }
+        setBuilds(response.data.items);
       } catch (error) {
         toast.error(
           <ToastMessage title={error.title} message={error.message} />,
         );
       } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+        setLoading(false);
       }
     };
     fetchData();
-
-    return () => (isMounted = false);
   }, []);
 
   const cleanCPU = (cpu) => {

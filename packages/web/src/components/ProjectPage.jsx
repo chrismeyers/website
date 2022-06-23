@@ -24,16 +24,12 @@ const ProjectPage = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    let isMounted = true;
-
     const fetchData = async () => {
       try {
         const response = await ProjectsAPI.getById(id);
-        if (isMounted) {
-          document.title = `Project Details | ${response.data.title} | ${DEFAULT_DOCUMENT_TITLE}`;
-          setError(false);
-          setProject(response.data);
-        }
+        document.title = `Project Details | ${response.data.title} | ${DEFAULT_DOCUMENT_TITLE}`;
+        setError(false);
+        setProject(response.data);
       } catch (error) {
         document.title = `Project Details | ${id} | ${DEFAULT_DOCUMENT_TITLE}`;
         setError(true);
@@ -41,14 +37,10 @@ const ProjectPage = () => {
           <ToastMessage title={error.title} message={error.message} />,
         );
       } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+        setLoading(false);
       }
     };
     fetchData();
-
-    return () => (isMounted = false);
   }, [id]);
 
   const restartGif = () => {
