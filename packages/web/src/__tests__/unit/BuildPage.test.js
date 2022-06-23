@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import nock from 'nock';
 import Axios from 'axios';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import BuildPage from '../../components/BuildPage';
 
 Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
@@ -8,6 +9,15 @@ Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 jest.mock('react-router-dom', () => ({
   useParams: () => ({ id: 1 }),
 }));
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      cacheTime: 0,
+    },
+  },
+});
 
 describe('BuildPage', () => {
   it('handles failure to load a build', async () => {
@@ -19,7 +29,11 @@ describe('BuildPage', () => {
       .once()
       .reply(404);
 
-    render(<BuildPage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <BuildPage />
+      </QueryClientProvider>,
+    );
 
     await waitFor(() => {
       expect(screen.getByText(/Unable to load build/)).toBeInTheDocument();
@@ -61,7 +75,11 @@ describe('BuildPage', () => {
         psu,
       });
 
-    render(<BuildPage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <BuildPage />
+      </QueryClientProvider>,
+    );
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();
@@ -114,7 +132,11 @@ describe('BuildPage', () => {
         psu,
       });
 
-    render(<BuildPage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <BuildPage />
+      </QueryClientProvider>,
+    );
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();
@@ -167,7 +189,11 @@ describe('BuildPage', () => {
         psu,
       });
 
-    render(<BuildPage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <BuildPage />
+      </QueryClientProvider>,
+    );
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();
@@ -229,7 +255,11 @@ describe('BuildPage', () => {
         psu,
       });
 
-    render(<BuildPage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <BuildPage />
+      </QueryClientProvider>,
+    );
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();

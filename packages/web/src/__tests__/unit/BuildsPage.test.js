@@ -2,9 +2,19 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import nock from 'nock';
 import Axios from 'axios';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import BuildsPage from '../../components/BuildsPage';
 
 Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      cacheTime: 0,
+    },
+  },
+});
 
 describe('BuildsPage', () => {
   it('displays build summary correctly', async () => {
@@ -28,7 +38,12 @@ describe('BuildsPage', () => {
         ],
       });
 
-    render(<BuildsPage />, { wrapper: MemoryRouter });
+    render(
+      <QueryClientProvider client={queryClient}>
+        <BuildsPage />
+      </QueryClientProvider>,
+      { wrapper: MemoryRouter },
+    );
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();

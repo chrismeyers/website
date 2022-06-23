@@ -2,9 +2,19 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import nock from 'nock';
 import Axios from 'axios';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import AboutPage from '../../components/AboutPage';
 
 Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      cacheTime: 0,
+    },
+  },
+});
 
 describe('AboutPage', () => {
   it('excludes employment info is not currently employed', async () => {
@@ -20,7 +30,12 @@ describe('AboutPage', () => {
         },
       });
 
-    render(<AboutPage />, { wrapper: MemoryRouter });
+    render(
+      <QueryClientProvider client={queryClient}>
+        <AboutPage />
+      </QueryClientProvider>,
+      { wrapper: MemoryRouter },
+    );
 
     await expect(screen.findByTestId('employment')).rejects.toThrow();
   });
@@ -40,7 +55,12 @@ describe('AboutPage', () => {
         },
       });
 
-    render(<AboutPage />, { wrapper: MemoryRouter });
+    render(
+      <QueryClientProvider client={queryClient}>
+        <AboutPage />
+      </QueryClientProvider>,
+      { wrapper: MemoryRouter },
+    );
 
     const employment = await screen.findByTestId('employment');
 
@@ -59,7 +79,12 @@ describe('AboutPage', () => {
       .once()
       .reply(200);
 
-    render(<AboutPage />, { wrapper: MemoryRouter });
+    render(
+      <QueryClientProvider client={queryClient}>
+        <AboutPage />
+      </QueryClientProvider>,
+      { wrapper: MemoryRouter },
+    );
 
     await expect(screen.findByTestId('desktop-languages')).rejects.toThrow();
     await expect(screen.findByTestId('web-languages')).rejects.toThrow();
@@ -83,7 +108,12 @@ describe('AboutPage', () => {
         },
       });
 
-    render(<AboutPage />, { wrapper: MemoryRouter });
+    render(
+      <QueryClientProvider client={queryClient}>
+        <AboutPage />
+      </QueryClientProvider>,
+      { wrapper: MemoryRouter },
+    );
 
     const desktopLanguages = await screen.findByTestId('desktop-languages');
     const webLanguages = await screen.findByTestId('web-languages');

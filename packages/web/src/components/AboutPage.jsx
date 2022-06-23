@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useQuery } from 'react-query';
 import lightGallery from 'lightgallery';
 import lgZoom from 'lightgallery/plugins/zoom';
 import ResumeApi from '../utils/api/resume';
@@ -13,9 +14,8 @@ import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
 const AboutPage = () => {
-  const [loading, setLoading] = useState(true);
-  const [mostRecentJob, setMostRecentJob] = useState(null);
-  const [languages, setLanguages] = useState(null);
+  document.title = DEFAULT_DOCUMENT_TITLE;
+
   const clarkGalleryRef = useRef();
 
   const setClarkGalleryRef = (element) => {
@@ -35,38 +35,31 @@ const AboutPage = () => {
   };
 
   useEffect(() => {
-    document.title = DEFAULT_DOCUMENT_TITLE;
-
-    const fetchData = async () => {
-      try {
-        const response = await ResumeApi.summary();
-        setMostRecentJob(response.data.mostRecentJob);
-        setLanguages(response.data.languages);
-      } catch (error) {
-        toast.error(
-          <ToastMessage title={error.title} message={error.message} />,
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-
     return () => {
       clarkGalleryRef.current?.destroy();
     };
   }, []);
 
+  const { isLoading, data, error } = useQuery(
+    'resume.summary',
+    ResumeApi.summary,
+  );
+
+  if (error) {
+    toast.error(<ToastMessage title={error.title} message={error.message} />);
+    return;
+  }
+
   return (
     <div className="content">
       <div className="section-header section-header-size">
-        <div className={loading ? 'section-header-loading' : ''}>
-          {loading ? <Loading lines={0} header={true} /> : 'About'}
+        <div className={isLoading ? 'section-header-loading' : ''}>
+          {isLoading ? <Loading lines={0} header={true} /> : 'About'}
         </div>
       </div>
 
       <div className="content-text">
-        {loading ? (
+        {isLoading ? (
           <Loading lines={10} />
         ) : (
           <>
@@ -85,11 +78,11 @@ const AboutPage = () => {
                 in Glassboro, NJ and earned a Bachelor of Science in Computer
                 Science
               </li>
-              {mostRecentJob && mostRecentJob.employed && (
+              {data?.mostRecentJob?.employed && (
                 <li data-testid="employment">
-                  Currently, I am employed as a {mostRecentJob.title} at{' '}
-                  <a href={mostRecentJob.url} className="fancytxt">
-                    {mostRecentJob.company}
+                  Currently, I am employed as a {data.mostRecentJob.title} at{' '}
+                  <a href={data.mostRecentJob.url} className="fancytxt">
+                    {data.mostRecentJob.company}
                   </a>
                 </li>
               )}
@@ -137,9 +130,9 @@ const AboutPage = () => {
             <ul>
               <li>
                 Websites, web applications, and APIs:
-                {languages && languages.web && (
+                {data?.languages?.web && (
                   <ul data-testid="web-languages">
-                    {languages.web.map((item, index) => (
+                    {data.languages.web.map((item, index) => (
                       <li key={`web-${index}`}>{item}</li>
                     ))}
                   </ul>
@@ -147,9 +140,9 @@ const AboutPage = () => {
               </li>
               <li>
                 Desktop and command-line interface (CLI) applications:
-                {languages && languages.desktop && (
+                {data?.languages?.desktop && (
                   <ul data-testid="desktop-languages">
-                    {languages.desktop.map((item, index) => (
+                    {data.languages.desktop.map((item, index) => (
                       <li key={`desktop-${index}`}>{item}</li>
                     ))}
                   </ul>

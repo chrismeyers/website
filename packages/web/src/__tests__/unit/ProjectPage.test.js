@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import nock from 'nock';
 import Axios from 'axios';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import ProjectPage from '../../components/ProjectPage';
 
 Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
@@ -8,6 +9,15 @@ Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 jest.mock('react-router-dom', () => ({
   useParams: () => ({ id: 1 }),
 }));
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      cacheTime: 0,
+    },
+  },
+});
 
 describe('ProjectPage', () => {
   it('handles failure to load a project', async () => {
@@ -19,7 +29,11 @@ describe('ProjectPage', () => {
       .once()
       .reply(404);
 
-    render(<ProjectPage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <ProjectPage />
+      </QueryClientProvider>,
+    );
 
     await waitFor(() => {
       expect(screen.getByText(/Unable to load project/)).toBeInTheDocument();
@@ -57,7 +71,11 @@ describe('ProjectPage', () => {
         images,
       });
 
-    render(<ProjectPage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <ProjectPage />
+      </QueryClientProvider>,
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Project Name')).toBeInTheDocument();
@@ -128,7 +146,11 @@ describe('ProjectPage', () => {
         images,
       });
 
-    render(<ProjectPage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <ProjectPage />
+      </QueryClientProvider>,
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Project Name')).toBeInTheDocument();
@@ -175,7 +197,11 @@ describe('ProjectPage', () => {
         codeUrl,
       });
 
-    render(<ProjectPage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <ProjectPage />
+      </QueryClientProvider>,
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Code')).toHaveAttribute(
@@ -211,7 +237,11 @@ describe('ProjectPage', () => {
         images,
       });
 
-    render(<ProjectPage />);
+    render(
+      <QueryClientProvider client={queryClient}>
+        <ProjectPage />
+      </QueryClientProvider>,
+    );
 
     expect(await screen.findByAltText('Image 1')).toHaveAttribute(
       'src',
