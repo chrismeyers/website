@@ -16,6 +16,7 @@ const MobileNav = ({ themeProps }) => {
 
   useEffect(() => {
     setMenuDisplayed(false);
+    window.scrollTo(0, 0);
   }, [location]);
 
   useEffect(() => {

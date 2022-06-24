@@ -1,4 +1,3 @@
-import 'delayed-scroll-restoration-polyfill';
 import { createRoot } from 'react-dom/client';
 import Axios from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -15,7 +14,7 @@ import reportWebVitals from './reportWebVitals';
 Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 
 if ('scrollRestoration' in window.history) {
-  window.history.scrollRestoration = 'manual';
+  window.history.scrollRestoration = 'auto';
 }
 
 const queryClient = new QueryClient({

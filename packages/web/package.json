@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "delayed-scroll-restoration-polyfill": "^0.1.1",
     "lightgallery": "^2.5.0",
     "lodash": "^4.17.21",
     "process": "^0.11.10",

@@ -5452,13 +5452,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"delayed-scroll-restoration-polyfill@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "delayed-scroll-restoration-polyfill@npm:0.1.1"
-  checksum: b0e72949e977bef83399b60c769d14357ad775b10a99f6ef54f58309961c9b87524898bbd5d2ca009d06fc92f5c704354be73aa6f02b42cc69f4b01bc784f4c7
-  languageName: node
-  linkType: hard
-
 "delayed-stream@npm:~1.0.0":
   version: 1.0.0
   resolution: "delayed-stream@npm:1.0.0"
@@ -14067,7 +14060,6 @@ __metadata:
     "@testing-library/react": ^13.3.0
     "@testing-library/user-event": ^14.2.1
     axios: ^0.27.2
-    delayed-scroll-restoration-polyfill: ^0.1.1
     eslint: ^8.18.0
     eslint-config-prettier: ^8.5.0
     eslint-config-react-app: ^7.0.1
