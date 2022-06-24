@@ -15,15 +15,12 @@ const ProjectsPage = () => {
 
   if (error) {
     toast.error(<ToastMessage title={error.title} message={error.message} />);
-    return;
   }
 
   return (
     <div className="content">
       <div className="section-header section-header-size">
-        <div className={isLoading ? 'section-header-loading' : ''}>
-          {isLoading ? <Loading lines={0} header={true} /> : 'Projects'}
-        </div>
+        <div>Projects</div>
       </div>
 
       <div className="content-text">
@@ -31,7 +28,7 @@ const ProjectsPage = () => {
           <Loading lines={10} header={true} />
         ) : (
           <>
-            {data.items.map((project, index) => (
+            {data?.items?.map((project, index) => (
               <Fragment key={project.id}>
                 <div className="project">
                   <h2 className={index === 0 ? 'first-header' : ''}>

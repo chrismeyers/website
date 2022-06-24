@@ -29,15 +29,17 @@ describe('ProjectPage', () => {
       .once()
       .reply(404);
 
-    render(
+    const { container } = render(
       <QueryClientProvider client={queryClient}>
         <ProjectPage />
       </QueryClientProvider>,
     );
 
     await waitFor(() => {
-      expect(screen.getByText(/Unable to load project/)).toBeInTheDocument();
+      expect(screen.getByText('Project Details')).toBeInTheDocument();
     });
+
+    expect(container).not.toHaveClass('project-wrapper');
   });
 
   it('displays project details without images correctly', async () => {

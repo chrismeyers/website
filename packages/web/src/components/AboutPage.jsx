@@ -47,15 +47,12 @@ const AboutPage = () => {
 
   if (error) {
     toast.error(<ToastMessage title={error.title} message={error.message} />);
-    return;
   }
 
   return (
     <div className="content">
       <div className="section-header section-header-size">
-        <div className={isLoading ? 'section-header-loading' : ''}>
-          {isLoading ? <Loading lines={0} header={true} /> : 'About'}
-        </div>
+        <div>About</div>
       </div>
 
       <div className="content-text">

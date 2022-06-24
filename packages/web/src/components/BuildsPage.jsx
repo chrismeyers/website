@@ -15,7 +15,6 @@ const BuildsPage = () => {
 
   if (error) {
     toast.error(<ToastMessage title={error.title} message={error.message} />);
-    return;
   }
 
   const cleanCPU = (cpu) => {
@@ -25,9 +24,7 @@ const BuildsPage = () => {
   return (
     <div className="content">
       <div className="section-header section-header-size">
-        <div className={isLoading ? 'section-header-loading' : ''}>
-          {isLoading ? <Loading lines={0} header={true} /> : 'Builds'}
-        </div>
+        <div>Builds</div>
       </div>
 
       <div className="content-text">
@@ -35,7 +32,7 @@ const BuildsPage = () => {
           <Loading lines={10} header={true} />
         ) : (
           <>
-            {data.items.map((build, index) => (
+            {data?.items?.map((build, index) => (
               <Fragment key={build.id}>
                 <div className="build" key="build.id">
                   <h2 className={index === 0 ? 'first-header' : ''}>

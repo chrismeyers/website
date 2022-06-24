@@ -29,15 +29,17 @@ describe('BuildPage', () => {
       .once()
       .reply(404);
 
-    render(
+    const { container } = render(
       <QueryClientProvider client={queryClient}>
         <BuildPage />
       </QueryClientProvider>,
     );
 
     await waitFor(() => {
-      expect(screen.getByText(/Unable to load build/)).toBeInTheDocument();
+      expect(screen.getByText('Build Details')).toBeInTheDocument();
     });
+
+    expect(container).not.toHaveClass('build-info');
   });
 
   it('displays build details without optional fields correctly', async () => {

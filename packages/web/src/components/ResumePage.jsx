@@ -14,15 +14,12 @@ const ResumePage = () => {
 
   if (error) {
     toast.error(<ToastMessage title={error.title} message={error.message} />);
-    return;
   }
 
   return (
     <div className="content">
       <div className="section-header section-header-size">
-        <div className={isLoading ? 'section-header-loading' : ''}>
-          {isLoading ? <Loading lines={0} header={true} /> : 'Résumé'}
-        </div>
+        <div>Résumé</div>
       </div>
 
       <div className="content-text">

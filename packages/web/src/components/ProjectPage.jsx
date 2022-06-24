@@ -46,22 +46,15 @@ const ProjectPage = () => {
   return (
     <div className="content">
       <div className="section-header section-header-size">
-        <div className={isLoading ? 'section-header-loading' : ''}>
-          {isLoading ? <Loading lines={0} header={true} /> : 'Project Details'}
-        </div>
+        <div>Project Details</div>
       </div>
 
       <div className="content-text project">
         {isLoading ? (
           <Loading lines={10} header={true} />
         ) : (
-          <>
-            {error ? (
-              <p className="center">
-                Unable to load project{' '}
-                <span className="pre highlighted">{id}</span>
-              </p>
-            ) : (
+          data && (
+            <>
               <div className="project" key={data.id}>
                 <h2>{data.title}</h2>
                 <h3>{data.displayDate}</h3>
@@ -188,8 +181,8 @@ const ProjectPage = () => {
                   )}
                 </div>
               </div>
-            )}
-          </>
+            </>
+          )
         )}
       </div>
     </div>
