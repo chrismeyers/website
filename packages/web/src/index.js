@@ -20,7 +20,7 @@ if ('scrollRestoration' in window.history) {
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false,
+      staleTime: 1000 * 60 * 1,
       retry: (count, error) => {
         if ([400, 404].includes(error.statusCode)) return false;
         return count < 3;
