@@ -1,6 +1,5 @@
 const createApp = require('../../app');
 const createBuildsRepository = require('../../lib/builds-repository');
-const createProjectsRepository = require('../../lib/projects-repository');
 const testDataLoader = require('../__fixtures__/test-data-loader');
 
 describe('Build API Endpoints', () => {
@@ -12,7 +11,6 @@ describe('Build API Endpoints', () => {
         name: 'repos',
         value: {
           builds: createBuildsRepository(testDataLoader),
-          projects: createProjectsRepository(testDataLoader),
         },
       },
     ]);
