@@ -8,8 +8,8 @@ const imageSchema = S.object()
   .prop('pos', S.number())
   .prop('orient', S.string());
 
-const buildResponseSchema = S.object()
-  .id('#buildResponse')
+const buildSchema = S.object()
+  .id('#build')
   .prop('id', S.number())
   .prop('active', S.boolean())
   .prop('displayDate', S.string())
@@ -25,8 +25,8 @@ const buildResponseSchema = S.object()
   .prop('psu', S.string())
   .prop('image', imageSchema);
 
-const projectResponseSchema = S.object()
-  .id('#projectResponse')
+const projectSchema = S.object()
+  .id('#project')
   .prop('id', S.number())
   .prop('active', S.boolean())
   .prop('title', S.string())
@@ -40,8 +40,8 @@ const projectResponseSchema = S.object()
   .prop('stat', S.string())
   .prop('images', S.array().items(imageSchema));
 
-const resumeResponseSchema = S.object()
-  .id('#resumeResponse')
+const resumeSchema = S.object()
+  .id('#resume')
   .definition(
     'complex',
     S.array()
@@ -68,8 +68,8 @@ const resumeResponseSchema = S.object()
   .prop('education', S.ref('#complex'))
   .prop('skills', S.ref('#list'));
 
-const resumeSummaryResponseSchema = S.object()
-  .id('#resumeSummaryResponse')
+const resumeSummarySchema = S.object()
+  .id('#resumeSummary')
   .prop(
     'languages',
     S.object()
@@ -88,8 +88,8 @@ const resumeSummaryResponseSchema = S.object()
 
 module.exports = S.object()
   .id('schema')
-  .definition('imageSchema', imageSchema)
-  .definition('buildResponseSchema', buildResponseSchema)
-  .definition('projectResponseSchema', projectResponseSchema)
-  .definition('resumeResponseSchema', resumeResponseSchema)
-  .definition('resumeSummaryResponseSchema', resumeSummaryResponseSchema);
+  .definition('image', imageSchema)
+  .definition('build', buildSchema)
+  .definition('project', projectSchema)
+  .definition('resume', resumeSchema)
+  .definition('resumeSummary', resumeSummarySchema);

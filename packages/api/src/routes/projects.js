@@ -4,10 +4,7 @@ module.exports = async (app) => {
   app.get('/projects', {
     schema: {
       response: {
-        200: S.object().prop(
-          'items',
-          S.array().items(S.ref('schema#projectResponse')),
-        ),
+        200: S.object().prop('items', S.array().items(S.ref('schema#project'))),
       },
     },
     handler: async (request, reply) => {
@@ -21,7 +18,7 @@ module.exports = async (app) => {
     schema: {
       params: S.object().prop('id', S.number().required()),
       response: {
-        200: S.ref('schema#projectResponse'),
+        200: S.ref('schema#project'),
       },
     },
     handler: async (request, reply) => {

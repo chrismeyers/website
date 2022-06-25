@@ -11,7 +11,7 @@ const schemas = require('./lib/schema');
 module.exports = async (decorations = [], opts = {}) => {
   const app = fastify(opts);
 
-  // Plugins
+  // Register plugins
   await app.register(fastifyEnv, {
     dotenv: true,
     schema: S.object()
@@ -29,13 +29,13 @@ module.exports = async (decorations = [], opts = {}) => {
   app.register(fastifyHelmet);
   app.register(fastifySensible);
 
-  // Routes
+  // Register routes
   app.register(fastifyAutoLoad, {
     dir: path.join(__dirname, 'routes'),
     dirNameRoutePrefix: false,
   });
 
-  // Schema
+  // Register schemas
   app.addSchema(schemas);
 
   // Decorate server instance

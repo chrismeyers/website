@@ -4,7 +4,7 @@ module.exports = async (app) => {
   app.get('/resume', {
     schema: {
       response: {
-        200: S.ref('schema#resumeResponse'),
+        200: S.ref('schema#resume'),
       },
     },
     handler: async (request, reply) => {
@@ -21,7 +21,7 @@ module.exports = async (app) => {
   app.get('/resume/summary', {
     schema: {
       response: {
-        200: S.ref('schema#resumeSummaryResponse'),
+        200: S.ref('schema#resumeSummary'),
       },
     },
     handler: async (request, reply) => {
