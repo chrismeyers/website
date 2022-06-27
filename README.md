@@ -5,7 +5,7 @@ This is the codebase for my personal website currently located at [https://chris
 
 ## Setup
 ### Local
-1. Install Node.js (see [nvm](https://github.com/nvm-sh/nvm) or [nodejs.org](https://nodejs.org/en/download/current))
+1. Install Node.js (see [nvm](https://github.com/nvm-sh/nvm) or [nodejs.org](https://nodejs.org/en/download))
 1. Install [pnpm](https://pnpm.io/installation)
 1. Copy [bin/git/hooks/pre-commit](bin/git/hooks/pre-commit) to the local `.git/hooks` directory and ensure the script is executable
 1. Run `pnpm install` from the root of the repository to install dependencies for all packages
