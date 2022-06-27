@@ -1,29 +1,24 @@
 # api
 
-## Install dependencies
-```
-yarn
-```
-
 ### Run development server (server automatically restarts when files are saved)
 ```
-yarn dev
+pnpm dev
 ```
 
 ### Run production server
 ```
-yarn start
+pnpm start
 ```
 
 ### Run tests
 ```
-yarn test
+pnpm test
 ```
 
 ### Lint and fix files
 ```
-yarn lint
-yarn lint:fix
+pnpm lint
+pnpm lint:fix
 ```
 
 ## Setup

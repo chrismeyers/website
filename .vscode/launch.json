@@ -12,7 +12,7 @@
         "<node_internals>/**"
       ],
       "cwd": "${workspaceFolder}/packages/api",
-      "runtimeExecutable": "yarn",
+      "runtimeExecutable": "pnpm",
       "runtimeArgs": ["dev"],
       "outputCapture": "std"
     },

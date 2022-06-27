@@ -1,12 +1,20 @@
 FROM node:16.15.1-slim as builder
 
 WORKDIR /app
-COPY .yarn/ ./.yarn
-COPY package.json yarn.lock .yarnrc.yml ./
+
+RUN npm install --location=global pnpm@7.3.0
+
+COPY pnpm-lock.yaml pnpm-workspace.yaml package.json .npmrc ./
+
+RUN mkdir -p packages/web/
+
 COPY packages/web/package.json ./packages/web/
-RUN yarn workspaces focus web > /dev/null
+
+RUN pnpm --filter web install --frozen-lockfile
+
 COPY packages/web/ ./packages/web/
-RUN yarn workspace web build
+
+RUN pnpm --filter web build
 
 FROM nginx:1.21.6
 
