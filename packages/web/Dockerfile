@@ -4,16 +4,20 @@ WORKDIR /app
 
 RUN npm install --location=global pnpm@7.3.0
 
-COPY pnpm-lock.yaml packages/web/package.json .npmrc ./
+COPY pnpm-lock.yaml pnpm-workspace.yaml package.json .npmrc ./
 
-RUN pnpm install
+RUN mkdir -p packages/web/
 
-COPY packages/web/ ./
+COPY packages/web/package.json ./packages/web/
 
-RUN pnpm build
+RUN pnpm --filter web install --frozen-lockfile
+
+COPY packages/web/ ./packages/web/
+
+RUN pnpm --filter web build
 
 FROM nginx:1.21.6
 
 RUN mkdir /app
-COPY --from=builder /app/build /app
+COPY --from=builder /app/packages/web/build /app
 COPY packages/web/nginx.conf /etc/nginx/nginx.conf

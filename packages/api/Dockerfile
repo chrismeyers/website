@@ -4,9 +4,13 @@ WORKDIR /app
 
 RUN npm install --location=global pnpm@7.3.0
 
-COPY pnpm-lock.yaml packages/api/package.json ./
+COPY pnpm-lock.yaml pnpm-workspace.yaml package.json .npmrc ./
 
-RUN pnpm install --prod
+RUN mkdir -p packages/api/
+
+COPY packages/api/package.json ./packages/api/
+
+RUN pnpm --filter api install --frozen-lockfile --prod
 
 COPY resume/ ./resume
 COPY packages/api/ ./packages/api/
