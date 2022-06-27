@@ -1,12 +1,19 @@
 FROM node:16.15.1-slim as builder
 
 WORKDIR /app
-COPY .yarn/ ./.yarn
-COPY package.json yarn.lock .yarnrc.yml ./
-COPY packages/web/package.json ./packages/web/
-RUN yarn workspaces focus web > /dev/null
+
+RUN npm install --location=global pnpm@7.3.0
+
+COPY pnpm-lock.yaml packages/web/package.json .npmrc ./
+
+RUN pnpm install
+
 COPY packages/web/ ./packages/web/
-RUN yarn workspace web build
+
+WORKDIR /app/packages/web
+
+# TODO: The build step is currently unable to find react-scripts
+RUN pnpm build
 
 FROM nginx:1.21.6
 

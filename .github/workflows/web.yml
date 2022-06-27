@@ -5,13 +5,13 @@ on:
     paths:
       - .github/workflows/web.yml
       - packages/web/**
-      - yarn.lock
+      - .pnpm-lock.yaml
   pull_request:
     branches: [ main ]
     paths:
       - .github/workflows/web.yml
       - packages/web/**
-      - yarn.lock
+      - .pnpm-lock.yaml
 
 jobs:
   build:
@@ -27,11 +27,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install pnpm
+        run: npm install --location=global pnpm@7.3.0
+
       - name: Install dependencies
-        run: yarn workspaces focus web
+        run: pnpm --filter web install
 
       - name: Lint Code
-        run: yarn workspace web lint
+        run: pnpm --filter web lint
 
       - name: Run tests
-        run: yarn workspace web test:ci
+        run: pnpm --filter web test:ci

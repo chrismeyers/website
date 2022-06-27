@@ -4,5 +4,8 @@
   "workspaces": [
     "packages/*"
   ],
-  "packageManager": "yarn@3.2.1"
+  "scripts": {
+    "dev:web": "pnpm --filter web start",
+    "dev:api": "pnpm --filter api dev"
+  }
 }
