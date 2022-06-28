@@ -21,17 +21,23 @@ jobs:
       run:
         shell: bash
 
-    container:
-      image: node:16.15.1-slim
-
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Install pnpm
-        run: npm install --location=global pnpm@7.3.0
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.3.0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+          cache-dependency-path: |
+            pnpm-lock.yaml
+            packages/web/package.json
 
       - name: Install dependencies
-        run: pnpm --filter web install
+        run: pnpm --filter web install --frozen-lockfile
 
       - name: Lint Code
         run: pnpm --filter web lint
