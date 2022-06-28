@@ -2,6 +2,8 @@ module.exports = {
   root: true,
   env: {
     node: true,
+    jest: true,
+    es6: true,
   },
   extends: ['react-app', 'react-app/jest', 'plugin:prettier/recommended'],
   rules: {
