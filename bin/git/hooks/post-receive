@@ -19,7 +19,7 @@ while read oldrev newrev ref
 do
   if [[ $ref =~ .*/main$ ]];
   then
-    echo "[DEPLOY] ${oldrev:0:6}..${newrev:0:6} $ref"
+    echo "[DEPLOY] ${oldrev:0:7}..${newrev:0:7} $ref"
 
     DEPLOY_API=false
     DEPLOY_WEB=false
