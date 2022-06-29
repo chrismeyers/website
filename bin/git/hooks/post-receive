@@ -19,23 +19,49 @@ while read oldrev newrev ref
 do
   if [[ $ref =~ .*/main$ ]];
   then
-    echo "[DEPLOY] Deploying $ref branch to production"
+    echo $oldrev $newrev $ref
+
+    DEPLOY_API=false
+    DEPLOY_WEB=false
+
+    CHANGED_FILES=$(git diff --name-only $newrev $oldrev)
+
+    while IFS= read -r file; do
+      if [[ $file =~ ^packages/api/* ]]; then
+        DEPLOY_API=true
+      fi
+      if [[ $file =~ ^packages/web/* ]]; then
+        DEPLOY_WEB=true
+      fi
+    done <<< "$CHANGED_FILES"
+
+    echo "[DEPLOY] Checking out files to work tree"
     git --work-tree=/home/chris/www/chrismeyers-website --git-dir=/home/chris/repo/chrismeyers-website.git checkout -f main
 
     echo "[DEPLOY] Moving to project work tree root"
     cd /home/chris/www/chrismeyers-website
 
-    echo "[DEPLOY] Syncing credentials"
-    rsync -av /home/chris/creds/chrismeyers-website/web/ packages/web/
-    rsync -av /home/chris/creds/chrismeyers-website/api/ packages/api/
+    if [ "$DEPLOY_API" = true ]; then
+      echo "[DEPLOY] Syncing credentials"
+      rsync -av /home/chris/creds/chrismeyers-website/api/ packages/api/
 
-    echo "[DEPLOY] Building 'web' image and running container"
-    bin/docker/web/build.sh
-    bin/docker/web/run.sh -d --restart always
+      echo "[DEPLOY] Building 'api' image and running container"
+      bin/docker/api/build.sh
+      bin/docker/api/run.sh -d --restart always
+    else
+      echo "[DEPLOY] Skipping 'api' build and run"
+    fi
 
-    echo "[DEPLOY] Building 'api' image and running container"
-    bin/docker/api/build.sh
-    bin/docker/api/run.sh -d --restart always
+    if [ "$DEPLOY_WEB" = true ]; then
+      echo "[DEPLOY] Syncing credentials"
+      rsync -av /home/chris/creds/chrismeyers-website/web/ packages/web/
+
+      echo "[DEPLOY] Building 'web' image and running container"
+      bin/docker/web/build.sh
+      bin/docker/web/run.sh -d --restart always
+    else
+      echo "[DEPLOY] Skipping 'web' build and run"
+    fi
   else
     echo "Ref $ref successfully received. Doing nothing: only the main branch may be deployed on this server."
   fi
