@@ -24,7 +24,7 @@ do
     DEPLOY_API=false
     DEPLOY_WEB=false
 
-    CHANGED_FILES=$(git diff --name-only $newrev $oldrev)
+    CHANGED_FILES=$(git diff --name-only $oldrev $newrev)
 
     while IFS= read -r file; do
       if [[ $file =~ ^packages/api/* ]]; then
