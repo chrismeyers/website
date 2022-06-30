@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import nock from 'nock';
 import Axios from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import ResumePage from '../../components/ResumePage';
+import ResumePage from '../../src/components/ResumePage';
 
 Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 

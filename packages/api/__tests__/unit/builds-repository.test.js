@@ -1,4 +1,4 @@
-const createBuildsRepository = require('../../lib/builds-repository');
+const createBuildsRepository = require('../../src/lib/builds-repository');
 const testDataLoader = require('../__fixtures__/test-data-loader');
 
 describe('Builds Repository', () => {

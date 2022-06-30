@@ -1,6 +1,6 @@
 const path = require('path');
-const createApp = require('../../app');
-const createResumeParser = require('../../lib/resume-parser');
+const createApp = require('../../src/app');
+const createResumeParser = require('../../src/lib/resume-parser');
 
 describe('Resume API Endpoints', () => {
   let app;

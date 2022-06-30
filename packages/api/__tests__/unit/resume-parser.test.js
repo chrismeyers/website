@@ -1,5 +1,5 @@
 const path = require('path');
-const createResumeParser = require('../../lib/resume-parser');
+const createResumeParser = require('../../src/lib/resume-parser');
 
 describe('Resume Parser', () => {
   let parser;

@@ -3,7 +3,7 @@ module.exports = {
   verbose: true,
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
-    '<rootDir>/src/__tests__/__fixtures__/*',
+    '<rootDir>/__tests__/__fixtures__/*',
   ],
   setupFilesAfterEnv: ['jest-extended/all'],
 };

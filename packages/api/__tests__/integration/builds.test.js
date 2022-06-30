@@ -1,5 +1,5 @@
-const createApp = require('../../app');
-const createBuildsRepository = require('../../lib/builds-repository');
+const createApp = require('../../src/app');
+const createBuildsRepository = require('../../src/lib/builds-repository');
 const testDataLoader = require('../__fixtures__/test-data-loader');
 
 describe('Build API Endpoints', () => {

@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import nock from 'nock';
 import Axios from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import BuildsPage from '../../components/BuildsPage';
+import ProjectsPage from '../../src/components/ProjectsPage';
 
 Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -16,57 +16,50 @@ const queryClient = new QueryClient({
   },
 });
 
-describe('BuildsPage', () => {
-  it('displays build summary correctly', async () => {
+describe('ProjectsPage', () => {
+  it('displays project summary correctly', async () => {
     const id = 1;
-    const displayDate = 'Today - Built for Someone';
-    const cpu = 'Intel 1000000K @ 99.9GHz';
+    const title = 'Project Name';
+    const displayDate = 'Test Project, Always and Forever';
+    const info = 'Something involving code';
 
     nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
-      .get('/builds')
+      .get('/projects')
       .once()
       .reply(200, {
         items: [
           {
             id,
+            title,
             displayDate,
-            cpu,
+            info,
           },
         ],
       });
 
     render(
       <QueryClientProvider client={queryClient}>
-        <BuildsPage />
+        <ProjectsPage />
       </QueryClientProvider>,
       { wrapper: MemoryRouter },
     );
 
     await waitFor(() => {
-      expect(screen.getByText(displayDate)).toBeInTheDocument();
+      expect(screen.getByText('Project Name')).toBeInTheDocument();
     });
 
-    expect(screen.getByText(displayDate)).toHaveAttribute(
+    expect(screen.getByText('Project Name')).toHaveAttribute(
       'href',
-      `/builds/${id}`,
+      `/projects/${id}`,
     );
-    expect(
-      screen.getByText((content, node) => {
-        const hasText = (node) => node.textContent.match(/An Intel 1000000K/);
-        const nodeHasText = hasText(node);
-        const childrenDontHaveText = Array.from(node.children).every(
-          (child) => !hasText(child),
-        );
-
-        return nodeHasText && childrenDontHaveText;
-      }),
-    ).toBeInTheDocument();
-    expect(screen.getByText(/Build Details/)).toHaveAttribute(
+    expect(screen.getByText(displayDate)).toBeInTheDocument();
+    expect(screen.getByText(info)).toBeInTheDocument();
+    expect(screen.getByText(/Project Details/)).toHaveAttribute(
       'href',
-      `/builds/${id}`,
+      `/projects/${id}`,
     );
   });
 });

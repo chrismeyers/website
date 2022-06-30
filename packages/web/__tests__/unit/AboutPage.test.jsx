@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import nock from 'nock';
 import Axios from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import AboutPage from '../../components/AboutPage';
+import AboutPage from '../../src/components/AboutPage';
 
 Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 

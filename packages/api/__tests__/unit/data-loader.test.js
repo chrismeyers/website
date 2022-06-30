@@ -1,5 +1,5 @@
 const fs = require('fs');
-const dataLoader = require('../../lib/data-loader');
+const dataLoader = require('../../src/lib/data-loader');
 
 describe('Data Loader', () => {
   it('returns entire parsed JSON object', () => {

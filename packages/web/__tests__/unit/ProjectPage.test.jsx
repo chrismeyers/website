@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import nock from 'nock';
 import Axios from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import ProjectPage from '../../components/ProjectPage';
+import ProjectPage from '../../src/components/ProjectPage';
 
 Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
