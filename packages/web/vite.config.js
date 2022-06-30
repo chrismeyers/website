@@ -11,4 +11,9 @@ export default defineConfig({
     port: '8080',
   },
   plugins: [react(), svgr()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: 'src/setupTests.js',
+  },
 });

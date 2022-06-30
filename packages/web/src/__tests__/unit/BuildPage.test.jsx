@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import nock from 'nock';
 import Axios from 'axios';
@@ -6,7 +7,7 @@ import BuildPage from '../../components/BuildPage';
 
 Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
-jest.mock('react-router-dom', () => ({
+vi.mock('react-router-dom', () => ({
   useParams: () => ({ id: 1 }),
 }));
 
