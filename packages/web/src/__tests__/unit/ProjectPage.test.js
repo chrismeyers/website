@@ -4,7 +4,7 @@ import Axios from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ProjectPage from '../../components/ProjectPage';
 
-Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
 jest.mock('react-router-dom', () => ({
   useParams: () => ({ id: 1 }),
@@ -21,7 +21,7 @@ const queryClient = new QueryClient({
 
 describe('ProjectPage', () => {
   it('handles failure to load a project', async () => {
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -54,7 +54,7 @@ describe('ProjectPage', () => {
     const stat = 'Being maintained';
     const images = [];
 
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -129,7 +129,7 @@ describe('ProjectPage', () => {
       },
     ];
 
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -188,7 +188,7 @@ describe('ProjectPage', () => {
     const webUrl = null;
     const codeUrl = 'https://hosted.code';
 
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -228,7 +228,7 @@ describe('ProjectPage', () => {
       },
     ];
 
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })

@@ -4,7 +4,7 @@ import Axios from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ResumePage from '../../components/ResumePage';
 
-Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,7 +17,7 @@ const queryClient = new QueryClient({
 
 describe('ResumePage', () => {
   it('displays experience section correctly', async () => {
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -57,7 +57,7 @@ describe('ResumePage', () => {
   });
 
   it('displays experience section without info correctly', async () => {
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -94,7 +94,7 @@ describe('ResumePage', () => {
   });
 
   it('displays multiple experience at some company correctly', async () => {
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -154,7 +154,7 @@ describe('ResumePage', () => {
   });
 
   it('displays education section correctly', async () => {
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -196,7 +196,7 @@ describe('ResumePage', () => {
   });
 
   it('displays education section without info correctly', async () => {
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -235,7 +235,7 @@ describe('ResumePage', () => {
   });
 
   it('displays skills section correctly', async () => {
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
