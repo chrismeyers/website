@@ -13,5 +13,5 @@
     "node": ">= 16",
     "pnpm": ">= 7"
   },
-  "packageManager": "pnpm@7.3.0"
+  "packageManager": "pnpm@7.4.0"
 }
