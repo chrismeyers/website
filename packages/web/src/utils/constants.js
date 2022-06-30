@@ -10,4 +10,4 @@ export const SYSTEM_THEME_DARK_MEDIA_QUERY = '(prefers-color-scheme: dark)';
 export const DEFAULT_DOCUMENT_TITLE =
   'Chris Meyers - Developer, Tech Enthusiast';
 export const LIGHTGALLERY_LICENSE =
-  process.env.REACT_APP_LIGHTGALLERY_LICENSE || '0000-0000-000-0000';
+  import.meta.env.VITE_LIGHTGALLERY_LICENSE || '0000-0000-000-0000';

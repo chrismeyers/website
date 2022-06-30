@@ -5,7 +5,7 @@ import Axios from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ProjectsPage from '../../components/ProjectsPage';
 
-Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,7 +23,7 @@ describe('ProjectsPage', () => {
     const displayDate = 'Test Project, Always and Forever';
     const info = 'Something involving code';
 
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })

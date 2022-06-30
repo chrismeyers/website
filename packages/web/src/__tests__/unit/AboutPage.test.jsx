@@ -5,7 +5,7 @@ import Axios from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import AboutPage from '../../components/AboutPage';
 
-Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,7 +18,7 @@ const queryClient = new QueryClient({
 
 describe('AboutPage', () => {
   it('excludes employment info is not currently employed', async () => {
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -41,7 +41,7 @@ describe('AboutPage', () => {
   });
 
   it('displays current job if currently employed', async () => {
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -71,7 +71,7 @@ describe('AboutPage', () => {
   });
 
   it('excludes language experience if missing', async () => {
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -91,7 +91,7 @@ describe('AboutPage', () => {
   });
 
   it('displays language experience', async () => {
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })

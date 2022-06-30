@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:web": "pnpm --filter web start",
+    "dev:web": "pnpm --filter web dev",
     "dev:api": "pnpm --filter api dev"
   },
   "engines": {

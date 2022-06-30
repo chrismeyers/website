@@ -1,12 +1,13 @@
+import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import nock from 'nock';
 import Axios from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import BuildPage from '../../components/BuildPage';
 
-Axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
-jest.mock('react-router-dom', () => ({
+vi.mock('react-router-dom', () => ({
   useParams: () => ({ id: 1 }),
 }));
 
@@ -21,7 +22,7 @@ const queryClient = new QueryClient({
 
 describe('BuildPage', () => {
   it('handles failure to load a build', async () => {
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -56,7 +57,7 @@ describe('BuildPage', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -113,7 +114,7 @@ describe('BuildPage', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -170,7 +171,7 @@ describe('BuildPage', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
@@ -236,7 +237,7 @@ describe('BuildPage', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    nock(process.env.REACT_APP_API_BASE_URL)
+    nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({
         'access-control-allow-origin': '*',
       })
