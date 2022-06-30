@@ -50,6 +50,8 @@ describe('Build API Endpoints', () => {
           hdd: expect.any(String),
           ssd: expect.toBeOneOf([expect.any(String), null]),
           gpu: expect.any(String),
+          case: expect.any(String),
+          psu: expect.any(String),
           image: expect.objectContaining({
             id: expect.any(Number),
             path: expect.any(String),
@@ -113,6 +115,8 @@ describe('Build API Endpoints', () => {
         hdd: expect.any(String),
         ssd: expect.toBeOneOf([expect.any(String), null]),
         gpu: expect.any(String),
+        case: expect.any(String),
+        psu: expect.any(String),
         image: expect.objectContaining({
           id: expect.any(Number),
           path: expect.any(String),

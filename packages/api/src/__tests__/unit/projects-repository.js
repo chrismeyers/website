@@ -1,4 +1,4 @@
-const createProjectsRepository = require('../../lib/builds-repository');
+const createProjectsRepository = require('../../lib/projects-repository');
 const testDataLoader = require('../__fixtures__/test-data-loader');
 
 describe('Projects Repository', () => {
@@ -11,7 +11,7 @@ describe('Projects Repository', () => {
   it('returns all active projects', () => {
     const data = repo.active();
 
-    expect(data).toHaveLength(1);
+    expect(data).toHaveLength(2);
   });
 
   it('returns an active project', () => {
@@ -21,7 +21,7 @@ describe('Projects Repository', () => {
   });
 
   it('does not return an inactive project', () => {
-    const data = repo.findById(2);
+    const data = repo.findById(3);
 
     expect(data).toBeUndefined();
   });

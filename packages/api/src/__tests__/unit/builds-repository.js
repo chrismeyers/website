@@ -11,7 +11,7 @@ describe('Builds Repository', () => {
   it('returns all active builds', () => {
     const data = repo.active();
 
-    expect(data).toHaveLength(1);
+    expect(data).toHaveLength(3);
   });
 
   it('returns an active build', () => {
@@ -21,7 +21,7 @@ describe('Builds Repository', () => {
   });
 
   it('does not return an inactive build', () => {
-    const data = repo.findById(2);
+    const data = repo.findById(4);
 
     expect(data).toBeUndefined();
   });
