@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import './index.css';
 import './assets/vendor/hamburgers/hamburgers.min.css';
 import 'react-loading-skeleton/dist/skeleton.css';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.min.css';
 import 'lightgallery/css/lightgallery.css';
 import 'lightgallery/css/lg-zoom.css';
 import 'lightgallery/css/lg-thumbnail.css';
