@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
 import { toast } from 'react-toastify';
 import { useQuery } from 'react-query';
-import './css/resume.css';
 import ResumeApi from '../utils/api/resume';
 import { RESUME_PDF_URL, DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
+import styles from '../styles/Resume.module.css';
 
 const ResumePage = () => {
   document.title = `Résumé | ${DEFAULT_DOCUMENT_TITLE}`;
@@ -29,22 +29,30 @@ const ResumePage = () => {
           <>
             <h2 className="top">Experience</h2>
             {data?.experience?.map((job, i) => (
-              <ul className="italic-spacer" key={`job-${i}`}>
-                <li className="left-column company" key={`job-company-${i}`}>
+              <ul className={styles['italic-spacer']} key={`job-${i}`}>
+                <li
+                  className={`${styles['left-column']} ${styles.company}`}
+                  key={`job-company-${i}`}
+                >
                   <a className="fancytxt" href={job.url}>
                     {job.firstLine[0]}
                   </a>
                 </li>
-                <li className="right-column location" key={`job-location-${i}`}>
+                <li
+                  className={`${styles['right-column']} ${styles.location}`}
+                  key={`job-location-${i}`}
+                >
                   {job.firstLine[1]}
                 </li>
 
                 {job.secondLine.map((secondLine, j) => (
                   <Fragment key={`job-secondLine-${i}-${j}`}>
                     <li
-                      className={`left-column sub-left-column job-title ${
+                      className={`${styles['left-column']} ${
+                        styles['sub-left-column']
+                      } ${styles['job-title']} ${
                         j > 0 && job.info[j].length > 0
-                          ? 'same-company-spacing'
+                          ? styles['same-company-spacing']
                           : ''
                       }`}
                       key={`job-title-${i}-${j}`}
@@ -52,9 +60,9 @@ const ResumePage = () => {
                       {secondLine[0]}
                     </li>
                     <li
-                      className={`right-column tenure ${
+                      className={`${styles['right-column']} ${styles.tenure} ${
                         j > 0 && job.info[j].length > 0
-                          ? 'same-company-spacing'
+                          ? styles['same-company-spacing']
                           : ''
                       }`}
                       key={`job-tenure-${i}-${j}`}
@@ -62,9 +70,12 @@ const ResumePage = () => {
                     ></li>
 
                     {job.info && job.info[j].length > 0 && (
-                      <li className="remove-bullets" key={`job-info-${i}-${j}`}>
+                      <li
+                        className={styles['remove-bullets']}
+                        key={`job-info-${i}-${j}`}
+                      >
                         <ul
-                          className="more-info-wrapper"
+                          className={styles['more-info-wrapper']}
                           key={`job-info-wrapper-${i}-${j}`}
                         >
                           {job.info[j].map((info, k) => (
@@ -87,12 +98,15 @@ const ResumePage = () => {
 
             <h2>Education</h2>
             {data?.education?.map((school, i) => (
-              <ul className="italic-spacer" key={`school-${i}`}>
-                <li className="left-column degree" key={`school-degree-${i}`}>
+              <ul className={styles['italic-spacer']} key={`school-${i}`}>
+                <li
+                  className={`${styles['left-column']} ${styles.degree}`}
+                  key={`school-degree-${i}`}
+                >
                   {school.firstLine[0]}
                 </li>
                 <li
-                  className="right-column location"
+                  className={`${styles['right-column']} ${styles.location}`}
                   key={`school-location-${i}`}
                 >
                   {school.firstLine[1]}
@@ -100,7 +114,7 @@ const ResumePage = () => {
                 {school.secondLine.map((secondLine, j) => (
                   <Fragment key={`school-secondLine-${i}-${j}`}>
                     <li
-                      className="left-column sub-left-column school"
+                      className={`${styles['left-column']} ${styles['sub-left-column']} ${styles.school}`}
                       key={`school-school-${i}-${j}`}
                     >
                       <a
@@ -112,18 +126,18 @@ const ResumePage = () => {
                       </a>
                     </li>
                     <li
-                      className="right-column tenure"
+                      className={`${styles['right-column']} ${styles.tenure}`}
                       key={`school-tenure-${i}-${j}`}
                       dangerouslySetInnerHTML={{ __html: secondLine[1] }}
                     ></li>
 
                     {school.info && school.info[j].length > 0 && (
                       <li
-                        className="remove-bullets"
+                        className={styles['remove-bullets']}
                         key={`school-info-${i}-${j}`}
                       >
                         <ul
-                          className="more-info-wrapper"
+                          className={styles['more-info-wrapper']}
                           key={`school-info-wrapper-${i}-${j}`}
                         >
                           {school.info[j].map((info, k) => (

@@ -5,7 +5,6 @@ import { useQuery } from 'react-query';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
-import './css/project.css';
 import { ReactComponent as ExternalLinkIcon } from '../assets/images/icons/link-external.svg';
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
 import { ReactComponent as PlayIcon } from '../assets/images/icons/play.svg';
@@ -16,6 +15,7 @@ import {
 } from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
+import styles from '../styles/Project.module.css';
 
 const ProjectPage = () => {
   const { id } = useParams();
@@ -49,17 +49,17 @@ const ProjectPage = () => {
         <div>Project Details</div>
       </div>
 
-      <div className="content-text project">
+      <div className={`content-text ${styles.project}`}>
         {isLoading ? (
           <Loading lines={10} header={true} />
         ) : (
           data && (
             <>
-              <div className="project" key={data.id}>
+              <div className={styles.project} key={data.id}>
                 <h2>{data.title}</h2>
                 <h3>{data.displayDate}</h3>
-                <div className="project-wrapper">
-                  <div className="project-description">
+                <div className={styles.wrapper}>
+                  <div className={styles.description}>
                     <dl>
                       <dt className="dt-mod">
                         <b>Language(s)</b>
@@ -85,7 +85,7 @@ const ProjectPage = () => {
                         <b>Links</b>
                       </dt>
                       {data.webUrl !== null && (
-                        <dd className="project-link-image">
+                        <dd className="link-image">
                           <ExternalLinkIcon
                             className="link-image small"
                             title="External website"
@@ -96,7 +96,7 @@ const ProjectPage = () => {
                           </a>
                         </dd>
                       )}
-                      <dd className="project-link-image">
+                      <dd className="link-image">
                         <GithubIcon
                           className="link-image small"
                           title="GitHub repository"
@@ -110,12 +110,15 @@ const ProjectPage = () => {
                   </div>
 
                   {data?.images?.length > 0 && (
-                    <div className="project-images">
+                    <div className={styles.images}>
                       {data.images[0].path.toLowerCase().endsWith('.gif') ? (
                         <>
                           {data.images.map((image) => (
                             <Fragment key={image.id}>
-                              <div className="gif-overlay" title="Play GIF">
+                              <div
+                                className={styles['gif-overlay']}
+                                title="Play GIF"
+                              >
                                 <LightGallery
                                   licenseKey={LIGHTGALLERY_LICENSE}
                                   onBeforeOpen={restartGif}
@@ -125,7 +128,11 @@ const ProjectPage = () => {
                                   <a href={image.path}>
                                     <img
                                       src={image.thumbnail}
-                                      className={`project-images-full-img-${image.orient}`}
+                                      className={
+                                        styles[
+                                          `images-full-img-${image.orient}`
+                                        ]
+                                      }
                                       alt={image.title}
                                       title="Click to enlarge"
                                     />
@@ -153,20 +160,26 @@ const ProjectPage = () => {
                                 <a href={image.path}>
                                   <img
                                     src={image.path}
-                                    className={`project-images-full-img-${image.orient}`}
+                                    className={
+                                      styles[`images-full-img-${image.orient}`]
+                                    }
                                     alt={image.title}
                                     title="Click to enlarge"
                                   />
                                 </a>
                               ) : (
                                 <div
-                                  className="project-images-small"
+                                  className={styles['images-small']}
                                   data-src={image.path}
                                 >
                                   <a href={image.path}>
                                     <img
                                       src={image.path}
-                                      className={`project-images-small-img-${image.orient}`}
+                                      className={
+                                        styles[
+                                          `images-small-img-${image.orient}`
+                                        ]
+                                      }
                                       alt={image.title}
                                       title="Click to enlarge"
                                     />

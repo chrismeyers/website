@@ -2,11 +2,11 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useQuery } from 'react-query';
-import './css/projects.css';
 import ProjectsAPI from '../utils/api/projects';
 import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
+import styles from '../styles/Projects.module.css';
 
 const ProjectsPage = () => {
   document.title = `Projects | ${DEFAULT_DOCUMENT_TITLE}`;
@@ -30,7 +30,7 @@ const ProjectsPage = () => {
           <>
             {data?.items?.map((project, index) => (
               <Fragment key={project.id}>
-                <div className="project">
+                <div className={styles.project}>
                   <h2 className={index === 0 ? 'first-header' : ''}>
                     <Link
                       className="fancytxt"
@@ -41,7 +41,7 @@ const ProjectsPage = () => {
                     </Link>
                   </h2>
                   <h3>{project.displayDate}</h3>
-                  <div className="project-overview">
+                  <div className={styles.overview}>
                     <p dangerouslySetInnerHTML={{ __html: project.info }}></p>
                     <p className="right">
                       <Link

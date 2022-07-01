@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import { useQuery } from 'react-query';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
-import './css/build.css';
 import BuildsAPI from '../utils/api/builds';
 import {
   DEFAULT_DOCUMENT_TITLE,
@@ -11,6 +10,7 @@ import {
 } from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
+import styles from '../styles/Build.module.css';
 
 const BuildPage = () => {
   const { id } = useParams();
@@ -33,16 +33,17 @@ const BuildPage = () => {
         <div>Build Details</div>
       </div>
 
-      <div className="content-text build">
+      <div className={`content-text ${styles.build}`}>
+        {' '}
         {isLoading ? (
           <Loading lines={10} header={true} />
         ) : (
           data && (
             <>
-              <div className="build" key={data.id}>
+              <div className={styles.build} key={data.id}>
                 <h2>{data.displayDate}</h2>
-                <div className="build-info">
-                  <div className="build-specs">
+                <div className={styles.info}>
+                  <div className={styles.specs}>
                     <dl>
                       <dt className="dt-mod">
                         <b>GPU</b>
@@ -99,7 +100,7 @@ const BuildPage = () => {
                     </dl>
                   </div>
                   {data.image && (
-                    <div className="build-pic">
+                    <div className={styles.pic}>
                       <LightGallery
                         licenseKey={LIGHTGALLERY_LICENSE}
                         plugins={[lgZoom]}
@@ -107,7 +108,7 @@ const BuildPage = () => {
                         <a href={data.image.path}>
                           <img
                             src={data.image.path}
-                            className={`build-pic-img-${data.image.orient}`}
+                            className={styles[`pic-img-${data.image.orient}`]}
                             alt={data.image.title}
                             data-sub-html={data.image.title}
                             title="Click to enlarge"

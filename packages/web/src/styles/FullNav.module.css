@@ -2,7 +2,7 @@ nav {
   width: 300px;
 }
 
-#full-menu {
+.full-menu {
   position: fixed;
   top: 0;
   left: 0;
@@ -50,7 +50,7 @@ nav {
 }
 
 @media screen and (min-width: 970px) {
-  #mobile-menu {
+  .mobile-menu {
     display: none;
   }
 }

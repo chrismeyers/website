@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import './css/full-nav.css';
 import { ReactComponent as Logo } from '../assets/images/logos/v3/ccm-logo.svg';
+import styles from '../styles/FullNav.module.css';
 
 const FullNav = () => {
   const location = useLocation();
@@ -12,17 +12,17 @@ const FullNav = () => {
 
   return (
     <nav>
-      <div id="full-menu">
+      <div className={styles['full-menu']}>
         <Link to="/">
-          <span className="side-nav-logo">
+          <span className={styles['side-nav-logo']}>
             <Logo
               alt="Chris Meyers. Developer, Tech enthusiast."
-              className="banner-img"
+              className={styles['banner-img']}
               title="Home"
             />
           </span>
         </Link>
-        <ul className="side-nav-items">
+        <ul className={styles['side-nav-items']}>
           <li>
             <Link
               className={`nav-link ${
