@@ -336,17 +336,6 @@ select.select-mod {
   background-color: var(--warning-color);
 }
 
-/******************* hamburgers overrides ******************/
-.hamburger:hover {
-  opacity: 1;
-}
-
-.hamburger-inner,
-.hamburger-inner:after,
-.hamburger-inner:before {
-  background-color: var(--hamburgers-color);
-}
-
 @media screen and (max-width: 969px) {
   .content {
     margin: 60px 0px 90px 0px;

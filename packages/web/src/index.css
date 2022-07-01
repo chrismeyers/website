@@ -12,6 +12,17 @@ code {
     monospace;
 }
 
+/* Global hamburgers overrides */
+.hamburger:hover {
+  opacity: 1 !important;
+}
+
+.hamburger-inner,
+.hamburger-inner:after,
+.hamburger-inner:before {
+  background-color: var(--hamburgers-color) !important;
+}
+
 /* Global lightGallery overrides */
 .lg-container {
   font-family: 'Open-Sans', sans-serif !important;
