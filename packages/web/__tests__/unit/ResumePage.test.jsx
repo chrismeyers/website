@@ -53,7 +53,7 @@ describe('ResumePage', () => {
       styles.company,
     );
     expect(screen.getByText('Anywhere, Earth')).toHaveClass(styles.location);
-    expect(screen.getByText('Wizard')).toHaveClass(styles['job-title']);
+    expect(screen.getByText('Wizard')).toHaveClass(styles.jobTitle);
     expect(screen.getByText('Jan. 1234 \u2013 Present')).toHaveClass(
       styles.tenure,
     );
@@ -96,7 +96,7 @@ describe('ResumePage', () => {
       styles.company,
     );
     expect(screen.getByText('Anywhere, Earth')).toHaveClass(styles.location);
-    expect(screen.getByText('Wizard')).toHaveClass(styles['job-title']);
+    expect(screen.getByText('Wizard')).toHaveClass(styles.jobTitle);
     expect(screen.getByText('Jan. 1234 \u2013 Present')).toHaveClass(
       styles.tenure,
     );
@@ -144,11 +144,11 @@ describe('ResumePage', () => {
       styles.company,
     );
     expect(screen.getByText('Anywhere, Earth')).toHaveClass(styles.location);
-    expect(screen.getByText('Wizard')).toHaveClass(styles['job-title']);
+    expect(screen.getByText('Wizard')).toHaveClass(styles.jobTitle);
     expect(screen.getByText('Jan. 1234 \u2013 Present')).toHaveClass(
       styles.tenure,
     );
-    expect(screen.getByText('Sorcerer')).toHaveClass(styles['job-title']);
+    expect(screen.getByText('Sorcerer')).toHaveClass(styles.jobTitle);
     expect(screen.getByText('Jan. 1000 \u2013 Dec. 1233')).toHaveClass(
       styles.tenure,
     );

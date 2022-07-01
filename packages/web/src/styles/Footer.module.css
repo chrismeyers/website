@@ -10,7 +10,7 @@ footer {
   text-align: center;
 }
 
-footer.in-menu {
+footer.inMenu {
   bottom: 0;
   position: fixed;
   background-color: var(--bg-color);

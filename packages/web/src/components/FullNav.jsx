@@ -12,17 +12,17 @@ const FullNav = () => {
 
   return (
     <nav>
-      <div className={styles['full-menu']}>
+      <div className={styles.fullMenu}>
         <Link to="/">
-          <span className={styles['side-nav-logo']}>
+          <span className={styles.sideNavLogo}>
             <Logo
               alt="Chris Meyers. Developer, Tech enthusiast."
-              className={styles['banner-img']}
+              className={styles.bannerImg}
               title="Home"
             />
           </span>
         </Link>
-        <ul className={styles['side-nav-items']}>
+        <ul className={styles.sideNavItems}>
           <li>
             <Link
               className={`nav-link ${

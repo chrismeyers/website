@@ -29,18 +29,18 @@ const MobileNav = ({ themeProps }) => {
 
   return (
     <nav className={styles.mobile}>
-      <div className={styles['mobile-menu']}>
+      <div className={styles.mobileMenu}>
         <div className={styles.header}>
-          <div className={styles['small-nav-logo']}>
+          <div className={styles.smallNavLogo}>
             <Link to="/">
               <Logo
                 alt="Chris Meyers. Developer, Tech enthusiast."
-                className={styles['banner-img-small']}
+                className={styles.bannerImgSmall}
                 title="Home"
               />
             </Link>
           </div>
-          <div className={styles['menu-icon']} ref={menuIconRef}>
+          <div className={styles.menuIcon} ref={menuIconRef}>
             <div>
               <button
                 style={{ outline: 'none' }}
@@ -62,7 +62,7 @@ const MobileNav = ({ themeProps }) => {
 
         {menuDisplayed && (
           <div>
-            <div className={styles['menu-overlay']}></div>
+            <div className={styles.menuOverlay}></div>
             <div className={styles.menu} ref={menuRef}>
               <Link
                 className={`nav-link ${
@@ -70,7 +70,7 @@ const MobileNav = ({ themeProps }) => {
                 }`}
                 to="/"
               >
-                <div className={styles['menu-item']}>About</div>
+                <div className={styles.menuItem}>About</div>
               </Link>
               <Link
                 className={`nav-link ${
@@ -78,7 +78,7 @@ const MobileNav = ({ themeProps }) => {
                 }`}
                 to="/resume"
               >
-                <div className={styles['menu-item']}>Résumé</div>
+                <div className={styles.menuItem}>Résumé</div>
               </Link>
               <Link
                 className={`nav-link ${
@@ -88,7 +88,7 @@ const MobileNav = ({ themeProps }) => {
                 }`}
                 to="/projects"
               >
-                <div className={styles['menu-item']}>Projects</div>
+                <div className={styles.menuItem}>Projects</div>
               </Link>
               <Link
                 className={`nav-link ${
@@ -96,7 +96,7 @@ const MobileNav = ({ themeProps }) => {
                 }`}
                 to="/builds"
               >
-                <div className={styles['menu-item']}>Builds</div>
+                <div className={styles.menuItem}>Builds</div>
               </Link>
 
               <Footer themeProps={themeProps} inMenu={true} />

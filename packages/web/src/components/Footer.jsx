@@ -14,7 +14,7 @@ import styles from '../styles/Footer.module.css';
 
 const Footer = ({ themeProps, inMenu = false }) => {
   return (
-    <footer className={inMenu ? styles['in-menu'] : ''}>
+    <footer className={inMenu ? styles.inMenu : ''}>
       <div className={styles.links}>
         <div className={styles.social}>
           <a href={GITHUB_URL} className="no-decoration">

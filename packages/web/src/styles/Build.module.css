@@ -12,8 +12,8 @@
   cursor: pointer;
 }
 
-.pic-img-land,
-.pic-img-port {
+img.land,
+img.port {
   border-style: solid;
   border-width: 1px;
   border-color: #707070;
@@ -36,11 +36,11 @@
     flex: 2;
   }
 
-  .pic-img-land {
+  img.land {
     max-width: 100%;
   }
 
-  .pic-img-port {
+  img.port {
     max-width: 100%;
   }
 }
@@ -55,13 +55,13 @@
     text-align: center;
   }
 
-  .pic-img-land,
-  .pic-img-port {
+  img.land,
+  img.port {
     height: 100%;
     width: 100%;
   }
 
-  .pic-img-port {
+  img.port {
     max-height: 525px;
     max-width: 406px;
   }
@@ -75,11 +75,11 @@
     margin-top: 50px;
   }
 
-  .pic-img-land {
+  img.land {
     height: 100%;
     width: 100%;
   }
-  .pic-img-port {
+  img.port {
     height: 60%;
     width: 60%;
   }

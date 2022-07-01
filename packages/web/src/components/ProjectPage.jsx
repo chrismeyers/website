@@ -116,7 +116,7 @@ const ProjectPage = () => {
                           {data.images.map((image) => (
                             <Fragment key={image.id}>
                               <div
-                                className={styles['gif-overlay']}
+                                className={styles.gifOverlay}
                                 title="Play GIF"
                               >
                                 <LightGallery
@@ -128,11 +128,9 @@ const ProjectPage = () => {
                                   <a href={image.path}>
                                     <img
                                       src={image.thumbnail}
-                                      className={
-                                        styles[
-                                          `images-full-img-${image.orient}`
-                                        ]
-                                      }
+                                      className={`${styles.imagesFull} ${
+                                        styles[image.orient]
+                                      }`}
                                       alt={image.title}
                                       title="Click to enlarge"
                                     />
@@ -160,26 +158,24 @@ const ProjectPage = () => {
                                 <a href={image.path}>
                                   <img
                                     src={image.path}
-                                    className={
-                                      styles[`images-full-img-${image.orient}`]
-                                    }
+                                    className={`${styles.imagesFull} ${
+                                      styles[image.orient]
+                                    }`}
                                     alt={image.title}
                                     title="Click to enlarge"
                                   />
                                 </a>
                               ) : (
                                 <div
-                                  className={styles['images-small']}
+                                  className={styles.imagesSmall}
                                   data-src={image.path}
                                 >
                                   <a href={image.path}>
                                     <img
                                       src={image.path}
-                                      className={
-                                        styles[
-                                          `images-small-img-${image.orient}`
-                                        ]
-                                      }
+                                      className={`${styles.imagesSmall} ${
+                                        styles[image.orient]
+                                      }`}
                                       alt={image.title}
                                       title="Click to enlarge"
                                     />

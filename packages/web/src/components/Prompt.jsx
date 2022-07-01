@@ -313,7 +313,7 @@ const Prompt = ({ themeProps }) => {
           {outputWindowVisible && (
             <textarea
               value={output}
-              className={`${styles['output-window']} ${styles.hackerman}`}
+              className={`${styles.outputWindow} ${styles.hackerman}`}
               ref={outputWindowRef}
               readOnly="readonly"
             ></textarea>
@@ -334,7 +334,7 @@ const Prompt = ({ themeProps }) => {
             autoFocus
           />
           <button
-            className={`${styles['output-window-btn']} ${styles.hackerman}`}
+            className={`${styles.outputWindowBtn} ${styles.hackerman}`}
             onClick={() => run({ cmd: 'toggle', recordHistory: false })}
             dangerouslySetInnerHTML={{ __html: ARROWS[arrowDirection] }}
           ></button>

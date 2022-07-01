@@ -37,7 +37,7 @@
   height: 0px;
 }
 
-.output-window {
+.outputWindow {
   width: 535px;
   padding: 2px;
   border: 0;
@@ -47,17 +47,17 @@
   font-size: 12px;
   height: 175px;
 }
-.output-window:focus {
+.outputWindow:focus {
   outline: none;
 }
 
-.output-window-btn {
+.outputWindowBtn {
   border: 0;
   width: 21px;
   height: 27px;
   cursor: pointer;
 }
-.output-window-btn:focus {
+.outputWindowBtn:focus {
   outline: none;
 }
 
