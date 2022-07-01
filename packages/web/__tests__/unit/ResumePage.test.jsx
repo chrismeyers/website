@@ -3,6 +3,7 @@ import nock from 'nock';
 import Axios from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ResumePage from '../../src/components/ResumePage';
+import styles from '../../src/styles/Resume.module.css';
 
 Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -48,10 +49,14 @@ describe('ResumePage', () => {
       'href',
       'https://company.com',
     );
-    expect(screen.getByText('Somewhere').closest('li')).toHaveClass('company');
-    expect(screen.getByText('Anywhere, Earth')).toHaveClass('location');
-    expect(screen.getByText('Wizard')).toHaveClass('job-title');
-    expect(screen.getByText('Jan. 1234 \u2013 Present')).toHaveClass('tenure');
+    expect(screen.getByText('Somewhere').closest('li')).toHaveClass(
+      styles.company,
+    );
+    expect(screen.getByText('Anywhere, Earth')).toHaveClass(styles.location);
+    expect(screen.getByText('Wizard')).toHaveClass(styles['job-title']);
+    expect(screen.getByText('Jan. 1234 \u2013 Present')).toHaveClass(
+      styles.tenure,
+    );
     expect(screen.getByText('Did this thing')).toHaveClass('more-info');
     expect(screen.getByText('Did that thing')).toHaveClass('more-info');
   });
@@ -87,10 +92,14 @@ describe('ResumePage', () => {
       'href',
       'https://company.com',
     );
-    expect(screen.getByText('Somewhere').closest('li')).toHaveClass('company');
-    expect(screen.getByText('Anywhere, Earth')).toHaveClass('location');
-    expect(screen.getByText('Wizard')).toHaveClass('job-title');
-    expect(screen.getByText('Jan. 1234 \u2013 Present')).toHaveClass('tenure');
+    expect(screen.getByText('Somewhere').closest('li')).toHaveClass(
+      styles.company,
+    );
+    expect(screen.getByText('Anywhere, Earth')).toHaveClass(styles.location);
+    expect(screen.getByText('Wizard')).toHaveClass(styles['job-title']);
+    expect(screen.getByText('Jan. 1234 \u2013 Present')).toHaveClass(
+      styles.tenure,
+    );
   });
 
   it('displays multiple experience at some company correctly', async () => {
@@ -131,13 +140,17 @@ describe('ResumePage', () => {
       'href',
       'https://company.com',
     );
-    expect(screen.getByText('Somewhere').closest('li')).toHaveClass('company');
-    expect(screen.getByText('Anywhere, Earth')).toHaveClass('location');
-    expect(screen.getByText('Wizard')).toHaveClass('job-title');
-    expect(screen.getByText('Jan. 1234 \u2013 Present')).toHaveClass('tenure');
-    expect(screen.getByText('Sorcerer')).toHaveClass('job-title');
+    expect(screen.getByText('Somewhere').closest('li')).toHaveClass(
+      styles.company,
+    );
+    expect(screen.getByText('Anywhere, Earth')).toHaveClass(styles.location);
+    expect(screen.getByText('Wizard')).toHaveClass(styles['job-title']);
+    expect(screen.getByText('Jan. 1234 \u2013 Present')).toHaveClass(
+      styles.tenure,
+    );
+    expect(screen.getByText('Sorcerer')).toHaveClass(styles['job-title']);
     expect(screen.getByText('Jan. 1000 \u2013 Dec. 1233')).toHaveClass(
-      'tenure',
+      styles.tenure,
     );
     expect(screen.getByText('Did this thing as a wizard')).toHaveClass(
       'more-info',
@@ -185,11 +198,11 @@ describe('ResumePage', () => {
       'href',
       'https://school.edu',
     );
-    expect(screen.getByText('School').closest('li')).toHaveClass('school');
-    expect(screen.getByText('Degree')).toHaveClass('degree');
-    expect(screen.getByText('Anywhere, Earth')).toHaveClass('location');
+    expect(screen.getByText('School').closest('li')).toHaveClass(styles.school);
+    expect(screen.getByText('Degree')).toHaveClass(styles.degree);
+    expect(screen.getByText('Anywhere, Earth')).toHaveClass(styles.location);
     expect(screen.getByText('Jan. 9999 \u2013 Dec. 9999')).toHaveClass(
-      'tenure',
+      styles.tenure,
     );
     expect(screen.getByText('Took a class')).toHaveClass('more-info');
     expect(screen.getByText('Took another class')).toHaveClass('more-info');
@@ -226,11 +239,11 @@ describe('ResumePage', () => {
       'href',
       'https://school.edu',
     );
-    expect(screen.getByText('School').closest('li')).toHaveClass('school');
-    expect(screen.getByText('Degree')).toHaveClass('degree');
-    expect(screen.getByText('Anywhere, Earth')).toHaveClass('location');
+    expect(screen.getByText('School').closest('li')).toHaveClass(styles.school);
+    expect(screen.getByText('Degree')).toHaveClass(styles.degree);
+    expect(screen.getByText('Anywhere, Earth')).toHaveClass(styles.location);
     expect(screen.getByText('Jan. 9999 \u2013 Dec. 9999')).toHaveClass(
-      'tenure',
+      styles.tenure,
     );
   });
 

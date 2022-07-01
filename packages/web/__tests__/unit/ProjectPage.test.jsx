@@ -4,6 +4,7 @@ import nock from 'nock';
 import Axios from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import ProjectPage from '../../src/components/ProjectPage';
+import styles from '../../src/styles/Project.module.css';
 
 Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -40,7 +41,7 @@ describe('ProjectPage', () => {
       expect(screen.getByText('Project Details')).toBeInTheDocument();
     });
 
-    expect(container).not.toHaveClass('project-wrapper');
+    expect(container).not.toHaveClass(styles.wrapper);
   });
 
   it('displays project details without images correctly', async () => {

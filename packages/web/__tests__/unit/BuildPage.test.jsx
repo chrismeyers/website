@@ -4,6 +4,7 @@ import nock from 'nock';
 import Axios from 'axios';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import BuildPage from '../../src/components/BuildPage';
+import styles from '../../src/styles/Build.module.css';
 
 Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -40,7 +41,7 @@ describe('BuildPage', () => {
       expect(screen.getByText('Build Details')).toBeInTheDocument();
     });
 
-    expect(container).not.toHaveClass('build-info');
+    expect(container).not.toHaveClass(styles.info);
   });
 
   it('displays build details without optional fields correctly', async () => {
