@@ -21,7 +21,7 @@ nav.mobile {
   height: 100%;
 }
 
-.banner-img-small > .cls-1 {
+.banner-img-small > :global(.cls-1) {
   fill: var(--main-theme-color);
 }
 
