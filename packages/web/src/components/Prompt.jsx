@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate, useLocation } from 'react-router-dom';
-import './css/prompt.css';
 import { THEMES } from '../utils/constants';
+import styles from '../styles/Prompt.module.css';
 
 let CONSOLE_MESSAGE_DISPLAYED = false;
 
@@ -309,19 +309,17 @@ const Prompt = ({ themeProps }) => {
   return (
     <>
       {promptVisible && (
-        <div id="prompt-wrapper">
+        <div className={styles.wrapper}>
           {outputWindowVisible && (
             <textarea
               value={output}
-              className="prompt-style"
-              id="prompt-output-window"
+              className={`${styles['output-window']} ${styles.hackerman}`}
               ref={outputWindowRef}
               readOnly="readonly"
             ></textarea>
           )}
           <input
-            className="prompt-style"
-            id="prompt-caret"
+            className={`${styles.caret} ${styles.hackerman}`}
             value=">"
             maxLength="1"
             readOnly="readonly"
@@ -329,16 +327,14 @@ const Prompt = ({ themeProps }) => {
           <input
             value={command}
             onChange={(e) => setCommand(e.target.value)}
-            className="prompt-style"
-            id="prompt"
+            className={`${styles.prompt} ${styles.hackerman}`}
             ref={promptRef}
             maxLength="75"
             autoComplete="off"
             autoFocus
           />
           <button
-            className="prompt-style"
-            id="prompt-output-window-btn"
+            className={`${styles['output-window-btn']} ${styles.hackerman}`}
             onClick={() => run({ cmd: 'toggle', recordHistory: false })}
             dangerouslySetInnerHTML={{ __html: ARROWS[arrowDirection] }}
           ></button>

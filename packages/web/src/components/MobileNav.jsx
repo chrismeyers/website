@@ -1,10 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import './css/mobile-nav.css';
 import { ReactComponent as Logo } from '../assets/images/logos/v3/ccm-logo.svg';
 import Footer from './Footer';
 import useClickOutside from '../hooks/useClickOutside';
 import { setBodyScrollable } from '../utils/styles';
+import styles from '../styles/MobileNav.module.css';
 
 const MobileNav = ({ themeProps }) => {
   const [menuDisplayed, setMenuDisplayed] = useState(false);
@@ -28,19 +28,19 @@ const MobileNav = ({ themeProps }) => {
   }, []);
 
   return (
-    <nav className="mobile">
-      <div id="mobile-menu">
-        <div className="header">
-          <div className="small-nav-logo">
+    <nav className={styles.mobile}>
+      <div className={styles['mobile-menu']}>
+        <div className={styles.header}>
+          <div className={styles['small-nav-logo']}>
             <Link to="/">
               <Logo
                 alt="Chris Meyers. Developer, Tech enthusiast."
-                className="banner-img-small"
+                className={styles['banner-img-small']}
                 title="Home"
               />
             </Link>
           </div>
-          <div className="menu-icon" ref={menuIconRef}>
+          <div className={styles['menu-icon']} ref={menuIconRef}>
             <div>
               <button
                 style={{ outline: 'none' }}
@@ -62,15 +62,15 @@ const MobileNav = ({ themeProps }) => {
 
         {menuDisplayed && (
           <div>
-            <div className="menu-overlay"></div>
-            <div className="menu" ref={menuRef}>
+            <div className={styles['menu-overlay']}></div>
+            <div className={styles.menu} ref={menuRef}>
               <Link
                 className={`nav-link ${
                   location.pathname === '/' ? 'nav-selected' : ''
                 }`}
                 to="/"
               >
-                <div className="menu-item">About</div>
+                <div className={styles['menu-item']}>About</div>
               </Link>
               <Link
                 className={`nav-link ${
@@ -78,7 +78,7 @@ const MobileNav = ({ themeProps }) => {
                 }`}
                 to="/resume"
               >
-                <div className="menu-item">Résumé</div>
+                <div className={styles['menu-item']}>Résumé</div>
               </Link>
               <Link
                 className={`nav-link ${
@@ -88,7 +88,7 @@ const MobileNav = ({ themeProps }) => {
                 }`}
                 to="/projects"
               >
-                <div className="menu-item">Projects</div>
+                <div className={styles['menu-item']}>Projects</div>
               </Link>
               <Link
                 className={`nav-link ${
@@ -96,7 +96,7 @@ const MobileNav = ({ themeProps }) => {
                 }`}
                 to="/builds"
               >
-                <div className="menu-item">Builds</div>
+                <div className={styles['menu-item']}>Builds</div>
               </Link>
 
               <Footer themeProps={themeProps} inMenu={true} />

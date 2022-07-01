@@ -2,11 +2,11 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useQuery } from 'react-query';
-import './css/builds.css';
 import BuildsAPI from '../utils/api/builds';
 import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
+import styles from '../styles/Builds.module.css';
 
 const BuildsPage = () => {
   document.title = `Builds | ${DEFAULT_DOCUMENT_TITLE}`;
@@ -34,7 +34,7 @@ const BuildsPage = () => {
           <>
             {data?.items?.map((build, index) => (
               <Fragment key={build.id}>
-                <div className="build" key="build.id">
+                <div className={styles.build} key="build.id">
                   <h2 className={index === 0 ? 'first-header' : ''}>
                     <Link
                       className="fancytxt"
@@ -44,7 +44,7 @@ const BuildsPage = () => {
                       {build.displayDate}
                     </Link>
                   </h2>
-                  <div className="build-overview">
+                  <div className={styles.overview}>
                     <p>
                       An{' '}
                       <span className="highlighted">{cleanCPU(build.cpu)}</span>{' '}

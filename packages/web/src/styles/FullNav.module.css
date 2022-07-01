@@ -2,7 +2,7 @@ nav {
   width: 300px;
 }
 
-#full-menu {
+.full-menu {
   position: fixed;
   top: 0;
   left: 0;
@@ -20,7 +20,7 @@ nav {
   height: 100%;
 }
 
-.banner-img > .cls-1 {
+.banner-img > :global(.cls-1) {
   fill: var(--main-theme-color);
 }
 
@@ -50,7 +50,7 @@ nav {
 }
 
 @media screen and (min-width: 970px) {
-  #mobile-menu {
+  .mobile-menu {
     display: none;
   }
 }

@@ -108,6 +108,10 @@ h2.top {
   color: var(--faded-text-color);
 }
 
+.link-image {
+  margin-bottom: 10px;
+}
+
 .link-image > g {
   fill: var(--icon-color);
 }
@@ -115,16 +119,36 @@ h2.top {
 .link-image.small {
   height: 16px;
   width: 16px;
+  margin-bottom: 0;
 }
 
 .link-image.large {
   height: 24px;
   width: 20px;
+  margin-bottom: 0;
 }
 
 .link-image.xlarge {
   height: 80px;
   width: 80px;
+  margin-bottom: 0;
+}
+
+.link-image.play-overlay {
+  position: absolute;
+  pointer-events: none;
+}
+
+.link-image.theme {
+  height: 100%;
+}
+
+.link-image.theme.on {
+  margin-left: 8px;
+}
+
+.link-image.theme.off {
+  margin-left: 6px;
 }
 
 .jump-anchor {

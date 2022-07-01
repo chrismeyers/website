@@ -1,5 +1,4 @@
 import Routes from 'react-switch';
-import './css/footer.css';
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
 import { ReactComponent as LinkedInIcon } from '../assets/images/icons/linkedin.svg';
 import { ReactComponent as MailIcon } from '../assets/images/icons/mail.svg';
@@ -11,12 +10,13 @@ import {
   MAILTO_HREF,
   THEMES,
 } from '../utils/constants';
+import styles from '../styles/Footer.module.css';
 
 const Footer = ({ themeProps, inMenu = false }) => {
   return (
-    <footer className={inMenu ? 'in-menu' : ''}>
-      <div className="footer-links">
-        <div className="footer-social">
+    <footer className={inMenu ? styles['in-menu'] : ''}>
+      <div className={styles.links}>
+        <div className={styles.social}>
           <a href={GITHUB_URL} className="no-decoration">
             <GithubIcon
               className="link-image large"
@@ -26,9 +26,9 @@ const Footer = ({ themeProps, inMenu = false }) => {
           </a>
         </div>
 
-        <div className="footer-bullets">&bull;</div>
+        <div className={styles.bullets}>&bull;</div>
 
-        <div className="footer-social">
+        <div className={styles.social}>
           <a href={LINKEDIN_URL} className="no-decoration">
             <LinkedInIcon
               className="link-image large"
@@ -38,9 +38,9 @@ const Footer = ({ themeProps, inMenu = false }) => {
           </a>
         </div>
 
-        <div className="footer-bullets">&bull;</div>
+        <div className={styles.bullets}>&bull;</div>
 
-        <div className="footer-social">
+        <div className={styles.social}>
           <a
             href={MAILTO_HREF}
             title="Send Message"
@@ -51,9 +51,9 @@ const Footer = ({ themeProps, inMenu = false }) => {
           </a>
         </div>
 
-        <div className="footer-bullets">&bull;</div>
+        <div className={styles.bullets}>&bull;</div>
 
-        <div className="footer-theme">
+        <div className={styles.theme}>
           <Routes
             onChange={themeProps.toggleTheme}
             checked={themeProps.theme === THEMES.DARK}
@@ -68,7 +68,7 @@ const Footer = ({ themeProps, inMenu = false }) => {
         </div>
       </div>
 
-      <span className="footer-years">
+      <span className={styles.years}>
         Designed and Developed by Chris Meyers, 2013-{new Date().getFullYear()}
       </span>
     </footer>
