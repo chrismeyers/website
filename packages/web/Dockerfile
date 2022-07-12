@@ -16,7 +16,7 @@ COPY packages/web/ ./packages/web/
 
 RUN pnpm --filter web build
 
-FROM nginx:1.21.6
+FROM nginx:1.23.0
 
 RUN mkdir /app
 COPY --from=builder /app/packages/web/build /app
