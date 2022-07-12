@@ -30,7 +30,7 @@ jobs:
 
       - uses: pnpm/action-setup@v2
         with:
-          version: 7.4.0
+          version: 7.5.1
 
       - uses: actions/setup-node@v3
         with:
