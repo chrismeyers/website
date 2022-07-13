@@ -8,7 +8,7 @@ import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 import styles from '../styles/Builds.module.css';
 
-const BuildsPage = () => {
+function BuildsPage() {
   document.title = `Builds | ${DEFAULT_DOCUMENT_TITLE}`;
 
   const { isLoading, data, error } = useQuery('builds', BuildsAPI.get);
@@ -29,52 +29,50 @@ const BuildsPage = () => {
 
       <div className="content-text">
         {isLoading ? (
-          <Loading lines={10} header={true} />
+          <Loading lines={10} header />
         ) : (
-          <>
-            {data?.items?.map((build, index) => (
-              <Fragment key={build.id}>
-                <div className={styles.build} key="build.id">
-                  <h2 className={index === 0 ? 'first-header' : ''}>
+          data?.items?.map((build, index) => (
+            <Fragment key={build.id}>
+              <div className={styles.build} key="build.id">
+                <h2 className={index === 0 ? 'first-header' : ''}>
+                  <Link
+                    className="fancytxt"
+                    title={`Click for details of ${build.displayDate}`}
+                    to={`/builds/${build.id}`}
+                  >
+                    {build.displayDate}
+                  </Link>
+                </h2>
+                <div className={styles.overview}>
+                  <p>
+                    An{' '}
+                    <span className="highlighted">{cleanCPU(build.cpu)}</span>{' '}
+                    based system
+                  </p>
+                  <p className="right">
                     <Link
-                      className="fancytxt"
+                      className="subtle fancytxt"
                       title={`Click for details of ${build.displayDate}`}
                       to={`/builds/${build.id}`}
                     >
-                      {build.displayDate}
+                      Build Details &gt;
                     </Link>
-                  </h2>
-                  <div className={styles.overview}>
-                    <p>
-                      An{' '}
-                      <span className="highlighted">{cleanCPU(build.cpu)}</span>{' '}
-                      based system
-                    </p>
-                    <p className="right">
-                      <Link
-                        className="subtle fancytxt"
-                        title={`Click for details of ${build.displayDate}`}
-                        to={`/builds/${build.id}`}
-                      >
-                        Build Details &gt;
-                      </Link>
-                    </p>
-                  </div>
+                  </p>
                 </div>
+              </div>
 
-                {index < data.items.length - 1 && (
-                  <>
-                    <br />
-                    <hr />
-                  </>
-                )}
-              </Fragment>
-            ))}
-          </>
+              {index < data.items.length - 1 && (
+                <>
+                  <br />
+                  <hr />
+                </>
+              )}
+            </Fragment>
+          ))
         )}
       </div>
     </div>
   );
-};
+}
 
 export default BuildsPage;

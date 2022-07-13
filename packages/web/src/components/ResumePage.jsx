@@ -7,7 +7,7 @@ import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 import styles from '../styles/Resume.module.css';
 
-const ResumePage = () => {
+function ResumePage() {
   document.title = `Résumé | ${DEFAULT_DOCUMENT_TITLE}`;
 
   const { isLoading, data, error } = useQuery('resume', ResumeApi.get);
@@ -24,7 +24,7 @@ const ResumePage = () => {
 
       <div className="content-text">
         {isLoading ? (
-          <Loading lines={10} header={true} />
+          <Loading lines={10} header />
         ) : (
           <>
             <h2 className="top">Experience</h2>
@@ -66,8 +66,8 @@ const ResumePage = () => {
                           : ''
                       }`}
                       key={`job-tenure-${i}-${j}`}
-                      dangerouslySetInnerHTML={{ __html: secondLine[1] }}
-                    ></li>
+                      dangerouslySetInnerHTML={{ __html: secondLine[1] }} // eslint-disable-line react/no-danger
+                    />
 
                     {job.info && job.info[j].length > 0 && (
                       <li
@@ -82,8 +82,8 @@ const ResumePage = () => {
                             <li
                               className="more-info"
                               key={`job-info-item-${i}-${j}-${k}`}
-                              dangerouslySetInnerHTML={{ __html: info }}
-                            ></li>
+                              dangerouslySetInnerHTML={{ __html: info }} // eslint-disable-line react/no-danger
+                            />
                           ))}
                         </ul>
                       </li>
@@ -128,8 +128,8 @@ const ResumePage = () => {
                     <li
                       className={`${styles.rightColumn} ${styles.tenure}`}
                       key={`school-tenure-${i}-${j}`}
-                      dangerouslySetInnerHTML={{ __html: secondLine[1] }}
-                    ></li>
+                      dangerouslySetInnerHTML={{ __html: secondLine[1] }} // eslint-disable-line react/no-danger
+                    />
 
                     {school.info && school.info[j].length > 0 && (
                       <li
@@ -183,6 +183,6 @@ const ResumePage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default ResumePage;

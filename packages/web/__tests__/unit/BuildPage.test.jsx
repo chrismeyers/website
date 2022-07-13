@@ -1,4 +1,4 @@
-import { vi } from 'vitest';
+import { vi, describe, it, expect } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import nock from 'nock';
 import Axios from 'axios';
@@ -207,7 +207,7 @@ describe('BuildPage', () => {
     expect(screen.getByText(cool)).toBeInTheDocument();
     expect(screen.getByText(mobo)).toBeInTheDocument();
     expect(screen.getByText(ram)).toBeInTheDocument();
-    const hdds = hdd.split(',').map((hdd) => hdd.trim());
+    const hdds = hdd.split(',').map((h) => h.trim());
     expect(screen.getByText(hdds[0])).toBeInTheDocument();
     expect(screen.getByText(hdds[1])).toBeInTheDocument();
     expect(screen.getByText(ssd)).toBeInTheDocument();

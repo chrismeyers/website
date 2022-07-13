@@ -5,7 +5,7 @@ export function getCssVar(name) {
 }
 
 export function setBodyScrollable(enabled) {
-  enabled
+  return enabled
     ? document.body.classList.remove('prevent-scroll')
     : document.body.classList.add('prevent-scroll');
 }

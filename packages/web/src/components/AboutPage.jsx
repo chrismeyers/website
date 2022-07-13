@@ -13,7 +13,7 @@ import {
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
-const AboutPage = () => {
+function AboutPage() {
   document.title = DEFAULT_DOCUMENT_TITLE;
 
   const clarkGalleryRef = useRef();
@@ -106,21 +106,21 @@ const AboutPage = () => {
               </li>
               <li>
                 I am the owner of this{' '}
-                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <a
-                  className="fancytxt"
+                <button
+                  type="button"
+                  className="fancytxt link-button"
                   title="Clark the Corgi"
                   alt="Clark the Corgi"
                   ref={setClarkGalleryRef}
                   onClick={() => clarkGalleryRef.current?.openGallery()}
                 >
                   majestic beast
-                </a>
+                </button>
               </li>
             </ul>
 
             <p>
-              Over the years, I've gained experience with the following
+              Over the years, I&apos;ve gained experience with the following
               programming languages and frameworks:
             </p>
 
@@ -169,6 +169,6 @@ const AboutPage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default AboutPage;

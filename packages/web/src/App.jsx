@@ -17,14 +17,14 @@ import useTheme from './hooks/useTheme';
 import useScreenResize from './hooks/useScreenResize';
 
 function App() {
-  const themeProps = useTheme();
+  const theme = useTheme();
   const { isMobileWidth } = useScreenResize();
   const isMobile = (isMobileDevice || isMobileWidth) ?? true;
 
   return (
     <>
       <Router>
-        {isMobile ? <MobileNav themeProps={themeProps} /> : <FullNav />}
+        {isMobile ? <MobileNav theme={theme} /> : <FullNav />}
         <Routes>
           <Route path="/" element={<AboutPage />} />
           <Route path="/resume" element={<ResumePage />} />
@@ -34,11 +34,11 @@ function App() {
           <Route path="/builds/:id" element={<BuildPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-        {isMobile === true ? <></> : <Prompt themeProps={themeProps} />}
+        {isMobile === true ? <div /> : <Prompt theme={theme} />}
       </Router>
-      <Footer themeProps={themeProps} />
+      <Footer theme={theme} />
       <ToastContainer
-        theme={themeProps.theme}
+        theme={theme.theme}
         position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}

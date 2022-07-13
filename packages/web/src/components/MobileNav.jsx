@@ -3,10 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { ReactComponent as Logo } from '../assets/images/logos/v3/ccm-logo.svg';
 import Footer from './Footer';
 import useClickOutside from '../hooks/useClickOutside';
+import { themePropTypes } from '../hooks/useTheme';
 import { setBodyScrollable } from '../utils/styles';
 import styles from '../styles/MobileNav.module.css';
 
-const MobileNav = ({ themeProps }) => {
+function MobileNav({ theme }) {
   const [menuDisplayed, setMenuDisplayed] = useState(false);
   const location = useLocation();
   const menuRef = useRef(null);
@@ -53,7 +54,7 @@ const MobileNav = ({ themeProps }) => {
                 aria-controls="navigation"
               >
                 <span className="hamburger-box" style={{ height: 26 }}>
-                  <span className="hamburger-inner"></span>
+                  <span className="hamburger-inner" />
                 </span>
               </button>
             </div>
@@ -62,7 +63,7 @@ const MobileNav = ({ themeProps }) => {
 
         {menuDisplayed && (
           <div>
-            <div className={styles.menuOverlay}></div>
+            <div className={styles.menuOverlay} />
             <div className={styles.menu} ref={menuRef}>
               <Link
                 className={`nav-link ${
@@ -99,13 +100,17 @@ const MobileNav = ({ themeProps }) => {
                 <div className={styles.menuItem}>Builds</div>
               </Link>
 
-              <Footer themeProps={themeProps} inMenu={true} />
+              <Footer theme={theme} inMenu />
             </div>
           </div>
         )}
       </div>
     </nav>
   );
+}
+
+MobileNav.propTypes = {
+  theme: themePropTypes.isRequired,
 };
 
 export default MobileNav;
