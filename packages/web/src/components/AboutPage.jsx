@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { useQuery } from 'react-query';
 import lightGallery from 'lightgallery';
 import lgZoom from 'lightgallery/plugins/zoom';
+import { hashCode } from '../utils';
 import ResumeApi from '../utils/api/resume';
 import {
   MAILTO_HREF,
@@ -129,8 +130,8 @@ function AboutPage() {
                 Websites, web applications, and APIs:
                 {data?.languages?.web && (
                   <ul data-testid="web-languages">
-                    {data.languages.web.map((item, index) => (
-                      <li key={`web-${index}`}>{item}</li>
+                    {data.languages.web.map((item) => (
+                      <li key={`web-${hashCode(item)}`}>{item}</li>
                     ))}
                   </ul>
                 )}
@@ -139,8 +140,8 @@ function AboutPage() {
                 Desktop and command-line interface (CLI) applications:
                 {data?.languages?.desktop && (
                   <ul data-testid="desktop-languages">
-                    {data.languages.desktop.map((item, index) => (
-                      <li key={`desktop-${index}`}>{item}</li>
+                    {data.languages.desktop.map((item) => (
+                      <li key={`desktop-${hashCode(item)}`}>{item}</li>
                     ))}
                   </ul>
                 )}
