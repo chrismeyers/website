@@ -6,14 +6,13 @@ module.exports = {
   },
   extends: ['airbnb', 'plugin:prettier/recommended'],
   rules: {
-    'no-console': 'warn',
-    'prefer-const': 'warn',
-    'import/no-anonymous-default-export': 'off',
+    'no-param-reassign': ['error', { props: false }],
+    'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     'testing-library/no-node-access': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
   },
   parserOptions: {
-    ecmaVersion: 2021,
+    ecmaVersion: 13,
   },
 };
