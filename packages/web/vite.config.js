@@ -13,6 +13,7 @@ export default defineConfig({
   },
   plugins: [react(), svgr()],
   test: {
+    globals: true,
     environment: 'jsdom',
     setupFiles: '__tests__/setupTests.js',
   },
