@@ -7,10 +7,10 @@ module.exports = {
   },
   extends: ['airbnb-base', 'plugin:prettier/recommended'],
   rules: {
-    'prefer-const': 'warn',
-    'no-underscore-dangle': ['error', { allowAfterThis: true }],
+    'no-param-reassign': ['error', { props: false }],
+    'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
   },
   parserOptions: {
-    ecmaVersion: 2021,
+    ecmaVersion: 13,
   },
 };

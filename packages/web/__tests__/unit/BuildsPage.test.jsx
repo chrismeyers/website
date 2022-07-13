@@ -55,7 +55,7 @@ describe('BuildsPage', () => {
     );
     expect(
       screen.getByText((content, node) => {
-        const hasText = (node) => node.textContent.match(/An Intel 1000000K/);
+        const hasText = (n) => n.textContent.match(/An Intel 1000000K/);
         const nodeHasText = hasText(node);
         const childrenDontHaveText = Array.from(node.children).every(
           (child) => !hasText(child),

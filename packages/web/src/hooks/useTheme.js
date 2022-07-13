@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { THEMES, SYSTEM_THEME_DARK_MEDIA_QUERY } from '../utils/constants';
 import { getCssVar } from '../utils/styles';
 
@@ -74,5 +75,13 @@ const useTheme = () => {
     applyTheme,
   };
 };
+
+export const themePropTypes = PropTypes.shape({
+  theme: PropTypes.string,
+  mainThemeColor: PropTypes.string,
+  lightModeToggleColor: PropTypes.string,
+  toggleTheme: PropTypes.func,
+  applyTheme: PropTypes.func,
+});
 
 export default useTheme;

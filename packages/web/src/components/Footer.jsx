@@ -1,4 +1,6 @@
 import Routes from 'react-switch';
+import PropTypes from 'prop-types';
+import { themePropTypes } from '../hooks/useTheme';
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
 import { ReactComponent as LinkedInIcon } from '../assets/images/icons/linkedin.svg';
 import { ReactComponent as MailIcon } from '../assets/images/icons/mail.svg';
@@ -12,7 +14,7 @@ import {
 } from '../utils/constants';
 import styles from '../styles/Footer.module.css';
 
-const Footer = ({ themeProps, inMenu = false }) => {
+function Footer({ theme, inMenu }) {
   return (
     <footer className={inMenu ? styles.inMenu : ''}>
       <div className={styles.links}>
@@ -55,10 +57,10 @@ const Footer = ({ themeProps, inMenu = false }) => {
 
         <div className={styles.theme}>
           <Routes
-            onChange={themeProps.toggleTheme}
-            checked={themeProps.theme === THEMES.DARK}
-            onColor={themeProps.mainThemeColor}
-            offColor={themeProps.lightModeToggleColor}
+            onChange={theme.toggleTheme}
+            checked={theme.theme === THEMES.DARK}
+            onColor={theme.mainThemeColor}
+            offColor={theme.lightModeToggleColor}
             aria-label="Toggle site theme"
             height={20}
             width={48}
@@ -73,6 +75,15 @@ const Footer = ({ themeProps, inMenu = false }) => {
       </span>
     </footer>
   );
+}
+
+Footer.defaultProps = {
+  inMenu: false,
+};
+
+Footer.propTypes = {
+  theme: themePropTypes.isRequired,
+  inMenu: PropTypes.bool,
 };
 
 export default Footer;

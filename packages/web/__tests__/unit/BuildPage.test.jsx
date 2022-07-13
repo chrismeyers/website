@@ -207,7 +207,7 @@ describe('BuildPage', () => {
     expect(screen.getByText(cool)).toBeInTheDocument();
     expect(screen.getByText(mobo)).toBeInTheDocument();
     expect(screen.getByText(ram)).toBeInTheDocument();
-    const hdds = hdd.split(',').map((hdd) => hdd.trim());
+    const hdds = hdd.split(',').map((h) => h.trim());
     expect(screen.getByText(hdds[0])).toBeInTheDocument();
     expect(screen.getByText(hdds[1])).toBeInTheDocument();
     expect(screen.getByText(ssd)).toBeInTheDocument();

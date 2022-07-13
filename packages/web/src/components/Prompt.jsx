@@ -1,12 +1,13 @@
 import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { themePropTypes } from '../hooks/useTheme';
 import { THEMES } from '../utils/constants';
 import styles from '../styles/Prompt.module.css';
 
 let CONSOLE_MESSAGE_DISPLAYED = false;
 
-const Prompt = ({ themeProps }) => {
+function Prompt({ theme }) {
   const [promptVisible, setPromptVisible] = useState(false);
   const [outputWindowVisible, setOutputWindowVisible] = useState(false);
   const [arrowDirection, setArrowDirection] = useState('up');
@@ -63,6 +64,14 @@ const Prompt = ({ themeProps }) => {
     setPromptVisible(true);
   };
 
+  const clearCommand = () => {
+    setCommand('');
+  };
+
+  const clearOutput = () => {
+    setOutput('');
+  };
+
   const hidePrompt = useCallback(() => {
     setPromptVisible(false);
     setHistoryIndex(-1);
@@ -71,25 +80,17 @@ const Prompt = ({ themeProps }) => {
   }, []);
 
   const toggleOutputWindow = useCallback(() => {
-    outputWindowVisible
+    return outputWindowVisible
       ? hideOutputWindow()
       : showOutputWindow({ bottom: true });
   }, [outputWindowVisible, showOutputWindow]);
 
   const setTheme = useCallback(
     (which) => {
-      themeProps.applyTheme(which);
+      theme.applyTheme(which);
     },
-    [themeProps],
+    [theme],
   );
-
-  const clearCommand = () => {
-    setCommand('');
-  };
-
-  const clearOutput = () => {
-    setOutput('');
-  };
 
   const moveCursorToEnd = () => {
     promptRef.current.selectionStart = promptRef.current.value.length;
@@ -121,7 +122,7 @@ const Prompt = ({ themeProps }) => {
   const echo = useCallback(
     (args) => {
       let type = 'info';
-      let theme = themeProps.theme;
+      let { theme: currentTheme } = theme;
       let parts = [...args];
 
       parts = parts
@@ -130,18 +131,19 @@ const Prompt = ({ themeProps }) => {
             const proposed = part.split('=')[1];
             if (ECHO_TYPES.includes(proposed)) type = proposed;
             return null;
-          } else if (part.startsWith('--theme=')) {
+          }
+          if (part.startsWith('--theme=')) {
             const proposed = part.split('=')[1];
-            if (ECHO_THEMES.includes(proposed)) theme = proposed;
+            if (ECHO_THEMES.includes(proposed)) currentTheme = proposed;
             return null;
           }
           return part;
         })
         .filter((part) => part);
 
-      toast(parts.join(' '), { type, theme });
+      toast(parts.join(' '), { type, theme: currentTheme });
     },
-    [themeProps, ECHO_TYPES, ECHO_THEMES],
+    [theme, ECHO_TYPES, ECHO_THEMES],
   );
 
   const cd = useCallback(
@@ -201,7 +203,7 @@ const Prompt = ({ themeProps }) => {
   }, [ECHO_TYPES, ECHO_THEMES, showOutputWindow]);
 
   const run = useCallback(
-    ({ cmd = null, event = null, recordHistory = true }) => {
+    ({ cmd = null, recordHistory = true }) => {
       if (cmd === '') return;
 
       if (recordHistory) {
@@ -255,10 +257,8 @@ const Prompt = ({ themeProps }) => {
       .slice()
       .reverse()
       .reduce(
-        (accumulator, item, i) =>
-          (accumulator += `${(i + 1)
-            .toString()
-            .padStart(gutter, ' ')} ${item} \n`),
+        (acc, cur, i) =>
+          `${acc}${(i + 1).toString().padStart(gutter, ' ')} ${cur} \n`,
         '',
       );
 
@@ -307,41 +307,45 @@ const Prompt = ({ themeProps }) => {
   }, []);
 
   return (
-    <>
-      {promptVisible && (
-        <div className={styles.wrapper}>
-          {outputWindowVisible && (
-            <textarea
-              value={output}
-              className={`${styles.outputWindow} ${styles.hackerman}`}
-              ref={outputWindowRef}
-              readOnly="readonly"
-            ></textarea>
-          )}
-          <input
-            className={`${styles.caret} ${styles.hackerman}`}
-            value=">"
-            maxLength="1"
+    promptVisible && (
+      <div className={styles.wrapper}>
+        {outputWindowVisible && (
+          <textarea
+            value={output}
+            className={`${styles.outputWindow} ${styles.hackerman}`}
+            ref={outputWindowRef}
             readOnly="readonly"
           />
-          <input
-            value={command}
-            onChange={(e) => setCommand(e.target.value)}
-            className={`${styles.prompt} ${styles.hackerman}`}
-            ref={promptRef}
-            maxLength="75"
-            autoComplete="off"
-            autoFocus
-          />
-          <button
-            className={`${styles.outputWindowBtn} ${styles.hackerman}`}
-            onClick={() => run({ cmd: 'toggle', recordHistory: false })}
-            dangerouslySetInnerHTML={{ __html: ARROWS[arrowDirection] }}
-          ></button>
-        </div>
-      )}
-    </>
+        )}
+        <input
+          className={`${styles.caret} ${styles.hackerman}`}
+          value=">"
+          maxLength="1"
+          readOnly="readonly"
+        />
+        <input
+          value={command}
+          onChange={(e) => setCommand(e.target.value)}
+          className={`${styles.prompt} ${styles.hackerman}`}
+          ref={promptRef}
+          maxLength="75"
+          autoComplete="off"
+          autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+        />
+        <button
+          type="button"
+          aria-label="Toggle prompt output window"
+          className={`${styles.outputWindowBtn} ${styles.hackerman}`}
+          onClick={() => run({ cmd: 'toggle', recordHistory: false })}
+          dangerouslySetInnerHTML={{ __html: ARROWS[arrowDirection] }} // eslint-disable-line react/no-danger
+        />
+      </div>
+    )
   );
+}
+
+Prompt.propTypes = {
+  theme: themePropTypes.isRequired,
 };
 
 export default Prompt;

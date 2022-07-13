@@ -17,7 +17,7 @@ import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 import styles from '../styles/Project.module.css';
 
-const ProjectPage = () => {
+function ProjectPage() {
   const { id } = useParams();
 
   const { isLoading, data, error } = useQuery(['projects', id], () =>
@@ -51,113 +51,83 @@ const ProjectPage = () => {
 
       <div className={`content-text ${styles.project}`}>
         {isLoading ? (
-          <Loading lines={10} header={true} />
+          <Loading lines={10} header />
         ) : (
           data && (
-            <>
-              <div className={styles.project} key={data.id}>
-                <h2>{data.title}</h2>
-                <h3>{data.displayDate}</h3>
-                <div className={styles.wrapper}>
-                  <div className={styles.description}>
-                    <dl>
-                      <dt className="dt-mod">
-                        <b>Language(s)</b>
-                      </dt>
-                      <dd dangerouslySetInnerHTML={{ __html: data.lang }}></dd>
+            <div className={styles.project} key={data.id}>
+              <h2>{data.title}</h2>
+              <h3>{data.displayDate}</h3>
+              <div className={styles.wrapper}>
+                <div className={styles.description}>
+                  <dl>
+                    <dt className="dt-mod">
+                      <b>Language(s)</b>
+                    </dt>
+                    <dd
+                      dangerouslySetInnerHTML={{ __html: data.lang }} // eslint-disable-line react/no-danger
+                    />
 
-                      <dt className="dt-mod">
-                        <b>Description</b>
-                      </dt>
-                      <dd dangerouslySetInnerHTML={{ __html: data.info }}></dd>
+                    <dt className="dt-mod">
+                      <b>Description</b>
+                    </dt>
+                    <dd
+                      dangerouslySetInnerHTML={{ __html: data.info }} // eslint-disable-line react/no-danger
+                    />
 
-                      <dt className="dt-mod">
-                        <b>My Role</b>
-                      </dt>
-                      <dd>{data.role}</dd>
+                    <dt className="dt-mod">
+                      <b>My Role</b>
+                    </dt>
+                    <dd>{data.role}</dd>
 
-                      <dt className="dt-mod">
-                        <b>Status</b>
-                      </dt>
-                      <dd>{data.stat}</dd>
+                    <dt className="dt-mod">
+                      <b>Status</b>
+                    </dt>
+                    <dd>{data.stat}</dd>
 
-                      <dt className="dt-mod dt-links">
-                        <b>Links</b>
-                      </dt>
-                      {data.webUrl !== null && (
-                        <dd className="link-image">
-                          <ExternalLinkIcon
-                            className="link-image small"
-                            title="External website"
-                            alt="Link to external website"
-                          />{' '}
-                          <a href={data.webUrl} className="fancytxt">
-                            Website
-                          </a>
-                        </dd>
-                      )}
+                    <dt className="dt-mod dt-links">
+                      <b>Links</b>
+                    </dt>
+                    {data.webUrl !== null && (
                       <dd className="link-image">
-                        <GithubIcon
+                        <ExternalLinkIcon
                           className="link-image small"
-                          title="GitHub repository"
-                          alt="Link to GitHub repository"
+                          title="External website"
+                          alt="Link to external website"
                         />{' '}
-                        <a href={data.codeUrl} className="fancytxt">
-                          Code
+                        <a href={data.webUrl} className="fancytxt">
+                          Website
                         </a>
                       </dd>
-                    </dl>
-                  </div>
+                    )}
+                    <dd className="link-image">
+                      <GithubIcon
+                        className="link-image small"
+                        title="GitHub repository"
+                        alt="Link to GitHub repository"
+                      />{' '}
+                      <a href={data.codeUrl} className="fancytxt">
+                        Code
+                      </a>
+                    </dd>
+                  </dl>
+                </div>
 
-                  {data?.images?.length > 0 && (
-                    <div className={styles.images}>
-                      {data.images[0].path.toLowerCase().endsWith('.gif') ? (
-                        <>
-                          {data.images.map((image) => (
-                            <Fragment key={image.id}>
-                              <div
-                                className={styles.gifOverlay}
-                                title="Play GIF"
+                {data?.images?.length > 0 && (
+                  <div className={styles.images}>
+                    {data.images[0].path.toLowerCase().endsWith('.gif') ? (
+                      <>
+                        {data.images.map((image) => (
+                          <Fragment key={image.id}>
+                            <div className={styles.gifOverlay} title="Play GIF">
+                              <LightGallery
+                                licenseKey={LIGHTGALLERY_LICENSE}
+                                onBeforeOpen={restartGif}
+                                enableDrag={false}
+                                enableSwipe={false}
                               >
-                                <LightGallery
-                                  licenseKey={LIGHTGALLERY_LICENSE}
-                                  onBeforeOpen={restartGif}
-                                  enableDrag={false}
-                                  enableSwipe={false}
-                                >
-                                  <a href={image.path}>
-                                    <img
-                                      src={image.thumbnail}
-                                      className={`${styles.imagesFull} ${
-                                        styles[image.orient]
-                                      }`}
-                                      alt={image.title}
-                                      title="Click to enlarge"
-                                    />
-                                  </a>
-                                </LightGallery>
-                                <PlayIcon
-                                  name="play"
-                                  className="link-image xlarge play-overlay"
-                                  alt="Plays the associated GIF"
-                                  title="Play GIF"
-                                />
-                              </div>
-                            </Fragment>
-                          ))}
-                        </>
-                      ) : (
-                        <LightGallery
-                          licenseKey={LIGHTGALLERY_LICENSE}
-                          plugins={[lgZoom, lgThumbnail]}
-                          thumbnail={true}
-                        >
-                          {data.images.map((image, index) => (
-                            <Fragment key={image.id}>
-                              {index === 0 ? (
                                 <a href={image.path}>
                                   <img
-                                    src={image.path}
+                                    src={image.thumbnail}
                                     className={`${styles.imagesFull} ${
                                       styles[image.orient]
                                     }`}
@@ -165,37 +135,66 @@ const ProjectPage = () => {
                                     title="Click to enlarge"
                                   />
                                 </a>
-                              ) : (
-                                <div
-                                  className={styles.imagesSmall}
-                                  data-src={image.path}
-                                >
-                                  <a href={image.path}>
-                                    <img
-                                      src={image.path}
-                                      className={`${styles.imagesSmall} ${
-                                        styles[image.orient]
-                                      }`}
-                                      alt={image.title}
-                                      title="Click to enlarge"
-                                    />
-                                  </a>
-                                </div>
-                              )}
-                            </Fragment>
-                          ))}
-                        </LightGallery>
-                      )}
-                    </div>
-                  )}
-                </div>
+                              </LightGallery>
+                              <PlayIcon
+                                name="play"
+                                className="link-image xlarge play-overlay"
+                                alt="Plays the associated GIF"
+                                title="Play GIF"
+                              />
+                            </div>
+                          </Fragment>
+                        ))}
+                      </>
+                    ) : (
+                      <LightGallery
+                        licenseKey={LIGHTGALLERY_LICENSE}
+                        plugins={[lgZoom, lgThumbnail]}
+                        thumbnail
+                      >
+                        {data.images.map((image, index) => (
+                          <Fragment key={image.id}>
+                            {index === 0 ? (
+                              <a href={image.path}>
+                                <img
+                                  src={image.path}
+                                  className={`${styles.imagesFull} ${
+                                    styles[image.orient]
+                                  }`}
+                                  alt={image.title}
+                                  title="Click to enlarge"
+                                />
+                              </a>
+                            ) : (
+                              <div
+                                className={styles.imagesSmall}
+                                data-src={image.path}
+                              >
+                                <a href={image.path}>
+                                  <img
+                                    src={image.path}
+                                    className={`${styles.imagesSmall} ${
+                                      styles[image.orient]
+                                    }`}
+                                    alt={image.title}
+                                    title="Click to enlarge"
+                                  />
+                                </a>
+                              </div>
+                            )}
+                          </Fragment>
+                        ))}
+                      </LightGallery>
+                    )}
+                  </div>
+                )}
               </div>
-            </>
+            </div>
           )
         )}
       </div>
     </div>
   );
-};
+}
 
 export default ProjectPage;
