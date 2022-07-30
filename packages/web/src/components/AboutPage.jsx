@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import lightGallery from 'lightgallery';
 import lgZoom from 'lightgallery/plugins/zoom';
 import { hashCode } from '../utils';
@@ -42,7 +42,7 @@ function AboutPage() {
   }, []);
 
   const { isLoading, data, error } = useQuery(
-    'resume.summary',
+    ['resume.summary'],
     ResumeApi.summary,
   );
 

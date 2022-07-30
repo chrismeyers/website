@@ -2,21 +2,24 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import nock from 'nock';
 import Axios from 'axios';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AboutPage from '../../src/components/AboutPage';
 
 Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-      cacheTime: 0,
-    },
-  },
-});
-
 describe('AboutPage', () => {
+  let queryClient;
+
+  beforeEach(() => {
+    queryClient = new QueryClient({
+      logger: {
+        log: console.log, // eslint-disable-line no-console
+        warn: console.warn, // eslint-disable-line no-console
+        error: () => {},
+      },
+    });
+  });
+
   it('excludes employment info is not currently employed', async () => {
     nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({

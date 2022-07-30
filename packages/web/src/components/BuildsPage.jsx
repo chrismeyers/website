@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import BuildsAPI from '../utils/api/builds';
 import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import ToastMessage from './ToastMessage';
@@ -11,7 +11,7 @@ import styles from '../styles/Builds.module.css';
 function BuildsPage() {
   document.title = `Builds | ${DEFAULT_DOCUMENT_TITLE}`;
 
-  const { isLoading, data, error } = useQuery('builds', BuildsAPI.get);
+  const { isLoading, data, error } = useQuery(['builds'], BuildsAPI.get);
 
   if (error) {
     toast.error(<ToastMessage title={error.title} message={error.message} />);

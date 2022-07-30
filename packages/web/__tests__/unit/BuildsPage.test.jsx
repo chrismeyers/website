@@ -2,21 +2,24 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import nock from 'nock';
 import Axios from 'axios';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import BuildsPage from '../../src/components/BuildsPage';
 
 Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-      cacheTime: 0,
-    },
-  },
-});
-
 describe('BuildsPage', () => {
+  let queryClient;
+
+  beforeEach(() => {
+    queryClient = new QueryClient({
+      logger: {
+        log: console.log, // eslint-disable-line no-console
+        warn: console.warn, // eslint-disable-line no-console
+        error: () => {},
+      },
+    });
+  });
+
   it('displays build summary correctly', async () => {
     const id = 1;
     const displayDate = 'Today - Built for Someone';

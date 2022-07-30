@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import Axios from 'axios';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import './index.css';
 import './assets/vendor/hamburgers/hamburgers.min.css';
 import 'react-loading-skeleton/dist/skeleton.css';

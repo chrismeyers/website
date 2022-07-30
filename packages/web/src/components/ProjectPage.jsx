@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';

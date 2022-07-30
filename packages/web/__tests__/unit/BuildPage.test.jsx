@@ -2,7 +2,7 @@ import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import nock from 'nock';
 import Axios from 'axios';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import BuildPage from '../../src/components/BuildPage';
 import styles from '../../src/styles/Build.module.css';
 
@@ -12,16 +12,19 @@ vi.mock('react-router-dom', () => ({
   useParams: () => ({ id: 1 }),
 }));
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-      cacheTime: 0,
-    },
-  },
-});
-
 describe('BuildPage', () => {
+  let queryClient;
+
+  beforeEach(() => {
+    queryClient = new QueryClient({
+      logger: {
+        log: console.log, // eslint-disable-line no-console
+        warn: console.warn, // eslint-disable-line no-console
+        error: () => {},
+      },
+    });
+  });
+
   it('handles failure to load a build', async () => {
     nock(import.meta.env.VITE_API_BASE_URL)
       .defaultReplyHeaders({

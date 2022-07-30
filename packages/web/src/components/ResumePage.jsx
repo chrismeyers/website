@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { toast } from 'react-toastify';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { hashCode } from '../utils';
 import ResumeApi from '../utils/api/resume';
 import { RESUME_PDF_URL, DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
@@ -11,7 +11,7 @@ import styles from '../styles/Resume.module.css';
 function ResumePage() {
   document.title = `Résumé | ${DEFAULT_DOCUMENT_TITLE}`;
 
-  const { isLoading, data, error } = useQuery('resume', ResumeApi.get);
+  const { isLoading, data, error } = useQuery(['resume'], ResumeApi.get);
 
   if (error) {
     toast.error(<ToastMessage title={error.title} message={error.message} />);
