@@ -2,7 +2,7 @@ FROM node:16.16.0-slim as builder
 
 WORKDIR /app
 
-RUN npm install --location=global pnpm@7.5.1
+RUN npm install --location=global pnpm@7.7.1
 
 COPY pnpm-lock.yaml pnpm-workspace.yaml package.json .npmrc ./
 
