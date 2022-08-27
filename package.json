@@ -10,7 +10,7 @@
     "dev:api": "pnpm --filter api dev"
   },
   "engines": {
-    "node": ">= 16",
+    "node": ">= 18",
     "pnpm": ">= 7"
   },
   "packageManager": "pnpm@7.9.5"
