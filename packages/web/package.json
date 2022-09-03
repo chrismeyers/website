@@ -14,7 +14,7 @@
   "dependencies": {
     "@tanstack/react-query": "^4.2.3",
     "axios": "^0.27.2",
-    "lightgallery": "^2.5.0",
+    "lightgallery": "^2.6.0",
     "lodash": "^4.17.21",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -37,7 +37,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.31.1",
+    "eslint-plugin-react": "^7.31.4",
     "eslint-plugin-react-hooks": "^4.6.0",
     "jsdom": "^20.0.0",
     "nock": "^13.2.9",
