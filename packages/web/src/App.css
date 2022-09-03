@@ -179,6 +179,10 @@ h2.top {
   text-align: right;
 }
 
+.inline {
+  display: inline;
+}
+
 .highlighted {
   display: inline;
   background: var(--highlighted-text-bg);

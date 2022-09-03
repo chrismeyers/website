@@ -1,8 +1,7 @@
-import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useQuery } from '@tanstack/react-query';
-import lightGallery from 'lightgallery';
+import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
 import { hashCode } from '../utils';
 import ResumeApi from '../utils/api/resume';
@@ -16,30 +15,6 @@ import Loading from './Loading';
 
 function AboutPage() {
   document.title = DEFAULT_DOCUMENT_TITLE;
-
-  const clarkGalleryRef = useRef();
-
-  const setClarkGalleryRef = (element) => {
-    if (element !== null) {
-      clarkGalleryRef.current = lightGallery(element, {
-        licenseKey: LIGHTGALLERY_LICENSE,
-        plugins: [lgZoom],
-        dynamic: true,
-        dynamicEl: [
-          {
-            src: '/images/clark/DSC_1564-6.jpg',
-            subHtml: 'Clark the Corgi',
-          },
-        ],
-      });
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      clarkGalleryRef.current?.destroy();
-    };
-  }, []);
 
   const { isLoading, data, error } = useQuery(
     ['resume.summary'],
@@ -107,16 +82,19 @@ function AboutPage() {
               </li>
               <li>
                 I am the owner of this{' '}
-                <button
-                  type="button"
-                  className="fancytxt link-button"
-                  title="Clark the Corgi"
-                  alt="Clark the Corgi"
-                  ref={setClarkGalleryRef}
-                  onClick={() => clarkGalleryRef.current?.openGallery()}
+                <LightGallery
+                  licenseKey={LIGHTGALLERY_LICENSE}
+                  plugins={[lgZoom]}
+                  elementClassNames="inline"
                 >
-                  majestic beast
-                </button>
+                  <span
+                    className="fancytxt"
+                    data-src="/images/clark/DSC_1564-6.jpg"
+                    data-sub-html="Clark the Corgi"
+                  >
+                    majestic beast
+                  </span>
+                </LightGallery>
               </li>
             </ul>
 
