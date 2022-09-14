@@ -8,7 +8,7 @@ import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 import styles from '../styles/Resume.module.css';
 
-function ResumePage() {
+const ResumePage = () => {
   document.title = `Résumé | ${DEFAULT_DOCUMENT_TITLE}`;
 
   const { isLoading, data, error } = useQuery(['resume'], ResumeApi.get);
@@ -163,6 +163,6 @@ function ResumePage() {
       </div>
     </div>
   );
-}
+};
 
 export default ResumePage;

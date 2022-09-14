@@ -8,7 +8,7 @@ import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 import styles from '../styles/Builds.module.css';
 
-function BuildsPage() {
+const BuildsPage = () => {
   document.title = `Builds | ${DEFAULT_DOCUMENT_TITLE}`;
 
   const { isLoading, data, error } = useQuery(['builds'], BuildsAPI.get);
@@ -73,6 +73,6 @@ function BuildsPage() {
       </div>
     </div>
   );
-}
+};
 
 export default BuildsPage;

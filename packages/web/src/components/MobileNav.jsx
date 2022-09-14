@@ -7,7 +7,7 @@ import { themePropTypes } from '../hooks/useTheme';
 import { setBodyScrollable } from '../utils/styles';
 import styles from '../styles/MobileNav.module.css';
 
-function MobileNav({ theme }) {
+const MobileNav = ({ theme }) => {
   const [menuDisplayed, setMenuDisplayed] = useState(false);
   const location = useLocation();
   const menuRef = useRef(null);
@@ -107,7 +107,7 @@ function MobileNav({ theme }) {
       </div>
     </nav>
   );
-}
+};
 
 MobileNav.propTypes = {
   theme: themePropTypes.isRequired,

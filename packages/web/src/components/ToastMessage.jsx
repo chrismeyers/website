@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 
-function ToastMessage({ title, message }) {
+const ToastMessage = ({ title, message }) => {
   return (
     <>
       <b>{title}</b>
       <div>{message}</div>
     </>
   );
-}
+};
 
 ToastMessage.propTypes = {
   title: PropTypes.string.isRequired,

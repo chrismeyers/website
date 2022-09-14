@@ -13,7 +13,7 @@ import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 import styles from '../styles/Build.module.css';
 
-function BuildPage() {
+const BuildPage = () => {
   const { id } = useParams();
 
   const { isLoading, data, error } = useQuery(['builds', id], () =>
@@ -124,6 +124,6 @@ function BuildPage() {
       </div>
     </div>
   );
-}
+};
 
 export default BuildPage;

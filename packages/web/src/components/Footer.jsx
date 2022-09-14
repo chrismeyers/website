@@ -14,7 +14,7 @@ import {
 } from '../utils/constants';
 import styles from '../styles/Footer.module.css';
 
-function Footer({ theme, inMenu }) {
+const Footer = ({ theme, inMenu }) => {
   return (
     <footer className={inMenu ? styles.inMenu : ''}>
       <div className={styles.links}>
@@ -75,7 +75,7 @@ function Footer({ theme, inMenu }) {
       </span>
     </footer>
   );
-}
+};
 
 Footer.defaultProps = {
   inMenu: false,

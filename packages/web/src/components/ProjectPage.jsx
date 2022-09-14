@@ -17,7 +17,7 @@ import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 import styles from '../styles/Project.module.css';
 
-function ProjectPage() {
+const ProjectPage = () => {
   const { id } = useParams();
 
   const { isLoading, data, error } = useQuery(['projects', id], () =>
@@ -195,6 +195,6 @@ function ProjectPage() {
       </div>
     </div>
   );
-}
+};
 
 export default ProjectPage;

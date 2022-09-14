@@ -7,7 +7,7 @@ import styles from '../styles/Prompt.module.css';
 
 let CONSOLE_MESSAGE_DISPLAYED = false;
 
-function Prompt({ theme }) {
+const Prompt = ({ theme }) => {
   const [promptVisible, setPromptVisible] = useState(false);
   const [outputWindowVisible, setOutputWindowVisible] = useState(false);
   const [arrowDirection, setArrowDirection] = useState('up');
@@ -342,7 +342,7 @@ function Prompt({ theme }) {
       </div>
     )
   );
-}
+};
 
 Prompt.propTypes = {
   theme: themePropTypes.isRequired,

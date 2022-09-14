@@ -13,7 +13,7 @@ import {
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
 
-function AboutPage() {
+const AboutPage = () => {
   document.title = DEFAULT_DOCUMENT_TITLE;
 
   const { isLoading, data, error } = useQuery(
@@ -148,6 +148,6 @@ function AboutPage() {
       </div>
     </div>
   );
-}
+};
 
 export default AboutPage;

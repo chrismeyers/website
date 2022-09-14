@@ -16,7 +16,7 @@ import NotFoundPage from './components/NotFoundPage';
 import useTheme from './hooks/useTheme';
 import useScreenResize from './hooks/useScreenResize';
 
-function App() {
+const App = () => {
   const theme = useTheme();
   const { isMobileWidth } = useScreenResize();
   const isMobile = (isMobileDevice || isMobileWidth) ?? true;
@@ -51,6 +51,6 @@ function App() {
       />
     </>
   );
-}
+};
 
 export default App;

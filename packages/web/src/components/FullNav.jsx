@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { ReactComponent as Logo } from '../assets/images/logos/v3/ccm-logo.svg';
 import styles from '../styles/FullNav.module.css';
 
-function FullNav() {
+const FullNav = () => {
   const location = useLocation();
 
   useEffect(() => {
@@ -67,6 +67,6 @@ function FullNav() {
       </div>
     </nav>
   );
-}
+};
 
 export default FullNav;

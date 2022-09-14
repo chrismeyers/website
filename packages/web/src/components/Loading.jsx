@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { getCssVar } from '../utils/styles';
 
-function Loading({ lines, header }) {
+const Loading = ({ lines, header }) => {
   const [waiting, setWaiting] = useState(true);
   const loadingColor = getCssVar('--skeleton-color');
   const loadingHighlightColor = getCssVar('--skelton-highlight-color');
@@ -29,7 +29,7 @@ function Loading({ lines, header }) {
       </p>
     </SkeletonTheme>
   );
-}
+};
 
 Loading.defaultProps = {
   lines: 5,
