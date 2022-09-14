@@ -132,7 +132,6 @@ const AboutPage = () => {
               innovative and usable applications that solve problems. If you
               have any questions, comments, or would like to work together on a
               project, please{' '}
-              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a
                 href={MAILTO_HREF}
                 className="fancytxt"
