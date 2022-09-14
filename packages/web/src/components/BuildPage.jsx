@@ -40,7 +40,7 @@ function BuildPage() {
           <Loading lines={10} header />
         ) : (
           data && (
-            <div className={styles.build} key={data.id}>
+            <div className={styles.build}>
               <h2>{data.displayDate}</h2>
               <div className={styles.info}>
                 <div className={styles.specs}>

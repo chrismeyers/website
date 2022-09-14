@@ -54,7 +54,7 @@ function ProjectPage() {
           <Loading lines={10} header />
         ) : (
           data && (
-            <div className={styles.project} key={data.id}>
+            <div className={styles.project}>
               <h2>{data.title}</h2>
               <h3>{data.displayDate}</h3>
               <div className={styles.wrapper}>

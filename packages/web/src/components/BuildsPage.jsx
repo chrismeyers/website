@@ -33,7 +33,7 @@ function BuildsPage() {
         ) : (
           data?.items?.map((build, index) => (
             <Fragment key={build.id}>
-              <div className={styles.build} key="build.id">
+              <div className={styles.build}>
                 <h2 className={index === 0 ? 'first-header' : ''}>
                   <Link
                     className="fancytxt"
