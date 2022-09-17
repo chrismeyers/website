@@ -5,15 +5,15 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "pwa-node",
+      "type": "node",
       "request": "launch",
       "name": "Debug API",
       "skipFiles": [
         "<node_internals>/**"
       ],
       "cwd": "${workspaceFolder}/packages/api",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["dev"],
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
       "outputCapture": "std"
     },
   ]
