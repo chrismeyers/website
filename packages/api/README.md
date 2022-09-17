@@ -2,23 +2,23 @@
 
 ### Run development server
 ```
-$ pnpm dev
+$ npm run dev
 ```
 
 ### Run production server
 ```
-$ pnpm start
+$ npm start
 ```
 
 ### Run tests
 ```
-$ pnpm test
+$ npm test
 ```
 
 ### Lint and fix files
 ```
-$ pnpm lint
-$ pnpm lint:fix
+$ npm run lint
+$ npm run lint:fix
 ```
 
 ## Setup
