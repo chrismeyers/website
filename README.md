@@ -6,9 +6,8 @@ This is the codebase for my personal website currently located at [https://chris
 ## Setup
 ### Local
 1. Install Node.js (see [nvm](https://github.com/nvm-sh/nvm) or [nodejs.org](https://nodejs.org/en/download))
-1. Install [pnpm](https://pnpm.io/installation)
 1. Copy [bin/git/hooks/pre-commit](bin/git/hooks/pre-commit) to the local `.git/hooks` directory and ensure the script is executable
-1. Run `pnpm install` from the root of the repository to install dependencies for all packages
+1. Run `npm install` from the root of the repository to install dependencies for all packages
 1. Follow the instructions in [packages/api/README.md](packages/api/README.md)
 1. Follow the instructions in [packages/web/README.md](packages/web/README.md)
 
@@ -26,7 +25,7 @@ This is the codebase for my personal website currently located at [https://chris
         - **Apache**: `deploy-hook = systemctl reload apache2`
 
 ## Workspaces
-This project is a monorepo and uses [pnpm workspaces](https://pnpm.io/workspaces) to manage multiple packages
+This project is a monorepo and uses [npm workspaces](https://docs.npmjs.com/cli/v8/using-npm/workspaces) to manage multiple packages
 
 ## Docker
 ### Build

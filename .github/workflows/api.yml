@@ -5,7 +5,7 @@ on:
     paths:
       - .github/workflows/api.yml
       - packages/api/**
-      - pnpm-lock.yaml
+      - package-lock.json
 
 jobs:
   build:
@@ -22,23 +22,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7.11.0
-
       - uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
-          cache: 'pnpm'
+          cache: 'npm'
           cache-dependency-path: |
-            pnpm-lock.yaml
+            package-lock.json
             packages/api/package.json
 
       - name: Install dependencies
-        run: pnpm --filter api install --frozen-lockfile
+        run: npm ci --workspace=api
 
       - name: Lint Code
-        run: pnpm --filter api lint
+        run: npm run lint --workspace=api
 
       - name: Run tests
-        run: pnpm --filter api test:ci
+        run: npm test --workspace=api

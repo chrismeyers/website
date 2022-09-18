@@ -2,15 +2,13 @@ FROM node:18.9.0-slim
 
 WORKDIR /app
 
-RUN npm install --global pnpm@7.11.0
-
-COPY pnpm-lock.yaml pnpm-workspace.yaml package.json .npmrc ./
+COPY package.json package-lock.json ./
 
 RUN mkdir -p packages/api/
 
 COPY packages/api/package.json ./packages/api/
 
-RUN pnpm --filter api install --frozen-lockfile --prod
+RUN npm ci --production --workspace=api
 
 COPY resume/ ./resume
 COPY packages/api/src/ ./packages/api/src/

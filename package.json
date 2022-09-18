@@ -6,12 +6,11 @@
     "packages/*"
   ],
   "scripts": {
-    "dev:web": "pnpm --filter web dev",
-    "dev:api": "pnpm --filter api dev"
+    "dev:web": "npm run dev --workspace=web",
+    "dev:api": "npm run dev --workspace=api"
   },
   "engines": {
-    "node": ">= 18",
-    "pnpm": ">= 7"
-  },
-  "packageManager": "pnpm@7.11.0"
+    "node": "^18.0.0",
+    "npm": "^8.0.0"
+  }
 }
