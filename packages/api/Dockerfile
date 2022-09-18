@@ -8,7 +8,7 @@ RUN mkdir -p packages/api/
 
 COPY packages/api/package.json ./packages/api/
 
-RUN npm ci --production --workspace=api
+RUN npm ci --omit=dev --workspace=api
 
 COPY resume/ ./resume
 COPY packages/api/src/ ./packages/api/src/
