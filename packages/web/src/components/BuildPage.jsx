@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useQuery } from '@tanstack/react-query';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
-import BuildsAPI from '../utils/api/builds';
+import * as BuildsAPI from '../utils/api/builds';
 import {
   DEFAULT_DOCUMENT_TITLE,
   LIGHTGALLERY_LICENSE,

@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useQuery } from '@tanstack/react-query';
-import ProjectsAPI from '../utils/api/projects';
+import * as ProjectsAPI from '../utils/api/projects';
 import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';

@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useQuery } from '@tanstack/react-query';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
-import ResumeApi from '../utils/api/resume';
+import * as ResumeApi from '../utils/api/resume';
 import {
   MAILTO_HREF,
   DEFAULT_DOCUMENT_TITLE,

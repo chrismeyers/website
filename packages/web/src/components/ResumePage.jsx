@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { toast } from 'react-toastify';
 import { useQuery } from '@tanstack/react-query';
-import ResumeApi from '../utils/api/resume';
+import * as ResumeApi from '../utils/api/resume';
 import { RESUME_PDF_URL, DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import ToastMessage from './ToastMessage';
 import Loading from './Loading';
