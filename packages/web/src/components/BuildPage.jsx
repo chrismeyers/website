@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import { useQuery } from '@tanstack/react-query';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
-import { hashCode } from '../utils';
 import BuildsAPI from '../utils/api/builds';
 import {
   DEFAULT_DOCUMENT_TITLE,
@@ -83,9 +82,7 @@ const BuildPage = () => {
                           <b>HDD</b>
                         </dt>
                         {data.hdd.split(',').map((hdd) => (
-                          <dd key={`${data.id}-hdd-${hashCode(hdd)}`}>
-                            {hdd.trim()}
-                          </dd>
+                          <dd key={`${data.id}-hdd-${hdd}`}>{hdd.trim()}</dd>
                         ))}
                       </>
                     )}

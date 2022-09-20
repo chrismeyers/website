@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import { useQuery } from '@tanstack/react-query';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
-import { hashCode } from '../utils';
 import ResumeApi from '../utils/api/resume';
 import {
   MAILTO_HREF,
@@ -109,7 +108,7 @@ const AboutPage = () => {
                 {data?.languages?.web && (
                   <ul data-testid="web-languages">
                     {data.languages.web.map((item) => (
-                      <li key={`web-${hashCode(item)}`}>{item}</li>
+                      <li key={`web-${item}`}>{item}</li>
                     ))}
                   </ul>
                 )}
@@ -119,7 +118,7 @@ const AboutPage = () => {
                 {data?.languages?.desktop && (
                   <ul data-testid="desktop-languages">
                     {data.languages.desktop.map((item) => (
-                      <li key={`desktop-${hashCode(item)}`}>{item}</li>
+                      <li key={`desktop-${item}`}>{item}</li>
                     ))}
                   </ul>
                 )}

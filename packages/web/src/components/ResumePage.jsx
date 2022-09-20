@@ -1,7 +1,6 @@
 import { Fragment } from 'react';
 import { toast } from 'react-toastify';
 import { useQuery } from '@tanstack/react-query';
-import { hashCode } from '../utils';
 import ResumeApi from '../utils/api/resume';
 import { RESUME_PDF_URL, DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import ToastMessage from './ToastMessage';
@@ -32,7 +31,7 @@ const ResumePage = () => {
             {data?.experience?.map((job) => (
               <ul
                 className={styles.italicSpacer}
-                key={`job-${hashCode(job.firstLine[0])}-${hashCode(job.secondLine[0][1])}`} // prettier-ignore
+                key={`job-${job.firstLine[0]}-${job.secondLine[0][1]}`} // prettier-ignore
               >
                 <li className={`${styles.leftColumn} ${styles.company}`}>
                   <a className="fancytxt" href={job.url}>
@@ -44,7 +43,7 @@ const ResumePage = () => {
                 </li>
 
                 {job.secondLine.map((secondLine, j) => (
-                  <Fragment key={`job-secondLine-${hashCode(secondLine[0])}`}>
+                  <Fragment key={`job-secondLine-${secondLine[0]}`}>
                     <li
                       className={`${styles.leftColumn} ${
                         styles.subLeftColumn
@@ -71,7 +70,7 @@ const ResumePage = () => {
                           {job.info[j].map((info) => (
                             <li
                               className="more-info"
-                              key={`job-info-item-${hashCode(info)}`}
+                              key={`job-info-item-${info}`}
                               dangerouslySetInnerHTML={{ __html: info }} // eslint-disable-line react/no-danger
                             />
                           ))}
@@ -118,7 +117,7 @@ const ResumePage = () => {
                           {school.info[j].map((info) => (
                             <li
                               className="more-info"
-                              key={`school-info-item-${hashCode(info)}`}
+                              key={`school-info-item-${info}`}
                             >
                               {info}
                             </li>
@@ -139,15 +138,13 @@ const ResumePage = () => {
               {data?.skills?.map((skill) => (
                 <li
                   className="skill-wrapper"
-                  key={`skill-wrapper-${hashCode(skill.mainItem)}`}
+                  key={`skill-wrapper-${skill.mainItem}`}
                 >
                   {skill.mainItem}
                   {skill.subItems.length > 0 && (
                     <ul>
                       {skill.subItems.map((subItem) => (
-                        <li key={`skill-subItem-${hashCode(subItem)}`}>
-                          {subItem}
-                        </li>
+                        <li key={`skill-subItem-${subItem}`}>{subItem}</li>
                       ))}
                     </ul>
                   )}
