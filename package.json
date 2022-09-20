@@ -7,7 +7,8 @@
   ],
   "scripts": {
     "dev:web": "npm run dev --workspace=web",
-    "dev:api": "npm run dev --workspace=api"
+    "dev:api": "npm run dev --workspace=api",
+    "update": "npm-check-updates --interactive --workspaces"
   },
   "engines": {
     "node": "^18.0.0",
