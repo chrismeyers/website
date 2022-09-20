@@ -27,6 +27,8 @@ This is the codebase for my personal website currently located at [https://chris
 ## Workspaces
 This project is a monorepo and uses [npm workspaces](https://docs.npmjs.com/cli/v8/using-npm/workspaces) to manage multiple packages
 
+To update dependencies, the [npm-check-updates](https://github.com/raineorshine/npm-check-updates) CLI tool is used with the `--workspaces` flag
+
 ## Docker
 ### Build
 ```sh
