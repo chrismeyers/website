@@ -17,7 +17,6 @@ const resumePath = process.argv[2];
 fs.rmSync(generatedDir, { recursive: true, force: true });
 
 const parser = createResumeParser(resumePath);
-parser.load();
 
 const parsed = {
   full: {
