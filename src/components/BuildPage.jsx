@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
-import { getBuilds } from '../utils/data';
+import { getBuilds } from '../assets/data';
 import {
   DEFAULT_DOCUMENT_TITLE,
   LIGHTGALLERY_LICENSE,

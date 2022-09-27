@@ -11,7 +11,7 @@ if (process.argv.length < 3) {
   process.exit(1);
 }
 
-const generatedDir = 'generated';
+const generatedDir = 'src/assets/generated';
 const resumePath = process.argv[2];
 
 fs.rmSync(generatedDir, { recursive: true, force: true });

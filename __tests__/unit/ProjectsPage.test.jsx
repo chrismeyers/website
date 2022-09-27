@@ -2,7 +2,7 @@ import { vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import ProjectsPage from '../../src/components/ProjectsPage';
-import * as Data from '../../src/utils/data';
+import * as Data from '../../src/assets/data';
 
 describe('ProjectsPage', () => {
   it('displays project summary correctly', async () => {

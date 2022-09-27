@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { getProjects } from '../utils/data';
+import { getProjects } from '../assets/data';
 import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import styles from '../styles/Projects.module.css';
 

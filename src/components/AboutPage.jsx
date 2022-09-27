@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
-import { getSummary } from '../../generated/resume';
+import { getSummary } from '../assets/generated/resume';
 import {
   MAILTO_HREF,
   DEFAULT_DOCUMENT_TITLE,

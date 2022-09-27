@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { getFullResume } from '../../generated/resume';
+import { getFullResume } from '../assets/generated/resume';
 import { RESUME_PDF_URL, DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import styles from '../styles/Resume.module.css';
 

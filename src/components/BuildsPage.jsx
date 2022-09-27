@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { getBuilds } from '../utils/data';
+import { getBuilds } from '../assets/data';
 import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import styles from '../styles/Builds.module.css';
 

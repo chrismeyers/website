@@ -2,7 +2,7 @@ import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import AboutPage from '../../src/components/AboutPage';
-import * as Resume from '../../generated/resume';
+import * as Resume from '../../src/assets/generated/resume';
 
 describe('AboutPage', () => {
   it('excludes employment info is not currently employed', async () => {

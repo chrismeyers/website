@@ -2,7 +2,7 @@ import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import BuildPage from '../../src/components/BuildPage';
 import styles from '../../src/styles/Build.module.css';
-import * as Data from '../../src/utils/data';
+import * as Data from '../../src/assets/data';
 
 vi.mock('react-router-dom', () => ({
   useParams: () => ({ id: 1 }),

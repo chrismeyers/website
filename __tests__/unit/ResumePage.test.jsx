@@ -2,7 +2,7 @@ import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import ResumePage from '../../src/components/ResumePage';
 import styles from '../../src/styles/Resume.module.css';
-import * as Resume from '../../generated/resume';
+import * as Resume from '../../src/assets/generated/resume';
 
 describe('ResumePage', () => {
   it('displays experience section correctly', async () => {
