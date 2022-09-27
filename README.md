@@ -8,6 +8,7 @@ This is the codebase for my personal website currently located at [https://chris
 1. Install Node.js (see [nvm](https://github.com/nvm-sh/nvm) or [nodejs.org](https://nodejs.org/en/download))
 1. Copy [bin/git/hooks/pre-commit](bin/git/hooks/pre-commit) to the local `.git/hooks` directory and ensure the script is executable
 1. Run `npm install` to install dependencies
+1. Run `npm run generate` to generate required modules
 1. The following scripts are available:
     - Run development server
         ```
