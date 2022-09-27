@@ -7,8 +7,11 @@ This is the codebase for my personal website currently located at [https://chris
 ### Local
 1. Install Node.js (see [nvm](https://github.com/nvm-sh/nvm) or [nodejs.org](https://nodejs.org/en/download))
 1. Copy [bin/git/hooks/pre-commit](bin/git/hooks/pre-commit) to the local `.git/hooks` directory and ensure the script is executable
+1. Create `.env.development.local` and add the following variables:
+    - `VITE_LIGHTGALLERY_LICENSE`
 1. Run `npm install` to install dependencies
 1. Run `npm run generate` to generate required modules
+    - This script will need to be run every time the resume is updated
 1. The following scripts are available:
     - Run development server
         ```
