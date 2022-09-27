@@ -19,15 +19,12 @@
     "lint:fix": "eslint . --fix  --ext .js,.jsx"
   },
   "dependencies": {
-    "@tanstack/react-query": "^4.6.0",
-    "axios": "^0.27.2",
     "lightgallery": "^2.6.1",
     "lodash": "^4.17.21",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-device-detect": "^2.2.2",
     "react-dom": "^18.2.0",
-    "react-loading-skeleton": "^3.1.0",
     "react-router-dom": "^6.4.1",
     "react-switch": "^7.0.0",
     "react-toastify": "^9.0.8"
@@ -35,7 +32,6 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^14.4.3",
     "@vitejs/plugin-react": "^2.1.0",
     "@vitest/coverage-c8": "^0.23.4",
     "eslint": "^8.24.0",
@@ -47,7 +43,6 @@
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
     "jsdom": "^20.0.0",
-    "nock": "^13.2.9",
     "prettier": "2.7.1",
     "rimraf": "^3.0.2",
     "vite": "^3.1.3",
