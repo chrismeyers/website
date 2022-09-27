@@ -1,9 +1,11 @@
 import { Fragment } from 'react';
-import { full as data } from '../../generated/resume.json';
+import { getFullResume } from '../../generated/resume';
 import { RESUME_PDF_URL, DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import styles from '../styles/Resume.module.css';
 
 const ResumePage = () => {
+  const data = getFullResume();
+
   document.title = `Résumé | ${DEFAULT_DOCUMENT_TITLE}`;
 
   return (

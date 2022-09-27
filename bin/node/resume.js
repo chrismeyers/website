@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const prettier = require('prettier'); // eslint-disable-line import/no-extraneous-dependencies
+const prettierrc = require('../../.prettierrc');
 
 const resumeParser = ({ resumePath }) => {
   const rawSections = {};
@@ -222,10 +224,12 @@ if (process.argv.length < 3) {
   process.exit(1);
 }
 
+const generatedDir = 'generated';
 const resumePath = process.argv[2];
 
-const parser = resumeParser({ resumePath });
+fs.rmSync(generatedDir, { recursive: true, force: true });
 
+const parser = resumeParser({ resumePath });
 parser.load();
 
 const parsed = {
@@ -240,5 +244,16 @@ const parsed = {
   },
 };
 
-fs.mkdirSync('generated', { recursive: true });
-fs.writeFileSync('generated/resume.json', JSON.stringify(parsed));
+fs.mkdirSync(generatedDir, { recursive: true });
+
+fs.writeFileSync(
+  `${generatedDir}/resume.js`,
+  prettier.format(
+    [
+      `export const getFullResume = () => (${JSON.stringify(parsed.full)});`,
+      '',
+      `export const getSummary = () => (${JSON.stringify(parsed.summary)})`,
+    ].join('\n'),
+    { parser: 'babel', ...prettierrc },
+  ),
+);

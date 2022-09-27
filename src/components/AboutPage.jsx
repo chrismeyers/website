@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
-import { summary as data } from '../../generated/resume.json';
+import { getSummary } from '../../generated/resume';
 import {
   MAILTO_HREF,
   DEFAULT_DOCUMENT_TITLE,
@@ -9,6 +9,8 @@ import {
 } from '../utils/constants';
 
 const AboutPage = () => {
+  const data = getSummary();
+
   document.title = DEFAULT_DOCUMENT_TITLE;
 
   return (
