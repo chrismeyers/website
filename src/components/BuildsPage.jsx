@@ -4,14 +4,12 @@ import { getBuilds } from '../assets/data';
 import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import styles from '../styles/Builds.module.css';
 
+const cleanCPU = (cpu) => cpu.split('@')[0].trim();
+
 const BuildsPage = () => {
   document.title = `Builds | ${DEFAULT_DOCUMENT_TITLE}`;
 
   const data = getBuilds().filter((item) => item.active);
-
-  const cleanCPU = (cpu) => {
-    return cpu.split('@')[0].trim();
-  };
 
   return (
     <div className="content">
