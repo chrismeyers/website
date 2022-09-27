@@ -2,14 +2,14 @@
 
 pushd "$(dirname "$0")" > /dev/null 2>&1
 
-docker stop chrismeyers-website-api
-docker rm chrismeyers-website-api
+docker stop chrismeyers-website
+docker rm chrismeyers-website
 docker run \
     "$@" \
-    -p 8888:8888 \
+    -p 8080:80 \
     --log-opt max-size=25m \
     --log-opt max-file=2 \
-    --name chrismeyers-website-api \
-    chrismeyers-website-api
+    --name chrismeyers-website \
+    chrismeyers-website
 
 popd > /dev/null 2>&1

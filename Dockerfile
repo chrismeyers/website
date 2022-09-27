@@ -4,18 +4,15 @@ WORKDIR /app
 
 COPY package.json package-lock.json ./
 
-RUN mkdir -p packages/web/
+RUN npm ci
 
-COPY packages/web/package.json ./packages/web/
+COPY . .
 
-RUN npm ci --workspace=web
-
-COPY packages/web/ ./packages/web/
-
-RUN npm run build --workspace=web
+RUN npm run generate
+RUN npm run build
 
 FROM nginx:1.23.1
 
 RUN mkdir /app
-COPY --from=builder /app/packages/web/build /app
-COPY packages/web/nginx.conf /etc/nginx/nginx.conf
+COPY --from=builder /app/build /app
+COPY nginx.conf /etc/nginx/nginx.conf
