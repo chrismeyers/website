@@ -1,48 +1,23 @@
+import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
-import nock from 'nock';
-import Axios from 'axios';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ResumePage from '../../src/components/ResumePage';
 import styles from '../../src/styles/Resume.module.css';
-
-Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
+import * as Resume from '../../generated/resume';
 
 describe('ResumePage', () => {
-  let queryClient;
-
-  beforeEach(() => {
-    queryClient = new QueryClient({
-      logger: {
-        log: console.log, // eslint-disable-line no-console
-        warn: console.warn, // eslint-disable-line no-console
-        error: () => {},
-      },
-    });
-  });
-
   it('displays experience section correctly', async () => {
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/resume')
-      .once()
-      .reply(200, {
-        experience: [
-          {
-            url: 'https://company.com',
-            firstLine: ['Somewhere', 'Anywhere, Earth'],
-            secondLine: [['Wizard', 'Jan. 1234 &ndash; Present']],
-            info: [['Did this thing', 'Did that thing']],
-          },
-        ],
-      });
+    vi.spyOn(Resume, 'getFullResume').mockReturnValue({
+      experience: [
+        {
+          url: 'https://company.com',
+          firstLine: ['Somewhere', 'Anywhere, Earth'],
+          secondLine: [['Wizard', 'Jan. 1234 &ndash; Present']],
+          info: [['Did this thing', 'Did that thing']],
+        },
+      ],
+    });
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ResumePage />
-      </QueryClientProvider>,
-    );
+    render(<ResumePage />);
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -65,27 +40,17 @@ describe('ResumePage', () => {
   });
 
   it('displays experience section without info correctly', async () => {
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/resume')
-      .once()
-      .reply(200, {
-        experience: [
-          {
-            url: 'https://company.com',
-            firstLine: ['Somewhere', 'Anywhere, Earth'],
-            secondLine: [['Wizard', 'Jan. 1234 &ndash; Present']],
-          },
-        ],
-      });
+    vi.spyOn(Resume, 'getFullResume').mockReturnValue({
+      experience: [
+        {
+          url: 'https://company.com',
+          firstLine: ['Somewhere', 'Anywhere, Earth'],
+          secondLine: [['Wizard', 'Jan. 1234 &ndash; Present']],
+        },
+      ],
+    });
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ResumePage />
-      </QueryClientProvider>,
-    );
+    render(<ResumePage />);
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -106,34 +71,24 @@ describe('ResumePage', () => {
   });
 
   it('displays multiple experience at some company correctly', async () => {
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/resume')
-      .once()
-      .reply(200, {
-        experience: [
-          {
-            url: 'https://company.com',
-            firstLine: ['Somewhere', 'Anywhere, Earth'],
-            secondLine: [
-              ['Wizard', 'Jan. 1234 &ndash; Present'],
-              ['Sorcerer', 'Jan. 1000 &ndash; Dec. 1233'],
-            ],
-            info: [
-              ['Did this thing as a wizard', 'Did that thing as a wizard'],
-              ['Did this thing as a sorcerer', 'Did that thing as a sorcerer'],
-            ],
-          },
-        ],
-      });
+    vi.spyOn(Resume, 'getFullResume').mockReturnValue({
+      experience: [
+        {
+          url: 'https://company.com',
+          firstLine: ['Somewhere', 'Anywhere, Earth'],
+          secondLine: [
+            ['Wizard', 'Jan. 1234 &ndash; Present'],
+            ['Sorcerer', 'Jan. 1000 &ndash; Dec. 1233'],
+          ],
+          info: [
+            ['Did this thing as a wizard', 'Did that thing as a wizard'],
+            ['Did this thing as a sorcerer', 'Did that thing as a sorcerer'],
+          ],
+        },
+      ],
+    });
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ResumePage />
-      </QueryClientProvider>,
-    );
+    render(<ResumePage />);
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -170,28 +125,18 @@ describe('ResumePage', () => {
   });
 
   it('displays education section correctly', async () => {
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/resume')
-      .once()
-      .reply(200, {
-        education: [
-          {
-            url: 'https://school.edu',
-            firstLine: ['Degree', 'Anywhere, Earth'],
-            secondLine: [['School', 'Jan. 9999 &ndash; Dec. 9999']],
-            info: [['Took a class', 'Took another class']],
-          },
-        ],
-      });
+    vi.spyOn(Resume, 'getFullResume').mockReturnValue({
+      education: [
+        {
+          url: 'https://school.edu',
+          firstLine: ['Degree', 'Anywhere, Earth'],
+          secondLine: [['School', 'Jan. 9999 &ndash; Dec. 9999']],
+          info: [['Took a class', 'Took another class']],
+        },
+      ],
+    });
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ResumePage />
-      </QueryClientProvider>,
-    );
+    render(<ResumePage />);
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -212,27 +157,17 @@ describe('ResumePage', () => {
   });
 
   it('displays education section without info correctly', async () => {
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/resume')
-      .once()
-      .reply(200, {
-        education: [
-          {
-            url: 'https://school.edu',
-            firstLine: ['Degree', 'Anywhere, Earth'],
-            secondLine: [['School', 'Jan. 9999 &ndash; Dec. 9999']],
-          },
-        ],
-      });
+    vi.spyOn(Resume, 'getFullResume').mockReturnValue({
+      education: [
+        {
+          url: 'https://school.edu',
+          firstLine: ['Degree', 'Anywhere, Earth'],
+          secondLine: [['School', 'Jan. 9999 &ndash; Dec. 9999']],
+        },
+      ],
+    });
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ResumePage />
-      </QueryClientProvider>,
-    );
+    render(<ResumePage />);
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -251,34 +186,24 @@ describe('ResumePage', () => {
   });
 
   it('displays skills section correctly', async () => {
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/resume')
-      .once()
-      .reply(200, {
-        skills: [
-          {
-            mainItem: 'Multiple subitems',
-            subItems: ['Sub 1', 'Sub 2'],
-          },
-          {
-            mainItem: 'One subitem',
-            subItems: ['Sub 3'],
-          },
-          {
-            mainItem: 'No subitems',
-            subItems: [],
-          },
-        ],
-      });
+    vi.spyOn(Resume, 'getFullResume').mockReturnValue({
+      skills: [
+        {
+          mainItem: 'Multiple subitems',
+          subItems: ['Sub 1', 'Sub 2'],
+        },
+        {
+          mainItem: 'One subitem',
+          subItems: ['Sub 3'],
+        },
+        {
+          mainItem: 'No subitems',
+          subItems: [],
+        },
+      ],
+    });
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ResumePage />
-      </QueryClientProvider>,
-    );
+    render(<ResumePage />);
 
     await waitFor(() => {
       expect(screen.getByText('Multiple subitems')).toBeInTheDocument();

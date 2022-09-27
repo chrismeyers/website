@@ -1,44 +1,55 @@
 import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
-import nock from 'nock';
-import Axios from 'axios';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ProjectPage from '../../src/components/ProjectPage';
 import styles from '../../src/styles/Project.module.css';
-
-Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
+import * as Data from '../../src/utils/data';
 
 vi.mock('react-router-dom', () => ({
   useParams: () => ({ id: 1 }),
 }));
 
 describe('ProjectPage', () => {
-  let queryClient;
+  it('handles no projects', async () => {
+    vi.spyOn(Data, 'getProjects').mockReturnValue([]);
 
-  beforeEach(() => {
-    queryClient = new QueryClient({
-      logger: {
-        log: console.log, // eslint-disable-line no-console
-        warn: console.warn, // eslint-disable-line no-console
-        error: () => {},
-      },
+    const { container } = render(<ProjectPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Project Details')).toBeInTheDocument();
     });
+
+    expect(container).not.toHaveClass(styles.wrapper);
   });
 
-  it('handles failure to load a project', async () => {
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/projects/1')
-      .once()
-      .reply(404);
+  it('handles no active projects', async () => {
+    const id = 1;
+    const title = 'Project Name';
+    const webUrl = 'https://hosted.site';
+    const codeUrl = 'https://hosted.code';
+    const displayDate = 'Test Project, Always and Forever';
+    const lang = 'Language 1';
+    const info = 'Something involving code';
+    const role = 'Solo project';
+    const stat = 'Being maintained';
+    const images = [];
 
-    const { container } = render(
-      <QueryClientProvider client={queryClient}>
-        <ProjectPage />
-      </QueryClientProvider>,
-    );
+    vi.spyOn(Data, 'getProjects').mockReturnValue([
+      {
+        id,
+        active: false,
+        title,
+        webUrl,
+        codeUrl,
+        displayDate,
+        lang,
+        info,
+        role,
+        stat,
+        images,
+      },
+    ]);
+
+    const { container } = render(<ProjectPage />);
 
     await waitFor(() => {
       expect(screen.getByText('Project Details')).toBeInTheDocument();
@@ -59,14 +70,10 @@ describe('ProjectPage', () => {
     const stat = 'Being maintained';
     const images = [];
 
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/projects/1')
-      .once()
-      .reply(200, {
+    vi.spyOn(Data, 'getProjects').mockReturnValue([
+      {
         id,
+        active: true,
         title,
         webUrl,
         codeUrl,
@@ -76,13 +83,10 @@ describe('ProjectPage', () => {
         role,
         stat,
         images,
-      });
+      },
+    ]);
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ProjectPage />
-      </QueryClientProvider>,
-    );
+    render(<ProjectPage />);
 
     await waitFor(() => {
       expect(screen.getByText('Project Name')).toBeInTheDocument();
@@ -134,14 +138,10 @@ describe('ProjectPage', () => {
       },
     ];
 
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/projects/1')
-      .once()
-      .reply(200, {
+    vi.spyOn(Data, 'getProjects').mockReturnValue([
+      {
         id,
+        active: true,
         title,
         webUrl,
         codeUrl,
@@ -151,13 +151,10 @@ describe('ProjectPage', () => {
         role,
         stat,
         images,
-      });
+      },
+    ]);
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ProjectPage />
-      </QueryClientProvider>,
-    );
+    render(<ProjectPage />);
 
     await waitFor(() => {
       expect(screen.getByText('Project Name')).toBeInTheDocument();
@@ -193,22 +190,16 @@ describe('ProjectPage', () => {
     const webUrl = null;
     const codeUrl = 'https://hosted.code';
 
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/projects/1')
-      .once()
-      .reply(200, {
+    vi.spyOn(Data, 'getProjects').mockReturnValue([
+      {
+        id: 1,
+        active: true,
         webUrl,
         codeUrl,
-      });
+      },
+    ]);
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ProjectPage />
-      </QueryClientProvider>,
-    );
+    render(<ProjectPage />);
 
     await waitFor(() => {
       expect(screen.getByText('Code')).toHaveAttribute(
@@ -233,22 +224,11 @@ describe('ProjectPage', () => {
       },
     ];
 
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/projects/1')
-      .once()
-      .reply(200, {
-        title,
-        images,
-      });
+    vi.spyOn(Data, 'getProjects').mockReturnValue([
+      { id: 1, active: true, title, images },
+    ]);
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ProjectPage />
-      </QueryClientProvider>,
-    );
+    render(<ProjectPage />);
 
     expect(await screen.findByAltText('Image 1')).toHaveAttribute(
       'src',

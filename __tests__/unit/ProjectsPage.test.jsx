@@ -1,54 +1,27 @@
+import { vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
-import nock from 'nock';
-import Axios from 'axios';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ProjectsPage from '../../src/components/ProjectsPage';
-
-Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
+import * as Data from '../../src/utils/data';
 
 describe('ProjectsPage', () => {
-  let queryClient;
-
-  beforeEach(() => {
-    queryClient = new QueryClient({
-      logger: {
-        log: console.log, // eslint-disable-line no-console
-        warn: console.warn, // eslint-disable-line no-console
-        error: () => {},
-      },
-    });
-  });
-
   it('displays project summary correctly', async () => {
     const id = 1;
     const title = 'Project Name';
     const displayDate = 'Test Project, Always and Forever';
     const info = 'Something involving code';
 
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/projects')
-      .once()
-      .reply(200, {
-        items: [
-          {
-            id,
-            title,
-            displayDate,
-            info,
-          },
-        ],
-      });
+    vi.spyOn(Data, 'getProjects').mockReturnValue([
+      {
+        id,
+        active: true,
+        title,
+        displayDate,
+        info,
+      },
+    ]);
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ProjectsPage />
-      </QueryClientProvider>,
-      { wrapper: MemoryRouter },
-    );
+    render(<ProjectsPage />, { wrapper: MemoryRouter });
 
     await waitFor(() => {
       expect(screen.getByText('Project Name')).toBeInTheDocument();

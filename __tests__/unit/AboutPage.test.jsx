@@ -1,69 +1,32 @@
+import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import nock from 'nock';
-import Axios from 'axios';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AboutPage from '../../src/components/AboutPage';
-
-Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
+import * as Resume from '../../generated/resume';
 
 describe('AboutPage', () => {
-  let queryClient;
-
-  beforeEach(() => {
-    queryClient = new QueryClient({
-      logger: {
-        log: console.log, // eslint-disable-line no-console
-        warn: console.warn, // eslint-disable-line no-console
-        error: () => {},
+  it('excludes employment info is not currently employed', async () => {
+    vi.spyOn(Resume, 'getSummary').mockReturnValue({
+      mostRecentJob: {
+        employed: false,
       },
     });
-  });
 
-  it('excludes employment info is not currently employed', async () => {
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/resume/summary')
-      .once()
-      .reply(200, {
-        mostRecentJob: {
-          employed: false,
-        },
-      });
-
-    render(
-      <QueryClientProvider client={queryClient}>
-        <AboutPage />
-      </QueryClientProvider>,
-      { wrapper: MemoryRouter },
-    );
+    render(<AboutPage />, { wrapper: MemoryRouter });
 
     await expect(screen.findByTestId('employment')).rejects.toThrow();
   });
 
   it('displays current job if currently employed', async () => {
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/resume/summary')
-      .once()
-      .reply(200, {
-        mostRecentJob: {
-          employed: true,
-          company: 'Somewhere',
-          title: 'Wizard',
-        },
-      });
+    vi.spyOn(Resume, 'getSummary').mockReturnValue({
+      mostRecentJob: {
+        employed: true,
+        company: 'Somewhere',
+        title: 'Wizard',
+      },
+    });
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <AboutPage />
-      </QueryClientProvider>,
-      { wrapper: MemoryRouter },
-    );
+    render(<AboutPage />, { wrapper: MemoryRouter });
 
     const employment = await screen.findByTestId('employment');
 
@@ -74,49 +37,27 @@ describe('AboutPage', () => {
   });
 
   it('excludes language experience if missing', async () => {
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/resume/summary')
-      .once()
-      .reply(200);
+    vi.spyOn(Resume, 'getSummary').mockReturnValue({});
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <AboutPage />
-      </QueryClientProvider>,
-      { wrapper: MemoryRouter },
-    );
+    render(<AboutPage />, { wrapper: MemoryRouter });
 
     await expect(screen.findByTestId('desktop-languages')).rejects.toThrow();
     await expect(screen.findByTestId('web-languages')).rejects.toThrow();
   });
 
   it('displays language experience', async () => {
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/resume/summary')
-      .once()
-      .reply(200, {
-        languages: {
-          desktop: [
-            'Language 1 (Something 1, Something 2)',
-            'Language 2',
-            'Language 3',
-          ],
-          web: ['Language 4', 'Language 5 (Something 3)'],
-        },
-      });
+    vi.spyOn(Resume, 'getSummary').mockReturnValue({
+      languages: {
+        desktop: [
+          'Language 1 (Something 1, Something 2)',
+          'Language 2',
+          'Language 3',
+        ],
+        web: ['Language 4', 'Language 5 (Something 3)'],
+      },
+    });
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <AboutPage />
-      </QueryClientProvider>,
-      { wrapper: MemoryRouter },
-    );
+    render(<AboutPage />, { wrapper: MemoryRouter });
 
     const desktopLanguages = await screen.findByTestId('desktop-languages');
     const webLanguages = await screen.findByTestId('web-languages');

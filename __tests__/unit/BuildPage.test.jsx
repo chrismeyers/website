@@ -1,44 +1,59 @@
 import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
-import nock from 'nock';
-import Axios from 'axios';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import BuildPage from '../../src/components/BuildPage';
 import styles from '../../src/styles/Build.module.css';
-
-Axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
+import * as Data from '../../src/utils/data';
 
 vi.mock('react-router-dom', () => ({
   useParams: () => ({ id: 1 }),
 }));
 
 describe('BuildPage', () => {
-  let queryClient;
+  it('handles no builds', async () => {
+    vi.spyOn(Data, 'getBuilds').mockReturnValue([]);
 
-  beforeEach(() => {
-    queryClient = new QueryClient({
-      logger: {
-        log: console.log, // eslint-disable-line no-console
-        warn: console.warn, // eslint-disable-line no-console
-        error: () => {},
-      },
+    const { container } = render(<BuildPage />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Build Details')).toBeInTheDocument();
     });
+
+    expect(container).not.toHaveClass(styles.info);
   });
 
-  it('handles failure to load a build', async () => {
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/builds/1')
-      .once()
-      .reply(404);
+  it('handles no active builds', async () => {
+    const id = 1;
+    const displayDate = 'Today - Built for Someone';
+    const cpu = 'Intel 1000000K CPU @ 99.9GHz';
+    const cool = null;
+    const mobo = 'Motherboard with a lot of LEDs';
+    const ram = '999GB Fast Memory 9999MHz';
+    const hdd = null;
+    const ssd = null;
+    const gpu = 'The best GPU 99GB';
+    const image = null;
+    const pcCase = 'Shiny Case';
+    const psu = 'Powerful PSU';
 
-    const { container } = render(
-      <QueryClientProvider client={queryClient}>
-        <BuildPage />
-      </QueryClientProvider>,
-    );
+    vi.spyOn(Data, 'getBuilds').mockReturnValue([
+      {
+        id,
+        active: false,
+        displayDate,
+        cpu,
+        cool,
+        mobo,
+        ram,
+        hdd,
+        ssd,
+        gpu,
+        image,
+        case: pcCase,
+        psu,
+      },
+    ]);
+
+    const { container } = render(<BuildPage />);
 
     await waitFor(() => {
       expect(screen.getByText('Build Details')).toBeInTheDocument();
@@ -61,14 +76,10 @@ describe('BuildPage', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/builds/1')
-      .once()
-      .reply(200, {
+    vi.spyOn(Data, 'getBuilds').mockReturnValue([
+      {
         id,
+        active: true,
         displayDate,
         cpu,
         cool,
@@ -80,13 +91,10 @@ describe('BuildPage', () => {
         image,
         case: pcCase,
         psu,
-      });
+      },
+    ]);
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <BuildPage />
-      </QueryClientProvider>,
-    );
+    render(<BuildPage />);
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();
@@ -118,14 +126,10 @@ describe('BuildPage', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/builds/1')
-      .once()
-      .reply(200, {
+    vi.spyOn(Data, 'getBuilds').mockReturnValue([
+      {
         id,
+        active: true,
         displayDate,
         cpu,
         cool,
@@ -137,13 +141,10 @@ describe('BuildPage', () => {
         image,
         case: pcCase,
         psu,
-      });
+      },
+    ]);
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <BuildPage />
-      </QueryClientProvider>,
-    );
+    render(<BuildPage />);
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();
@@ -175,14 +176,10 @@ describe('BuildPage', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/builds/1')
-      .once()
-      .reply(200, {
+    vi.spyOn(Data, 'getBuilds').mockReturnValue([
+      {
         id,
+        active: true,
         displayDate,
         cpu,
         cool,
@@ -194,13 +191,10 @@ describe('BuildPage', () => {
         image,
         case: pcCase,
         psu,
-      });
+      },
+    ]);
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <BuildPage />
-      </QueryClientProvider>,
-    );
+    render(<BuildPage />);
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();
@@ -241,14 +235,10 @@ describe('BuildPage', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    nock(import.meta.env.VITE_API_BASE_URL)
-      .defaultReplyHeaders({
-        'access-control-allow-origin': '*',
-      })
-      .get('/builds/1')
-      .once()
-      .reply(200, {
+    vi.spyOn(Data, 'getBuilds').mockReturnValue([
+      {
         id,
+        active: true,
         displayDate,
         cpu,
         cool,
@@ -260,13 +250,10 @@ describe('BuildPage', () => {
         image,
         case: pcCase,
         psu,
-      });
+      },
+    ]);
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <BuildPage />
-      </QueryClientProvider>,
-    );
+    render(<BuildPage />);
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();
