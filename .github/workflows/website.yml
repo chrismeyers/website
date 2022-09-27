@@ -1,0 +1,31 @@
+name: Website
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate files
+        run: npm run generate
+
+      - name: Lint Code
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
