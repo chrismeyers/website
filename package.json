@@ -2,16 +2,63 @@
   "name": "website",
   "version": "0.0.0",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
-  "scripts": {
-    "dev:web": "npm run dev --workspace=web",
-    "dev:api": "npm run dev --workspace=api",
-    "update": "npm-check-updates --interactive --workspaces"
-  },
   "engines": {
     "node": "^18.0.0",
     "npm": "^8.0.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "generate": "node bin/node/resume.js resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.tex",
+    "build": "rimraf ./build && vite build",
+    "preview": "vite preview",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest --coverage --run",
+    "test:ci": "CI=true vitest --coverage --run",
+    "lint": "eslint . --ext .js,.jsx --max-warnings 0",
+    "lint:fix": "eslint . --fix  --ext .js,.jsx"
+  },
+  "dependencies": {
+    "lightgallery": "^2.6.1",
+    "lodash": "^4.17.21",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-device-detect": "^2.2.2",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.1",
+    "react-switch": "^7.0.0",
+    "react-toastify": "^9.0.8"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@vitejs/plugin-react": "^2.1.0",
+    "@vitest/coverage-c8": "^0.23.4",
+    "eslint": "^8.24.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "jsdom": "^20.0.0",
+    "prettier": "2.7.1",
+    "rimraf": "^3.0.2",
+    "vite": "^3.1.3",
+    "vite-plugin-svgr": "^2.2.1",
+    "vitest": "^0.23.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
