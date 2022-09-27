@@ -1,24 +1,26 @@
 import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import BuildPage from '../../src/components/BuildPage';
-import styles from '../../src/styles/Build.module.css';
 import * as Data from '../../src/assets/data';
 
-vi.mock('react-router-dom', () => ({
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
   useParams: () => ({ id: 1 }),
+  useLocation: () => ({ pathname: '/builds/1' }),
 }));
 
 describe('BuildPage', () => {
   it('handles no builds', async () => {
     vi.spyOn(Data, 'getBuilds').mockReturnValue([]);
 
-    const { container } = render(<BuildPage />);
+    render(<BuildPage />, { wrapper: MemoryRouter });
 
     await waitFor(() => {
-      expect(screen.getByText('Build Details')).toBeInTheDocument();
+      expect(screen.getByText('Page Not Found')).toBeInTheDocument();
     });
 
-    expect(container).not.toHaveClass(styles.info);
+    expect(screen.getByText('/builds/1')).toBeInTheDocument();
   });
 
   it('handles no active builds', async () => {
@@ -53,13 +55,13 @@ describe('BuildPage', () => {
       },
     ]);
 
-    const { container } = render(<BuildPage />);
+    render(<BuildPage />, { wrapper: MemoryRouter });
 
     await waitFor(() => {
-      expect(screen.getByText('Build Details')).toBeInTheDocument();
+      expect(screen.getByText('Page Not Found')).toBeInTheDocument();
     });
 
-    expect(container).not.toHaveClass(styles.info);
+    expect(screen.getByText('/builds/1')).toBeInTheDocument();
   });
 
   it('displays build details without optional fields correctly', async () => {

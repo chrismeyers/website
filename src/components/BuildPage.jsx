@@ -7,6 +7,7 @@ import {
   LIGHTGALLERY_LICENSE,
 } from '../utils/constants';
 import styles from '../styles/Build.module.css';
+import NotFoundPage from './NotFoundPage';
 
 const BuildPage = () => {
   const { id } = useParams();
@@ -15,8 +16,9 @@ const BuildPage = () => {
     (item) => item.id === parseInt(id, 10) && item.active,
   );
 
-  if (data)
-    document.title = `Build Details | ${data.displayDate} | ${DEFAULT_DOCUMENT_TITLE}`;
+  if (!data) return <NotFoundPage />;
+
+  document.title = `Build Details | ${data.displayDate} | ${DEFAULT_DOCUMENT_TITLE}`;
 
   return (
     <div className="content">

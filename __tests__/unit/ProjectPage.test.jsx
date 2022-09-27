@@ -1,24 +1,26 @@
 import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import ProjectPage from '../../src/components/ProjectPage';
-import styles from '../../src/styles/Project.module.css';
 import * as Data from '../../src/assets/data';
 
-vi.mock('react-router-dom', () => ({
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
   useParams: () => ({ id: 1 }),
+  useLocation: () => ({ pathname: '/projects/1' }),
 }));
 
 describe('ProjectPage', () => {
   it('handles no projects', async () => {
     vi.spyOn(Data, 'getProjects').mockReturnValue([]);
 
-    const { container } = render(<ProjectPage />);
+    render(<ProjectPage />, { wrapper: MemoryRouter });
 
     await waitFor(() => {
-      expect(screen.getByText('Project Details')).toBeInTheDocument();
+      expect(screen.getByText('Page Not Found')).toBeInTheDocument();
     });
 
-    expect(container).not.toHaveClass(styles.wrapper);
+    expect(screen.getByText('/projects/1')).toBeInTheDocument();
   });
 
   it('handles no active projects', async () => {
@@ -49,13 +51,13 @@ describe('ProjectPage', () => {
       },
     ]);
 
-    const { container } = render(<ProjectPage />);
+    render(<ProjectPage />, { wrapper: MemoryRouter });
 
     await waitFor(() => {
-      expect(screen.getByText('Project Details')).toBeInTheDocument();
+      expect(screen.getByText('Page Not Found')).toBeInTheDocument();
     });
 
-    expect(container).not.toHaveClass(styles.wrapper);
+    expect(screen.getByText('/projects/1')).toBeInTheDocument();
   });
 
   it('displays project details without images correctly', async () => {

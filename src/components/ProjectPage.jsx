@@ -12,6 +12,18 @@ import {
   LIGHTGALLERY_LICENSE,
 } from '../utils/constants';
 import styles from '../styles/Project.module.css';
+import NotFoundPage from './NotFoundPage';
+
+const restartGif = () => {
+  // Restart the GIF each time it's opened
+  setTimeout(() => {
+    const gif = document.getElementsByClassName('lg-image')[0];
+
+    if (gif) {
+      document.getElementsByClassName('lg-image')[0].src = gif.src;
+    }
+  }, 100);
+};
 
 const ProjectPage = () => {
   const { id } = useParams();
@@ -20,19 +32,9 @@ const ProjectPage = () => {
     (item) => item.id === parseInt(id, 10) && item.active,
   );
 
-  if (data)
-    document.title = `Project Details | ${data.title} | ${DEFAULT_DOCUMENT_TITLE}`;
+  if (!data) return <NotFoundPage />;
 
-  const restartGif = () => {
-    // Restart the GIF each time it's opened
-    setTimeout(() => {
-      const gif = document.getElementsByClassName('lg-image')[0];
-
-      if (gif) {
-        document.getElementsByClassName('lg-image')[0].src = gif.src;
-      }
-    }, 100);
-  };
+  document.title = `Project Details | ${data.title} | ${DEFAULT_DOCUMENT_TITLE}`;
 
   return (
     <div className="content">
