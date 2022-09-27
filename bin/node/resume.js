@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fs = require('fs');
 
 const resumeParser = ({ resumePath }) => {
@@ -214,10 +216,29 @@ const resumeParser = ({ resumePath }) => {
   };
 };
 
-const createResumeParser = (resumePath) => {
-  const parser = resumeParser({ resumePath });
-  parser.load();
-  return parser;
+if (process.argv.length < 3) {
+  // eslint-disable-next-line no-console
+  console.error('usage: node resume.js resumePath');
+  process.exit(1);
+}
+
+const resumePath = process.argv[2];
+
+const parser = resumeParser({ resumePath });
+
+parser.load();
+
+const parsed = {
+  full: {
+    experience: parser.parseComplexSection('Experience'),
+    education: parser.parseComplexSection('Education'),
+    skills: parser.parseListSection('TechnicalSkills'),
+  },
+  summary: {
+    languages: parser.getLanguages(),
+    mostRecentJob: parser.getMostRecentJob(),
+  },
 };
 
-module.exports = createResumeParser;
+fs.mkdirSync('generated', { recursive: true });
+fs.writeFileSync('generated/resume.json', JSON.stringify(parsed));
