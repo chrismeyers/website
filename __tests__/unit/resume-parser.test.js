@@ -1,5 +1,5 @@
 import path from 'path';
-import createResumeParser from '../../src/lib/resume-parser';
+import createResumeParser from '../../bin/node/resume';
 
 describe('Resume Parser', () => {
   let parser;
