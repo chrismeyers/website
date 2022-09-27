@@ -1,5 +1,5 @@
 # website
-[![Actions Status](https://github.com/chrismeyers/website/actions/workflows/api.yml/badge.svg)](https://github.com/chrismeyers/website/actions/workflows/api.yml) [![Actions Status](https://github.com/chrismeyers/website/actions/workflows/web.yml/badge.svg)](https://github.com/chrismeyers/website/actions/workflows/web.yml)
+[![Actions Status](https://github.com/chrismeyers/website/actions/workflows/website.yml/badge.svg)](https://github.com/chrismeyers/website/actions/workflows/website.yml)
 
 This is the codebase for my personal website currently located at [https://chrismeyers.net](https://chrismeyers.net)
 
@@ -7,9 +7,25 @@ This is the codebase for my personal website currently located at [https://chris
 ### Local
 1. Install Node.js (see [nvm](https://github.com/nvm-sh/nvm) or [nodejs.org](https://nodejs.org/en/download))
 1. Copy [bin/git/hooks/pre-commit](bin/git/hooks/pre-commit) to the local `.git/hooks` directory and ensure the script is executable
-1. Run `npm install` from the root of the repository to install dependencies for all packages
-1. Follow the instructions in [packages/api/README.md](packages/api/README.md)
-1. Follow the instructions in [packages/web/README.md](packages/web/README.md)
+1. Run `npm install` to install dependencies
+1. The following scripts are available:
+    - Run development server
+        ```
+        $ npm run dev
+        ```
+    - Run production preview
+        ```
+        $ npm run build && npm run preview
+        ```
+    - Run tests
+        ```
+        $ npm test
+        ```
+    - Lint and fix files
+        ```
+        $ npm run lint
+        $ npm run lint:fix
+        ```
 
 ### Server
 1. Install Git
@@ -24,24 +40,19 @@ This is the codebase for my personal website currently located at [https://chris
         - **Nginx**: `deploy-hook = systemctl reload nginx`
         - **Apache**: `deploy-hook = systemctl reload apache2`
 
-## Workspaces
-This project is a monorepo and uses [npm workspaces](https://docs.npmjs.com/cli/v8/using-npm/workspaces) to manage multiple packages
-
-To update dependencies, the [npm-check-updates](https://github.com/raineorshine/npm-check-updates) CLI tool is used with the `--workspaces` flag
-
 ## Docker
 ### Build
 ```sh
 # Additional docker build arguments can be passed through such as:
 #   --no-cache (do not use cache when building image)
-$ bin/docker/<package>/build.sh
+$ bin/docker/build.sh
 ```
 
 ### Run
 ```sh
 # Additional docker run arguments can be passed through such as:
 #   -d (detached - run container in background)
-$ bin/docker/<package>/run.sh
+$ bin/docker/run.sh
 ```
 
 ## Deployment
@@ -57,4 +68,4 @@ $ git push production main
 ```
 
 ## Credit
-The site uses several open source libraries and frameworks. See each `package.json` within the `packages/` directory for the full list.
+The site uses several open source libraries and frameworks. See `package.json` for the full list.
