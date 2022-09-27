@@ -1,13 +1,13 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { builds } from '../utils/data';
+import { getBuilds } from '../utils/data';
 import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import styles from '../styles/Builds.module.css';
 
 const BuildsPage = () => {
   document.title = `Builds | ${DEFAULT_DOCUMENT_TITLE}`;
 
-  const data = { items: builds.filter((item) => item.active) };
+  const data = getBuilds().filter((item) => item.active);
 
   const cleanCPU = (cpu) => {
     return cpu.split('@')[0].trim();
@@ -20,7 +20,7 @@ const BuildsPage = () => {
       </div>
 
       <div className="content-text">
-        {data?.items?.map((build, index) => (
+        {data?.map((build, index) => (
           <Fragment key={build.id}>
             <div className={styles.build}>
               <h2 className={index === 0 ? 'first-header' : ''}>
@@ -49,7 +49,7 @@ const BuildsPage = () => {
               </div>
             </div>
 
-            {index < data.items.length - 1 && (
+            {index < data.length - 1 && (
               <>
                 <br />
                 <hr />

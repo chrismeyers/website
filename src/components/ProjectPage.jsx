@@ -6,7 +6,7 @@ import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import { ReactComponent as ExternalLinkIcon } from '../assets/images/icons/link-external.svg';
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
 import { ReactComponent as PlayIcon } from '../assets/images/icons/play.svg';
-import { projects } from '../utils/data';
+import { getProjects } from '../utils/data';
 import {
   DEFAULT_DOCUMENT_TITLE,
   LIGHTGALLERY_LICENSE,
@@ -16,7 +16,7 @@ import styles from '../styles/Project.module.css';
 const ProjectPage = () => {
   const { id } = useParams();
 
-  const data = projects.find(
+  const data = getProjects().find(
     (item) => item.id === parseInt(id, 10) && item.active,
   );
 

@@ -1,13 +1,13 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { projects } from '../utils/data';
+import { getProjects } from '../utils/data';
 import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import styles from '../styles/Projects.module.css';
 
 const ProjectsPage = () => {
   document.title = `Projects | ${DEFAULT_DOCUMENT_TITLE}`;
 
-  const data = { items: projects.filter((item) => item.active) };
+  const data = getProjects().filter((item) => item.active);
 
   return (
     <div className="content">
@@ -16,7 +16,7 @@ const ProjectsPage = () => {
       </div>
 
       <div className="content-text">
-        {data?.items?.map((project, index) => (
+        {data?.map((project, index) => (
           <Fragment key={project.id}>
             <div className={styles.project}>
               <h2 className={index === 0 ? 'first-header' : ''}>
@@ -45,7 +45,7 @@ const ProjectsPage = () => {
               </div>
             </div>
 
-            {index < data.items.length - 1 && (
+            {index < data.length - 1 && (
               <>
                 <br />
                 <hr />
