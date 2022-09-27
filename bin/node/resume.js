@@ -39,7 +39,7 @@ fs.writeFileSync(
     [
       `export const getFullResume = () => (${JSON.stringify(parsed.full)});`,
       '',
-      `export const getSummary = () => (${JSON.stringify(parsed.summary)})`,
+      `export const getSummary = () => (${JSON.stringify(parsed.summary)});`,
     ].join('\n'),
     { parser: 'babel', ...prettierrc },
   ),
