@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "generate": "node bin/node/resume-parser.js resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.tex",
+    "generate": "node bin/node/resume-parser.js resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.tex src/assets/generated/resume.js",
     "build": "rimraf ./build && vite build",
     "preview": "vite preview",
     "test": "vitest --run",

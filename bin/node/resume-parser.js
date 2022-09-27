@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
+const path = require('path');
 const prettier = require('prettier'); // eslint-disable-line import/no-extraneous-dependencies
 const prettierrc = require('../../.prettierrc');
 
@@ -225,14 +226,16 @@ const createResumeParser = (resumePath) => {
 };
 
 if (require.main === module) {
-  if (process.argv.length < 3) {
+  if (process.argv.length < 4) {
     // eslint-disable-next-line no-console
-    console.error('usage: node resume.js resumePath');
+    console.error('usage: node resume.js resumePath generatedPath');
     process.exit(1);
   }
 
-  const generatedDir = 'src/assets/generated';
   const resumePath = process.argv[2];
+  const generatedPath = process.argv[3];
+
+  const { dir: generatedDir } = path.parse(generatedPath);
 
   fs.rmSync(generatedDir, { recursive: true, force: true });
 
@@ -253,7 +256,7 @@ if (require.main === module) {
   fs.mkdirSync(generatedDir, { recursive: true });
 
   fs.writeFileSync(
-    `${generatedDir}/resume.js`,
+    generatedPath,
     prettier.format(
       [
         `export const getFullResume = () => (${JSON.stringify(parsed.full)});`,
