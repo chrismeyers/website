@@ -34,8 +34,8 @@ This is the codebase for my personal website currently located at [https://chris
 1. Install Nginx or Apache
 1. Setup a Git remote by following the instructions in [bin/git/hooks/post-receive](bin/git/hooks/post-receive)
 1. Configure a reverse proxy (assuming Debian based server):
-    - **Nginx**: Copy files from [config/nginx](config/nginx) to `/etc/nginx/sites-available` and symlink each file to `/etc/nginx/sites-enabled`
-    - **Apache**: Copy files from [config/apache](config/apache) to `/etc/apache2/sites-available` and run `a2ensite` for each virtual host (disable virtual host with `a2dissite`)
+    - **Nginx**: Copy files from [config/reverseproxy/nginx](config/reverseproxy/nginx) to `/etc/nginx/sites-available` and symlink each file to `/etc/nginx/sites-enabled`
+    - **Apache**: Copy files from [config/reverseproxy/apache](config/reverseproxy/apache) to `/etc/apache2/sites-available` and run `a2ensite` for each virtual host (disable virtual host with `a2dissite`)
 1. Install and configure LetsEncrypt/Certbot:
     + Add a `deploy-hook` to `/etc/letsencrypt/cli.ini` to reload proxy server after certificate update ([more info](https://blog.arnonerba.com/2019/01/lets-encrypt-how-to-automatically-restart-nginx-with-certbot))
         - **Nginx**: `deploy-hook = systemctl reload nginx`

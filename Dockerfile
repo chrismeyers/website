@@ -15,4 +15,4 @@ FROM nginx:1.23.1
 
 RUN mkdir /app
 COPY --from=builder /app/build /app
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY config/docker/nginx.conf /etc/nginx/nginx.conf
