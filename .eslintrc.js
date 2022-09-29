@@ -4,6 +4,7 @@ module.exports = {
     browser: true,
     jest: true,
     es6: true,
+    node: true,
   },
   extends: ['airbnb', 'plugin:prettier/recommended'],
   rules: {

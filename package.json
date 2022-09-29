@@ -8,15 +8,15 @@
   },
   "scripts": {
     "dev": "vite",
-    "generate": "node bin/node/resume-parser.js resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.tex src/assets/generated/resume.js",
+    "generate": "node bin/node/resume-parser.mjs resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.tex src/assets/generated/resume.js",
     "build": "rimraf ./build && vite build",
     "preview": "vite preview",
     "test": "vitest --run",
     "test:watch": "vitest",
     "test:coverage": "vitest --coverage --run",
     "test:ci": "CI=true vitest --coverage --run",
-    "lint": "eslint . --ext .js,.jsx --max-warnings 0",
-    "lint:fix": "eslint . --fix  --ext .js,.jsx"
+    "lint": "eslint . --ext .js,.mjs,.jsx --max-warnings 0",
+    "lint:fix": "eslint . --fix  --ext .js,.mjs,.jsx"
   },
   "dependencies": {
     "lightgallery": "^2.6.1",

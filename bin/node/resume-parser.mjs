@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const prettier = require('prettier'); // eslint-disable-line import/no-extraneous-dependencies
-const prettierrc = require('../../.prettierrc');
+import fs from 'node:fs';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
+import prettier from 'prettier'; // eslint-disable-line import/no-extraneous-dependencies
+import prettierrc from '../../.prettierrc.js';
 
 const resumeParser = ({ resumePath }) => {
   const rawSections = {};
@@ -225,10 +226,12 @@ const createResumeParser = (resumePath) => {
   return parser;
 };
 
-if (require.main === module) {
+export default createResumeParser;
+
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   if (process.argv.length < 4) {
     // eslint-disable-next-line no-console
-    console.error('usage: node resume.js resumePath generatedPath');
+    console.error('usage: node resume.js <resumePath> <generatedPath>');
     process.exit(1);
   }
 
@@ -266,6 +269,4 @@ if (require.main === module) {
       { parser: 'babel', ...prettierrc },
     ),
   );
-} else {
-  module.exports = createResumeParser;
 }
