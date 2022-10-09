@@ -148,7 +148,7 @@ export const getProjects = () => [
     codeUrl: 'https://github.com/chrismeyers/website',
     displayDate: 'Personal Project, Fall 2013',
     startedDate: '2013-09-01T00:00:00.000Z',
-    lang: 'JavaScript (<a href="https://nodejs.org" class="fancytxt">Node.js</a>, <a href="https://reactjs.org" class="fancytxt">React</a>)',
+    lang: 'JavaScript (<a href="https://nodejs.org" class="fancytxt">Node.js</a>, <a href="https://reactjs.org" class="fancytxt">React</a>, <a href="https://vitejs.dev" class="fancytxt">Vite</a>)',
     info: `
       A digital representation of myself.
       <br><br>
@@ -173,8 +173,8 @@ export const getProjects = () => [
           version can be found <a href="https://github.com/chrismeyers/website/tree/fastify-react-monorepo" class="fancytxt">here</a>.
         </li>
         <li>
-          The current version of the website was simplified to only use
-          <a href="https://reactjs.org" class="fancytxt">React</a> in September 2022.
+          The current version of the website was simplified to only use <a href="https://reactjs.org" class="fancytxt">React</a>
+          and <a href="https://vitejs.dev" class="fancytxt">Vite</a> in September 2022.
         </li>
       </ol>`,
     role: 'Solo project',
