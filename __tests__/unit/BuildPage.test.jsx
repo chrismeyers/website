@@ -270,11 +270,11 @@ describe('BuildPage', () => {
     expect(screen.getByText(gpu)).toBeInTheDocument();
     expect(screen.getByTitle('Click to enlarge')).toHaveAttribute(
       'src',
-      image.path,
+      image.path
     );
     expect(screen.getByTitle('Click to enlarge').closest('a')).toHaveAttribute(
       'href',
-      image.path,
+      image.path
     );
     expect(screen.getByText(pcCase)).toBeInTheDocument();
     expect(screen.getByText(psu)).toBeInTheDocument();

@@ -29,7 +29,7 @@ const Prompt = ({ theme }) => {
 
   const ECHO_TYPES = useMemo(
     () => ['info', 'success', 'warning', 'error', 'default'],
-    [],
+    []
   );
   const ECHO_THEMES = useMemo(() => ['light', 'dark', 'colored'], []);
 
@@ -52,7 +52,7 @@ const Prompt = ({ theme }) => {
       if (top) setTimeout(() => scrollOutputWindowToTop(), 0);
       if (bottom) setTimeout(() => scrollOutputWindowToBottom(), 0);
     },
-    [scrollOutputWindowToBottom, scrollOutputWindowToTop],
+    [scrollOutputWindowToBottom, scrollOutputWindowToTop]
   );
 
   const hideOutputWindow = () => {
@@ -89,7 +89,7 @@ const Prompt = ({ theme }) => {
     (which) => {
       theme.applyTheme(which);
     },
-    [theme],
+    [theme]
   );
 
   const moveCursorToEnd = () => {
@@ -143,7 +143,7 @@ const Prompt = ({ theme }) => {
 
       toast(parts.join(' '), { type, theme: currentTheme });
     },
-    [theme, ECHO_TYPES, ECHO_THEMES],
+    [theme, ECHO_TYPES, ECHO_THEMES]
   );
 
   const cd = useCallback(
@@ -167,7 +167,7 @@ const Prompt = ({ theme }) => {
 
       navigate(path);
     },
-    [location.pathname, navigate],
+    [location.pathname, navigate]
   );
 
   const exit = useCallback(() => {
@@ -180,7 +180,7 @@ const Prompt = ({ theme }) => {
     const echoTypes = ECHO_TYPES.reduce((acc, cur) => `${acc}, ${cur}`);
     const echoThemes = ECHO_THEMES.reduce((acc, cur) => `${acc}, ${cur}`);
     const siteThemes = Object.values(THEMES).reduce(
-      (acc, cur) => `${acc}, ${cur}`,
+      (acc, cur) => `${acc}, ${cur}`
     );
 
     // prettier-ignore
@@ -246,7 +246,7 @@ const Prompt = ({ theme }) => {
       setHistoryIndex(-1);
       clearCommand();
     },
-    [cd, echo, exit, help, setTheme, toggleOutputWindow],
+    [cd, echo, exit, help, setTheme, toggleOutputWindow]
   );
 
   useEffect(() => {
@@ -259,7 +259,7 @@ const Prompt = ({ theme }) => {
       .reduce(
         (acc, cur, i) =>
           `${acc}${(i + 1).toString().padStart(gutter, ' ')} ${cur} \n`,
-        '',
+        ''
       );
 
     setOutput(historyString);
@@ -299,7 +299,7 @@ const Prompt = ({ theme }) => {
       // eslint-disable-next-line no-console
       console.info(
         `%c[${window.location.host}] Prefer a CLI? Press the tilde (~) key when focused on the website and type \`help\` for usage.`,
-        'font-size: 16px; background-color: rgba(0,0,0,0.85); color: #00CC00; font-family: "Courier New", Courier, monospace;',
+        'font-size: 16px; background-color: rgba(0,0,0,0.85); color: #00CC00; font-family: "Courier New", Courier, monospace;'
       );
 
       CONSOLE_MESSAGE_DISPLAYED = true;

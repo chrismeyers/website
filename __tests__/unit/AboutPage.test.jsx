@@ -32,7 +32,7 @@ describe('AboutPage', () => {
 
     expect(employment).toBeInTheDocument();
     expect(employment).toHaveTextContent(
-      'Currently, I am employed as a Wizard at Somewhere',
+      'Currently, I am employed as a Wizard at Somewhere'
     );
   });
 

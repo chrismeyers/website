@@ -6,7 +6,7 @@ describe('Resume Parser', () => {
 
   beforeEach(async () => {
     parser = createResumeParser(
-      path.join(__dirname, '..', '__fixtures__', 'test-resume.latex'),
+      path.join(__dirname, '..', '__fixtures__', 'test-resume.latex')
     );
   });
 
@@ -71,7 +71,7 @@ describe('Resume Parser', () => {
       expect(items[0].mainItem).toBe('Language list 100%:');
       expect(items[0].subItems).toHaveLength(1);
       expect(items[0].subItems[0]).toBe(
-        'Language 1 (Something 1, Something 2), Language 2, Language 3',
+        'Language 1 (Something 1, Something 2), Language 2, Language 3'
       );
 
       expect(items[1].mainItem).toBe('Language list 2:');

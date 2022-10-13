@@ -13,7 +13,7 @@ const BuildPage = () => {
   const { id } = useParams();
 
   const data = getBuilds().find(
-    (item) => item.id === parseInt(id, 10) && item.active,
+    (item) => item.id === parseInt(id, 10) && item.active
   );
 
   if (!data) return <NotFoundPage />;

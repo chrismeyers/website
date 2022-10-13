@@ -29,7 +29,7 @@ const ProjectPage = () => {
   const { id } = useParams();
 
   const data = getProjects().find(
-    (item) => item.id === parseInt(id, 10) && item.active,
+    (item) => item.id === parseInt(id, 10) && item.active
   );
 
   if (!data) return <NotFoundPage />;

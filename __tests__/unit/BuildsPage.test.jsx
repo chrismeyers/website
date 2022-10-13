@@ -22,22 +22,22 @@ describe('BuildsPage', () => {
 
     expect(screen.getByText(displayDate)).toHaveAttribute(
       'href',
-      `/builds/${id}`,
+      `/builds/${id}`
     );
     expect(
       screen.getByText((content, node) => {
         const hasText = (n) => n.textContent.match(/An Intel 1000000K/);
         const nodeHasText = hasText(node);
         const childrenDontHaveText = Array.from(node.children).every(
-          (child) => !hasText(child),
+          (child) => !hasText(child)
         );
 
         return nodeHasText && childrenDontHaveText;
-      }),
+      })
     ).toBeInTheDocument();
     expect(screen.getByText(/Build Details/)).toHaveAttribute(
       'href',
-      `/builds/${id}`,
+      `/builds/${id}`
     );
   });
 });

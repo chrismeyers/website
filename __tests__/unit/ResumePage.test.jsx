@@ -25,15 +25,15 @@ describe('ResumePage', () => {
 
     expect(screen.getByText('Somewhere')).toHaveAttribute(
       'href',
-      'https://company.com',
+      'https://company.com'
     );
     expect(screen.getByText('Somewhere').closest('li')).toHaveClass(
-      styles.company,
+      styles.company
     );
     expect(screen.getByText('Anywhere, Earth')).toHaveClass(styles.location);
     expect(screen.getByText('Wizard')).toHaveClass(styles.jobTitle);
     expect(screen.getByText('Jan. 1234 \u2013 Present')).toHaveClass(
-      styles.tenure,
+      styles.tenure
     );
     expect(screen.getByText('Did this thing')).toHaveClass('more-info');
     expect(screen.getByText('Did that thing')).toHaveClass('more-info');
@@ -58,15 +58,15 @@ describe('ResumePage', () => {
 
     expect(screen.getByText('Somewhere')).toHaveAttribute(
       'href',
-      'https://company.com',
+      'https://company.com'
     );
     expect(screen.getByText('Somewhere').closest('li')).toHaveClass(
-      styles.company,
+      styles.company
     );
     expect(screen.getByText('Anywhere, Earth')).toHaveClass(styles.location);
     expect(screen.getByText('Wizard')).toHaveClass(styles.jobTitle);
     expect(screen.getByText('Jan. 1234 \u2013 Present')).toHaveClass(
-      styles.tenure,
+      styles.tenure
     );
   });
 
@@ -96,31 +96,31 @@ describe('ResumePage', () => {
 
     expect(screen.getByText('Somewhere')).toHaveAttribute(
       'href',
-      'https://company.com',
+      'https://company.com'
     );
     expect(screen.getByText('Somewhere').closest('li')).toHaveClass(
-      styles.company,
+      styles.company
     );
     expect(screen.getByText('Anywhere, Earth')).toHaveClass(styles.location);
     expect(screen.getByText('Wizard')).toHaveClass(styles.jobTitle);
     expect(screen.getByText('Jan. 1234 \u2013 Present')).toHaveClass(
-      styles.tenure,
+      styles.tenure
     );
     expect(screen.getByText('Sorcerer')).toHaveClass(styles.jobTitle);
     expect(screen.getByText('Jan. 1000 \u2013 Dec. 1233')).toHaveClass(
-      styles.tenure,
+      styles.tenure
     );
     expect(screen.getByText('Did this thing as a wizard')).toHaveClass(
-      'more-info',
+      'more-info'
     );
     expect(screen.getByText('Did that thing as a wizard')).toHaveClass(
-      'more-info',
+      'more-info'
     );
     expect(screen.getByText('Did this thing as a sorcerer')).toHaveClass(
-      'more-info',
+      'more-info'
     );
     expect(screen.getByText('Did that thing as a sorcerer')).toHaveClass(
-      'more-info',
+      'more-info'
     );
   });
 
@@ -144,13 +144,13 @@ describe('ResumePage', () => {
 
     expect(screen.getByText('School')).toHaveAttribute(
       'href',
-      'https://school.edu',
+      'https://school.edu'
     );
     expect(screen.getByText('School').closest('li')).toHaveClass(styles.school);
     expect(screen.getByText('Degree')).toHaveClass(styles.degree);
     expect(screen.getByText('Anywhere, Earth')).toHaveClass(styles.location);
     expect(screen.getByText('Jan. 9999 \u2013 Dec. 9999')).toHaveClass(
-      styles.tenure,
+      styles.tenure
     );
     expect(screen.getByText('Took a class')).toHaveClass('more-info');
     expect(screen.getByText('Took another class')).toHaveClass('more-info');
@@ -175,13 +175,13 @@ describe('ResumePage', () => {
 
     expect(screen.getByText('School')).toHaveAttribute(
       'href',
-      'https://school.edu',
+      'https://school.edu'
     );
     expect(screen.getByText('School').closest('li')).toHaveClass(styles.school);
     expect(screen.getByText('Degree')).toHaveClass(styles.degree);
     expect(screen.getByText('Anywhere, Earth')).toHaveClass(styles.location);
     expect(screen.getByText('Jan. 9999 \u2013 Dec. 9999')).toHaveClass(
-      styles.tenure,
+      styles.tenure
     );
   });
 

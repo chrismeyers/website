@@ -29,13 +29,13 @@ describe('ProjectsPage', () => {
 
     expect(screen.getByText('Project Name')).toHaveAttribute(
       'href',
-      `/projects/${id}`,
+      `/projects/${id}`
     );
     expect(screen.getByText(displayDate)).toBeInTheDocument();
     expect(screen.getByText(info)).toBeInTheDocument();
     expect(screen.getByText(/Project Details/)).toHaveAttribute(
       'href',
-      `/projects/${id}`,
+      `/projects/${id}`
     );
   });
 });

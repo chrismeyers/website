@@ -56,7 +56,7 @@ const resumeParser = ({ resumePath }) => {
     output = output.replaceAll('--', '&ndash;');
     output = output.replaceAll(
       String.raw`\textsuperscript{\textregistered}`,
-      '&reg;',
+      '&reg;'
     );
     output = output.replaceAll(String.raw({ raw: '\\' }), '');
 
@@ -96,7 +96,7 @@ const resumeParser = ({ resumePath }) => {
           line
             .substring(beginPatternIndex, endPatternIndex)
             .replaceAll(endPattern, ''),
-          removeInlineComments,
+          removeInlineComments
         );
 
         firstLine.push(cleaned);
@@ -108,14 +108,14 @@ const resumeParser = ({ resumePath }) => {
           line
             .substring(beginPatternIndex, endPatternIndex)
             .replaceAll(endPattern, ''),
-          removeInlineComments,
+          removeInlineComments
         );
 
         currentSecondLine.push(cleaned);
       } else if (line.startsWith(infoPattern)) {
         const cleaned = cleanString(
           line.substring(infoPattern.length + 1),
-          removeInlineComments,
+          removeInlineComments
         );
 
         currentInfo.push(cleaned);
@@ -163,13 +163,13 @@ const resumeParser = ({ resumePath }) => {
         if (subItem) {
           cleaned = cleanString(
             line.substring(circleItemPattern.length + 1),
-            removeInlineComments,
+            removeInlineComments
           );
           items[count - 1].subItems.push(cleaned);
         } else {
           cleaned = cleanString(
             line.substring(itemPattern.length + 1),
-            removeInlineComments,
+            removeInlineComments
           );
           items.push({ mainItem: cleaned, subItems: [] });
           count += 1;
@@ -266,7 +266,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
         '',
         `export const getSummary = () => (${JSON.stringify(parsed.summary)});`,
       ].join('\n'),
-      { parser: 'babel', ...prettierrc },
-    ),
+      { parser: 'babel', ...prettierrc }
+    )
   );
 }

@@ -95,18 +95,18 @@ describe('ProjectPage', () => {
     });
 
     expect(
-      screen.getByText('Test Project, Always and Forever'),
+      screen.getByText('Test Project, Always and Forever')
     ).toBeInTheDocument();
     expect(screen.getByText('Something involving code')).toBeInTheDocument();
     expect(screen.getByText('Solo project')).toBeInTheDocument();
     expect(screen.getByText('Being maintained')).toBeInTheDocument();
     expect(screen.getByText('Website')).toHaveAttribute(
       'href',
-      'https://hosted.site',
+      'https://hosted.site'
     );
     expect(screen.getByText('Code')).toHaveAttribute(
       'href',
-      'https://hosted.code',
+      'https://hosted.code'
     );
     await expect(screen.findByAltText('Image 1')).rejects.toThrow();
   });
@@ -163,28 +163,28 @@ describe('ProjectPage', () => {
     });
 
     expect(
-      screen.getByText('Test Project, Always and Forever'),
+      screen.getByText('Test Project, Always and Forever')
     ).toBeInTheDocument();
     expect(screen.getByText('Something involving code')).toBeInTheDocument();
     expect(screen.getByText('Solo project')).toBeInTheDocument();
     expect(screen.getByText('Being maintained')).toBeInTheDocument();
     expect(screen.getByText('Website')).toHaveAttribute(
       'href',
-      'https://hosted.site',
+      'https://hosted.site'
     );
     expect(screen.getByText('Code')).toHaveAttribute(
       'href',
-      'https://hosted.code',
+      'https://hosted.code'
     );
     expect(screen.getByAltText('Image 1')).toBeInTheDocument();
     expect(screen.getByAltText('Image 1').closest('a')).toHaveAttribute(
       'href',
-      '/path/to/1.png',
+      '/path/to/1.png'
     );
     expect(screen.getByAltText('Image 2')).toBeInTheDocument();
     expect(screen.getByAltText('Image 2').closest('a')).toHaveAttribute(
       'href',
-      '/path/to/2.png',
+      '/path/to/2.png'
     );
   });
 
@@ -206,7 +206,7 @@ describe('ProjectPage', () => {
     await waitFor(() => {
       expect(screen.getByText('Code')).toHaveAttribute(
         'href',
-        'https://hosted.code',
+        'https://hosted.code'
       );
     });
 
@@ -234,10 +234,10 @@ describe('ProjectPage', () => {
 
     expect(await screen.findByAltText('Image 1')).toHaveAttribute(
       'src',
-      '/path/to/thumbnail.png',
+      '/path/to/thumbnail.png'
     );
     expect(
-      (await screen.findByAltText('Image 1')).closest('a'),
+      (await screen.findByAltText('Image 1')).closest('a')
     ).toHaveAttribute('href', '/path/to/animated.gif');
   });
 });
