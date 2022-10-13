@@ -6,30 +6,26 @@ This is the codebase for my personal website currently located at [https://chris
 ## Setup
 ### Local
 1. Install Node.js (see [nvm](https://github.com/nvm-sh/nvm) or [nodejs.org](https://nodejs.org/en/download))
-1. Copy [bin/git/hooks/pre-commit](bin/git/hooks/pre-commit) to the local `.git/hooks` directory and ensure the script is executable
-1. Create `.env.development.local` and add the following variables:
-    - `VITE_LIGHTGALLERY_LICENSE`
-1. Run `npm install` to install dependencies
-1. Run `npm run generate` to generate required modules
-    - This script will need to be run every time the resume is updated
+1. Quick Start:
+    ```sh
+    $ cp bin/git/hooks/pre-commit .git/hooks && chmod 755 .git/hooks/pre-commit
+    $ npm install
+    $ npm run generate # Needs to be run whenever the resume is updated
+    $ npm run dev
+    ```
 1. The following scripts are available:
-    - Run development server
-        ```
-        $ npm run dev
-        ```
-    - Run production preview
-        ```
-        $ npm run build && npm run preview
-        ```
-    - Run tests
-        ```
-        $ npm test
-        ```
-    - Lint and fix files
-        ```
-        $ npm run lint
-        $ npm run lint:fix
-        ```
+    ```sh
+    $ npm run dev # Run development server
+    $ npm run generate # Generate required code
+    $ npm run build # Build for production
+    $ npm run preview # Run production preview (build is a prerequisite)
+    $ npm test # Run tests and exit
+    $ npm run test:watch # Run tests in watch mode
+    $ npm run test:coverage # Run tests, collect coverage, then exit
+    $ npm run test:ci # Run tests in CI mode
+    $ npm run lint # Report lint warnings and errors
+    $ npm run lint:fix # Attempt to fix lint warnings and errors
+    ```
 
 ### Server
 1. Install Git
