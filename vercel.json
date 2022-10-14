@@ -1,0 +1,7 @@
+{
+  "github": {
+    "enabled": false,
+    "silent": true
+  },
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
