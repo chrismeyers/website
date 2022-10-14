@@ -2,10 +2,6 @@
   "name": "website",
   "version": "0.0.0",
   "private": true,
-  "engines": {
-    "node": "^18.0.0",
-    "npm": "^8.0.0"
-  },
   "scripts": {
     "dev": "vite",
     "generate": "node bin/node/resume-parser.mjs resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.tex src/assets/generated/resume.js",
