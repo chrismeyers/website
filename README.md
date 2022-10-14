@@ -15,16 +15,16 @@ This is the codebase for my personal website currently located at [https://chris
     ```
 1. The following scripts are available:
     ```sh
-    $ npm run dev            # Run development server
-    $ npm run generate       # Generate required code
-    $ npm run build          # Build for production
-    $ npm run preview        # Run production preview (build is a prerequisite)
-    $ npm test               # Run tests and exit
-    $ npm run test:watch     # Run tests in watch mode
-    $ npm run test:coverage  # Run tests, collect coverage, then exit
-    $ npm run test:ci        # Run tests in CI mode
-    $ npm run lint           # Report lint warnings and errors
-    $ npm run lint:fix       # Attempt to fix lint warnings and errors
+    $ npm run dev            # Starts development server
+    $ npm run generate       # Generates required code
+    $ npm run build          # Builds for production
+    $ npm run preview        # Runs production preview (build is a prerequisite)
+    $ npm test               # Runs tests and exits
+    $ npm run test:watch     # Runs tests in watch mode
+    $ npm run test:coverage  # Runs tests, collects coverage, then exits
+    $ npm run test:ci        # Runs tests in CI mode
+    $ npm run lint           # Reports lint warnings and errors
+    $ npm run lint:fix       # Attempts to fix lint warnings and errors
     ```
 
 ### Server
