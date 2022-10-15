@@ -2,7 +2,7 @@ import { vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import BuildsPage from '../../src/components/BuildsPage';
-import * as Data from '../../src/assets/data';
+import * as data from '../../src/assets/data';
 
 describe('BuildsPage', () => {
   it('displays build summary correctly', async () => {
@@ -10,7 +10,7 @@ describe('BuildsPage', () => {
     const displayDate = 'Today - Built for Someone';
     const cpu = 'Intel 1000000K @ 99.9GHz';
 
-    vi.spyOn(Data, 'getBuilds').mockReturnValue([
+    vi.spyOn(data, 'builds', 'get').mockReturnValue([
       { id, active: true, displayDate, cpu },
     ]);
 

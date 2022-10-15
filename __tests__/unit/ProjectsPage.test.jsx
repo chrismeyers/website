@@ -2,7 +2,7 @@ import { vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import ProjectsPage from '../../src/components/ProjectsPage';
-import * as Data from '../../src/assets/data';
+import * as data from '../../src/assets/data';
 
 describe('ProjectsPage', () => {
   it('displays project summary correctly', async () => {
@@ -11,7 +11,7 @@ describe('ProjectsPage', () => {
     const displayDate = 'Test Project, Always and Forever';
     const info = 'Something involving code';
 
-    vi.spyOn(Data, 'getProjects').mockReturnValue([
+    vi.spyOn(data, 'projects', 'get').mockReturnValue([
       {
         id,
         active: true,

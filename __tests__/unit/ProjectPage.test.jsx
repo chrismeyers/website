@@ -2,7 +2,7 @@ import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import ProjectPage from '../../src/components/ProjectPage';
-import * as Data from '../../src/assets/data';
+import * as data from '../../src/assets/data';
 
 vi.mock('react-router-dom', async () => ({
   ...(await vi.importActual('react-router-dom')),
@@ -12,7 +12,7 @@ vi.mock('react-router-dom', async () => ({
 
 describe('ProjectPage', () => {
   it('handles no projects', async () => {
-    vi.spyOn(Data, 'getProjects').mockReturnValue([]);
+    vi.spyOn(data, 'projects', 'get').mockReturnValue([]);
 
     render(<ProjectPage />, { wrapper: MemoryRouter });
 
@@ -35,7 +35,7 @@ describe('ProjectPage', () => {
     const stat = 'Being maintained';
     const images = [];
 
-    vi.spyOn(Data, 'getProjects').mockReturnValue([
+    vi.spyOn(data, 'projects', 'get').mockReturnValue([
       {
         id,
         active: false,
@@ -72,7 +72,7 @@ describe('ProjectPage', () => {
     const stat = 'Being maintained';
     const images = [];
 
-    vi.spyOn(Data, 'getProjects').mockReturnValue([
+    vi.spyOn(data, 'projects', 'get').mockReturnValue([
       {
         id,
         active: true,
@@ -140,7 +140,7 @@ describe('ProjectPage', () => {
       },
     ];
 
-    vi.spyOn(Data, 'getProjects').mockReturnValue([
+    vi.spyOn(data, 'projects', 'get').mockReturnValue([
       {
         id,
         active: true,
@@ -192,7 +192,7 @@ describe('ProjectPage', () => {
     const webUrl = null;
     const codeUrl = 'https://hosted.code';
 
-    vi.spyOn(Data, 'getProjects').mockReturnValue([
+    vi.spyOn(data, 'projects', 'get').mockReturnValue([
       {
         id: 1,
         active: true,
@@ -226,7 +226,7 @@ describe('ProjectPage', () => {
       },
     ];
 
-    vi.spyOn(Data, 'getProjects').mockReturnValue([
+    vi.spyOn(data, 'projects', 'get').mockReturnValue([
       { id: 1, active: true, title, images },
     ]);
 

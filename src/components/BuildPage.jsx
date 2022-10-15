@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
-import { getBuilds } from '../assets/data';
+import { builds } from '../assets/data';
 import {
   DEFAULT_DOCUMENT_TITLE,
   LIGHTGALLERY_LICENSE,
@@ -12,7 +12,7 @@ import NotFoundPage from './NotFoundPage';
 const BuildPage = () => {
   const { id } = useParams();
 
-  const data = getBuilds().find(
+  const data = builds.find(
     (item) => item.id === parseInt(id, 10) && item.active
   );
 

@@ -262,9 +262,9 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
     generatedPath,
     prettier.format(
       [
-        `export const getFullResume = () => (${JSON.stringify(parsed.full)});`,
+        `export const full = ${JSON.stringify(parsed.full)};`,
         '',
-        `export const getSummary = () => (${JSON.stringify(parsed.summary)});`,
+        `export const summary = ${JSON.stringify(parsed.summary)};`,
       ].join('\n'),
       { parser: 'babel', ...prettierrc }
     )

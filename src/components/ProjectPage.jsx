@@ -6,7 +6,7 @@ import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import { ReactComponent as ExternalLinkIcon } from '../assets/images/icons/link-external.svg';
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
 import { ReactComponent as PlayIcon } from '../assets/images/icons/play.svg';
-import { getProjects } from '../assets/data';
+import { projects } from '../assets/data';
 import {
   DEFAULT_DOCUMENT_TITLE,
   LIGHTGALLERY_LICENSE,
@@ -28,7 +28,7 @@ const restartGif = () => {
 const ProjectPage = () => {
   const { id } = useParams();
 
-  const data = getProjects().find(
+  const data = projects.find(
     (item) => item.id === parseInt(id, 10) && item.active
   );
 

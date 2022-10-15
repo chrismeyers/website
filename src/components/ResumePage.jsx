@@ -1,11 +1,9 @@
 import { Fragment } from 'react';
-import { getFullResume } from '../assets/generated/resume';
+import { full as resume } from '../assets/generated/resume';
 import { RESUME_PDF_URL, DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import styles from '../styles/Resume.module.css';
 
 const ResumePage = () => {
-  const data = getFullResume();
-
   document.title = `Résumé | ${DEFAULT_DOCUMENT_TITLE}`;
 
   return (
@@ -16,7 +14,7 @@ const ResumePage = () => {
 
       <div className="content-text">
         <h2 className="top">Experience</h2>
-        {data?.experience?.map((job) => (
+        {resume?.experience?.map((job) => (
           <ul
             className={styles.italicSpacer}
             key={`job-${job.firstLine[0]}-${job.secondLine[0][1]}`} // prettier-ignore
@@ -74,7 +72,7 @@ const ResumePage = () => {
         <hr />
 
         <h2>Education</h2>
-        {data?.education?.map((school) => (
+        {resume?.education?.map((school) => (
           <ul
             className={styles.italicSpacer}
             key={`school-${school.firstLine[0]}`}
@@ -123,7 +121,7 @@ const ResumePage = () => {
 
         <h2>Technical Skills</h2>
         <ul>
-          {data?.skills?.map((skill) => (
+          {resume?.skills?.map((skill) => (
             <li
               className="skill-wrapper"
               key={`skill-wrapper-${skill.mainItem}`}

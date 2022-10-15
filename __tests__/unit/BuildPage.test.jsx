@@ -2,7 +2,7 @@ import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import BuildPage from '../../src/components/BuildPage';
-import * as Data from '../../src/assets/data';
+import * as data from '../../src/assets/data';
 
 vi.mock('react-router-dom', async () => ({
   ...(await vi.importActual('react-router-dom')),
@@ -12,7 +12,7 @@ vi.mock('react-router-dom', async () => ({
 
 describe('BuildPage', () => {
   it('handles no builds', async () => {
-    vi.spyOn(Data, 'getBuilds').mockReturnValue([]);
+    vi.spyOn(data, 'builds', 'get').mockReturnValue([]);
 
     render(<BuildPage />, { wrapper: MemoryRouter });
 
@@ -37,7 +37,7 @@ describe('BuildPage', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    vi.spyOn(Data, 'getBuilds').mockReturnValue([
+    vi.spyOn(data, 'builds', 'get').mockReturnValue([
       {
         id,
         active: false,
@@ -78,7 +78,7 @@ describe('BuildPage', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    vi.spyOn(Data, 'getBuilds').mockReturnValue([
+    vi.spyOn(data, 'builds', 'get').mockReturnValue([
       {
         id,
         active: true,
@@ -128,7 +128,7 @@ describe('BuildPage', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    vi.spyOn(Data, 'getBuilds').mockReturnValue([
+    vi.spyOn(data, 'builds', 'get').mockReturnValue([
       {
         id,
         active: true,
@@ -178,7 +178,7 @@ describe('BuildPage', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    vi.spyOn(Data, 'getBuilds').mockReturnValue([
+    vi.spyOn(data, 'builds', 'get').mockReturnValue([
       {
         id,
         active: true,
@@ -237,7 +237,7 @@ describe('BuildPage', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    vi.spyOn(Data, 'getBuilds').mockReturnValue([
+    vi.spyOn(data, 'builds', 'get').mockReturnValue([
       {
         id,
         active: true,

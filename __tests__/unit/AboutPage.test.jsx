@@ -2,11 +2,11 @@ import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import AboutPage from '../../src/components/AboutPage';
-import * as Resume from '../../src/assets/generated/resume';
+import * as resume from '../../src/assets/generated/resume';
 
 describe('AboutPage', () => {
   it('excludes employment info is not currently employed', async () => {
-    vi.spyOn(Resume, 'getSummary').mockReturnValue({
+    vi.spyOn(resume, 'summary', 'get').mockReturnValue({
       mostRecentJob: {
         employed: false,
       },
@@ -18,7 +18,7 @@ describe('AboutPage', () => {
   });
 
   it('displays current job if currently employed', async () => {
-    vi.spyOn(Resume, 'getSummary').mockReturnValue({
+    vi.spyOn(resume, 'summary', 'get').mockReturnValue({
       mostRecentJob: {
         employed: true,
         company: 'Somewhere',
@@ -37,7 +37,7 @@ describe('AboutPage', () => {
   });
 
   it('excludes language experience if missing', async () => {
-    vi.spyOn(Resume, 'getSummary').mockReturnValue({});
+    vi.spyOn(resume, 'summary', 'get').mockReturnValue({});
 
     render(<AboutPage />, { wrapper: MemoryRouter });
 
@@ -46,7 +46,7 @@ describe('AboutPage', () => {
   });
 
   it('displays language experience', async () => {
-    vi.spyOn(Resume, 'getSummary').mockReturnValue({
+    vi.spyOn(resume, 'summary', 'get').mockReturnValue({
       languages: {
         desktop: [
           'Language 1 (Something 1, Something 2)',

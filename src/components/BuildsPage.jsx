@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { getBuilds } from '../assets/data';
+import { builds } from '../assets/data';
 import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import styles from '../styles/Builds.module.css';
 
@@ -9,7 +9,7 @@ const cleanCPU = (cpu) => cpu.split('@')[0].trim();
 const BuildsPage = () => {
   document.title = `Builds | ${DEFAULT_DOCUMENT_TITLE}`;
 
-  const data = getBuilds().filter((item) => item.active);
+  const data = builds.filter((item) => item.active);
 
   return (
     <div className="content">

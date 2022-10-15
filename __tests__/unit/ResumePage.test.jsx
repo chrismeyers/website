@@ -2,11 +2,11 @@ import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import ResumePage from '../../src/components/ResumePage';
 import styles from '../../src/styles/Resume.module.css';
-import * as Resume from '../../src/assets/generated/resume';
+import * as resume from '../../src/assets/generated/resume';
 
 describe('ResumePage', () => {
   it('displays experience section correctly', async () => {
-    vi.spyOn(Resume, 'getFullResume').mockReturnValue({
+    vi.spyOn(resume, 'full', 'get').mockReturnValue({
       experience: [
         {
           url: 'https://company.com',
@@ -40,7 +40,7 @@ describe('ResumePage', () => {
   });
 
   it('displays experience section without info correctly', async () => {
-    vi.spyOn(Resume, 'getFullResume').mockReturnValue({
+    vi.spyOn(resume, 'full', 'get').mockReturnValue({
       experience: [
         {
           url: 'https://company.com',
@@ -71,7 +71,7 @@ describe('ResumePage', () => {
   });
 
   it('displays multiple experience at some company correctly', async () => {
-    vi.spyOn(Resume, 'getFullResume').mockReturnValue({
+    vi.spyOn(resume, 'full', 'get').mockReturnValue({
       experience: [
         {
           url: 'https://company.com',
@@ -125,7 +125,7 @@ describe('ResumePage', () => {
   });
 
   it('displays education section correctly', async () => {
-    vi.spyOn(Resume, 'getFullResume').mockReturnValue({
+    vi.spyOn(resume, 'full', 'get').mockReturnValue({
       education: [
         {
           url: 'https://school.edu',
@@ -157,7 +157,7 @@ describe('ResumePage', () => {
   });
 
   it('displays education section without info correctly', async () => {
-    vi.spyOn(Resume, 'getFullResume').mockReturnValue({
+    vi.spyOn(resume, 'full', 'get').mockReturnValue({
       education: [
         {
           url: 'https://school.edu',
@@ -186,7 +186,7 @@ describe('ResumePage', () => {
   });
 
   it('displays skills section correctly', async () => {
-    vi.spyOn(Resume, 'getFullResume').mockReturnValue({
+    vi.spyOn(resume, 'full', 'get').mockReturnValue({
       skills: [
         {
           mainItem: 'Multiple subitems',

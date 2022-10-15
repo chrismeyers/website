@@ -1,13 +1,13 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { getProjects } from '../assets/data';
+import { projects } from '../assets/data';
 import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import styles from '../styles/Projects.module.css';
 
 const ProjectsPage = () => {
   document.title = `Projects | ${DEFAULT_DOCUMENT_TITLE}`;
 
-  const data = getProjects().filter((item) => item.active);
+  const data = projects.filter((item) => item.active);
 
   return (
     <div className="content">

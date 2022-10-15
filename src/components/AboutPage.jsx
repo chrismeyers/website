@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
-import { getSummary } from '../assets/generated/resume';
+import { summary } from '../assets/generated/resume';
 import {
   MAILTO_HREF,
   DEFAULT_DOCUMENT_TITLE,
@@ -9,8 +9,6 @@ import {
 } from '../utils/constants';
 
 const AboutPage = () => {
-  const data = getSummary();
-
   document.title = DEFAULT_DOCUMENT_TITLE;
 
   return (
@@ -34,11 +32,11 @@ const AboutPage = () => {
             in Glassboro, NJ and earned a Bachelor of Science in Computer
             Science
           </li>
-          {data?.mostRecentJob?.employed && (
+          {summary?.mostRecentJob?.employed && (
             <li data-testid="employment">
-              Currently, I am employed as a {data.mostRecentJob.title} at{' '}
-              <a href={data.mostRecentJob.url} className="fancytxt">
-                {data.mostRecentJob.company}
+              Currently, I am employed as a {summary.mostRecentJob.title} at{' '}
+              <a href={summary.mostRecentJob.url} className="fancytxt">
+                {summary.mostRecentJob.company}
               </a>
             </li>
           )}
@@ -89,9 +87,9 @@ const AboutPage = () => {
         <ul>
           <li>
             Websites, web applications, and APIs:
-            {data?.languages?.web && (
+            {summary?.languages?.web && (
               <ul data-testid="web-languages">
-                {data.languages.web.map((item) => (
+                {summary.languages.web.map((item) => (
                   <li key={`web-${item}`}>{item}</li>
                 ))}
               </ul>
@@ -99,9 +97,9 @@ const AboutPage = () => {
           </li>
           <li>
             Desktop and command-line interface (CLI) applications:
-            {data?.languages?.desktop && (
+            {summary?.languages?.desktop && (
               <ul data-testid="desktop-languages">
-                {data.languages.desktop.map((item) => (
+                {summary.languages.desktop.map((item) => (
                   <li key={`desktop-${item}`}>{item}</li>
                 ))}
               </ul>

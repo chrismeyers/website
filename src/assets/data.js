@@ -1,4 +1,4 @@
-export const getBuilds = () => [
+export const builds = [
   {
     id: 1,
     active: true,
@@ -139,7 +139,7 @@ export const getBuilds = () => [
   },
 ];
 
-export const getProjects = () => [
+export const projects = [
   {
     id: 1,
     active: true,
