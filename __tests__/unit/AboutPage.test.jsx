@@ -14,7 +14,7 @@ describe('AboutPage', () => {
 
     render(<AboutPage />, { wrapper: MemoryRouter });
 
-    await expect(screen.findByTestId('employment')).rejects.toThrow();
+    expect(screen.queryByTestId('employment')).toBeNull();
   });
 
   it('displays current job if currently employed', async () => {
@@ -28,7 +28,7 @@ describe('AboutPage', () => {
 
     render(<AboutPage />, { wrapper: MemoryRouter });
 
-    const employment = await screen.findByTestId('employment');
+    const employment = screen.getByTestId('employment');
 
     expect(employment).toBeInTheDocument();
     expect(employment).toHaveTextContent(
@@ -41,8 +41,8 @@ describe('AboutPage', () => {
 
     render(<AboutPage />, { wrapper: MemoryRouter });
 
-    await expect(screen.findByTestId('desktop-languages')).rejects.toThrow();
-    await expect(screen.findByTestId('web-languages')).rejects.toThrow();
+    expect(screen.queryByTestId('desktop-languages')).toBeNull();
+    expect(screen.queryByTestId('web-languages')).toBeNull();
   });
 
   it('displays language experience', async () => {
@@ -59,8 +59,8 @@ describe('AboutPage', () => {
 
     render(<AboutPage />, { wrapper: MemoryRouter });
 
-    const desktopLanguages = await screen.findByTestId('desktop-languages');
-    const webLanguages = await screen.findByTestId('web-languages');
+    const desktopLanguages = screen.getByTestId('desktop-languages');
+    const webLanguages = screen.getByTestId('web-languages');
 
     expect(desktopLanguages).toBeInTheDocument();
     expect(webLanguages).toBeInTheDocument();

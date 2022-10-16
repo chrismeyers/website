@@ -19,5 +19,6 @@ export default defineConfig({
     coverage: {
       provider: 'c8',
     },
+    reporters: ['verbose'],
   },
 });

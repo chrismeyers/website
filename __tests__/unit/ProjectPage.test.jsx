@@ -108,7 +108,7 @@ describe('ProjectPage', () => {
       'href',
       'https://hosted.code'
     );
-    await expect(screen.findByAltText('Image 1')).rejects.toThrow();
+    expect(screen.queryByAltText('Image 1')).toBeNull();
   });
 
   it('displays project details with images correctly', async () => {
@@ -210,7 +210,7 @@ describe('ProjectPage', () => {
       );
     });
 
-    await expect(screen.findByAltText('Website')).rejects.toThrow();
+    expect(screen.queryByAltText('Website')).toBeNull();
   });
 
   it('displays gif thumbnail correctly', async () => {
@@ -232,12 +232,13 @@ describe('ProjectPage', () => {
 
     render(<ProjectPage />);
 
-    expect(await screen.findByAltText('Image 1')).toHaveAttribute(
+    expect(screen.queryByAltText('Image 1')).toHaveAttribute(
       'src',
       '/path/to/thumbnail.png'
     );
-    expect(
-      (await screen.findByAltText('Image 1')).closest('a')
-    ).toHaveAttribute('href', '/path/to/animated.gif');
+    expect(screen.queryByAltText('Image 1').closest('a')).toHaveAttribute(
+      'href',
+      '/path/to/animated.gif'
+    );
   });
 });

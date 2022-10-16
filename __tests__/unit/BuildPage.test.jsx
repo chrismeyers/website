@@ -103,13 +103,13 @@ describe('BuildPage', () => {
     });
 
     expect(screen.getByText(cpu)).toBeInTheDocument();
-    await expect(screen.findByText(cool)).rejects.toThrow();
+    expect(screen.queryByText('Cooling')).toBeNull();
     expect(screen.getByText(mobo)).toBeInTheDocument();
     expect(screen.getByText(ram)).toBeInTheDocument();
-    await expect(screen.findByText(hdd)).rejects.toThrow();
-    await expect(screen.findByText(ssd)).rejects.toThrow();
+    expect(screen.queryByText('HDD')).toBeNull();
+    expect(screen.queryByText('SSD')).toBeNull();
     expect(screen.getByText(gpu)).toBeInTheDocument();
-    await expect(screen.findByTitle('Click to enlarge')).rejects.toThrow();
+    expect(screen.queryByTitle('Click to enlarge')).toBeNull();
     expect(screen.getByText(pcCase)).toBeInTheDocument();
     expect(screen.getByText(psu)).toBeInTheDocument();
   });
@@ -159,7 +159,7 @@ describe('BuildPage', () => {
     expect(screen.getByText(hdd)).toBeInTheDocument();
     expect(screen.getByText(ssd)).toBeInTheDocument();
     expect(screen.getByText(gpu)).toBeInTheDocument();
-    await expect(screen.findByTitle('Click to enlarge')).rejects.toThrow();
+    expect(screen.queryByTitle('Click to enlarge')).toBeNull();
     expect(screen.getByText(pcCase)).toBeInTheDocument();
     expect(screen.getByText(psu)).toBeInTheDocument();
   });
@@ -211,7 +211,7 @@ describe('BuildPage', () => {
     expect(screen.getByText(hdds[1])).toBeInTheDocument();
     expect(screen.getByText(ssd)).toBeInTheDocument();
     expect(screen.getByText(gpu)).toBeInTheDocument();
-    await expect(screen.findByTitle('Click to enlarge')).rejects.toThrow();
+    expect(screen.queryByTitle('Click to enlarge')).toBeNull();
     expect(screen.getByText(pcCase)).toBeInTheDocument();
     expect(screen.getByText(psu)).toBeInTheDocument();
   });
