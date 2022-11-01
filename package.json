@@ -12,7 +12,8 @@
     "test:coverage": "vitest --coverage --run",
     "test:ci": "CI=true vitest --coverage --run",
     "lint": "eslint . --ext .js,.mjs,.jsx --max-warnings 0",
-    "lint:fix": "eslint . --fix  --ext .js,.mjs,.jsx"
+    "lint:fix": "eslint . --fix  --ext .js,.mjs,.jsx",
+    "prepare": "husky install"
   },
   "dependencies": {
     "lightgallery": "^2.7.0",
@@ -38,6 +39,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.0",
     "jsdom": "^20.0.1",
     "prettier": "2.7.1",
     "rimraf": "^3.0.2",
