@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
 
 RESUME_PDF="resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.pdf"
 if git diff --cached --name-only | grep --quiet "$RESUME_PDF"
