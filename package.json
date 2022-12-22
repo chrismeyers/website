@@ -12,8 +12,7 @@
     "test:coverage": "vitest --coverage --run",
     "test:ci": "CI=true vitest --coverage --run",
     "lint": "eslint . --ext .js,.mjs,.jsx --max-warnings 0",
-    "lint:fix": "eslint . --fix  --ext .js,.mjs,.jsx",
-    "prepare": "husky install"
+    "lint:fix": "eslint . --fix  --ext .js,.mjs,.jsx"
   },
   "dependencies": {
     "lightgallery": "^2.7.0",
