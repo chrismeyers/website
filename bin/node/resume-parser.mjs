@@ -262,6 +262,9 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
     generatedPath,
     prettier.format(
       [
+        '// WARNING: This file is generated, do not edit directly!',
+        '// Edit the resume source file and regenerate instead',
+        '',
         `export const full = ${JSON.stringify(parsed.full)};`,
         '',
         `export const summary = ${JSON.stringify(parsed.summary)};`,
