@@ -8,7 +8,7 @@ import {
   LIGHTGALLERY_LICENSE,
 } from '../utils/constants';
 
-const AboutPage = () => {
+const About = () => {
   document.title = DEFAULT_DOCUMENT_TITLE;
 
   return (
@@ -127,4 +127,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;
+export default About;

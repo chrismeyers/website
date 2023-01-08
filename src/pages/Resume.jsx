@@ -3,7 +3,7 @@ import { full as resume } from '../assets/generated/resume';
 import { RESUME_PDF_URL, DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
 import styles from '../styles/Resume.module.css';
 
-const ResumePage = () => {
+const Resume = () => {
   document.title = `Résumé | ${DEFAULT_DOCUMENT_TITLE}`;
 
   return (
@@ -146,4 +146,4 @@ const ResumePage = () => {
   );
 };
 
-export default ResumePage;
+export default Resume;

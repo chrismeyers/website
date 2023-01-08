@@ -7,16 +7,16 @@ import {
   LIGHTGALLERY_LICENSE,
 } from '../utils/constants';
 import styles from '../styles/Build.module.css';
-import NotFoundPage from './NotFoundPage';
+import NotFound from './NotFound';
 
-const BuildPage = () => {
+const Build = () => {
   const { id } = useParams();
 
   const data = builds.find(
     (item) => item.id === parseInt(id, 10) && item.active
   );
 
-  if (!data) return <NotFoundPage />;
+  if (!data) return <NotFound />;
 
   document.title = `Build Details | ${data.displayDate} | ${DEFAULT_DOCUMENT_TITLE}`;
 
@@ -111,4 +111,4 @@ const BuildPage = () => {
   );
 };
 
-export default BuildPage;
+export default Build;

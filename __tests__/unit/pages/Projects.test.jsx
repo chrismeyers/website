@@ -1,10 +1,10 @@
 import { vi } from 'vitest';
-import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
-import ProjectsPage from '../../src/components/ProjectsPage';
-import * as data from '../../src/assets/data';
+import { RouterProvider, createMemoryRouter } from 'react-router-dom';
+import Projects from '../../../src/pages/Projects';
+import * as data from '../../../src/assets/data';
 
-describe('ProjectsPage', () => {
+describe('Projects page', () => {
   it('displays project summary correctly', async () => {
     const id = 1;
     const title = 'Project Name';
@@ -21,7 +21,11 @@ describe('ProjectsPage', () => {
       },
     ]);
 
-    render(<ProjectsPage />, { wrapper: MemoryRouter });
+    render(
+      <RouterProvider
+        router={createMemoryRouter([{ path: '', element: <Projects /> }])}
+      />
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Project Name')).toBeInTheDocument();

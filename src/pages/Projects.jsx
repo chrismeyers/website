@@ -1,47 +1,45 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { builds } from '../assets/data';
+import { projects } from '../assets/data';
 import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
-import styles from '../styles/Builds.module.css';
+import styles from '../styles/Projects.module.css';
 
-const cleanCPU = (cpu) => cpu.split('@')[0].trim();
+const Projects = () => {
+  document.title = `Projects | ${DEFAULT_DOCUMENT_TITLE}`;
 
-const BuildsPage = () => {
-  document.title = `Builds | ${DEFAULT_DOCUMENT_TITLE}`;
-
-  const data = builds.filter((item) => item.active);
+  const data = projects.filter((item) => item.active);
 
   return (
     <div className="content">
       <div className="section-header section-header-size">
-        <div>Builds</div>
+        <div>Projects</div>
       </div>
 
       <div className="content-text">
-        {data?.map((build, index) => (
-          <Fragment key={build.id}>
-            <div className={styles.build}>
+        {data?.map((project, index) => (
+          <Fragment key={project.id}>
+            <div className={styles.project}>
               <h2 className={index === 0 ? 'first-header' : ''}>
                 <Link
                   className="fancytxt"
-                  title={`Click for details of ${build.displayDate}`}
-                  to={`/builds/${build.id}`}
+                  title={`Click for details of ${project.title}`}
+                  to={`/projects/${project.id}`}
                 >
-                  {build.displayDate}
+                  {project.title}
                 </Link>
               </h2>
+              <h3>{project.displayDate}</h3>
               <div className={styles.overview}>
-                <p>
-                  An <span className="highlighted">{cleanCPU(build.cpu)}</span>{' '}
-                  based system
-                </p>
+                <p
+                  dangerouslySetInnerHTML={{ __html: project.info }} // eslint-disable-line react/no-danger
+                />
                 <p className="right">
                   <Link
                     className="subtle fancytxt"
-                    title={`Click for details of ${build.displayDate}`}
-                    to={`/builds/${build.id}`}
+                    title={`Click for details of ${project.title}`}
+                    to={`/projects/${project.id}`}
                   >
-                    Build Details &gt;
+                    Project Details &gt;
                   </Link>
                 </p>
               </div>
@@ -60,4 +58,4 @@ const BuildsPage = () => {
   );
 };
 
-export default BuildsPage;
+export default Projects;

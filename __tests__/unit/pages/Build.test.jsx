@@ -1,8 +1,8 @@
 import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import BuildPage from '../../src/components/BuildPage';
-import * as data from '../../src/assets/data';
+import { RouterProvider, createMemoryRouter } from 'react-router-dom';
+import Build from '../../../src/pages/Build';
+import * as data from '../../../src/assets/data';
 
 vi.mock('react-router-dom', async () => ({
   ...(await vi.importActual('react-router-dom')),
@@ -10,11 +10,15 @@ vi.mock('react-router-dom', async () => ({
   useLocation: () => ({ pathname: '/builds/1' }),
 }));
 
-describe('BuildPage', () => {
+describe('Build page', () => {
   it('handles no builds', async () => {
     vi.spyOn(data, 'builds', 'get').mockReturnValue([]);
 
-    render(<BuildPage />, { wrapper: MemoryRouter });
+    render(
+      <RouterProvider
+        router={createMemoryRouter([{ path: '', element: <Build /> }])}
+      />
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Page Not Found')).toBeInTheDocument();
@@ -55,7 +59,11 @@ describe('BuildPage', () => {
       },
     ]);
 
-    render(<BuildPage />, { wrapper: MemoryRouter });
+    render(
+      <RouterProvider
+        router={createMemoryRouter([{ path: '', element: <Build /> }])}
+      />
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Page Not Found')).toBeInTheDocument();
@@ -96,7 +104,7 @@ describe('BuildPage', () => {
       },
     ]);
 
-    render(<BuildPage />);
+    render(<Build />);
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();
@@ -146,7 +154,7 @@ describe('BuildPage', () => {
       },
     ]);
 
-    render(<BuildPage />);
+    render(<Build />);
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();
@@ -196,7 +204,7 @@ describe('BuildPage', () => {
       },
     ]);
 
-    render(<BuildPage />);
+    render(<Build />);
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();
@@ -255,7 +263,7 @@ describe('BuildPage', () => {
       },
     ]);
 
-    render(<BuildPage />);
+    render(<Build />);
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();

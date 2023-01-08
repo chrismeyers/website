@@ -1,10 +1,10 @@
 import { vi } from 'vitest';
-import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
-import BuildsPage from '../../src/components/BuildsPage';
-import * as data from '../../src/assets/data';
+import { RouterProvider, createMemoryRouter } from 'react-router-dom';
+import Builds from '../../../src/pages/Builds';
+import * as data from '../../../src/assets/data';
 
-describe('BuildsPage', () => {
+describe('Builds page', () => {
   it('displays build summary correctly', async () => {
     const id = 1;
     const displayDate = 'Today - Built for Someone';
@@ -14,7 +14,11 @@ describe('BuildsPage', () => {
       { id, active: true, displayDate, cpu },
     ]);
 
-    render(<BuildsPage />, { wrapper: MemoryRouter });
+    render(
+      <RouterProvider
+        router={createMemoryRouter([{ path: '', element: <Builds /> }])}
+      />
+    );
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();
