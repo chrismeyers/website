@@ -1,13 +1,10 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import './App.css';
-import Root from './components/Root';
-import About from './pages/About';
-import Resume from './pages/Resume';
-import Projects from './pages/Projects';
-import Project from './pages/Project';
-import Builds from './pages/Builds';
-import Build from './pages/Build';
-import NotFound from './pages/NotFound';
+import FullNav from './components/FullNav';
+import MobileNav from './components/MobileNav';
+import Prompt from './components/Prompt';
+import Footer from './components/Footer';
 import useTheme from './hooks/useTheme';
 import useScreenResize from './hooks/useScreenResize';
 
@@ -15,24 +12,26 @@ const App = () => {
   const theme = useTheme();
   const { isMobileWidth } = useScreenResize();
 
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Root isMobileWidth={isMobileWidth} theme={theme} />,
-      errorElement: <NotFound />,
-      children: [
-        { path: '', element: <About /> },
-        { path: 'resume', element: <Resume /> },
-        { path: 'projects', element: <Projects /> },
-        { path: 'projects/:id', element: <Project /> },
-        { path: 'builds', element: <Builds /> },
-        { path: 'builds/:id', element: <Build /> },
-        { path: '*', element: <NotFound /> },
-      ],
-    },
-  ]);
-
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      {isMobileWidth ? <MobileNav theme={theme} /> : <FullNav />}
+      {isMobileWidth ? <div /> : <Prompt theme={theme} />}
+      <Outlet />
+      <Footer theme={theme} />
+      <ToastContainer
+        theme={theme.theme}
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+    </>
+  );
 };
 
 export default App;
