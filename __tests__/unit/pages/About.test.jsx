@@ -1,10 +1,10 @@
 import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import AboutPage from '../../src/components/AboutPage';
-import * as resume from '../../src/assets/generated/resume';
+import About from '../../../src/pages/About';
+import * as resume from '../../../src/assets/generated/resume';
 
-describe('AboutPage', () => {
+describe('About page', () => {
   it('excludes employment info is not currently employed', async () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
       mostRecentJob: {
@@ -12,7 +12,7 @@ describe('AboutPage', () => {
       },
     });
 
-    render(<AboutPage />, { wrapper: MemoryRouter });
+    render(<About />, { wrapper: MemoryRouter });
 
     expect(screen.queryByTestId('employment')).toBeNull();
   });
@@ -26,7 +26,7 @@ describe('AboutPage', () => {
       },
     });
 
-    render(<AboutPage />, { wrapper: MemoryRouter });
+    render(<About />, { wrapper: MemoryRouter });
 
     const employment = screen.getByTestId('employment');
 
@@ -39,7 +39,7 @@ describe('AboutPage', () => {
   it('excludes language experience if missing', async () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({});
 
-    render(<AboutPage />, { wrapper: MemoryRouter });
+    render(<About />, { wrapper: MemoryRouter });
 
     expect(screen.queryByTestId('desktop-languages')).toBeNull();
     expect(screen.queryByTestId('web-languages')).toBeNull();
@@ -57,7 +57,7 @@ describe('AboutPage', () => {
       },
     });
 
-    render(<AboutPage />, { wrapper: MemoryRouter });
+    render(<About />, { wrapper: MemoryRouter });
 
     const desktopLanguages = screen.getByTestId('desktop-languages');
     const webLanguages = screen.getByTestId('web-languages');

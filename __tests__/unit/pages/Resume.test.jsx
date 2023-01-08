@@ -1,10 +1,10 @@
 import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
-import ResumePage from '../../src/components/ResumePage';
-import styles from '../../src/styles/Resume.module.css';
-import * as resume from '../../src/assets/generated/resume';
+import Resume from '../../../src/pages/Resume';
+import styles from '../../../src/styles/Resume.module.css';
+import * as resume from '../../../src/assets/generated/resume';
 
-describe('ResumePage', () => {
+describe('Resume page', () => {
   it('displays experience section correctly', async () => {
     vi.spyOn(resume, 'full', 'get').mockReturnValue({
       experience: [
@@ -17,7 +17,7 @@ describe('ResumePage', () => {
       ],
     });
 
-    render(<ResumePage />);
+    render(<Resume />);
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -50,7 +50,7 @@ describe('ResumePage', () => {
       ],
     });
 
-    render(<ResumePage />);
+    render(<Resume />);
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -88,7 +88,7 @@ describe('ResumePage', () => {
       ],
     });
 
-    render(<ResumePage />);
+    render(<Resume />);
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -136,7 +136,7 @@ describe('ResumePage', () => {
       ],
     });
 
-    render(<ResumePage />);
+    render(<Resume />);
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -167,7 +167,7 @@ describe('ResumePage', () => {
       ],
     });
 
-    render(<ResumePage />);
+    render(<Resume />);
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -203,7 +203,7 @@ describe('ResumePage', () => {
       ],
     });
 
-    render(<ResumePage />);
+    render(<Resume />);
 
     await waitFor(() => {
       expect(screen.getByText('Multiple subitems')).toBeInTheDocument();

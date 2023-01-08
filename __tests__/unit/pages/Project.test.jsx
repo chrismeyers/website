@@ -1,8 +1,8 @@
 import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import ProjectPage from '../../src/components/ProjectPage';
-import * as data from '../../src/assets/data';
+import Project from '../../../src/pages/Project';
+import * as data from '../../../src/assets/data';
 
 vi.mock('react-router-dom', async () => ({
   ...(await vi.importActual('react-router-dom')),
@@ -10,11 +10,11 @@ vi.mock('react-router-dom', async () => ({
   useLocation: () => ({ pathname: '/projects/1' }),
 }));
 
-describe('ProjectPage', () => {
+describe('Project page', () => {
   it('handles no projects', async () => {
     vi.spyOn(data, 'projects', 'get').mockReturnValue([]);
 
-    render(<ProjectPage />, { wrapper: MemoryRouter });
+    render(<Project />, { wrapper: MemoryRouter });
 
     await waitFor(() => {
       expect(screen.getByText('Page Not Found')).toBeInTheDocument();
@@ -51,7 +51,7 @@ describe('ProjectPage', () => {
       },
     ]);
 
-    render(<ProjectPage />, { wrapper: MemoryRouter });
+    render(<Project />, { wrapper: MemoryRouter });
 
     await waitFor(() => {
       expect(screen.getByText('Page Not Found')).toBeInTheDocument();
@@ -88,7 +88,7 @@ describe('ProjectPage', () => {
       },
     ]);
 
-    render(<ProjectPage />);
+    render(<Project />);
 
     await waitFor(() => {
       expect(screen.getByText('Project Name')).toBeInTheDocument();
@@ -156,7 +156,7 @@ describe('ProjectPage', () => {
       },
     ]);
 
-    render(<ProjectPage />);
+    render(<Project />);
 
     await waitFor(() => {
       expect(screen.getByText('Project Name')).toBeInTheDocument();
@@ -201,7 +201,7 @@ describe('ProjectPage', () => {
       },
     ]);
 
-    render(<ProjectPage />);
+    render(<Project />);
 
     await waitFor(() => {
       expect(screen.getByText('Code')).toHaveAttribute(
@@ -230,7 +230,7 @@ describe('ProjectPage', () => {
       { id: 1, active: true, title, images },
     ]);
 
-    render(<ProjectPage />);
+    render(<Project />);
 
     expect(screen.queryByAltText('Image 1')).toHaveAttribute(
       'src',

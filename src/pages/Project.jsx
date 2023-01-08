@@ -12,7 +12,7 @@ import {
   LIGHTGALLERY_LICENSE,
 } from '../utils/constants';
 import styles from '../styles/Project.module.css';
-import NotFoundPage from './NotFoundPage';
+import NotFound from './NotFound';
 
 const restartGif = () => {
   // Restart the GIF each time it's opened
@@ -25,14 +25,14 @@ const restartGif = () => {
   }, 100);
 };
 
-const ProjectPage = () => {
+const Project = () => {
   const { id } = useParams();
 
   const data = projects.find(
     (item) => item.id === parseInt(id, 10) && item.active
   );
 
-  if (!data) return <NotFoundPage />;
+  if (!data) return <NotFound />;
 
   document.title = `Project Details | ${data.title} | ${DEFAULT_DOCUMENT_TITLE}`;
 
@@ -186,4 +186,4 @@ const ProjectPage = () => {
   );
 };
 
-export default ProjectPage;
+export default Project;

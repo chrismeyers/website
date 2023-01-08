@@ -1,13 +1,13 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
 import Root from './components/Root';
-import AboutPage from './components/AboutPage';
-import ResumePage from './components/ResumePage';
-import ProjectsPage from './components/ProjectsPage';
-import ProjectPage from './components/ProjectPage';
-import BuildsPage from './components/BuildsPage';
-import BuildPage from './components/BuildPage';
-import NotFoundPage from './components/NotFoundPage';
+import About from './pages/About';
+import Resume from './pages/Resume';
+import Projects from './pages/Projects';
+import Project from './pages/Project';
+import Builds from './pages/Builds';
+import Build from './pages/Build';
+import NotFound from './pages/NotFound';
 import useTheme from './hooks/useTheme';
 import useScreenResize from './hooks/useScreenResize';
 
@@ -19,15 +19,15 @@ const App = () => {
     {
       path: '/',
       element: <Root isMobileWidth={isMobileWidth} theme={theme} />,
-      errorElement: <NotFoundPage />,
+      errorElement: <NotFound />,
       children: [
-        { path: '', element: <AboutPage /> },
-        { path: 'resume', element: <ResumePage /> },
-        { path: 'projects', element: <ProjectsPage /> },
-        { path: 'projects/:id', element: <ProjectPage /> },
-        { path: 'builds', element: <BuildsPage /> },
-        { path: 'builds/:id', element: <BuildPage /> },
-        { path: '*', element: <NotFoundPage /> },
+        { path: '', element: <About /> },
+        { path: 'resume', element: <Resume /> },
+        { path: 'projects', element: <Projects /> },
+        { path: 'projects/:id', element: <Project /> },
+        { path: 'builds', element: <Builds /> },
+        { path: 'builds/:id', element: <Build /> },
+        { path: '*', element: <NotFound /> },
       ],
     },
   ]);
