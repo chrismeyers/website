@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import Build from '../../../src/pages/Build';
 import * as data from '../../../src/assets/data';
 
@@ -14,7 +14,11 @@ describe('Build page', () => {
   it('handles no builds', async () => {
     vi.spyOn(data, 'builds', 'get').mockReturnValue([]);
 
-    render(<Build />, { wrapper: MemoryRouter });
+    render(
+      <RouterProvider
+        router={createMemoryRouter([{ path: '', element: <Build /> }])}
+      />
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Page Not Found')).toBeInTheDocument();
@@ -55,7 +59,11 @@ describe('Build page', () => {
       },
     ]);
 
-    render(<Build />, { wrapper: MemoryRouter });
+    render(
+      <RouterProvider
+        router={createMemoryRouter([{ path: '', element: <Build /> }])}
+      />
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Page Not Found')).toBeInTheDocument();

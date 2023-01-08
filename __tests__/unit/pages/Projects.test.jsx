@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
-import { MemoryRouter } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
+import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import Projects from '../../../src/pages/Projects';
 import * as data from '../../../src/assets/data';
 
@@ -21,7 +21,11 @@ describe('Projects page', () => {
       },
     ]);
 
-    render(<Projects />, { wrapper: MemoryRouter });
+    render(
+      <RouterProvider
+        router={createMemoryRouter([{ path: '', element: <Projects /> }])}
+      />
+    );
 
     await waitFor(() => {
       expect(screen.getByText('Project Name')).toBeInTheDocument();
