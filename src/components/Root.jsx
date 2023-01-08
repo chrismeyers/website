@@ -10,7 +10,7 @@ import { themePropTypes } from '../hooks/useTheme';
 const Root = ({ isMobileWidth, theme }) => {
   return (
     <>
-      {isMobileWidth ? <MobileNav theme={theme} /> : <FullNav />}{' '}
+      {isMobileWidth ? <MobileNav theme={theme} /> : <FullNav />}
       {isMobileWidth ? <div /> : <Prompt theme={theme} />}
       <Outlet />
       <Footer theme={theme} />
