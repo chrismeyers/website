@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import './App.css';
 import FullNav from './components/FullNav';
@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <>
-      <Router>
+      <BrowserRouter>
         {isMobileWidth ? <MobileNav theme={theme} /> : <FullNav />}
         <Routes>
           <Route path="/" element={<AboutPage />} />
@@ -33,7 +33,7 @@ const App = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         {isMobileWidth ? <div /> : <Prompt theme={theme} />}
-      </Router>
+      </BrowserRouter>
       <Footer theme={theme} />
       <ToastContainer
         theme={theme.theme}
