@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import { isMobile as isMobileDevice } from 'react-device-detect';
 import './App.css';
 import FullNav from './components/FullNav';
 import MobileNav from './components/MobileNav';
@@ -19,12 +18,11 @@ import useScreenResize from './hooks/useScreenResize';
 const App = () => {
   const theme = useTheme();
   const { isMobileWidth } = useScreenResize();
-  const isMobile = (isMobileDevice || isMobileWidth) ?? true;
 
   return (
     <>
       <Router>
-        {isMobile ? <MobileNav theme={theme} /> : <FullNav />}
+        {isMobileWidth ? <MobileNav theme={theme} /> : <FullNav />}
         <Routes>
           <Route path="/" element={<AboutPage />} />
           <Route path="/resume" element={<ResumePage />} />
@@ -34,7 +32,7 @@ const App = () => {
           <Route path="/builds/:id" element={<BuildPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-        {isMobile === true ? <div /> : <Prompt theme={theme} />}
+        {isMobileWidth ? <div /> : <Prompt theme={theme} />}
       </Router>
       <Footer theme={theme} />
       <ToastContainer
