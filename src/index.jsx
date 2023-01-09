@@ -16,6 +16,7 @@ import Project, { projectContentStyles } from './pages/Project';
 import Builds from './pages/Builds';
 import Build, { buildContentStyles } from './pages/Build';
 import NotFound from './pages/NotFound';
+import Error from './pages/Error';
 
 if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'auto';
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <NotFound />,
+    errorElement: <Page title="An Error Has Occurred" content={<Error />} />,
     children: [
       { path: '', element: <Page title="About" content={<About />} /> },
       { path: 'resume', element: <Page title="Résumé" content={<Resume />} /> },
