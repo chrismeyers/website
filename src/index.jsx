@@ -13,9 +13,7 @@ if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'auto';
 }
 
-const container = document.getElementById('root');
-const root = createRoot(container);
-root.render(
+createRoot(document.getElementById('root')).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>
