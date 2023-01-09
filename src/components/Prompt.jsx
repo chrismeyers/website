@@ -65,6 +65,14 @@ const Prompt = ({ theme }) => {
     setOutput('');
   };
 
+  const stdout = useCallback(
+    (text) => {
+      setOutput((prev) => `${prev}\n${text}`.trim());
+      setTimeout(() => scrollOutputWindowToBottom(), 0);
+    },
+    [scrollOutputWindowToBottom]
+  );
+
   const hidePrompt = useCallback(() => {
     setPromptVisible(false);
     setHistoryIndex(-1);
@@ -114,11 +122,10 @@ const Prompt = ({ theme }) => {
 
   const echo = useCallback(
     (args) => {
-      clearOutput();
-      setOutput(args.join(' '));
-      showOutputWindow({ top: true });
+      stdout(args.join(' '));
+      showOutputWindow({ bottom: true });
     },
-    [showOutputWindow]
+    [showOutputWindow, stdout]
   );
 
   const cd = useCallback(
@@ -150,27 +157,24 @@ const Prompt = ({ theme }) => {
   }, [hidePrompt]);
 
   const help = useCallback(() => {
-    clearOutput();
-
-    const siteThemes = Object.values(THEMES).reduce(
+    const availableThemes = Object.values(THEMES).reduce(
       (acc, cur) => `${acc}, ${cur}`
     );
 
     // prettier-ignore
-    setOutput(`usage: command [arg1] [arg2] ...
+    stdout(`usage: command [arg1] [arg2] ...
   Available commands:
   echo   - prints args to the output window
   cd     - navigates to the given arg
   toggle - toggles the output window
   theme  - sets the website theme to the arg
-           themes: ${siteThemes}
-           e.g. theme ${Object.values(THEMES)[0]}
+           themes: ${availableThemes}
+  clear  - clears the output window
   exit   - closes the command prompt
   help   - prints this message
   `);
-
-    showOutputWindow({ top: true });
-  }, [showOutputWindow]);
+    showOutputWindow({ bottom: true });
+  }, [showOutputWindow, stdout]);
 
   const run = useCallback(
     ({ cmd = null, recordHistory = true }) => {
@@ -179,6 +183,7 @@ const Prompt = ({ theme }) => {
       if (recordHistory) {
         // Push to top of history stack
         setHistory((prevHistory) => [cmd, ...prevHistory]);
+        stdout(`$ ${cmd}`);
       }
 
       const parts = cmd
@@ -203,6 +208,9 @@ const Prompt = ({ theme }) => {
         case 'theme':
           setTheme(args[0]);
           break;
+        case 'clear':
+          clearOutput();
+          break;
         case 'exit':
           exit();
           break;
@@ -210,37 +218,15 @@ const Prompt = ({ theme }) => {
           help();
           break;
         default:
+          stdout(`command not found: ${cleanedCommand}`);
           break;
       }
 
       setHistoryIndex(-1);
       clearCommand();
     },
-    [cd, echo, exit, help, setTheme, toggleOutputWindow]
+    [cd, echo, exit, help, setTheme, stdout, toggleOutputWindow]
   );
-
-  useEffect(() => {
-    if (
-      history.length > 0 &&
-      ['help', 'echo'].includes(history[0].split(' ')[0])
-    ) {
-      return;
-    }
-
-    const gutter = history.length.toString().length + 1;
-    const historyString = history
-      .slice()
-      .reverse()
-      .reduce(
-        (acc, cur, i) =>
-          `${acc}${(i + 1).toString().padStart(gutter, ' ')} ${cur} \n`,
-        ''
-      );
-
-    setOutput(historyString);
-
-    setTimeout(() => scrollOutputWindowToBottom(), 0);
-  }, [history, scrollOutputWindowToBottom]);
 
   useEffect(() => {
     const keyupFn = (e) => {
@@ -294,7 +280,7 @@ const Prompt = ({ theme }) => {
         )}
         <input
           className={`${styles.caret} ${styles.hackerman}`}
-          value=">"
+          value="$"
           maxLength="1"
           readOnly="readonly"
         />
