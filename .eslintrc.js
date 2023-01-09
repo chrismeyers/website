@@ -6,7 +6,7 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ['airbnb', 'plugin:prettier/recommended'],
+  extends: ['airbnb', 'airbnb/hooks', 'plugin:prettier/recommended'],
   rules: {
     'no-param-reassign': ['error', { props: false }],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],

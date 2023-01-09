@@ -1,5 +1,4 @@
-import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
-import { toast } from 'react-toastify';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { themePropTypes } from '../hooks/useTheme';
 import { THEMES } from '../utils/constants';
@@ -26,12 +25,6 @@ const Prompt = ({ theme }) => {
     up: '&#9650;',
     down: '&#9660;',
   };
-
-  const ECHO_TYPES = useMemo(
-    () => ['info', 'success', 'warning', 'error', 'default'],
-    []
-  );
-  const ECHO_THEMES = useMemo(() => ['light', 'dark', 'colored'], []);
 
   const scrollOutputWindowToTop = useCallback(() => {
     if (outputWindowRef.current) {
@@ -121,29 +114,11 @@ const Prompt = ({ theme }) => {
 
   const echo = useCallback(
     (args) => {
-      let type = 'info';
-      let { theme: currentTheme } = theme;
-      let parts = [...args];
-
-      parts = parts
-        .map((part) => {
-          if (part.startsWith('--type=')) {
-            const proposed = part.split('=')[1];
-            if (ECHO_TYPES.includes(proposed)) type = proposed;
-            return null;
-          }
-          if (part.startsWith('--theme=')) {
-            const proposed = part.split('=')[1];
-            if (ECHO_THEMES.includes(proposed)) currentTheme = proposed;
-            return null;
-          }
-          return part;
-        })
-        .filter((part) => part);
-
-      toast(parts.join(' '), { type, theme: currentTheme });
+      clearOutput();
+      setOutput(args.join(' '));
+      showOutputWindow({ top: true });
     },
-    [theme, ECHO_TYPES, ECHO_THEMES]
+    [showOutputWindow]
   );
 
   const cd = useCallback(
@@ -177,8 +152,6 @@ const Prompt = ({ theme }) => {
   const help = useCallback(() => {
     clearOutput();
 
-    const echoTypes = ECHO_TYPES.reduce((acc, cur) => `${acc}, ${cur}`);
-    const echoThemes = ECHO_THEMES.reduce((acc, cur) => `${acc}, ${cur}`);
     const siteThemes = Object.values(THEMES).reduce(
       (acc, cur) => `${acc}, ${cur}`
     );
@@ -186,10 +159,7 @@ const Prompt = ({ theme }) => {
     // prettier-ignore
     setOutput(`usage: command [arg1] [arg2] ...
   Available commands:
-  echo   - prints args to toast notification of optional type and theme
-           types: ${echoTypes}
-           themes: ${echoThemes}
-           e.g. echo --type=${ECHO_TYPES[0]} --theme=${ECHO_THEMES[0]} Hello World
+  echo   - prints args to the output window
   cd     - navigates to the given arg
   toggle - toggles the output window
   theme  - sets the website theme to the arg
@@ -200,7 +170,7 @@ const Prompt = ({ theme }) => {
   `);
 
     showOutputWindow({ top: true });
-  }, [ECHO_TYPES, ECHO_THEMES, showOutputWindow]);
+  }, [showOutputWindow]);
 
   const run = useCallback(
     ({ cmd = null, recordHistory = true }) => {
@@ -250,7 +220,12 @@ const Prompt = ({ theme }) => {
   );
 
   useEffect(() => {
-    if (history[0] === 'help') return;
+    if (
+      history.length > 0 &&
+      ['help', 'echo'].includes(history[0].split(' ')[0])
+    ) {
+      return;
+    }
 
     const gutter = history.length.toString().length + 1;
     const historyString = history
