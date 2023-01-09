@@ -8,12 +8,13 @@ import 'lightgallery/css/lightgallery.css';
 import 'lightgallery/css/lg-zoom.css';
 import 'lightgallery/css/lg-thumbnail.css';
 import App from './App';
+import Page from './components/Page';
 import About from './pages/About';
 import Resume from './pages/Resume';
 import Projects from './pages/Projects';
-import Project from './pages/Project';
+import Project, { projectContentStyles } from './pages/Project';
 import Builds from './pages/Builds';
-import Build from './pages/Build';
+import Build, { buildContentStyles } from './pages/Build';
 import NotFound from './pages/NotFound';
 
 if ('scrollRestoration' in window.history) {
@@ -26,13 +27,40 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <NotFound />,
     children: [
-      { path: '', element: <About /> },
-      { path: 'resume', element: <Resume /> },
-      { path: 'projects', element: <Projects /> },
-      { path: 'projects/:id', element: <Project /> },
-      { path: 'builds', element: <Builds /> },
-      { path: 'builds/:id', element: <Build /> },
-      { path: '*', element: <NotFound /> },
+      { path: '', element: <Page title="About" content={<About />} /> },
+      { path: 'resume', element: <Page title="Résumé" content={<Resume />} /> },
+      {
+        path: 'projects',
+        element: <Page title="Projects" content={<Projects />} />,
+      },
+      {
+        path: 'projects/:id',
+        element: (
+          <Page
+            title="Project Details"
+            content={<Project />}
+            contentStyles={projectContentStyles}
+          />
+        ),
+      },
+      {
+        path: 'builds',
+        element: <Page title="Builds" content={<Builds />} />,
+      },
+      {
+        path: 'builds/:id',
+        element: (
+          <Page
+            title="Build Details"
+            content={<Build />}
+            contentStyles={buildContentStyles}
+          />
+        ),
+      },
+      {
+        path: '*',
+        element: <Page title="Page Not Found" content={<NotFound />} />,
+      },
     ],
   },
 ]);

@@ -21,7 +21,7 @@ describe('Project page', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText('Page Not Found')).toBeInTheDocument();
+      expect(screen.getByText(/does not exist/)).toBeInTheDocument();
     });
 
     expect(screen.getByText('/projects/1')).toBeInTheDocument();
@@ -62,7 +62,7 @@ describe('Project page', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText('Page Not Found')).toBeInTheDocument();
+      expect(screen.getByText(/does not exist/)).toBeInTheDocument();
     });
 
     expect(screen.getByText('/projects/1')).toBeInTheDocument();

@@ -4,23 +4,19 @@ const NotFound = () => {
   const location = useLocation();
 
   return (
-    <div className="content">
-      <div className="section-header section-header-size">Page Not Found</div>
-
-      <div className="content-text">
-        <p className="center">
-          The path <span className="pre highlighted">{location.pathname}</span>{' '}
-          does not exist
-        </p>
-        <p className="center">
-          Go back{' '}
-          <Link className="fancytxt" to="/">
-            home
-          </Link>
-          !
-        </p>
-      </div>
-    </div>
+    <>
+      <p className="center">
+        The path <span className="pre highlighted">{location.pathname}</span>{' '}
+        does not exist
+      </p>
+      <p className="center">
+        Go back to the{' '}
+        <Link className="fancytxt" to="/">
+          home page
+        </Link>
+        !
+      </p>
+    </>
   );
 };
 

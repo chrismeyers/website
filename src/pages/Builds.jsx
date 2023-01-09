@@ -12,50 +12,44 @@ const Builds = () => {
   const data = builds.filter((item) => item.active);
 
   return (
-    <div className="content">
-      <div className="section-header section-header-size">
-        <div>Builds</div>
-      </div>
-
-      <div className="content-text">
-        {data?.map((build, index) => (
-          <Fragment key={build.id}>
-            <div className={styles.build}>
-              <h2 className={index === 0 ? 'first-header' : ''}>
+    <div>
+      {data?.map((build, index) => (
+        <Fragment key={build.id}>
+          <div>
+            <h2 className={index === 0 ? 'first-header' : ''}>
+              <Link
+                className="fancytxt"
+                title={`Click for details of ${build.displayDate}`}
+                to={`/builds/${build.id}`}
+              >
+                {build.displayDate}
+              </Link>
+            </h2>
+            <div className={styles.overview}>
+              <p>
+                An <span className="highlighted">{cleanCPU(build.cpu)}</span>{' '}
+                based system
+              </p>
+              <p className="right">
                 <Link
-                  className="fancytxt"
+                  className="subtle fancytxt"
                   title={`Click for details of ${build.displayDate}`}
                   to={`/builds/${build.id}`}
                 >
-                  {build.displayDate}
+                  Build Details &gt;
                 </Link>
-              </h2>
-              <div className={styles.overview}>
-                <p>
-                  An <span className="highlighted">{cleanCPU(build.cpu)}</span>{' '}
-                  based system
-                </p>
-                <p className="right">
-                  <Link
-                    className="subtle fancytxt"
-                    title={`Click for details of ${build.displayDate}`}
-                    to={`/builds/${build.id}`}
-                  >
-                    Build Details &gt;
-                  </Link>
-                </p>
-              </div>
+              </p>
             </div>
+          </div>
 
-            {index < data.length - 1 && (
-              <>
-                <br />
-                <hr />
-              </>
-            )}
-          </Fragment>
-        ))}
-      </div>
+          {index < data.length - 1 && (
+            <>
+              <br />
+              <hr />
+            </>
+          )}
+        </Fragment>
+      ))}
     </div>
   );
 };
