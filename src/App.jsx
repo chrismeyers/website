@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import { isMobile as isMobileDevice } from 'react-device-detect';
 import './App.css';
 import FullNav from './components/FullNav';
 import MobileNav from './components/MobileNav';
@@ -10,11 +11,12 @@ import useScreenResize from './hooks/useScreenResize';
 const App = () => {
   const theme = useTheme();
   const { isMobileWidth } = useScreenResize();
+  const isMobile = isMobileDevice || isMobileWidth;
 
   return (
     <>
-      {isMobileWidth ? <MobileNav theme={theme} /> : <FullNav />}
-      {isMobileWidth ? <div /> : <Prompt theme={theme} />}
+      {isMobile ? <MobileNav theme={theme} /> : <FullNav />}
+      {isMobile ? <div /> : <Prompt theme={theme} />}
       <Outlet />
       <Footer theme={theme} />
     </>
