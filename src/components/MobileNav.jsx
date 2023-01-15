@@ -51,7 +51,7 @@ const MobileNav = ({ theme }) => {
                 type="button"
                 onClick={() => setMenuDisplayed((prev) => !prev)}
                 aria-label="Menu"
-                aria-controls="navigation"
+                aria-controls="mobile-menu"
               >
                 <span className="hamburger-box" style={{ height: 26 }}>
                   <span className="hamburger-inner" />
@@ -61,49 +61,53 @@ const MobileNav = ({ theme }) => {
           </div>
         </div>
 
-        {menuDisplayed && (
-          <div>
-            <div className={styles.menuOverlay} />
-            <div className={styles.menu} ref={menuRef}>
-              <Link
-                className={`nav-link ${
-                  location.pathname === '/' ? 'nav-selected' : ''
-                }`}
-                to="/"
-              >
-                <div className={styles.menuItem}>About</div>
-              </Link>
-              <Link
-                className={`nav-link ${
-                  location.pathname === '/resume' ? 'nav-selected' : ''
-                }`}
-                to="/resume"
-              >
-                <div className={styles.menuItem}>Résumé</div>
-              </Link>
-              <Link
-                className={`nav-link ${
-                  location.pathname.startsWith('/projects')
-                    ? 'nav-selected'
-                    : ''
-                }`}
-                to="/projects"
-              >
-                <div className={styles.menuItem}>Projects</div>
-              </Link>
-              <Link
-                className={`nav-link ${
-                  location.pathname.startsWith('/builds') ? 'nav-selected' : ''
-                }`}
-                to="/builds"
-              >
-                <div className={styles.menuItem}>Builds</div>
-              </Link>
+        <div id="mobile-menu">
+          {menuDisplayed && (
+            <>
+              <div className={styles.menuOverlay} />
+              <div className={styles.menu} ref={menuRef}>
+                <Link
+                  className={`nav-link ${
+                    location.pathname === '/' ? 'nav-selected' : ''
+                  }`}
+                  to="/"
+                >
+                  <div className={styles.menuItem}>About</div>
+                </Link>
+                <Link
+                  className={`nav-link ${
+                    location.pathname === '/resume' ? 'nav-selected' : ''
+                  }`}
+                  to="/resume"
+                >
+                  <div className={styles.menuItem}>Résumé</div>
+                </Link>
+                <Link
+                  className={`nav-link ${
+                    location.pathname.startsWith('/projects')
+                      ? 'nav-selected'
+                      : ''
+                  }`}
+                  to="/projects"
+                >
+                  <div className={styles.menuItem}>Projects</div>
+                </Link>
+                <Link
+                  className={`nav-link ${
+                    location.pathname.startsWith('/builds')
+                      ? 'nav-selected'
+                      : ''
+                  }`}
+                  to="/builds"
+                >
+                  <div className={styles.menuItem}>Builds</div>
+                </Link>
 
-              <Footer theme={theme} inMenu />
-            </div>
-          </div>
-        )}
+                <Footer theme={theme} inMenu />
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </nav>
   );
