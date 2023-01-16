@@ -1,4 +1,4 @@
-import Routes from 'react-switch';
+import Switch from 'react-switch';
 import PropTypes from 'prop-types';
 import { themePropTypes } from '../hooks/useTheme';
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
@@ -56,7 +56,7 @@ const Footer = ({ theme, inMenu }) => {
         <div className={styles.bullets}>&bull;</div>
 
         <div className={styles.theme}>
-          <Routes
+          <Switch
             onChange={theme.toggleTheme}
             checked={theme.theme === THEMES.DARK}
             onColor={theme.mainThemeColor}
