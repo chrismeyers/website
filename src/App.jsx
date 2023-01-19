@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom';
-import { isMobile as isMobileDevice } from 'react-device-detect';
 import './App.css';
 import FullNav from './components/FullNav';
 import MobileNav from './components/MobileNav';
@@ -11,12 +10,15 @@ import useScreenResize from './hooks/useScreenResize';
 const App = () => {
   const theme = useTheme();
   const { isMobileWidth } = useScreenResize();
-  const isMobile = isMobileDevice || isMobileWidth;
+
+  // Return early if width has not been determined yet to reduce Cumulative
+  // Layout Shift (https://web.dev/cls/)
+  if (isMobileWidth === null) return <div />;
 
   return (
     <>
-      {isMobile ? <MobileNav theme={theme} /> : <FullNav />}
-      {isMobile ? <div /> : <Prompt theme={theme} />}
+      {isMobileWidth ? <MobileNav theme={theme} /> : <FullNav />}
+      {isMobileWidth ? <div /> : <Prompt theme={theme} />}
       <Outlet />
       <Footer theme={theme} />
     </>

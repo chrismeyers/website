@@ -3,7 +3,7 @@ import _throttle from 'lodash/throttle';
 import { MOBILE_BREAKPOINT } from '../utils/constants';
 
 const useScreenResize = () => {
-  const [isMobileWidth, setIsMobileWidth] = useState(false);
+  const [isMobileWidth, setIsMobileWidth] = useState(null);
 
   useEffect(() => {
     const onResize = () => {
