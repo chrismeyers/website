@@ -3,11 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 import { ReactComponent as Logo } from '../assets/images/logos/v3/ccm-logo.svg';
 import Footer from './Footer';
 import useClickOutside from '../hooks/useClickOutside';
-import { themePropTypes } from '../hooks/useTheme';
 import { setBodyScrollable } from '../utils/styles';
 import styles from '../styles/MobileNav.module.css';
 
-const MobileNav = ({ theme }) => {
+const MobileNav = () => {
   const [menuDisplayed, setMenuDisplayed] = useState(false);
   const location = useLocation();
   const menuRef = useRef(null);
@@ -103,7 +102,7 @@ const MobileNav = ({ theme }) => {
                   <div className={styles.menuItem}>Builds</div>
                 </Link>
 
-                <Footer theme={theme} inMenu />
+                <Footer inMenu />
               </div>
             </>
           )}
@@ -111,10 +110,6 @@ const MobileNav = ({ theme }) => {
       </div>
     </nav>
   );
-};
-
-MobileNav.propTypes = {
-  theme: themePropTypes.isRequired,
 };
 
 export default MobileNav;

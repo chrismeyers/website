@@ -1,12 +1,14 @@
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useContext, useEffect, useState, useCallback, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { themePropTypes } from '../hooks/useTheme';
 import { THEMES } from '../utils/constants';
 import styles from '../styles/Prompt.module.css';
+import { ThemeContext } from '../context/ThemeContext';
 
 let CONSOLE_MESSAGE_DISPLAYED = false;
 
-const Prompt = ({ theme }) => {
+const Prompt = () => {
+  const { applyTheme } = useContext(ThemeContext);
+
   const [promptVisible, setPromptVisible] = useState(false);
   const [outputWindowVisible, setOutputWindowVisible] = useState(false);
   const [arrowDirection, setArrowDirection] = useState('up');
@@ -88,9 +90,9 @@ const Prompt = ({ theme }) => {
 
   const setTheme = useCallback(
     (which) => {
-      theme.applyTheme(which);
+      applyTheme(which);
     },
-    [theme]
+    [applyTheme]
   );
 
   const moveCursorToEnd = () => {
@@ -303,10 +305,6 @@ const Prompt = ({ theme }) => {
       </div>
     )
   );
-};
-
-Prompt.propTypes = {
-  theme: themePropTypes.isRequired,
 };
 
 export default Prompt;

@@ -1,6 +1,6 @@
+import { useContext } from 'react';
 import Switch from 'react-switch';
 import PropTypes from 'prop-types';
-import { themePropTypes } from '../hooks/useTheme';
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
 import { ReactComponent as LinkedInIcon } from '../assets/images/icons/linkedin.svg';
 import { ReactComponent as MailIcon } from '../assets/images/icons/mail.svg';
@@ -13,8 +13,12 @@ import {
   THEMES,
 } from '../utils/constants';
 import styles from '../styles/Footer.module.css';
+import { ThemeContext } from '../context/ThemeContext';
 
-const Footer = ({ theme, inMenu }) => {
+const Footer = ({ inMenu }) => {
+  const { theme, toggleTheme, mainThemeColor, lightModeToggleColor } =
+    useContext(ThemeContext);
+
   return (
     <footer className={inMenu ? styles.inMenu : ''}>
       <div className={styles.links}>
@@ -57,10 +61,10 @@ const Footer = ({ theme, inMenu }) => {
 
         <div className={styles.theme}>
           <Switch
-            onChange={theme.toggleTheme}
-            checked={theme.theme === THEMES.DARK}
-            onColor={theme.mainThemeColor}
-            offColor={theme.lightModeToggleColor}
+            onChange={toggleTheme}
+            checked={theme === THEMES.dark}
+            onColor={mainThemeColor}
+            offColor={lightModeToggleColor}
             aria-label="Toggle site theme"
             height={20}
             width={48}
@@ -82,7 +86,6 @@ Footer.defaultProps = {
 };
 
 Footer.propTypes = {
-  theme: themePropTypes.isRequired,
   inMenu: PropTypes.bool,
 };
 
