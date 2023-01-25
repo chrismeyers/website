@@ -130,7 +130,12 @@ const Resume = () => {
         ))}
       </ul>
 
-      <a className="subtle fancytxt" href={MAILTO_HREF_RESUME}>
+      <a
+        className="subtle fancytxt"
+        href={MAILTO_HREF_RESUME}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Request the PDF version of my résumé
       </a>
     </>
