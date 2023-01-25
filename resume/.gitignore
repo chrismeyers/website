@@ -7,7 +7,6 @@
 # Whitelist some files
 !.gitignore
 !*.tex
-!*.pdf
 
 # Ignore the config file
 *Config.tex
