@@ -3,7 +3,7 @@ import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
 import { summary } from '../assets/generated/resume';
 import {
-  MAILTO_HREF,
+  MAILTO_HREF_MESSAGE,
   DEFAULT_DOCUMENT_TITLE,
   LIGHTGALLERY_LICENSE,
 } from '../utils/constants';
@@ -107,7 +107,7 @@ const About = () => {
         usable applications that solve problems. If you have any questions,
         comments, or would like to work together on a project, please{' '}
         <a
-          href={MAILTO_HREF}
+          href={MAILTO_HREF_MESSAGE}
           className="fancytxt"
           target="_blank"
           rel="noopener noreferrer"

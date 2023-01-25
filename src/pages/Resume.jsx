@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { full as resume } from '../assets/generated/resume';
-import { RESUME_PDF_URL, DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
+import { DEFAULT_DOCUMENT_TITLE, MAILTO_HREF_RESUME } from '../utils/constants';
 import styles from '../styles/Resume.module.css';
 
 const Resume = () => {
@@ -130,8 +130,8 @@ const Resume = () => {
         ))}
       </ul>
 
-      <a className="subtle fancytxt" href={RESUME_PDF_URL}>
-        View or download the PDF version of my résumé
+      <a className="subtle fancytxt" href={MAILTO_HREF_RESUME}>
+        Request the PDF version of my résumé
       </a>
     </>
   );
