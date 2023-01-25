@@ -8,21 +8,8 @@ This is the codebase for my personal website currently located at [https://chris
 1. Quick Start:
     ```sh
     $ npm install
-    $ npm run generate       # Needs to be run whenever the resume is updated
+    $ npm run generate # Needs to be run whenever the resume is updated
     $ npm run dev
-    ```
-1. The following scripts are available:
-    ```sh
-    $ npm run dev            # Starts development server
-    $ npm run generate       # Generates required code
-    $ npm run build          # Builds for production
-    $ npm run preview        # Runs production preview (build is a prerequisite)
-    $ npm test               # Runs tests
-    $ npm run test:watch     # Runs tests in watch mode
-    $ npm run test:coverage  # Runs tests and collects coverage
-    $ npm run test:ci        # Runs tests in CI mode
-    $ npm run lint           # Reports lint warnings and errors
-    $ npm run lint:fix       # Attempts to fix lint warnings and errors
     ```
 
 ## Docker
