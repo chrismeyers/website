@@ -1,8 +1,8 @@
 import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import Projects from '../../../src/pages/Projects';
-import * as data from '../../../src/assets/data';
+import Projects from '../../src/pages/Projects';
+import * as data from '../../src/assets/data';
 
 describe('Projects page', () => {
   it('displays project summary correctly', async () => {

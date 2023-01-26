@@ -1,8 +1,8 @@
 import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import About from '../../../src/pages/About';
-import * as resume from '../../../src/assets/generated/resume';
+import About from '../../src/pages/About';
+import * as resume from '../../src/assets/generated/resume';
 
 describe('About page', () => {
   it('excludes employment info is not currently employed', async () => {

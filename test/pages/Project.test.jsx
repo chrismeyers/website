@@ -1,8 +1,8 @@
 import { vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import Project from '../../../src/pages/Project';
-import * as data from '../../../src/assets/data';
+import Project from '../../src/pages/Project';
+import * as data from '../../src/assets/data';
 
 vi.mock('react-router-dom', async () => ({
   ...(await vi.importActual('react-router-dom')),
