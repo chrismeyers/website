@@ -14,19 +14,22 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <Page title="An Error Has Occurred" content={<Error />} />,
+    errorElement: <Page header="An Error Has Occurred" content={<Error />} />,
     children: [
-      { path: '', element: <Page title="About" content={<About />} /> },
-      { path: 'resume', element: <Page title="Résumé" content={<Resume />} /> },
+      { path: '', element: <Page header="About" content={<About />} /> },
+      {
+        path: 'resume',
+        element: <Page header="Résumé" content={<Resume />} />,
+      },
       {
         path: 'projects',
-        element: <Page title="Projects" content={<Projects />} />,
+        element: <Page header="Projects" content={<Projects />} />,
       },
       {
         path: 'projects/:id',
         element: (
           <Page
-            title="Project Details"
+            header="Project Details"
             content={<Project />}
             contentStyles={projectContentStyles}
           />
@@ -34,13 +37,13 @@ const router = createBrowserRouter([
       },
       {
         path: 'builds',
-        element: <Page title="Builds" content={<Builds />} />,
+        element: <Page header="Builds" content={<Builds />} />,
       },
       {
         path: 'builds/:id',
         element: (
           <Page
-            title="Build Details"
+            header="Build Details"
             content={<Build />}
             contentStyles={buildContentStyles}
           />
@@ -48,7 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: '*',
-        element: <Page title="Page Not Found" content={<NotFound />} />,
+        element: <Page header="Page Not Found" content={<NotFound />} />,
       },
     ],
   },

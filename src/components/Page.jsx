@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
-const Page = ({ title, content, contentStyles }) => {
+const Page = ({ header, content, contentStyles }) => {
   return (
     <div className="content">
       <div className="section-header section-header-size">
-        <div>{title}</div>
+        <div>{header}</div>
       </div>
 
       <div className={`content-text ${contentStyles.join(' ')}`}>{content}</div>
@@ -17,7 +17,7 @@ Page.defaultProps = {
 };
 
 Page.propTypes = {
-  title: PropTypes.string.isRequired,
+  header: PropTypes.string.isRequired,
   content: PropTypes.node.isRequired,
   contentStyles: PropTypes.arrayOf(PropTypes.string),
 };
