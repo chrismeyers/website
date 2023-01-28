@@ -6,7 +6,7 @@ import {
   MAILTO_HREF_MESSAGE,
   DEFAULT_DOCUMENT_TITLE,
   LIGHTGALLERY_LICENSE,
-} from '../utils/constants';
+} from '../constants';
 
 const About = () => {
   document.title = DEFAULT_DOCUMENT_TITLE;

@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { builds } from '../assets/data';
-import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
+import { DEFAULT_DOCUMENT_TITLE } from '../constants';
 import styles from '../styles/Builds.module.css';
 
 const cleanCPU = (cpu) => cpu.split('@')[0].trim();

@@ -11,13 +11,12 @@ import {
   LINKEDIN_URL,
   MAILTO_HREF_MESSAGE,
   THEMES,
-} from '../utils/constants';
+} from '../constants';
 import styles from '../styles/Footer.module.css';
 import { ThemeContext } from '../context/ThemeContext';
 
 const Footer = ({ inMenu }) => {
-  const { theme, toggleTheme, mainThemeColor, lightModeToggleColor } =
-    useContext(ThemeContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <footer className={inMenu ? styles.inMenu : ''}>
@@ -63,9 +62,9 @@ const Footer = ({ inMenu }) => {
           <Switch
             onChange={toggleTheme}
             checked={theme === THEMES.dark}
-            onColor={mainThemeColor}
-            offColor={lightModeToggleColor}
-            aria-label="Toggle site theme"
+            onColor="#5bb75b"
+            offColor="#bbbbbb"
+            aria-label="Toggle website theme"
             height={20}
             width={48}
             checkedIcon={<MoonIcon className="link-image small theme on" />}

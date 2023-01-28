@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { full as resume } from '../assets/generated/resume';
-import { DEFAULT_DOCUMENT_TITLE, MAILTO_HREF_RESUME } from '../utils/constants';
+import { DEFAULT_DOCUMENT_TITLE, MAILTO_HREF_RESUME } from '../constants';
 import styles from '../styles/Resume.module.css';
 
 const Resume = () => {

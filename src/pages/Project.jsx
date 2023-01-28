@@ -7,10 +7,7 @@ import { ReactComponent as ExternalLinkIcon } from '../assets/images/icons/link-
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
 import { ReactComponent as PlayIcon } from '../assets/images/icons/play.svg';
 import { projects } from '../assets/data';
-import {
-  DEFAULT_DOCUMENT_TITLE,
-  LIGHTGALLERY_LICENSE,
-} from '../utils/constants';
+import { DEFAULT_DOCUMENT_TITLE, LIGHTGALLERY_LICENSE } from '../constants';
 import styles from '../styles/Project.module.css';
 import NotFound from './NotFound';
 

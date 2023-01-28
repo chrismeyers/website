@@ -2,10 +2,7 @@ import { useParams } from 'react-router-dom';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
 import { builds } from '../assets/data';
-import {
-  DEFAULT_DOCUMENT_TITLE,
-  LIGHTGALLERY_LICENSE,
-} from '../utils/constants';
+import { DEFAULT_DOCUMENT_TITLE, LIGHTGALLERY_LICENSE } from '../constants';
 import styles from '../styles/Build.module.css';
 import NotFound from './NotFound';
 

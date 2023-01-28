@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { projects } from '../assets/data';
-import { DEFAULT_DOCUMENT_TITLE } from '../utils/constants';
+import { DEFAULT_DOCUMENT_TITLE } from '../constants';
 import styles from '../styles/Projects.module.css';
 
 const Projects = () => {

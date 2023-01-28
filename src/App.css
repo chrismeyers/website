@@ -2,7 +2,6 @@
 :root {
   --main-theme-color: #5bb75b;
   --warning-color: #d9534f;
-  --light-mode-toggle-bg-color: #bbbbbb;
 
   --font-color: #444444;
   --bg-color: #f7f7f7;
@@ -66,7 +65,6 @@ input,
 textarea {
   border-radius: 0;
   -webkit-border-radius: 0;
-  -webkit-appearance: none;
 }
 
 h2.top {

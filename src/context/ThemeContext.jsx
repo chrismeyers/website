@@ -1,7 +1,6 @@
 import { createContext, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { THEMES } from '../utils/constants';
-import { getCssVar } from '../utils/styles';
+import { THEMES } from '../constants';
 
 export const ThemeContext = createContext();
 
@@ -59,8 +58,6 @@ export const ThemeProvider = ({ children }) => {
       value={useMemo(
         () => ({
           theme,
-          mainThemeColor: getCssVar('--main-theme-color'),
-          lightModeToggleColor: getCssVar('--light-mode-toggle-bg-color'),
           toggleTheme: () => {
             setTheme(theme === THEMES.light ? THEMES.dark : THEMES.light);
           },
