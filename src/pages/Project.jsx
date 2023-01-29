@@ -104,6 +104,7 @@ const Project = () => {
                         onBeforeOpen={restartGif}
                         enableDrag={false}
                         enableSwipe={false}
+                        download={false}
                       >
                         <a href={image.path}>
                           <img
@@ -131,6 +132,7 @@ const Project = () => {
                 licenseKey={LIGHTGALLERY_LICENSE}
                 plugins={[lgZoom, lgThumbnail]}
                 thumbnail
+                download={false}
               >
                 {data.images.map((image, index) => (
                   <Fragment key={image.id}>

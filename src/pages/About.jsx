@@ -61,6 +61,7 @@ const About = () => {
             licenseKey={LIGHTGALLERY_LICENSE}
             plugins={[lgZoom]}
             elementClassNames="inline"
+            download={false}
           >
             <span
               className="fancytxt"

@@ -77,7 +77,11 @@ const Build = () => {
         </div>
         {data.image && (
           <div className={styles.pic}>
-            <LightGallery licenseKey={LIGHTGALLERY_LICENSE} plugins={[lgZoom]}>
+            <LightGallery
+              licenseKey={LIGHTGALLERY_LICENSE}
+              plugins={[lgZoom]}
+              download={false}
+            >
               <a href={data.image.path}>
                 <img
                   src={data.image.path}
