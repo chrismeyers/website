@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { full as resume } from '../assets/generated/resume';
-import { DEFAULT_DOCUMENT_TITLE, MAILTO_HREF_RESUME } from '../constants';
+import { DEFAULT_DOCUMENT_TITLE, MAILTO_RESUME } from '../constants';
 import styles from '../styles/Resume.module.css';
 
 const Resume = () => {
@@ -132,7 +132,7 @@ const Resume = () => {
 
       <a
         className="subtle fancytxt"
-        href={MAILTO_HREF_RESUME}
+        href={MAILTO_RESUME}
         target="_blank"
         rel="noopener noreferrer"
       >

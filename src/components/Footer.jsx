@@ -6,12 +6,7 @@ import { ReactComponent as LinkedInIcon } from '../assets/images/icons/linkedin.
 import { ReactComponent as MailIcon } from '../assets/images/icons/mail.svg';
 import { ReactComponent as SunIcon } from '../assets/images/icons/sun.svg';
 import { ReactComponent as MoonIcon } from '../assets/images/icons/moon.svg';
-import {
-  GITHUB_URL,
-  LINKEDIN_URL,
-  MAILTO_HREF_MESSAGE,
-  THEMES,
-} from '../constants';
+import { GITHUB_URL, LINKEDIN_URL, MAILTO_MESSAGE, THEMES } from '../constants';
 import styles from '../styles/Footer.module.css';
 import { ThemeContext } from '../context/ThemeContext';
 
@@ -47,7 +42,7 @@ const Footer = ({ inMenu }) => {
 
         <div className={styles.social}>
           <a
-            href={MAILTO_HREF_MESSAGE}
+            href={MAILTO_MESSAGE}
             title="Send Message"
             target="_blank"
             rel="noopener noreferrer"
