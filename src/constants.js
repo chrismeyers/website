@@ -10,24 +10,8 @@ export const DEFAULT_DOCUMENT_TITLE =
 export const LIGHTGALLERY_LICENSE =
   import.meta.env.VITE_LIGHTGALLERY_LICENSE || '0000-0000-000-0000';
 export const NAVIGATION = [
-  {
-    name: 'About',
-    path: '/',
-    hasChildren: false,
-  },
-  {
-    name: 'Résumé',
-    path: '/resume',
-    hasChildren: false,
-  },
-  {
-    name: 'Projects',
-    path: '/projects',
-    hasChildren: true,
-  },
-  {
-    name: 'Builds',
-    path: '/builds',
-    hasChildren: true,
-  },
+  { name: 'About', path: '/', hasChildren: false },
+  { name: 'Résumé', path: '/resume', hasChildren: false },
+  { name: 'Projects', path: '/projects', hasChildren: true },
+  { name: 'Builds', path: '/builds', hasChildren: true },
 ];
