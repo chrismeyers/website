@@ -4,6 +4,7 @@ import { ReactComponent as Logo } from '../assets/images/logos/v3/ccm-logo.svg';
 import Footer from './Footer';
 import useClickOutside from '../hooks/useClickOutside';
 import styles from '../styles/MobileNav.module.css';
+import { NAVIGATION } from '../constants';
 
 const setBodyScrollable = (enabled) =>
   enabled
@@ -69,43 +70,21 @@ const MobileNav = () => {
             <>
               <div className={styles.menuOverlay} />
               <div className={styles.menu} ref={menuRef}>
-                <Link
-                  className={`nav-link ${
-                    location.pathname === '/' ? 'nav-selected' : ''
-                  }`}
-                  to="/"
-                >
-                  <div className={styles.menuItem}>About</div>
-                </Link>
-                <Link
-                  className={`nav-link ${
-                    location.pathname === '/resume' ? 'nav-selected' : ''
-                  }`}
-                  to="/resume"
-                >
-                  <div className={styles.menuItem}>Résumé</div>
-                </Link>
-                <Link
-                  className={`nav-link ${
-                    location.pathname.startsWith('/projects')
-                      ? 'nav-selected'
-                      : ''
-                  }`}
-                  to="/projects"
-                >
-                  <div className={styles.menuItem}>Projects</div>
-                </Link>
-                <Link
-                  className={`nav-link ${
-                    location.pathname.startsWith('/builds')
-                      ? 'nav-selected'
-                      : ''
-                  }`}
-                  to="/builds"
-                >
-                  <div className={styles.menuItem}>Builds</div>
-                </Link>
+                {NAVIGATION.map((item) => {
+                  const current = item.hasChildren
+                    ? location.pathname.startsWith(item.path)
+                    : location.pathname === item.path;
 
+                  return (
+                    <Link
+                      className={`nav-link ${current ? 'nav-selected' : ''}`}
+                      to={item.path}
+                      key={item.name}
+                    >
+                      <div className={styles.menuItem}>{item.name}</div>
+                    </Link>
+                  );
+                })}
                 <Footer inMenu />
               </div>
             </>
