@@ -1,8 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import './App.css';
 import { ThemeProvider } from './context/ThemeContext';
-import FullNav from './components/FullNav';
-import MobileNav from './components/MobileNav';
+import { FullNav, MobileNav } from './components/Navigation';
 import Prompt from './components/Prompt';
 import Footer from './components/Footer';
 import useScreenResize from './hooks/useScreenResize';
