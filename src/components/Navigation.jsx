@@ -6,7 +6,7 @@ import useClickOutside from '../hooks/useClickOutside';
 import fullStyles from '../styles/FullNav.module.css';
 import mobileStyles from '../styles/MobileNav.module.css';
 
-export const NAVIGATION = [
+const NAVIGATION = [
   { name: 'About', path: '/', hasChildren: false },
   { name: 'Résumé', path: '/resume', hasChildren: false },
   { name: 'Projects', path: '/projects', hasChildren: true },
