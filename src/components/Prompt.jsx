@@ -281,7 +281,7 @@ const Prompt = () => {
           />
         )}
         <input
-          className={`${styles.caret} ${styles.hackerman}`}
+          className={`${styles.ps1} ${styles.hackerman}`}
           value="$"
           maxLength="1"
           readOnly="readonly"

@@ -12,14 +12,14 @@
   position: fixed;
 }
 
-.caret {
+.ps1 {
   height: 25px;
   width: 10px;
   font-weight: bold;
   padding-left: 5px;
   padding-right: 1px;
 }
-.caret:focus {
+.ps1:focus {
   outline: none;
 }
 
