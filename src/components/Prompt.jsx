@@ -164,7 +164,7 @@ const Prompt = () => {
     );
 
     // prettier-ignore
-    stdout(`usage: command [arg1] [arg2] ...
+    stdout(`Usage: command [arg1] [arg2] ...
   Available commands:
   echo   - prints args to the output window
   cd     - navigates to the given arg

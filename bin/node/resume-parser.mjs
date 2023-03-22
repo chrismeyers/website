@@ -231,7 +231,7 @@ export default createResumeParser;
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   if (process.argv.length < 4) {
     // eslint-disable-next-line no-console
-    console.error('usage: node resume.js <resumePath> <generatedPath>');
+    console.error('Usage: node resume-parser.mjs <resumePath> <generatedPath>');
     process.exit(1);
   }
 
