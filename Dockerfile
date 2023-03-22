@@ -1,4 +1,4 @@
-FROM node:18.15.0-alpine as builder
+FROM node:18.15.0-alpine AS builder
 
 WORKDIR /app
 
@@ -13,6 +13,7 @@ RUN npm run build
 
 FROM nginx:1.23.3-alpine-slim
 
-RUN mkdir /app
-COPY --from=builder /app/build /app
+WORKDIR /app
+
+COPY --from=builder /app/build .
 COPY config/docker/nginx.conf /etc/nginx/nginx.conf
