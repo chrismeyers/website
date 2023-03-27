@@ -1,11 +1,11 @@
 import path from 'node:path';
-import createResumeParser from '../bin/node/resume-parser.mjs';
+import ResumeParser from '../bin/node/resume-parser.mjs';
 
 describe('Resume Parser', () => {
   let parser;
 
   beforeEach(async () => {
-    parser = createResumeParser(
+    parser = new ResumeParser(
       path.join(__dirname, 'fixtures', 'test-resume.latex')
     );
   });
@@ -86,7 +86,9 @@ describe('Resume Parser', () => {
 
   describe('summary', () => {
     it('parses language summary', async () => {
-      const items = parser.getLanguages();
+      const items = ResumeParser.getLanguages(
+        parser.parseListSection('TechnicalSkills', false)
+      );
 
       expect(items.desktop).toEqual([
         'Language 1 (Something 1, Something 2)',
@@ -97,7 +99,9 @@ describe('Resume Parser', () => {
     });
 
     it('parses most recent job', async () => {
-      const items = parser.getMostRecentJob();
+      const items = ResumeParser.getMostRecentJob(
+        parser.parseComplexSection('Experience')
+      );
 
       expect(items.employed).toBe(true);
       expect(items.company).toBe('Company 1');

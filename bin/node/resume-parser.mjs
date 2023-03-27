@@ -6,11 +6,15 @@ import { pathToFileURL } from 'node:url';
 import prettier from 'prettier'; // eslint-disable-line import/no-extraneous-dependencies
 import prettierrc from '../../.prettierrc.js';
 
-const resumeParser = ({ resumePath }) => {
-  const rawSections = {};
+export default class ResumeParser {
+  #rawSections = {};
 
-  const load = () => {
-    const data = fs.readFileSync(resumePath, 'utf8');
+  constructor(resumePath) {
+    this.#load(resumePath);
+  }
+
+  #load(resumePath) {
+    const data = fs.readFileSync(resumePath, { encoding: 'utf-8' });
     const lines = data.split('\n');
 
     const beginPattern = '% BEGIN';
@@ -20,50 +24,26 @@ const resumeParser = ({ resumePath }) => {
     lines.forEach((line) => {
       const trimmedLine = line.trim();
 
-      if (trimmedLine === '') {
-        return;
-      }
+      if (trimmedLine === '') return;
 
       if (trimmedLine.includes(beginPattern)) {
         // New section
         section = trimmedLine.substring(beginPattern.length + 1);
       } else if (section !== '' && !trimmedLine.includes(endPattern)) {
         // Between begin and end
-        if (section in rawSections) {
-          const values = rawSections[section];
-          values.push(trimmedLine);
-          rawSections[section] = values;
+        if (section in this.#rawSections) {
+          this.#rawSections[section].push(trimmedLine);
         } else {
-          rawSections[section] = [trimmedLine];
+          this.#rawSections[section] = [trimmedLine];
         }
       } else {
         // Between end and begin
         section = '';
       }
     });
-  };
+  }
 
-  const cleanString = (input, removeInlineComments) => {
-    let output = input.trim();
-
-    if (removeInlineComments) {
-      // This regex skips escaped percent signs by using negative lookbehind
-      output = output.split(/(?<!\\)%/)[0].trim();
-    }
-
-    output = output.replaceAll(String.raw`\CPP`, 'C++');
-    output = output.replaceAll(String.raw`\break`, '');
-    output = output.replaceAll('--', '&ndash;');
-    output = output.replaceAll(
-      String.raw`\textsuperscript{\textregistered}`,
-      '&reg;'
-    );
-    output = output.replaceAll(String.raw({ raw: '\\' }), '');
-
-    return output;
-  };
-
-  const parseComplexSection = (section, removeInlineComments = true) => {
+  parseComplexSection(section, removeInlineComments = true) {
     const urlPattern = '% URL';
     const firstLinePattern = String.raw`{\textbf{`;
     const secondLinePattern = String.raw`{\emph{`;
@@ -78,11 +58,10 @@ const resumeParser = ({ resumePath }) => {
     let firstLine = [];
     let secondLine = [];
     let info = [];
-
     let currentSecondLine = [];
     let currentInfo = [];
 
-    rawSections[section].forEach((line) => {
+    this.#rawSections[section].forEach((line) => {
       if (line.startsWith(urlPattern)) {
         const beginPatternIndex =
           line.indexOf(urlPattern) + urlPattern.length + 1;
@@ -92,7 +71,7 @@ const resumeParser = ({ resumePath }) => {
         const beginPatternIndex =
           line.indexOf(firstLinePattern) + firstLinePattern.length;
         const endPatternIndex = line.indexOf(endPattern);
-        const cleaned = cleanString(
+        const cleaned = ResumeParser.#cleanString(
           line
             .substring(beginPatternIndex, endPatternIndex)
             .replaceAll(endPattern, ''),
@@ -104,7 +83,7 @@ const resumeParser = ({ resumePath }) => {
         const beginPatternIndex =
           line.indexOf(secondLinePattern) + secondLinePattern.length;
         const endPatternIndex = line.indexOf(endPattern);
-        const cleaned = cleanString(
+        const cleaned = ResumeParser.#cleanString(
           line
             .substring(beginPatternIndex, endPatternIndex)
             .replaceAll(endPattern, ''),
@@ -113,7 +92,7 @@ const resumeParser = ({ resumePath }) => {
 
         currentSecondLine.push(cleaned);
       } else if (line.startsWith(infoPattern)) {
-        const cleaned = cleanString(
+        const cleaned = ResumeParser.#cleanString(
           line.substring(infoPattern.length + 1),
           removeInlineComments
         );
@@ -140,9 +119,9 @@ const resumeParser = ({ resumePath }) => {
     });
 
     return items;
-  };
+  }
 
-  const parseListSection = (section, removeInlineComments = true) => {
+  parseListSection(section, removeInlineComments = true) {
     const itemPattern = String.raw`\item`;
     const circleItemPattern = String.raw`\item[$\circ$]`;
     const beginSubPattern = String.raw`\begin{itemize*}`;
@@ -152,25 +131,25 @@ const resumeParser = ({ resumePath }) => {
     let subItem = false;
     let count = 0;
 
-    rawSections[section].forEach((line) => {
+    this.#rawSections[section].forEach((line) => {
       if (line.startsWith(beginSubPattern)) {
         subItem = true;
       } else if (line.startsWith(endSubPattern)) {
         subItem = false;
       } else if (line.startsWith(itemPattern)) {
-        let cleaned = '';
-
         if (subItem) {
-          cleaned = cleanString(
+          const cleaned = ResumeParser.#cleanString(
             line.substring(circleItemPattern.length + 1),
             removeInlineComments
           );
+
           items[count - 1].subItems.push(cleaned);
         } else {
-          cleaned = cleanString(
+          const cleaned = ResumeParser.#cleanString(
             line.substring(itemPattern.length + 1),
             removeInlineComments
           );
+
           items.push({ mainItem: cleaned, subItems: [] });
           count += 1;
         }
@@ -178,14 +157,13 @@ const resumeParser = ({ resumePath }) => {
     });
 
     return items;
-  };
+  }
 
-  const getLanguages = () => {
+  static getLanguages(skills) {
     const languagesPattern = '% LANGUAGES';
     // Splits the language lists on commas, except within parentheses
     const regexp = /(?!\(.*),(?![^(]*?\))/;
     const langMap = {};
-    const skills = parseListSection('TechnicalSkills', false);
 
     skills.forEach((skill) => {
       if (skill.mainItem.includes(languagesPattern)) {
@@ -195,10 +173,10 @@ const resumeParser = ({ resumePath }) => {
     });
 
     return langMap;
-  };
+  }
 
-  const getMostRecentJob = () => {
-    const job = parseComplexSection('Experience')[0];
+  static getMostRecentJob(jobs) {
+    const job = jobs[0];
 
     const dates = job.secondLine[0][1].split('&ndash;').map((d) => d.trim());
 
@@ -209,24 +187,28 @@ const resumeParser = ({ resumePath }) => {
       title: job.secondLine[0][0].split(',')[0],
       dates,
     };
-  };
+  }
 
-  return {
-    load,
-    parseComplexSection,
-    parseListSection,
-    getLanguages,
-    getMostRecentJob,
-  };
-};
+  static #cleanString(input, removeInlineComments) {
+    let output = input.trim();
 
-const createResumeParser = (resumePath) => {
-  const parser = resumeParser({ resumePath });
-  parser.load();
-  return parser;
-};
+    if (removeInlineComments) {
+      // This regex skips escaped percent signs by using negative lookbehind
+      output = output.split(/(?<!\\)%/)[0].trim();
+    }
 
-export default createResumeParser;
+    output = output.replaceAll(String.raw`\CPP`, 'C++');
+    output = output.replaceAll(String.raw`\break`, '');
+    output = output.replaceAll('--', '&ndash;');
+    output = output.replaceAll(
+      String.raw`\textsuperscript{\textregistered}`,
+      '&reg;'
+    );
+    output = output.replaceAll(String.raw({ raw: '\\' }), '');
+
+    return output;
+  }
+}
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   if (process.argv.length < 4) {
@@ -242,7 +224,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
 
   fs.rmSync(generatedDir, { recursive: true, force: true });
 
-  const parser = createResumeParser(resumePath);
+  const parser = new ResumeParser(resumePath);
 
   const parsed = {
     full: {
@@ -251,8 +233,12 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
       skills: parser.parseListSection('TechnicalSkills'),
     },
     summary: {
-      languages: parser.getLanguages(),
-      mostRecentJob: parser.getMostRecentJob(),
+      languages: ResumeParser.getLanguages(
+        parser.parseListSection('TechnicalSkills', false)
+      ),
+      mostRecentJob: ResumeParser.getMostRecentJob(
+        parser.parseComplexSection('Experience')
+      ),
     },
   };
 
