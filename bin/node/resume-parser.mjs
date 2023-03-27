@@ -47,27 +47,6 @@ export default class ResumeParser {
     });
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  #cleanString(input, removeInlineComments) {
-    let output = input.trim();
-
-    if (removeInlineComments) {
-      // This regex skips escaped percent signs by using negative lookbehind
-      output = output.split(/(?<!\\)%/)[0].trim();
-    }
-
-    output = output.replaceAll(String.raw`\CPP`, 'C++');
-    output = output.replaceAll(String.raw`\break`, '');
-    output = output.replaceAll('--', '&ndash;');
-    output = output.replaceAll(
-      String.raw`\textsuperscript{\textregistered}`,
-      '&reg;'
-    );
-    output = output.replaceAll(String.raw({ raw: '\\' }), '');
-
-    return output;
-  }
-
   parseComplexSection(section, removeInlineComments = true) {
     const urlPattern = '% URL';
     const firstLinePattern = String.raw`{\textbf{`;
@@ -97,7 +76,7 @@ export default class ResumeParser {
         const beginPatternIndex =
           line.indexOf(firstLinePattern) + firstLinePattern.length;
         const endPatternIndex = line.indexOf(endPattern);
-        const cleaned = this.#cleanString(
+        const cleaned = ResumeParser.#cleanString(
           line
             .substring(beginPatternIndex, endPatternIndex)
             .replaceAll(endPattern, ''),
@@ -109,7 +88,7 @@ export default class ResumeParser {
         const beginPatternIndex =
           line.indexOf(secondLinePattern) + secondLinePattern.length;
         const endPatternIndex = line.indexOf(endPattern);
-        const cleaned = this.#cleanString(
+        const cleaned = ResumeParser.#cleanString(
           line
             .substring(beginPatternIndex, endPatternIndex)
             .replaceAll(endPattern, ''),
@@ -118,7 +97,7 @@ export default class ResumeParser {
 
         currentSecondLine.push(cleaned);
       } else if (line.startsWith(infoPattern)) {
-        const cleaned = this.#cleanString(
+        const cleaned = ResumeParser.#cleanString(
           line.substring(infoPattern.length + 1),
           removeInlineComments
         );
@@ -166,13 +145,13 @@ export default class ResumeParser {
         let cleaned = '';
 
         if (subItem) {
-          cleaned = this.#cleanString(
+          cleaned = ResumeParser.#cleanString(
             line.substring(circleItemPattern.length + 1),
             removeInlineComments
           );
           items[count - 1].subItems.push(cleaned);
         } else {
-          cleaned = this.#cleanString(
+          cleaned = ResumeParser.#cleanString(
             line.substring(itemPattern.length + 1),
             removeInlineComments
           );
@@ -214,6 +193,26 @@ export default class ResumeParser {
       title: job.secondLine[0][0].split(',')[0],
       dates,
     };
+  }
+
+  static #cleanString(input, removeInlineComments) {
+    let output = input.trim();
+
+    if (removeInlineComments) {
+      // This regex skips escaped percent signs by using negative lookbehind
+      output = output.split(/(?<!\\)%/)[0].trim();
+    }
+
+    output = output.replaceAll(String.raw`\CPP`, 'C++');
+    output = output.replaceAll(String.raw`\break`, '');
+    output = output.replaceAll('--', '&ndash;');
+    output = output.replaceAll(
+      String.raw`\textsuperscript{\textregistered}`,
+      '&reg;'
+    );
+    output = output.replaceAll(String.raw({ raw: '\\' }), '');
+
+    return output;
   }
 }
 
