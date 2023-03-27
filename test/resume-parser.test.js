@@ -86,9 +86,7 @@ describe('Resume Parser', () => {
 
   describe('summary', () => {
     it('parses language summary', async () => {
-      const items = ResumeParser.getLanguages(
-        parser.parseListSection('TechnicalSkills', false)
-      );
+      const items = parser.getLanguages();
 
       expect(items.desktop).toEqual([
         'Language 1 (Something 1, Something 2)',
@@ -99,9 +97,7 @@ describe('Resume Parser', () => {
     });
 
     it('parses most recent job', async () => {
-      const items = ResumeParser.getMostRecentJob(
-        parser.parseComplexSection('Experience')
-      );
+      const items = parser.getMostRecentJob();
 
       expect(items.employed).toBe(true);
       expect(items.company).toBe('Company 1');

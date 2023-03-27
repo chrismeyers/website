@@ -159,11 +159,12 @@ export default class ResumeParser {
     return items;
   }
 
-  static getLanguages(skills) {
+  getLanguages() {
     const languagesPattern = '% LANGUAGES';
     // Splits the language lists on commas, except within parentheses
     const regexp = /(?!\(.*),(?![^(]*?\))/;
     const langMap = {};
+    const skills = this.parseListSection('TechnicalSkills', false);
 
     skills.forEach((skill) => {
       if (skill.mainItem.includes(languagesPattern)) {
@@ -175,8 +176,8 @@ export default class ResumeParser {
     return langMap;
   }
 
-  static getMostRecentJob(jobs) {
-    const job = jobs[0];
+  getMostRecentJob() {
+    const job = this.parseComplexSection('Experience')[0];
 
     const dates = job.secondLine[0][1].split('&ndash;').map((d) => d.trim());
 
@@ -233,12 +234,8 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
       skills: parser.parseListSection('TechnicalSkills'),
     },
     summary: {
-      languages: ResumeParser.getLanguages(
-        parser.parseListSection('TechnicalSkills', false)
-      ),
-      mostRecentJob: ResumeParser.getMostRecentJob(
-        parser.parseComplexSection('Experience')
-      ),
+      languages: parser.getLanguages(),
+      mostRecentJob: parser.getMostRecentJob(),
     },
   };
 
