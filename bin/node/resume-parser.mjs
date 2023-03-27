@@ -10,11 +10,11 @@ export default class ResumeParser {
   #rawSections = {};
 
   constructor(resumePath) {
-    this.load(resumePath);
+    this.#load(resumePath);
   }
 
-  load(resumePath) {
-    const data = fs.readFileSync(resumePath, 'utf8');
+  #load(resumePath) {
+    const data = fs.readFileSync(resumePath, { encoding: 'utf-8' });
     const lines = data.split('\n');
 
     const beginPattern = '% BEGIN';
