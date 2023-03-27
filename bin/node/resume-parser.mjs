@@ -24,9 +24,7 @@ export default class ResumeParser {
     lines.forEach((line) => {
       const trimmedLine = line.trim();
 
-      if (trimmedLine === '') {
-        return;
-      }
+      if (trimmedLine === '') return;
 
       if (trimmedLine.includes(beginPattern)) {
         // New section
@@ -34,9 +32,7 @@ export default class ResumeParser {
       } else if (section !== '' && !trimmedLine.includes(endPattern)) {
         // Between begin and end
         if (section in this.#rawSections) {
-          const values = this.#rawSections[section];
-          values.push(trimmedLine);
-          this.#rawSections[section] = values;
+          this.#rawSections[section].push(trimmedLine);
         } else {
           this.#rawSections[section] = [trimmedLine];
         }
@@ -62,7 +58,6 @@ export default class ResumeParser {
     let firstLine = [];
     let secondLine = [];
     let info = [];
-
     let currentSecondLine = [];
     let currentInfo = [];
 
@@ -142,19 +137,19 @@ export default class ResumeParser {
       } else if (line.startsWith(endSubPattern)) {
         subItem = false;
       } else if (line.startsWith(itemPattern)) {
-        let cleaned = '';
-
         if (subItem) {
-          cleaned = ResumeParser.#cleanString(
+          const cleaned = ResumeParser.#cleanString(
             line.substring(circleItemPattern.length + 1),
             removeInlineComments
           );
+
           items[count - 1].subItems.push(cleaned);
         } else {
-          cleaned = ResumeParser.#cleanString(
+          const cleaned = ResumeParser.#cleanString(
             line.substring(itemPattern.length + 1),
             removeInlineComments
           );
+
           items.push({ mainItem: cleaned, subItems: [] });
           count += 1;
         }
@@ -164,12 +159,11 @@ export default class ResumeParser {
     return items;
   }
 
-  getLanguages() {
+  static getLanguages(skills) {
     const languagesPattern = '% LANGUAGES';
     // Splits the language lists on commas, except within parentheses
     const regexp = /(?!\(.*),(?![^(]*?\))/;
     const langMap = {};
-    const skills = this.parseListSection('TechnicalSkills', false);
 
     skills.forEach((skill) => {
       if (skill.mainItem.includes(languagesPattern)) {
@@ -181,8 +175,8 @@ export default class ResumeParser {
     return langMap;
   }
 
-  getMostRecentJob() {
-    const job = this.parseComplexSection('Experience')[0];
+  static getMostRecentJob(jobs) {
+    const job = jobs[0];
 
     const dates = job.secondLine[0][1].split('&ndash;').map((d) => d.trim());
 
@@ -239,8 +233,12 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
       skills: parser.parseListSection('TechnicalSkills'),
     },
     summary: {
-      languages: parser.getLanguages(),
-      mostRecentJob: parser.getMostRecentJob(),
+      languages: ResumeParser.getLanguages(
+        parser.parseListSection('TechnicalSkills', false)
+      ),
+      mostRecentJob: ResumeParser.getMostRecentJob(
+        parser.parseComplexSection('Experience')
+      ),
     },
   };
 
