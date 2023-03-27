@@ -1,11 +1,11 @@
 import path from 'node:path';
-import createResumeParser from '../bin/node/resume-parser.mjs';
+import ResumeParser from '../bin/node/resume-parser.mjs';
 
 describe('Resume Parser', () => {
   let parser;
 
   beforeEach(async () => {
-    parser = createResumeParser(
+    parser = new ResumeParser(
       path.join(__dirname, 'fixtures', 'test-resume.latex')
     );
   });
