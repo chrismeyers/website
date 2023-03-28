@@ -81,7 +81,7 @@ const About = () => {
 
       <ul>
         <li>
-          Websites, web applications, and APIs:
+          Websites, web applications, and REST APIs:
           {summary?.languages?.web && (
             <ul data-testid="web-languages">
               {summary.languages.web.map((item) => (
