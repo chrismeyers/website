@@ -49,8 +49,8 @@ export default class ResumeParser {
     const secondLinePattern = String.raw`{\emph{`;
     const endPattern = '}}';
     const infoPattern = String.raw`\item[$\circ$]`;
-    const sameCompanyPattern = '% Same Company';
-    const blockEndPattern = '% BLOCK End';
+    const sameCompanyPattern = '% SAME COMPANY';
+    const blockEndPattern = '% BLOCK END';
 
     const items = [];
 

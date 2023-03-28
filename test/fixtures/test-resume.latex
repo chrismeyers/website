@@ -24,14 +24,14 @@
     \item[$\circ$] Item 1
     \item[$\circ$] Item 2\textsuperscript{\textregistered}
   \end{itemize*}
-  % Same Company
+  % SAME COMPANY
   \headerrow
     {\emph{Position 2}}
     {\emph{Jan. 1234 -- May 1234}}
   \begin{itemize*}
     \item[$\circ$] Item 1
   \end{itemize*}
-  % BLOCK End
+  % BLOCK END
 
   \item
   \headerrow
@@ -47,7 +47,7 @@
     \item[$\circ$] Item 2
     \item[$\circ$] Item 3
   \end{itemize*}
-  % BLOCK End
+  % BLOCK END
 % END Experience
 
 \end{itemize}
@@ -68,7 +68,7 @@
   \headerrow
     {\emph{School}}
     {\emph{Jan. 9999 -- Dec. 9999}}
-  % BLOCK End
+  % BLOCK END
 % END Education
 
 \end{itemize}
