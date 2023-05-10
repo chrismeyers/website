@@ -163,6 +163,7 @@ h2.top {
   flex: 1;
   -webkit-margin-bottom-collapse: separate; /* Fixes margin-bottom for non-chrome browsers */
   font-size: 16px;
+  margin-left: 1px;
 }
 
 .content-text {
