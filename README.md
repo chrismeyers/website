@@ -17,12 +17,17 @@ This is the codebase for my personal website currently located at [https://chris
 ## Docker
 
 [Docker Compose](https://docs.docker.com/compose/) is used to run this project in a Docker container.
-In general, the only command needed is `docker compose up`.
-Refer to the [Docker Compose CLI documentation](https://docs.docker.com/compose/reference/) for more details.
+In general, the only command needed is:
+
+```sh
+$ docker compose up
+```
+
+Refer to the [Docker Compose CLI docs](https://docs.docker.com/compose/reference/) for more information.
 
 ## Deployment
 
-This site is hosted on Vercel and automatically deploys via [GitHub Actions](https://vercel.com/guides/how-can-i-use-github-actions-with-vercel) when pushing or merging to the `main` branch.
+This site is hosted on Vercel and [automatically deploys via GitHub Actions](https://vercel.com/guides/how-can-i-use-github-actions-with-vercel) when pushing or merging to the `main` branch.
 Including `[deploy skip]` or `[skip deploy]` in the HEAD commit message will skip the deploy job.
 
 ## Credit
