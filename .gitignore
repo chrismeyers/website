@@ -1,25 +1,20 @@
+# Dependencies
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Generated output
+build/
+coverage/
+.vercel/
+generated/
 
-# testing
-/coverage
-
-# production
-/build
-
-# misc
-.DS_Store
+# Credentials/secrets
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-generated/
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.vercel
+# Misc
+.DS_Store

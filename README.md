@@ -11,6 +11,7 @@ This is the codebase for my personal website currently located at [https://chris
     ```sh
     $ npm install
     $ npm run generate # Needs to be run whenever the resume is updated
+    $ cp .env.development .env.development.local # Update values
     $ npm run dev
     ```
 
