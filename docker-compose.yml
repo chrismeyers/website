@@ -1,9 +1,15 @@
-version: '3'
+version: '3.9'
+
+networks:
+  chrismeyers-website-net:
+    name: chrismeyers-website-net
 
 services:
   website:
     build: .
     image: chrismeyers-website:latest
     container_name: chrismeyers-website
+    networks:
+      - chrismeyers-website-net
     ports:
       - 8080:80

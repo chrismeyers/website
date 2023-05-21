@@ -17,7 +17,7 @@ This is the codebase for my personal website currently located at [https://chris
 
 ## Docker
 
-[Docker Compose](https://docs.docker.com/compose/) is used to run this project in a Docker container.
+[Docker Compose](https://docs.docker.com/compose/) is used to run this project in a Docker container accessible at http://localhost:8080.
 In general, the only command needed is:
 
 ```sh
