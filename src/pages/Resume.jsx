@@ -23,13 +23,13 @@ const Resume = () => {
             {job.firstLine[1]}
           </li>
 
-          {job.secondLine.map((secondLine, j) => (
+          {job.secondLine.map((secondLine, index) => (
             <Fragment key={`job-secondLine-${secondLine[0]}`}>
               <li
                 className={`${styles.leftColumn} ${styles.subLeftColumn} ${
                   styles.jobTitle
                 } ${
-                  j > 0 && job.info[j].length > 0
+                  index > 0 && job.info[index].length > 0
                     ? styles.sameCompanySpacing
                     : ''
                 }`}
@@ -38,17 +38,17 @@ const Resume = () => {
               </li>
               <li
                 className={`${styles.rightColumn} ${styles.tenure} ${
-                  j > 0 && job.info[j].length > 0
+                  index > 0 && job.info[index].length > 0
                     ? styles.sameCompanySpacing
                     : ''
                 }`}
                 dangerouslySetInnerHTML={{ __html: secondLine[1] }} // eslint-disable-line react/no-danger
               />
 
-              {job.info && job.info[j].length > 0 && (
+              {job.info && job.info[index].length > 0 && (
                 <li className={styles.removeBullets}>
                   <ul className={styles.moreInfoWrapper}>
-                    {job.info[j].map((info) => (
+                    {job.info[index].map((info) => (
                       <li
                         className="more-info"
                         key={`job-info-item-${info}`}
@@ -78,7 +78,7 @@ const Resume = () => {
           <li className={`${styles.rightColumn} ${styles.location}`}>
             {school.firstLine[1]}
           </li>
-          {school.secondLine.map((secondLine, j) => (
+          {school.secondLine.map((secondLine, index) => (
             <Fragment key={`school-secondLine-${secondLine[0]}`}>
               <li
                 className={`${styles.leftColumn} ${styles.subLeftColumn} ${styles.school}`}
@@ -92,10 +92,10 @@ const Resume = () => {
                 dangerouslySetInnerHTML={{ __html: secondLine[1] }} // eslint-disable-line react/no-danger
               />
 
-              {school.info && school.info[j].length > 0 && (
+              {school.info && school.info[index].length > 0 && (
                 <li className={styles.removeBullets}>
                   <ul className={styles.moreInfoWrapper}>
-                    {school.info[j].map((info) => (
+                    {school.info[index].map((info) => (
                       <li
                         className="more-info"
                         key={`school-info-item-${info}`}
