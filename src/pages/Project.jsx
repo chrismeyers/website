@@ -134,35 +134,40 @@ const Project = () => {
                 thumbnail
                 download={false}
               >
-                {data.images.map((image, index) => (
-                  <Fragment key={image.id}>
-                    {index === 0 ? (
-                      <a href={image.path}>
-                        <img
-                          src={image.path}
-                          className={`${styles.imagesFull} ${
-                            styles[image.orientation]
-                          }`}
-                          alt={image.title}
-                          title="Click to enlarge"
-                        />
-                      </a>
-                    ) : (
-                      <div className={styles.imagesSmall} data-src={image.path}>
+                {data.images
+                  .sort((a, b) => a.order - b.order)
+                  .map((image, index) => (
+                    <Fragment key={image.id}>
+                      {index === 0 ? (
                         <a href={image.path}>
                           <img
                             src={image.path}
-                            className={`${styles.imagesSmall} ${
+                            className={`${styles.imagesFull} ${
                               styles[image.orientation]
                             }`}
                             alt={image.title}
                             title="Click to enlarge"
                           />
                         </a>
-                      </div>
-                    )}
-                  </Fragment>
-                ))}
+                      ) : (
+                        <div
+                          className={styles.imagesSmall}
+                          data-src={image.path}
+                        >
+                          <a href={image.path}>
+                            <img
+                              src={image.path}
+                              className={`${styles.imagesSmall} ${
+                                styles[image.orientation]
+                              }`}
+                              alt={image.title}
+                              title="Click to enlarge"
+                            />
+                          </a>
+                        </div>
+                      )}
+                    </Fragment>
+                  ))}
               </LightGallery>
             )}
           </div>
