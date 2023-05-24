@@ -52,7 +52,9 @@ const Build = () => {
                 <dt className="dt-mod">
                   <b>SSD</b>
                 </dt>
-                <dd>{data.ssd}</dd>
+                {data.ssd.map((ssd) => (
+                  <dd key={`${data.id}-ssd-${ssd}`}>{ssd.trim()}</dd>
+                ))}
               </>
             )}
             {data.hdd !== null && (
@@ -60,7 +62,7 @@ const Build = () => {
                 <dt className="dt-mod">
                   <b>HDD</b>
                 </dt>
-                {data.hdd.split(',').map((hdd) => (
+                {data.hdd.map((hdd) => (
                   <dd key={`${data.id}-hdd-${hdd}`}>{hdd.trim()}</dd>
                 ))}
               </>

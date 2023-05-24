@@ -116,8 +116,8 @@ describe('Build page', () => {
     const cool = 'Cold Cooling';
     const mobo = 'Motherboard with a lot of LEDs';
     const ram = '999GB Fast Memory 9999MHz';
-    const hdd = 'Fast HDD 9999GB @ 9999rpm';
-    const ssd = 'Faster SSD 9999GB';
+    const hdd = ['Fast HDD 9999GB @ 9999rpm'];
+    const ssd = ['Faster SSD 9999GB'];
     const gpu = 'The best GPU 99GB';
     const image = null;
     const pcCase = 'Shiny Case';
@@ -166,8 +166,8 @@ describe('Build page', () => {
     const cool = 'Cold Cooling';
     const mobo = 'Motherboard with a lot of LEDs';
     const ram = '999GB Fast Memory 9999MHz';
-    const hdd = 'Fast HDD 9999GB @ 9999rpm, Slow HDD 99GB @ 99rpm';
-    const ssd = 'Faster SSD 9999GB';
+    const hdd = ['Fast HDD 9999GB @ 9999rpm', 'Slow HDD 99GB @ 99rpm'];
+    const ssd = ['Faster SSD 9999GB'];
     const gpu = 'The best GPU 99GB';
     const image = null;
     const pcCase = 'Shiny Case';
@@ -201,9 +201,8 @@ describe('Build page', () => {
     expect(screen.getByText(cool)).toBeInTheDocument();
     expect(screen.getByText(mobo)).toBeInTheDocument();
     expect(screen.getByText(ram)).toBeInTheDocument();
-    const hdds = hdd.split(',').map((h) => h.trim());
-    expect(screen.getByText(hdds[0])).toBeInTheDocument();
-    expect(screen.getByText(hdds[1])).toBeInTheDocument();
+    expect(screen.getByText(hdd[0])).toBeInTheDocument();
+    expect(screen.getByText(hdd[1])).toBeInTheDocument();
     expect(screen.getByText(ssd)).toBeInTheDocument();
     expect(screen.getByText(gpu)).toBeInTheDocument();
     expect(screen.queryByTitle('Click to enlarge')).toBeNull();
@@ -218,8 +217,8 @@ describe('Build page', () => {
     const cool = 'Cold Cooling';
     const mobo = 'Motherboard with a lot of LEDs';
     const ram = '999GB Fast Memory 9999MHz';
-    const hdd = 'Fast HDD 9999GB @ 9999rpm';
-    const ssd = 'Faster SSD 9999GB';
+    const hdd = ['Fast HDD 9999GB @ 9999rpm'];
+    const ssd = ['Faster SSD 9999GB'];
     const gpu = 'The best GPU 99GB';
     const image = {
       id: 1,
