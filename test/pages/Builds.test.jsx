@@ -44,4 +44,20 @@ describe('Builds page', () => {
       `/builds/${id}`
     );
   });
+
+  it('displays multiple builds', async () => {
+    vi.spyOn(data, 'builds', 'get').mockReturnValue([
+      { id: 1, active: true, displayDate: 'Yesterday', cpu: 'ABC @ 123GHz' },
+      { id: 2, active: true, displayDate: 'Today', cpu: 'ZYX @ 987GHz' },
+    ]);
+
+    render(
+      <RouterProvider
+        router={createMemoryRouter([{ path: '', element: <Builds /> }])}
+      />
+    );
+
+    expect(screen.getByText(/Yesterday/)).toBeInTheDocument();
+    expect(screen.getByText(/Today/)).toBeInTheDocument();
+  });
 });

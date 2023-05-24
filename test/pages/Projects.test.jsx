@@ -42,4 +42,20 @@ describe('Projects page', () => {
       `/projects/${id}`
     );
   });
+
+  it('displays multiple projects', async () => {
+    vi.spyOn(data, 'projects', 'get').mockReturnValue([
+      { id: 1, active: true, title: 'Apples' },
+      { id: 1, active: true, title: 'Bananas' },
+    ]);
+
+    render(
+      <RouterProvider
+        router={createMemoryRouter([{ path: '', element: <Projects /> }])}
+      />
+    );
+
+    expect(screen.getByText(/Apples/)).toBeInTheDocument();
+    expect(screen.getByText(/Bananas/)).toBeInTheDocument();
+  });
 });
