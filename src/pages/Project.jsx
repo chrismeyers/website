@@ -96,7 +96,7 @@ const Project = () => {
           <div className={styles.images}>
             {data.images[0].path.toLowerCase().endsWith('.gif') ? (
               <>
-                {data.images.map((image) => (
+                {data.images.slice(0, 1).map((image) => (
                   <Fragment key={image.id}>
                     <div className={styles.gifOverlay} title="Play GIF">
                       <LightGallery
