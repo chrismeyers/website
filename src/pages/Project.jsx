@@ -173,5 +173,3 @@ const Project = () => {
 };
 
 export default Project;
-
-export const projectContentStyles = [styles.project];

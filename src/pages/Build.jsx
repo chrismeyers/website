@@ -100,5 +100,3 @@ const Build = () => {
 };
 
 export default Build;
-
-export const buildContentStyles = [styles.build];

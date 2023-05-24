@@ -4,9 +4,11 @@ import Page from './components/Page';
 import About from './pages/About';
 import Resume from './pages/Resume';
 import Projects from './pages/Projects';
-import Project, { projectContentStyles } from './pages/Project';
+import Project from './pages/Project';
+import projectStyles from './styles/Project.module.css';
 import Builds from './pages/Builds';
-import Build, { buildContentStyles } from './pages/Build';
+import Build from './pages/Build';
+import buildStyles from './styles/Build.module.css';
 import NotFound from './pages/NotFound';
 import Error from './pages/Error';
 
@@ -31,7 +33,7 @@ const router = createBrowserRouter([
           <Page
             header="Project Details"
             content={<Project />}
-            contentStyles={projectContentStyles}
+            contentStyles={[projectStyles.project]}
           />
         ),
       },
@@ -45,7 +47,7 @@ const router = createBrowserRouter([
           <Page
             header="Build Details"
             content={<Build />}
-            contentStyles={buildContentStyles}
+            contentStyles={[buildStyles.build]}
           />
         ),
       },
