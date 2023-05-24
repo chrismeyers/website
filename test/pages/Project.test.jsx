@@ -28,30 +28,19 @@ describe('Project page', () => {
   });
 
   it('handles no active projects', async () => {
-    const id = 1;
-    const title = 'Project Name';
-    const webUrl = 'https://hosted.site';
-    const codeUrl = 'https://hosted.code';
-    const displayDate = 'Test Project, Always and Forever';
-    const lang = 'Language 1';
-    const info = 'Something involving code';
-    const role = 'Solo project';
-    const stat = 'Being maintained';
-    const images = [];
-
     vi.spyOn(data, 'projects', 'get').mockReturnValue([
       {
-        id,
+        id: 1,
         active: false,
-        title,
-        webUrl,
-        codeUrl,
-        displayDate,
-        lang,
-        info,
-        role,
-        stat,
-        images,
+        title: 'Project Name',
+        webUrl: 'https://hosted.site',
+        codeUrl: 'https://hosted.code',
+        displayDate: 'Test Project, Always and Forever',
+        languages: ['Language 1'],
+        info: 'Something involving code',
+        role: 'Solo project',
+        status: 'Being maintained',
+        images: [],
       },
     ]);
 
@@ -74,10 +63,10 @@ describe('Project page', () => {
     const webUrl = 'https://hosted.site';
     const codeUrl = 'https://hosted.code';
     const displayDate = 'Test Project, Always and Forever';
-    const lang = 'Language 1';
+    const languages = ['Language 1'];
     const info = 'Something involving code';
     const role = 'Solo project';
-    const stat = 'Being maintained';
+    const status = 'Being maintained';
     const images = [];
 
     vi.spyOn(data, 'projects', 'get').mockReturnValue([
@@ -88,10 +77,10 @@ describe('Project page', () => {
         webUrl,
         codeUrl,
         displayDate,
-        lang,
+        languages,
         info,
         role,
-        stat,
+        status,
         images,
       },
     ]);
@@ -125,26 +114,26 @@ describe('Project page', () => {
     const webUrl = 'https://hosted.site';
     const codeUrl = 'https://hosted.code';
     const displayDate = 'Test Project, Always and Forever';
-    const lang = 'Language 1';
+    const languages = ['Language 1'];
     const info = 'Something involving code';
     const role = 'Solo project';
-    const stat = 'Being maintained';
+    const status = 'Being maintained';
     const images = [
       {
         id: 1,
         path: '/path/to/1.png',
         thumbnail: null,
         title: 'Image 1',
-        pos: 1,
-        orient: 'square',
+        position: 1,
+        orientation: 'square',
       },
       {
         id: 2,
         path: '/path/to/2.png',
         thumbnail: null,
         title: 'Image 2',
-        pos: 2,
-        orient: 'land',
+        position: 2,
+        orientation: 'landscape',
       },
     ];
 
@@ -156,10 +145,10 @@ describe('Project page', () => {
         webUrl,
         codeUrl,
         displayDate,
-        lang,
+        languages,
         info,
         role,
-        stat,
+        status,
         images,
       },
     ]);
@@ -206,6 +195,7 @@ describe('Project page', () => {
         active: true,
         webUrl,
         codeUrl,
+        languages: [],
       },
     ]);
 
@@ -229,13 +219,13 @@ describe('Project page', () => {
         path: '/path/to/animated.gif',
         thumbnail: '/path/to/thumbnail.png',
         title: 'Image 1',
-        pos: 1,
-        orient: 'square',
+        position: 1,
+        orientation: 'square',
       },
     ];
 
     vi.spyOn(data, 'projects', 'get').mockReturnValue([
-      { id: 1, active: true, title, images },
+      { id: 1, active: true, title, images, languages: [] },
     ]);
 
     render(<Project />);

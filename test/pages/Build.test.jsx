@@ -28,34 +28,21 @@ describe('Build page', () => {
   });
 
   it('handles no active builds', async () => {
-    const id = 1;
-    const displayDate = 'Today - Built for Someone';
-    const cpu = 'Intel 1000000K CPU @ 99.9GHz';
-    const cool = null;
-    const mobo = 'Motherboard with a lot of LEDs';
-    const ram = '999GB Fast Memory 9999MHz';
-    const hdd = null;
-    const ssd = null;
-    const gpu = 'The best GPU 99GB';
-    const image = null;
-    const pcCase = 'Shiny Case';
-    const psu = 'Powerful PSU';
-
     vi.spyOn(data, 'builds', 'get').mockReturnValue([
       {
-        id,
+        id: 1,
         active: false,
-        displayDate,
-        cpu,
-        cool,
-        mobo,
-        ram,
-        hdd,
-        ssd,
-        gpu,
-        image,
-        case: pcCase,
-        psu,
+        displayDate: 'Today - Built for Someone',
+        cpu: 'Intel 1000000K CPU @ 99.9GHz',
+        cool: null,
+        mobo: 'Motherboard with a lot of LEDs',
+        ram: '999GB Fast Memory 9999MHz',
+        hdd: null,
+        ssd: null,
+        gpu: 'The best GPU 99GB',
+        image: null,
+        case: 'Shiny Case',
+        psu: 'Powerful PSU',
       },
     ]);
 
@@ -239,8 +226,8 @@ describe('Build page', () => {
       path: '/path/to/1.png',
       thumbnail: null,
       title: 'Image 1',
-      pos: 1,
-      orient: 'land',
+      position: 1,
+      orientation: 'landscape',
     };
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';

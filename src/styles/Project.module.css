@@ -27,7 +27,7 @@
   border-color: #707070;
 }
 
-.imagesSmall.port {
+.imagesSmall.portrait {
   height: 50px;
   width: 25px;
   margin-right: 4px;
@@ -36,7 +36,7 @@
   border-color: #707070;
 }
 
-.imagesSmall.land {
+.imagesSmall.landscape {
   height: 25px;
   width: 60px;
   margin-right: 4px;
@@ -46,8 +46,8 @@
 }
 
 .imagesFull.square,
-.imagesFull.land,
-.imagesFull.port {
+.imagesFull.landscape,
+.imagesFull.portrait {
   border-style: solid;
   border-width: 1px;
   border-color: #707070;
@@ -91,11 +91,11 @@
     max-width: 100%;
   }
 
-  .imagesFull.land {
+  .imagesFull.landscape {
     max-width: 100%;
   }
 
-  .imagesFull.port {
+  .imagesFull.portrait {
     max-width: 100%;
   }
 }
@@ -111,8 +111,8 @@
   }
 
   .imagesFull.square,
-  .imagesFull.land,
-  .imagesFull.port {
+  .imagesFull.landscape,
+  .imagesFull.portrait {
     height: 100%;
     width: 100%;
   }
@@ -137,8 +137,8 @@
   }
 
   .imagesFull.square,
-  .imagesFull.land,
-  .imagesFull.port {
+  .imagesFull.landscape,
+  .imagesFull.portrait {
     margin-top: 0;
     height: 80%;
     width: 80%;
@@ -153,12 +153,12 @@
     width: 200px;
     margin-right: 20px;
   }
-  .imagesSmall.land {
+  .imagesSmall.landscape {
     height: 40%;
     width: 40%;
     margin-right: 20px;
   }
-  .imagesSmall.port {
+  .imagesSmall.portrait {
     height: 25%;
     width: 25%;
     margin-right: 20px;

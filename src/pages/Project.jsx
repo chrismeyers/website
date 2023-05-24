@@ -44,7 +44,7 @@ const Project = () => {
               <b>Language(s)</b>
             </dt>
             <dd
-              dangerouslySetInnerHTML={{ __html: data.lang }} // eslint-disable-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: data.languages.join(', ') }} // eslint-disable-line react/no-danger
             />
 
             <dt className="dt-mod">
@@ -62,7 +62,7 @@ const Project = () => {
             <dt className="dt-mod">
               <b>Status</b>
             </dt>
-            <dd>{data.stat}</dd>
+            <dd>{data.status}</dd>
 
             <dt className="dt-mod dt-links">
               <b>Links</b>
@@ -110,7 +110,7 @@ const Project = () => {
                           <img
                             src={image.thumbnail}
                             className={`${styles.imagesFull} ${
-                              styles[image.orient]
+                              styles[image.orientation]
                             }`}
                             alt={image.title}
                             title="Click to enlarge"
@@ -141,7 +141,7 @@ const Project = () => {
                         <img
                           src={image.path}
                           className={`${styles.imagesFull} ${
-                            styles[image.orient]
+                            styles[image.orientation]
                           }`}
                           alt={image.title}
                           title="Click to enlarge"
@@ -153,7 +153,7 @@ const Project = () => {
                           <img
                             src={image.path}
                             className={`${styles.imagesSmall} ${
-                              styles[image.orient]
+                              styles[image.orientation]
                             }`}
                             alt={image.title}
                             title="Click to enlarge"

@@ -12,8 +12,8 @@
   cursor: pointer;
 }
 
-img.land,
-img.port {
+img.landscape,
+img.portrait {
   border-style: solid;
   border-width: 1px;
   border-color: #707070;
@@ -36,11 +36,11 @@ img.port {
     flex: 2;
   }
 
-  img.land {
+  img.landscape {
     max-width: 100%;
   }
 
-  img.port {
+  img.portrait {
     max-width: 100%;
   }
 }
@@ -55,13 +55,13 @@ img.port {
     text-align: center;
   }
 
-  img.land,
-  img.port {
+  img.landscape,
+  img.portrait {
     height: 100%;
     width: 100%;
   }
 
-  img.port {
+  img.portrait {
     max-height: 525px;
     max-width: 406px;
   }
@@ -75,11 +75,11 @@ img.port {
     margin-top: 50px;
   }
 
-  img.land {
+  img.landscape {
     height: 100%;
     width: 100%;
   }
-  img.port {
+  img.portrait {
     height: 60%;
     width: 60%;
   }
