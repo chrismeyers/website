@@ -11,7 +11,7 @@ COPY . .
 RUN npm run generate
 RUN npm run build
 
-FROM nginx:mainline-alpine-slim
+FROM nginx:1.25.1-alpine-slim
 
 WORKDIR /app
 
