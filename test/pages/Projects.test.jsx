@@ -46,7 +46,7 @@ describe('Projects page', () => {
   it('displays multiple projects', async () => {
     vi.spyOn(data, 'projects', 'get').mockReturnValue([
       { id: 1, active: true, title: 'Apples' },
-      { id: 1, active: true, title: 'Bananas' },
+      { id: 2, active: true, title: 'Bananas' },
     ]);
 
     render(
