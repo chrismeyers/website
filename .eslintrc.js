@@ -10,6 +10,7 @@ module.exports = {
   rules: {
     'no-param-reassign': ['error', { props: false }],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+    'import/prefer-default-export': 'off',
     'testing-library/no-node-access': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',

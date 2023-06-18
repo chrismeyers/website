@@ -2,7 +2,7 @@ import { useContext, useEffect, useState, useCallback, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { THEMES } from '../constants';
 import styles from '../styles/Prompt.module.css';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext } from '../context/contexts';
 
 let CONSOLE_MESSAGE_DISPLAYED = false;
 

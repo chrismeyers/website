@@ -1,10 +1,9 @@
-import { createContext, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { THEMES } from '../constants';
+import { ThemeContext } from './contexts';
 
-export const ThemeContext = createContext();
-
-export const ThemeProvider = ({ children }) => {
+const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(localStorage.getItem('theme'));
 
   const systemThemeDarkMediaQuery = '(prefers-color-scheme: dark)';
@@ -78,3 +77,5 @@ export const ThemeProvider = ({ children }) => {
 ThemeProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
+
+export default ThemeProvider;

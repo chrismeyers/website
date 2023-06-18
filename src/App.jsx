@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import './App.css';
-import { ThemeProvider } from './context/ThemeContext';
+import ThemeProvider from './context/ThemeProvider';
 import { FullNav, MobileNav } from './components/Navigation';
 import Prompt from './components/Prompt';
 import Footer from './components/Footer';

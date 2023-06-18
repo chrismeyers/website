@@ -8,7 +8,7 @@ import { ReactComponent as SunIcon } from '../assets/images/icons/sun.svg';
 import { ReactComponent as MoonIcon } from '../assets/images/icons/moon.svg';
 import { GITHUB_URL, LINKEDIN_URL, MAILTO_MESSAGE, THEMES } from '../constants';
 import styles from '../styles/Footer.module.css';
-import { ThemeContext } from '../context/ThemeContext';
+import { ThemeContext } from '../context/contexts';
 
 const Footer = ({ inMenu }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
