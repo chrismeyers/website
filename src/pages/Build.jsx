@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
+import Page from '../components/Page';
 import { builds } from '../assets/data';
 import { DEFAULT_DOCUMENT_TITLE, LIGHTGALLERY_LICENSE } from '../constants';
 import styles from '../styles/Build.module.css';
@@ -18,7 +19,7 @@ const Build = () => {
   document.title = `Build Details | ${data.displayDate} | ${DEFAULT_DOCUMENT_TITLE}`;
 
   return (
-    <div>
+    <Page header="Build Details" contentStyles={[styles.build]}>
       <h2>{data.displayDate}</h2>
       <div className={styles.info}>
         <div className={styles.specs}>
@@ -97,7 +98,7 @@ const Build = () => {
           </div>
         )}
       </div>
-    </div>
+    </Page>
   );
 };
 

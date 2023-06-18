@@ -1,4 +1,5 @@
 import { Link, useRouteError } from 'react-router-dom';
+import Page from '../components/Page';
 
 const Error = () => {
   const error = useRouteError();
@@ -7,7 +8,7 @@ const Error = () => {
   console.error(error);
 
   return (
-    <>
+    <Page header="An Error Has Occurred">
       <p className="center">Something went terribly wrong!</p>
       <p className="center">
         Don&apos;t panic, go back to the{' '}
@@ -16,7 +17,7 @@ const Error = () => {
         </Link>
         !
       </p>
-    </>
+    </Page>
   );
 };
 

@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import Page from '../components/Page';
 import { full as resume } from '../assets/generated/resume';
 import { DEFAULT_DOCUMENT_TITLE, MAILTO_RESUME } from '../constants';
 import styles from '../styles/Resume.module.css';
@@ -7,7 +8,7 @@ const Resume = () => {
   document.title = `Résumé | ${DEFAULT_DOCUMENT_TITLE}`;
 
   return (
-    <>
+    <Page header="Résumé">
       <h2 className="top">Experience</h2>
       {resume?.experience?.map((job) => (
         <ul
@@ -138,7 +139,7 @@ const Resume = () => {
       >
         Request the PDF version of my résumé
       </a>
-    </>
+    </Page>
   );
 };
 

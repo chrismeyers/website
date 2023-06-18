@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
+import Page from '../components/Page';
 import { ReactComponent as ExternalLinkIcon } from '../assets/images/icons/link-external.svg';
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
 import { ReactComponent as PlayIcon } from '../assets/images/icons/play.svg';
@@ -34,7 +35,7 @@ const Project = () => {
   document.title = `Project Details | ${data.title} | ${DEFAULT_DOCUMENT_TITLE}`;
 
   return (
-    <div>
+    <Page header="Project Details" contentStyles={[styles.project]}>
       <h2>{data.title}</h2>
       <h3>{data.displayDate}</h3>
       <div className={styles.wrapper}>
@@ -173,7 +174,7 @@ const Project = () => {
           </div>
         )}
       </div>
-    </div>
+    </Page>
   );
 };
 

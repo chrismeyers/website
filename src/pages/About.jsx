@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
+import Page from '../components/Page';
 import { summary } from '../assets/generated/resume';
 import {
   MAILTO_MESSAGE,
@@ -12,7 +13,7 @@ const About = () => {
   document.title = DEFAULT_DOCUMENT_TITLE;
 
   return (
-    <>
+    <Page header="About">
       <span>
         Hey, my name is Chris Meyers and I am a software engineer and technology
         enthusiast. Here are some things you should know about me:
@@ -117,7 +118,7 @@ const About = () => {
         </a>
         .
       </span>
-    </>
+    </Page>
   );
 };
 

@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import Page from '../components/Page';
 import { projects } from '../assets/data';
 import { DEFAULT_DOCUMENT_TITLE } from '../constants';
 import styles from '../styles/Projects.module.css';
@@ -10,7 +11,7 @@ const Projects = () => {
   const data = projects.filter((item) => item.active);
 
   return (
-    <div>
+    <Page header="Projects">
       {data?.map((project, index) => (
         <Fragment key={project.id}>
           <div>
@@ -48,7 +49,7 @@ const Projects = () => {
           )}
         </Fragment>
       ))}
-    </div>
+    </Page>
   );
 };
 
