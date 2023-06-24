@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState, useCallback, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { THEMES } from '../constants';
 import styles from '../styles/Prompt.module.css';
 import { ThemeContext } from '../context/contexts';
 
@@ -159,10 +158,6 @@ const Prompt = () => {
   }, [hidePrompt]);
 
   const help = useCallback(() => {
-    const availableThemes = Object.values(THEMES).reduce(
-      (acc, cur) => `${acc}, ${cur}`
-    );
-
     // prettier-ignore
     stdout(`Usage: command [arg1] [arg2] ...
   Available commands:
@@ -170,7 +165,7 @@ const Prompt = () => {
   cd     - navigates to the given arg
   toggle - toggles the output window
   theme  - sets the website theme to the arg
-           themes: ${availableThemes}
+           themes: light, dark
   clear  - clears the output window
   exit   - closes the command prompt
   help   - prints this message

@@ -6,7 +6,7 @@ import { ReactComponent as LinkedInIcon } from '../assets/images/icons/linkedin.
 import { ReactComponent as MailIcon } from '../assets/images/icons/mail.svg';
 import { ReactComponent as SunIcon } from '../assets/images/icons/sun.svg';
 import { ReactComponent as MoonIcon } from '../assets/images/icons/moon.svg';
-import { GITHUB_URL, LINKEDIN_URL, MAILTO_MESSAGE, THEMES } from '../constants';
+import { GITHUB_URL, LINKEDIN_URL, MAILTO_MESSAGE } from '../constants';
 import styles from '../styles/Footer.module.css';
 import { ThemeContext } from '../context/contexts';
 
@@ -56,7 +56,7 @@ const Footer = ({ inMenu }) => {
         <div className={styles.theme}>
           <Switch
             onChange={toggleTheme}
-            checked={theme === THEMES.dark}
+            checked={theme === 'dark'}
             onColor="#5bb75b"
             offColor="#bbbbbb"
             aria-label="Toggle website theme"

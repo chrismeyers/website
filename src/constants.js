@@ -1,4 +1,3 @@
-export const THEMES = { light: 'light', dark: 'dark' };
 export const MOBILE_BREAKPOINT = 970; // px
 export const GITHUB_URL = 'https://github.com/chrismeyers';
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/chris-meyers';

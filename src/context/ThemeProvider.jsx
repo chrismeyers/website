@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { THEMES } from '../constants';
 import { ThemeContext } from './contexts';
 
 const ThemeProvider = ({ children }) => {
@@ -12,11 +11,11 @@ const ThemeProvider = ({ children }) => {
     if (!theme) {
       if (window.matchMedia) {
         const init = window.matchMedia(systemThemeDarkMediaQuery).matches
-          ? THEMES.dark
-          : THEMES.light;
+          ? 'dark'
+          : 'light';
         setTheme(init);
       } else {
-        setTheme(THEMES.light);
+        setTheme('light');
       }
     }
 
@@ -26,7 +25,7 @@ const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     const systemThemeChangeFn = (e) => {
-      const which = e.matches ? THEMES.dark : THEMES.light;
+      const which = e.matches ? 'dark' : 'light';
       setTheme(which);
     };
 
@@ -58,10 +57,10 @@ const ThemeProvider = ({ children }) => {
         () => ({
           theme,
           toggleTheme: () => {
-            setTheme(theme === THEMES.light ? THEMES.dark : THEMES.light);
+            setTheme(theme === 'light' ? 'dark' : 'light');
           },
           applyTheme: (which) => {
-            if (Object.values(THEMES).includes(which)) {
+            if (['light', 'dark'].includes(which)) {
               setTheme(which);
             }
           },
