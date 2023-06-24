@@ -2,13 +2,13 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Page from '../components/Page';
 import { builds } from '../assets/data';
-import { DEFAULT_DOCUMENT_TITLE } from '../constants';
+import { SLOGAN } from '../constants';
 import styles from '../styles/Builds.module.css';
 
 const cleanCPU = (cpu) => cpu.split('@')[0].trim();
 
 const Builds = () => {
-  document.title = `Builds | ${DEFAULT_DOCUMENT_TITLE}`;
+  document.title = `Builds | ${SLOGAN}`;
 
   const data = builds.filter((item) => item.active);
 

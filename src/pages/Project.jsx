@@ -8,7 +8,7 @@ import { ReactComponent as ExternalLinkIcon } from '../assets/images/icons/link-
 import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
 import { ReactComponent as PlayIcon } from '../assets/images/icons/play.svg';
 import { projects } from '../assets/data';
-import { DEFAULT_DOCUMENT_TITLE, LIGHTGALLERY_LICENSE } from '../constants';
+import { SLOGAN, LIGHTGALLERY_LICENSE } from '../constants';
 import styles from '../styles/Project.module.css';
 import NotFound from './NotFound';
 
@@ -32,7 +32,7 @@ const Project = () => {
 
   if (!data) return <NotFound />;
 
-  document.title = `Project Details | ${data.title} | ${DEFAULT_DOCUMENT_TITLE}`;
+  document.title = `Project Details | ${data.title} | ${SLOGAN}`;
 
   return (
     <Page header="Project Details" contentStyles={[styles.project]}>

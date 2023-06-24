@@ -5,6 +5,7 @@ import Footer from './Footer';
 import useClickOutside from '../hooks/useClickOutside';
 import fullStyles from '../styles/FullNav.module.css';
 import mobileStyles from '../styles/MobileNav.module.css';
+import { SLOGAN } from '../constants';
 
 const NAVIGATION = [
   { name: 'About', path: '/', hasChildren: false },
@@ -30,11 +31,7 @@ export const FullNav = () => {
       <div className={fullStyles.fullMenu}>
         <Link to="/">
           <span className={fullStyles.sideNavLogo}>
-            <Logo
-              alt="Chris Meyers. Developer, Tech enthusiast."
-              className={fullStyles.bannerImg}
-              title="Home"
-            />
+            <Logo alt={SLOGAN} className={fullStyles.bannerImg} title="Home" />
           </span>
         </Link>
         <ul className={fullStyles.sideNavItems}>
@@ -88,7 +85,7 @@ export const MobileNav = () => {
           <div className={mobileStyles.smallNavLogo}>
             <Link to="/">
               <Logo
-                alt="Chris Meyers. Developer, Tech enthusiast."
+                alt={SLOGAN}
                 className={mobileStyles.bannerImgSmall}
                 title="Home"
               />

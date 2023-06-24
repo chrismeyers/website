@@ -3,7 +3,7 @@ import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
 import Page from '../components/Page';
 import { builds } from '../assets/data';
-import { DEFAULT_DOCUMENT_TITLE, LIGHTGALLERY_LICENSE } from '../constants';
+import { SLOGAN, LIGHTGALLERY_LICENSE } from '../constants';
 import styles from '../styles/Build.module.css';
 import NotFound from './NotFound';
 
@@ -16,7 +16,7 @@ const Build = () => {
 
   if (!data) return <NotFound />;
 
-  document.title = `Build Details | ${data.displayDate} | ${DEFAULT_DOCUMENT_TITLE}`;
+  document.title = `Build Details | ${data.displayDate} | ${SLOGAN}`;
 
   return (
     <Page header="Build Details" contentStyles={[styles.build]}>

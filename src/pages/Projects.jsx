@@ -2,11 +2,11 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Page from '../components/Page';
 import { projects } from '../assets/data';
-import { DEFAULT_DOCUMENT_TITLE } from '../constants';
+import { SLOGAN } from '../constants';
 import styles from '../styles/Projects.module.css';
 
 const Projects = () => {
-  document.title = `Projects | ${DEFAULT_DOCUMENT_TITLE}`;
+  document.title = `Projects | ${SLOGAN}`;
 
   const data = projects.filter((item) => item.active);
 

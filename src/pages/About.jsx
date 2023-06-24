@@ -3,14 +3,10 @@ import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
 import Page from '../components/Page';
 import { summary } from '../assets/generated/resume';
-import {
-  MAILTO_MESSAGE,
-  DEFAULT_DOCUMENT_TITLE,
-  LIGHTGALLERY_LICENSE,
-} from '../constants';
+import { MAILTO_MESSAGE, SLOGAN, LIGHTGALLERY_LICENSE } from '../constants';
 
 const About = () => {
-  document.title = DEFAULT_DOCUMENT_TITLE;
+  document.title = SLOGAN;
 
   return (
     <Page header="About">
