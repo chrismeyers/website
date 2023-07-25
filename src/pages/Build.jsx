@@ -88,7 +88,7 @@ const Build = () => {
               <a href={data.image.path}>
                 <img
                   src={data.image.path}
-                  className={`${styles[data.image.orientation]}`}
+                  className={styles[data.image.orientation]}
                   alt={data.image.title}
                   data-sub-html={data.image.title}
                   title="Click to enlarge"
