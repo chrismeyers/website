@@ -100,7 +100,7 @@ const About = () => {
       </ul>
 
       <span>
-        As a professional software engineer, I strive to write clean, modular,
+        As a professional software engineer, I strive to write simple, modular,
         and maintainable code. My primary goal is to create innovative and
         usable applications that solve problems. If you have any questions,
         comments, or would like to work together on a project, please{' '}
