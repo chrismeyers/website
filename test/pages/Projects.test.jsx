@@ -1,10 +1,14 @@
-import { vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import Projects from '../../src/pages/Projects';
 import * as data from '../../src/assets/data';
 
 describe('Projects page', () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   it('displays project summary correctly', async () => {
     const id = 1;
     const title = 'Project Name';

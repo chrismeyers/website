@@ -1,10 +1,14 @@
-import { vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import Resume from '../../src/pages/Resume';
 import styles from '../../src/styles/Resume.module.css';
 import * as resume from '../../src/assets/generated/resume';
 
 describe('Resume page', () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   it('displays experience section correctly', async () => {
     vi.spyOn(resume, 'full', 'get').mockReturnValue({
       experience: [
