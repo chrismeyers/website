@@ -518,69 +518,6 @@ export const projects = [
     images: [],
   },
   {
-    id: 10,
-    active: false,
-    title: 'Trumppet',
-    webUrl: null,
-    codeUrl: 'https://github.com/chrismeyers/trumppet',
-    displayDate: 'Personal Project, February 2018',
-    startedDate: '2018-02-01T00:00:00.000Z',
-    languages: ['Python'],
-    info: `
-      Trumppet is a Donald Trump tweet analyzer that periodically retrieves tweets from Donald Trump
-      (<a href="https://twitter.com/realDonaldTrump" class="fancytxt">@realDonaldTrump</a>) and
-      stores the data in a MongoDB database. Linguistic analysis is then performed on this data.
-      <br><br>
-      This project is comprised of four components: trumppet-client, trumppet-server, a Flask REST
-      API connecting the two, and a website.`,
-    role: 'Solo Project',
-    status: 'Complete',
-    images: [
-      {
-        id: 28,
-        path: '/images/projects/trumppet/trumppet_landing.png',
-        thumbnail: null,
-        title: 'Trumppet website landing page',
-        order: 1,
-        orientation: 'landscape',
-      },
-      {
-        id: 29,
-        path: '/images/projects/trumppet/trumppet_playback.png',
-        thumbnail: null,
-        title: 'Playback screen that displays a list of  previous tweets',
-        order: 2,
-        orientation: 'square',
-      },
-      {
-        id: 30,
-        path: '/images/projects/trumppet/trumppet_freq.png',
-        thumbnail: null,
-        title:
-          "Displays a list of unique words and the number of times they're used throughout the tweet database",
-        order: 3,
-        orientation: 'square',
-      },
-      {
-        id: 31,
-        path: '/images/projects/trumppet/trumppet_search.png',
-        thumbnail: null,
-        title: 'Searches the tweet database for a specified word or phrase',
-        order: 4,
-        orientation: 'square',
-      },
-      {
-        id: 32,
-        path: '/images/projects/trumppet/trumppet_freestyle.png',
-        thumbnail: null,
-        title:
-          'Generates a Trumpian-style tweet: Sentance. Sentance. Exclamation! (NOTE: these tweets are not real)',
-        order: 5,
-        orientation: 'square',
-      },
-    ],
-  },
-  {
     id: 11,
     active: true,
     title: 'pleasehold',
