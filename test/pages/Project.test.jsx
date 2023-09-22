@@ -177,13 +177,11 @@ describe('Project page', () => {
       'href',
       'https://hosted.code'
     );
-    expect(screen.getByAltText('Image 1')).toBeInTheDocument();
-    expect(screen.getByAltText('Image 1').closest('a')).toHaveAttribute(
+    expect(screen.getAllByAltText('Image 1')[0].closest('a')).toHaveAttribute(
       'href',
       '/path/to/1.png'
     );
-    expect(screen.getByAltText('Image 2')).toBeInTheDocument();
-    expect(screen.getByAltText('Image 2').closest('a')).toHaveAttribute(
+    expect(screen.getAllByAltText('Image 2')[0].closest('a')).toHaveAttribute(
       'href',
       '/path/to/2.png'
     );

@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ReactComponent as Logo } from '../assets/images/logos/v3/ccm-logo.svg';
+import Logo from '../assets/images/logos/v3/ccm-logo.svg';
 import Footer from './Footer';
 import useClickOutside from '../hooks/useClickOutside';
 import fullStyles from '../styles/FullNav.module.css';

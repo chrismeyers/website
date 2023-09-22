@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import Switch from 'react-switch';
 import PropTypes from 'prop-types';
-import { ReactComponent as GithubIcon } from '../assets/images/icons/github.svg';
-import { ReactComponent as LinkedInIcon } from '../assets/images/icons/linkedin.svg';
-import { ReactComponent as MailIcon } from '../assets/images/icons/mail.svg';
-import { ReactComponent as SunIcon } from '../assets/images/icons/sun.svg';
-import { ReactComponent as MoonIcon } from '../assets/images/icons/moon.svg';
+import GithubIcon from '../assets/images/icons/github.svg';
+import LinkedInIcon from '../assets/images/icons/linkedin.svg';
+import MailIcon from '../assets/images/icons/mail.svg';
+import SunIcon from '../assets/images/icons/sun.svg';
+import MoonIcon from '../assets/images/icons/moon.svg';
 import { GITHUB_URL, LINKEDIN_URL, MAILTO_MESSAGE } from '../constants';
 import styles from '../styles/Footer.module.css';
 import { ThemeContext } from '../context/contexts';
