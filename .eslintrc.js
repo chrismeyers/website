@@ -8,18 +8,14 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:import/recommended',
-    'plugin:jsx-a11y/recommended',
+    'airbnb',
+    'airbnb/hooks',
     'plugin:prettier/recommended',
   ],
   rules: {
     'no-param-reassign': ['error', { props: false }],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
-    'no-console': 'warn',
     'import/prefer-default-export': 'off',
-    'import/order': 'error',
     'import/no-extraneous-dependencies': [
       'error',
       {
@@ -28,7 +24,6 @@ module.exports = {
       },
     ],
     'testing-library/no-node-access': 'off',
-    'react/no-danger': 'warn',
     'react/react-in-jsx-scope': 'off',
     'react/function-component-definition': [
       'error',
@@ -37,20 +32,5 @@ module.exports = {
   },
   parserOptions: {
     ecmaVersion: 'latest',
-  },
-  settings: {
-    react: {
-      version: 'detect',
-    },
-    'import/extensions': ['.js', '.mjs', '.jsx'],
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.mjs', '.jsx', '.json'],
-      },
-    },
-    'import/ignore': [
-      'node_modules',
-      '\\.(coffee|scss|css|less|hbs|svg|json)$',
-    ],
   },
 };
