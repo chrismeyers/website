@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import { useContext } from 'react';
+import PropTypes from 'prop-types';
 import Switch from 'react-switch';
 import GithubIcon from '../assets/images/icons/github.svg';
 import LinkedInIcon from '../assets/images/icons/linkedin.svg';

@@ -1,7 +1,7 @@
+import { Fragment } from 'react';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import lgZoom from 'lightgallery/plugins/zoom';
 import LightGallery from 'lightgallery/react';
-import { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
 import { projects } from '../assets/data';
 import GithubIcon from '../assets/images/icons/github.svg';
