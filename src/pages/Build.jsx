@@ -1,9 +1,9 @@
-import { useParams } from 'react-router-dom';
-import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
-import Page from '../components/Page';
+import LightGallery from 'lightgallery/react';
+import { useParams } from 'react-router-dom';
 import { builds } from '../assets/data';
-import { SLOGAN, LIGHTGALLERY_LICENSE } from '../constants';
+import Page from '../components/Page';
+import { LIGHTGALLERY_LICENSE, SLOGAN } from '../constants';
 import styles from '../styles/Build.module.css';
 import NotFound from './NotFound';
 

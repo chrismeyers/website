@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import _throttle from 'lodash/throttle';
+import { useEffect, useState } from 'react';
 import { MOBILE_BREAKPOINT } from '../constants';
 
 const useScreenResize = () => {

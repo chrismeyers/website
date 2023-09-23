@@ -1,8 +1,8 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import Build from '../../src/pages/Build';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import * as data from '../../src/assets/data';
+import Build from '../../src/pages/Build';
 
 vi.mock('react-router-dom', async () => ({
   ...(await vi.importActual('react-router-dom')),

@@ -1,14 +1,14 @@
+import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import Switch from 'react-switch';
-import PropTypes from 'prop-types';
 import GithubIcon from '../assets/images/icons/github.svg';
 import LinkedInIcon from '../assets/images/icons/linkedin.svg';
 import MailIcon from '../assets/images/icons/mail.svg';
-import SunIcon from '../assets/images/icons/sun.svg';
 import MoonIcon from '../assets/images/icons/moon.svg';
+import SunIcon from '../assets/images/icons/sun.svg';
 import { GITHUB_URL, LINKEDIN_URL, MAILTO_MESSAGE } from '../constants';
-import styles from '../styles/Footer.module.css';
 import { ThemeContext } from '../context/contexts';
+import styles from '../styles/Footer.module.css';
 
 const Footer = ({ inMenu }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);

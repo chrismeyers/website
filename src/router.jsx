@@ -1,13 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import About from './pages/About';
-import Resume from './pages/Resume';
-import Projects from './pages/Projects';
-import Project from './pages/Project';
-import Builds from './pages/Builds';
 import Build from './pages/Build';
-import NotFound from './pages/NotFound';
+import Builds from './pages/Builds';
 import Error from './pages/Error';
+import NotFound from './pages/NotFound';
+import Project from './pages/Project';
+import Projects from './pages/Projects';
+import Resume from './pages/Resume';
 
 const router = createBrowserRouter([
   {

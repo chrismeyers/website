@@ -1,14 +1,14 @@
+import lgThumbnail from 'lightgallery/plugins/thumbnail';
+import lgZoom from 'lightgallery/plugins/zoom';
+import LightGallery from 'lightgallery/react';
 import { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
-import LightGallery from 'lightgallery/react';
-import lgZoom from 'lightgallery/plugins/zoom';
-import lgThumbnail from 'lightgallery/plugins/thumbnail';
-import Page from '../components/Page';
-import ExternalLinkIcon from '../assets/images/icons/link-external.svg';
-import GithubIcon from '../assets/images/icons/github.svg';
-import PlayIcon from '../assets/images/icons/play.svg';
 import { projects } from '../assets/data';
-import { SLOGAN, LIGHTGALLERY_LICENSE } from '../constants';
+import GithubIcon from '../assets/images/icons/github.svg';
+import ExternalLinkIcon from '../assets/images/icons/link-external.svg';
+import PlayIcon from '../assets/images/icons/play.svg';
+import Page from '../components/Page';
+import { LIGHTGALLERY_LICENSE, SLOGAN } from '../constants';
 import styles from '../styles/Project.module.css';
 import NotFound from './NotFound';
 

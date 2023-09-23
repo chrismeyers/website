@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
 import './App.css';
-import ThemeProvider from './context/ThemeProvider';
+import Footer from './components/Footer';
 import { FullNav, MobileNav } from './components/Navigation';
 import Prompt from './components/Prompt';
-import Footer from './components/Footer';
+import ThemeProvider from './context/ThemeProvider';
 import useScreenResize from './hooks/useScreenResize';
 
 const App = () => {

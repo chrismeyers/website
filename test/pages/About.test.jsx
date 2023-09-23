@@ -1,8 +1,8 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import About from '../../src/pages/About';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import * as resume from '../../src/assets/generated/resume';
+import About from '../../src/pages/About';
 
 describe('About page', () => {
   afterEach(() => {

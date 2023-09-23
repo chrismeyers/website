@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
-import LightGallery from 'lightgallery/react';
 import lgZoom from 'lightgallery/plugins/zoom';
-import Page from '../components/Page';
+import LightGallery from 'lightgallery/react';
+import { Link } from 'react-router-dom';
 import { summary } from '../assets/generated/resume';
-import { MAILTO_MESSAGE, SLOGAN, LIGHTGALLERY_LICENSE } from '../constants';
+import Page from '../components/Page';
+import { LIGHTGALLERY_LICENSE, MAILTO_MESSAGE, SLOGAN } from '../constants';
 
 const About = () => {
   document.title = SLOGAN;

@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState, useCallback, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import styles from '../styles/Prompt.module.css';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../context/contexts';
+import styles from '../styles/Prompt.module.css';
 
 let CONSOLE_MESSAGE_DISPLAYED = false;
 

@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useEffect, useMemo, useState } from 'react';
 import { ThemeContext } from './contexts';
 
 const ThemeProvider = ({ children }) => {

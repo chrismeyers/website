@@ -15,7 +15,15 @@ module.exports = {
   rules: {
     'no-param-reassign': ['error', { props: false }],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+    'sort-imports': ['error', { ignoreDeclarationSort: true }],
     'import/prefer-default-export': 'off',
+    'import/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
+        alphabetize: { order: 'asc' },
+      },
+    ],
     'import/no-extraneous-dependencies': [
       'error',
       {

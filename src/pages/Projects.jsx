@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import Page from '../components/Page';
 import { projects } from '../assets/data';
+import Page from '../components/Page';
 import { SLOGAN } from '../constants';
 import styles from '../styles/Projects.module.css';
 

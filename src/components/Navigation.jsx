@@ -1,10 +1,10 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../assets/images/logos/v3/ccm-logo.svg';
+import { SLOGAN } from '../constants';
 import useClickOutside from '../hooks/useClickOutside';
 import fullStyles from '../styles/FullNav.module.css';
 import mobileStyles from '../styles/MobileNav.module.css';
-import { SLOGAN } from '../constants';
 import Footer from './Footer';
 
 const NAVIGATION = [
