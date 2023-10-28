@@ -74,9 +74,7 @@ export const MobileNav = () => {
     setBodyScrollable(!menuDisplayed);
   }, [menuDisplayed]);
 
-  useEffect(() => {
-    return () => setBodyScrollable(true);
-  }, []);
+  useEffect(() => () => setBodyScrollable(true), []);
 
   return (
     <nav className={mobileStyles.mobile}>

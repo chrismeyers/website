@@ -81,11 +81,13 @@ const Prompt = () => {
     clearCommand();
   }, []);
 
-  const toggleOutputWindow = useCallback(() => {
-    return outputWindowVisible
-      ? hideOutputWindow()
-      : showOutputWindow({ bottom: true });
-  }, [outputWindowVisible, showOutputWindow]);
+  const toggleOutputWindow = useCallback(
+    () =>
+      outputWindowVisible
+        ? hideOutputWindow()
+        : showOutputWindow({ bottom: true }),
+    [outputWindowVisible, showOutputWindow]
+  );
 
   const setTheme = useCallback(
     (which) => {
@@ -185,9 +187,7 @@ const Prompt = () => {
 
       const parts = cmd
         .split(' ')
-        .filter((p) => {
-          return p !== '';
-        })
+        .filter((p) => p !== '')
         .map((p) => p.trim());
       const cleanedCommand = parts[0].trim().toLowerCase();
       const args = parts.slice(1);

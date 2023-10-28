@@ -6,12 +6,7 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: [
-    'eslint:recommended',
-    'airbnb',
-    'airbnb/hooks',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['eslint:recommended', 'airbnb', 'airbnb/hooks', 'prettier'],
   rules: {
     'no-param-reassign': ['error', { props: false }],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
