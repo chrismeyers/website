@@ -1,4 +1,4 @@
-FROM node:18.18.2-alpine AS builder
+FROM node:20.9.0-alpine AS builder
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ COPY . .
 RUN npm run generate
 RUN npm run build
 
-FROM nginx:1.25.2-alpine-slim
+FROM nginx:1.25.3-alpine-slim
 
 WORKDIR /app
 

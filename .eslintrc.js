@@ -26,7 +26,7 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: ['test/**', '**/vite.config.js', '**/.eslintrc.js'],
+        devDependencies: ['test/**', '**/vite.config.mjs', '**/.eslintrc.js'],
         optionalDependencies: false,
       },
     ],
