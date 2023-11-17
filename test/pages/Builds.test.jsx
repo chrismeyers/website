@@ -49,7 +49,7 @@ describe('Builds page', () => {
     );
   });
 
-  it('displays multiple builds', async () => {
+  it('displays multiple builds', () => {
     vi.spyOn(data, 'builds', 'get').mockReturnValue([
       { id: 1, active: true, displayDate: 'Yesterday', cpu: 'ABC @ 123GHz' },
       { id: 2, active: true, displayDate: 'Today', cpu: 'ZYX @ 987GHz' },

@@ -1,111 +1,106 @@
 import path from 'node:path';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import ResumeParser from '../bin/node/resume-parser.mjs';
 
 describe('Resume Parser', () => {
   let parser;
 
-  beforeEach(async () => {
+  beforeAll(() => {
     parser = new ResumeParser(
       path.join(__dirname, 'fixtures', 'test-resume.latex')
     );
   });
 
   describe('full', () => {
-    it('parses experience section', async () => {
+    it('parses experience section', () => {
       const items = parser.parseComplexSection('Experience');
 
-      expect(items).toHaveLength(2);
-
-      expect(items[0].url).toBe('https://www.company1.com');
-      expect(items[0].firstLine).toHaveLength(2);
-      expect(items[0].firstLine[0]).toBe('Company 1');
-      expect(items[0].firstLine[1]).toBe('Planet Earth');
-
-      expect(items[0].secondLine).toHaveLength(2);
-      expect(items[0].secondLine[0][0]).toBe('Position 1');
-      expect(items[0].secondLine[0][1]).toBe('June 1234 &ndash; Present');
-      expect(items[0].secondLine[1][0]).toBe('Position 2');
-      expect(items[0].secondLine[1][1]).toBe('Jan. 1234 &ndash; May 1234');
-
-      expect(items[0].info).toHaveLength(2);
-      expect(items[0].info[0]).toEqual(['Item 1', 'Item 2&reg;']);
-      expect(items[0].info[1]).toEqual(['Item 1']);
-
-      expect(items[1].url).toBe('https://company2.com');
-      expect(items[1].firstLine).toHaveLength(2);
-      expect(items[1].firstLine[0]).toBe('Company 2');
-      expect(items[1].firstLine[1]).toBe('Mars');
-
-      expect(items[1].secondLine).toHaveLength(1);
-      expect(items[1].secondLine[0][0]).toBe('Position 1');
-      expect(items[1].secondLine[0][1]).toBe('Jan. 2199 &ndash; Mar. 2208');
-
-      expect(items[1].info).toHaveLength(1);
-      expect(items[1].info[0]).toEqual(['Item 1', 'Item 2', 'Item 3']);
+      expect(items).toStrictEqual([
+        {
+          url: 'https://www.company1.com',
+          firstLine: ['Company 1', 'Planet Earth'],
+          secondLine: [
+            ['Position 1', 'June 1234 &ndash; Present'],
+            ['Position 2', 'Jan. 1234 &ndash; May 1234'],
+          ],
+          info: [['Item 1', 'Item 2&reg;'], ['Item 1']],
+        },
+        {
+          url: 'https://company2.com',
+          firstLine: ['Company 2', 'Mars'],
+          secondLine: [['Position 1', 'Jan. 2199 &ndash; Mar. 2208']],
+          info: [['Item 1', 'Item 2', 'Item 3']],
+        },
+      ]);
     });
 
-    it('parses education section', async () => {
+    it('parses education section', () => {
       const items = parser.parseComplexSection('Education');
 
-      expect(items).toHaveLength(1);
-
-      expect(items[0].url).toBe('https://www.school.edu');
-
-      expect(items[0].firstLine).toHaveLength(2);
-      expect(items[0].firstLine[0]).toBe('Degree');
-      expect(items[0].firstLine[1]).toBe('Planet Earth');
-
-      expect(items[0].secondLine).toHaveLength(1);
-      expect(items[0].secondLine[0][0]).toBe('School');
-      expect(items[0].secondLine[0][1]).toBe('Jan. 9999 &ndash; Dec. 9999');
-
-      expect(items[0].info).toHaveLength(1);
-      expect(items[0].info[0]).toEqual([]);
+      expect(items).toStrictEqual([
+        {
+          url: 'https://www.school.edu',
+          firstLine: ['Degree', 'Planet Earth'],
+          secondLine: [['School', 'Jan. 9999 &ndash; Dec. 9999']],
+          info: [[]],
+        },
+      ]);
     });
 
-    it('parses technical skills section', async () => {
+    it('parses technical skills section', () => {
       const items = parser.parseListSection('TechnicalSkills');
 
-      expect(items).toHaveLength(5);
-
-      expect(items[0].mainItem).toBe('Language list 100%:');
-      expect(items[0].subItems).toHaveLength(1);
-      expect(items[0].subItems[0]).toBe(
-        'Language 1 (Something 1, Something 2), Language 2, Language 3'
-      );
-
-      expect(items[1].mainItem).toBe('Language list 2:');
-      expect(items[1].subItems).toHaveLength(1);
-      expect(items[1].subItems[0]).toBe('Language 4, Language 5 (Something 3)');
-
-      expect(items[2].mainItem).toBe('Item 1');
-      expect(items[3].mainItem).toBe('Item 2');
-      expect(items[4].mainItem).toBe('Item 3');
+      expect(items).toStrictEqual([
+        {
+          mainItem: 'Language list 100%:',
+          subItems: [
+            'Language 1 (Something 1, Something 2), Language 2, Language 3',
+          ],
+        },
+        {
+          mainItem: 'Language list 2:',
+          subItems: ['Language 4, Language 5 (Something 3)'],
+        },
+        {
+          mainItem: 'Item 1',
+          subItems: [],
+        },
+        {
+          mainItem: 'Item 2',
+          subItems: [],
+        },
+        {
+          mainItem: 'Item 3',
+          subItems: [],
+        },
+      ]);
     });
   });
 
   describe('summary', () => {
-    it('parses language summary', async () => {
-      const items = parser.getLanguages();
+    it('parses language summary', () => {
+      const item = parser.getLanguages();
 
-      expect(items.desktop).toEqual([
-        'Language 1 (Something 1, Something 2)',
-        'Language 2',
-        'Language 3',
-      ]);
-      expect(items.web).toEqual(['Language 4', 'Language 5 (Something 3)']);
+      expect(item).toStrictEqual({
+        desktop: [
+          'Language 1 (Something 1, Something 2)',
+          'Language 2',
+          'Language 3',
+        ],
+        web: ['Language 4', 'Language 5 (Something 3)'],
+      });
     });
 
-    it('parses most recent job', async () => {
-      const items = parser.getMostRecentJob();
+    it('parses most recent job', () => {
+      const item = parser.getMostRecentJob();
 
-      expect(items.employed).toBe(true);
-      expect(items.company).toBe('Company 1');
-      expect(items.url).toBe('https://www.company1.com');
-      expect(items.title).toBe('Position 1');
-      expect(items.dates).toHaveLength(2);
-      expect(items.dates).toEqual(['June 1234', 'Present']);
+      expect(item).toStrictEqual({
+        employed: true,
+        company: 'Company 1',
+        url: 'https://www.company1.com',
+        title: 'Position 1',
+        dates: ['June 1234', 'Present'],
+      });
     });
   });
 });

@@ -9,7 +9,7 @@ describe('About page', () => {
     cleanup();
   });
 
-  it('excludes employment info is not currently employed', async () => {
+  it('excludes employment info is not currently employed', () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
       mostRecentJob: {
         employed: false,
@@ -25,7 +25,7 @@ describe('About page', () => {
     expect(screen.queryByTestId('employment')).toBeNull();
   });
 
-  it('displays current job if currently employed', async () => {
+  it('displays current job if currently employed', () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
       mostRecentJob: {
         employed: true,
@@ -48,7 +48,7 @@ describe('About page', () => {
     );
   });
 
-  it('excludes language experience if missing', async () => {
+  it('excludes language experience if missing', () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({});
 
     render(
@@ -61,7 +61,7 @@ describe('About page', () => {
     expect(screen.queryByTestId('web-languages')).toBeNull();
   });
 
-  it('displays language experience', async () => {
+  it('displays language experience', () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
       languages: {
         desktop: [

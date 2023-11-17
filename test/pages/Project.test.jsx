@@ -213,7 +213,7 @@ describe('Project page', () => {
     expect(screen.queryByAltText('Website')).toBeNull();
   });
 
-  it('displays gif thumbnail correctly', async () => {
+  it('displays gif thumbnail correctly', () => {
     const title = 'Project Name';
     const images = [
       {
