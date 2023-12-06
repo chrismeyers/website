@@ -13,7 +13,7 @@ export default defineConfig({
   plugins: [react(), svgr({ include: '**/*.svg' })],
   test: {
     environment: 'jsdom',
-    setupFiles: 'test/setupTests.js',
+    setupFiles: 'test/_setup.js',
     coverage: {
       provider: 'v8',
     },
