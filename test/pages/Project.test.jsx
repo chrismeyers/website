@@ -1,6 +1,6 @@
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import * as data from '../../src/assets/data';
 import Project from '../../src/pages/Project';
 
@@ -11,10 +11,6 @@ vi.mock('react-router-dom', async () => ({
 }));
 
 describe('Project page', () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it('handles no projects', async () => {
     vi.spyOn(data, 'projects', 'get').mockReturnValue([]);
 

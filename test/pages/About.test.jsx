@@ -1,14 +1,10 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import * as resume from '../../src/assets/generated/resume';
 import About from '../../src/pages/About';
 
 describe('About page', () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it('excludes employment info is not currently employed', () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
       mostRecentJob: {

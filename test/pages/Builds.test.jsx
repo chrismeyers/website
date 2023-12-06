@@ -1,14 +1,10 @@
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import * as data from '../../src/assets/data';
 import Builds from '../../src/pages/Builds';
 
 describe('Builds page', () => {
-  afterEach(() => {
-    cleanup();
-  });
-
   it('displays build summary correctly', async () => {
     const id = 1;
     const displayDate = 'Today - Built for Someone';
