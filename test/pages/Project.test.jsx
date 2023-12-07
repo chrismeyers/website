@@ -1,7 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as data from '../../src/assets/data';
+import * as lightbox from '../../src/components/Lightbox';
 import Project from '../../src/pages/Project';
 
 vi.mock('react-router-dom', async () => ({
@@ -11,6 +12,14 @@ vi.mock('react-router-dom', async () => ({
 }));
 
 describe('Project page', () => {
+  let lgSpy;
+
+  beforeEach(() => {
+    lgSpy = vi
+      .spyOn(lightbox, 'createLightGallery')
+      .mockImplementation(() => {});
+  });
+
   it('handles no projects', async () => {
     vi.spyOn(data, 'projects', 'get').mockReturnValue([]);
 
@@ -25,6 +34,7 @@ describe('Project page', () => {
     });
 
     expect(screen.getByText('/projects/1')).toBeInTheDocument();
+    expect(lgSpy).toHaveBeenCalledTimes(0);
   });
 
   it('handles no active projects', async () => {
@@ -55,6 +65,7 @@ describe('Project page', () => {
     });
 
     expect(screen.getByText('/projects/1')).toBeInTheDocument();
+    expect(lgSpy).toHaveBeenCalledTimes(0);
   });
 
   it('displays project details without images correctly', async () => {
@@ -105,7 +116,7 @@ describe('Project page', () => {
       'href',
       'https://hosted.code'
     );
-    expect(screen.queryByAltText('Image 1')).toBeNull();
+    expect(lgSpy).toHaveBeenCalledTimes(0);
   });
 
   it('displays project details with images correctly', async () => {
@@ -173,14 +184,7 @@ describe('Project page', () => {
       'href',
       'https://hosted.code'
     );
-    expect(screen.getAllByAltText('Image 1')[0].closest('a')).toHaveAttribute(
-      'href',
-      '/path/to/1.png'
-    );
-    expect(screen.getAllByAltText('Image 2')[0].closest('a')).toHaveAttribute(
-      'href',
-      '/path/to/2.png'
-    );
+    expect(lgSpy).toHaveBeenCalledTimes(1);
   });
 
   it('displays project details without a web URL correctly', async () => {
@@ -207,6 +211,7 @@ describe('Project page', () => {
     });
 
     expect(screen.queryByAltText('Website')).toBeNull();
+    expect(lgSpy).toHaveBeenCalledTimes(0);
   });
 
   it('displays gif thumbnail correctly', () => {
@@ -228,13 +233,6 @@ describe('Project page', () => {
 
     render(<Project />);
 
-    expect(screen.queryByAltText('Image 1')).toHaveAttribute(
-      'src',
-      '/path/to/thumbnail.png'
-    );
-    expect(screen.queryByAltText('Image 1').closest('a')).toHaveAttribute(
-      'href',
-      '/path/to/animated.gif'
-    );
+    expect(lgSpy).toHaveBeenCalledTimes(1);
   });
 });

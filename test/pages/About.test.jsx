@@ -1,10 +1,19 @@
 import { render, screen } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as resume from '../../src/assets/generated/resume';
+import * as lightbox from '../../src/components/Lightbox';
 import About from '../../src/pages/About';
 
 describe('About page', () => {
+  let lgSpy;
+
+  beforeEach(() => {
+    lgSpy = vi
+      .spyOn(lightbox, 'createLightGallery')
+      .mockImplementation(() => {});
+  });
+
   it('excludes employment info is not currently employed', () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
       mostRecentJob: {
@@ -19,6 +28,8 @@ describe('About page', () => {
     );
 
     expect(screen.queryByTestId('employment')).toBeNull();
+
+    expect(lgSpy).toHaveBeenCalledTimes(1);
   });
 
   it('displays current job if currently employed', () => {
@@ -42,6 +53,8 @@ describe('About page', () => {
     expect(employment).toHaveTextContent(
       'Currently, I am employed as a Wizard at Somewhere'
     );
+
+    expect(lgSpy).toHaveBeenCalledTimes(1);
   });
 
   it('excludes language experience if missing', () => {
@@ -55,6 +68,8 @@ describe('About page', () => {
 
     expect(screen.queryByTestId('desktop-languages')).toBeNull();
     expect(screen.queryByTestId('web-languages')).toBeNull();
+
+    expect(lgSpy).toHaveBeenCalledTimes(1);
   });
 
   it('displays language experience', () => {
@@ -83,5 +98,7 @@ describe('About page', () => {
 
     expect(desktopLanguages.children.length).toBe(3);
     expect(webLanguages.children.length).toBe(2);
+
+    expect(lgSpy).toHaveBeenCalledTimes(1);
   });
 });
