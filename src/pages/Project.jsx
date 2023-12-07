@@ -1,14 +1,12 @@
 import { Fragment } from 'react';
-import lgThumbnail from 'lightgallery/plugins/thumbnail';
-import lgZoom from 'lightgallery/plugins/zoom';
-import LightGallery from 'lightgallery/react';
 import { useParams } from 'react-router-dom';
 import { projects } from '../assets/data';
 import GithubIcon from '../assets/images/icons/github.svg';
 import ExternalLinkIcon from '../assets/images/icons/link-external.svg';
 import PlayIcon from '../assets/images/icons/play.svg';
+import { createLightGallery } from '../components/Lightbox';
 import Page from '../components/Page';
-import { LIGHTGALLERY_LICENSE, SLOGAN } from '../constants';
+import { SLOGAN } from '../constants';
 import styles from '../styles/Project.module.css';
 import NotFound from './NotFound';
 
@@ -100,24 +98,25 @@ const Project = () => {
                 {data.images.slice(0, 1).map((image) => (
                   <Fragment key={image.id}>
                     <div className={styles.gifOverlay} title="Play GIF">
-                      <LightGallery
-                        licenseKey={LIGHTGALLERY_LICENSE}
-                        onBeforeOpen={restartGif}
-                        enableDrag={false}
-                        enableSwipe={false}
-                        download={false}
-                      >
-                        <a href={image.path}>
-                          <img
-                            src={image.thumbnail}
-                            className={`${styles.imagesFull} ${
-                              styles[image.orientation]
-                            }`}
-                            alt={image.title}
-                            title="Click to enlarge"
-                          />
-                        </a>
-                      </LightGallery>
+                      {createLightGallery(
+                        [
+                          <a href={image.path}>
+                            <img
+                              src={image.thumbnail}
+                              className={`${styles.imagesFull} ${
+                                styles[image.orientation]
+                              }`}
+                              alt={image.title}
+                              title="Click to enlarge"
+                            />
+                          </a>,
+                        ],
+                        {
+                          onBeforeOpen: restartGif,
+                          enableDrag: false,
+                          enableSwipe: false,
+                        }
+                      )}
                       <PlayIcon
                         name="play"
                         className="link-image xlarge play-overlay"
@@ -129,47 +128,46 @@ const Project = () => {
                 ))}
               </>
             ) : (
-              <LightGallery
-                licenseKey={LIGHTGALLERY_LICENSE}
-                plugins={[lgZoom, lgThumbnail]}
-                thumbnail
-                download={false}
-              >
-                {data.images
-                  .sort((a, b) => a.order - b.order)
-                  .map((image, index) => (
-                    <Fragment key={image.id}>
-                      {index === 0 ? (
-                        <a href={image.path}>
-                          <img
-                            src={image.path}
-                            className={`${styles.imagesFull} ${
-                              styles[image.orientation]
-                            }`}
-                            alt={image.title}
-                            title="Click to enlarge"
-                          />
-                        </a>
-                      ) : (
-                        <div
-                          className={styles.imagesSmall}
-                          data-src={image.path}
-                        >
+              createLightGallery(
+                [
+                  data.images
+                    .sort((a, b) => a.order - b.order)
+                    .map((image, index) => (
+                      <Fragment key={image.id}>
+                        {index === 0 ? (
                           <a href={image.path}>
                             <img
                               src={image.path}
-                              className={`${styles.imagesSmall} ${
+                              className={`${styles.imagesFull} ${
                                 styles[image.orientation]
                               }`}
                               alt={image.title}
                               title="Click to enlarge"
                             />
                           </a>
-                        </div>
-                      )}
-                    </Fragment>
-                  ))}
-              </LightGallery>
+                        ) : (
+                          <div
+                            className={styles.imagesSmall}
+                            data-src={image.path}
+                          >
+                            <a href={image.path}>
+                              <img
+                                src={image.path}
+                                className={`${styles.imagesSmall} ${
+                                  styles[image.orientation]
+                                }`}
+                                alt={image.title}
+                                title="Click to enlarge"
+                              />
+                            </a>
+                          </div>
+                        )}
+                      </Fragment>
+                    )),
+                ],
+                { thumbnail: true },
+                ['lgThumbnail', 'lgZoom']
+              )
             )}
           </div>
         )}

@@ -1,9 +1,8 @@
-import lgZoom from 'lightgallery/plugins/zoom';
-import LightGallery from 'lightgallery/react';
 import { Link } from 'react-router-dom';
 import { summary } from '../assets/generated/resume';
+import { createLightGallery } from '../components/Lightbox';
 import Page from '../components/Page';
-import { LIGHTGALLERY_LICENSE, MAILTO_MESSAGE, SLOGAN } from '../constants';
+import { MAILTO_MESSAGE, SLOGAN } from '../constants';
 
 const About = () => {
   document.title = SLOGAN;
@@ -54,20 +53,19 @@ const About = () => {
         </li>
         <li>
           I am the owner of this{' '}
-          <LightGallery
-            licenseKey={LIGHTGALLERY_LICENSE}
-            plugins={[lgZoom]}
-            elementClassNames="inline"
-            download={false}
-          >
-            <span
-              className="fancytxt"
-              data-src="/images/clark/DSC_1564-6.jpg"
-              data-sub-html="Clark the Corgi"
-            >
-              majestic beast
-            </span>
-          </LightGallery>
+          {createLightGallery(
+            [
+              <span
+                className="fancytxt"
+                data-src="/images/clark/DSC_1564-6.jpg"
+                data-sub-html="Clark the Corgi"
+              >
+                majestic beast
+              </span>,
+            ],
+            { elementClassNames: 'inline' },
+            ['lgZoom']
+          )}
         </li>
       </ul>
 

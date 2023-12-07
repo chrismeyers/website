@@ -1,7 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as data from '../../src/assets/data';
+import * as lightbox from '../../src/components/Lightbox';
 import Build from '../../src/pages/Build';
 
 vi.mock('react-router-dom', async () => ({
@@ -11,6 +12,14 @@ vi.mock('react-router-dom', async () => ({
 }));
 
 describe('Build page', () => {
+  let lgSpy;
+
+  beforeEach(() => {
+    lgSpy = vi
+      .spyOn(lightbox, 'createLightGallery')
+      .mockImplementation(() => {});
+  });
+
   it('handles no builds', async () => {
     vi.spyOn(data, 'builds', 'get').mockReturnValue([]);
 
@@ -25,6 +34,7 @@ describe('Build page', () => {
     });
 
     expect(screen.getByText('/builds/1')).toBeInTheDocument();
+    expect(lgSpy).toHaveBeenCalledTimes(0);
   });
 
   it('handles no active builds', async () => {
@@ -57,6 +67,7 @@ describe('Build page', () => {
     });
 
     expect(screen.getByText('/builds/1')).toBeInTheDocument();
+    expect(lgSpy).toHaveBeenCalledTimes(0);
   });
 
   it('displays build details without optional fields correctly', async () => {
@@ -104,7 +115,7 @@ describe('Build page', () => {
     expect(screen.queryByText('HDD')).toBeNull();
     expect(screen.queryByText('SSD')).toBeNull();
     expect(screen.getByText(gpu)).toBeInTheDocument();
-    expect(screen.queryByTitle('Click to enlarge')).toBeNull();
+    expect(lgSpy).toHaveBeenCalledTimes(0);
     expect(screen.getByText(pcCase)).toBeInTheDocument();
     expect(screen.getByText(psu)).toBeInTheDocument();
   });
@@ -154,7 +165,7 @@ describe('Build page', () => {
     expect(screen.getByText(hdd)).toBeInTheDocument();
     expect(screen.getByText(ssd)).toBeInTheDocument();
     expect(screen.getByText(gpu)).toBeInTheDocument();
-    expect(screen.queryByTitle('Click to enlarge')).toBeNull();
+    expect(lgSpy).toHaveBeenCalledTimes(0);
     expect(screen.getByText(pcCase)).toBeInTheDocument();
     expect(screen.getByText(psu)).toBeInTheDocument();
   });
@@ -205,7 +216,7 @@ describe('Build page', () => {
     expect(screen.getByText(hdd[1])).toBeInTheDocument();
     expect(screen.getByText(ssd)).toBeInTheDocument();
     expect(screen.getByText(gpu)).toBeInTheDocument();
-    expect(screen.queryByTitle('Click to enlarge')).toBeNull();
+    expect(lgSpy).toHaveBeenCalledTimes(0);
     expect(screen.getByText(pcCase)).toBeInTheDocument();
     expect(screen.getByText(psu)).toBeInTheDocument();
   });
@@ -262,14 +273,7 @@ describe('Build page', () => {
     expect(screen.getByText(hdd)).toBeInTheDocument();
     expect(screen.getByText(ssd)).toBeInTheDocument();
     expect(screen.getByText(gpu)).toBeInTheDocument();
-    expect(screen.getByTitle('Click to enlarge')).toHaveAttribute(
-      'src',
-      image.path
-    );
-    expect(screen.getByTitle('Click to enlarge').closest('a')).toHaveAttribute(
-      'href',
-      image.path
-    );
+    expect(lgSpy).toHaveBeenCalledTimes(1);
     expect(screen.getByText(pcCase)).toBeInTheDocument();
     expect(screen.getByText(psu)).toBeInTheDocument();
   });

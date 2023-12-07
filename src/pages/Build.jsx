@@ -1,9 +1,8 @@
-import lgZoom from 'lightgallery/plugins/zoom';
-import LightGallery from 'lightgallery/react';
 import { useParams } from 'react-router-dom';
 import { builds } from '../assets/data';
+import { createLightGallery } from '../components/Lightbox';
 import Page from '../components/Page';
-import { LIGHTGALLERY_LICENSE, SLOGAN } from '../constants';
+import { SLOGAN } from '../constants';
 import styles from '../styles/Build.module.css';
 import NotFound from './NotFound';
 
@@ -80,21 +79,21 @@ const Build = () => {
         </div>
         {data.image && (
           <div className={styles.pic}>
-            <LightGallery
-              licenseKey={LIGHTGALLERY_LICENSE}
-              plugins={[lgZoom]}
-              download={false}
-            >
-              <a href={data.image.path}>
-                <img
-                  src={data.image.path}
-                  className={styles[data.image.orientation]}
-                  alt={data.image.title}
-                  data-sub-html={data.image.title}
-                  title="Click to enlarge"
-                />
-              </a>
-            </LightGallery>
+            {createLightGallery(
+              [
+                <a href={data.image.path}>
+                  <img
+                    src={data.image.path}
+                    className={styles[data.image.orientation]}
+                    alt={data.image.title}
+                    data-sub-html={data.image.title}
+                    title="Click to enlarge"
+                  />
+                </a>,
+              ],
+              {},
+              ['lgZoom']
+            )}
           </div>
         )}
       </div>
