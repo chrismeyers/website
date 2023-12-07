@@ -1,6 +1,4 @@
 import { Fragment } from 'react';
-import lgThumbnail from 'lightgallery/plugins/thumbnail';
-import lgZoom from 'lightgallery/plugins/zoom';
 import { useParams } from 'react-router-dom';
 import { projects } from '../assets/data';
 import GithubIcon from '../assets/images/icons/github.svg';
@@ -167,10 +165,8 @@ const Project = () => {
                       </Fragment>
                     )),
                 ],
-                {
-                  plugins: [lgZoom, lgThumbnail],
-                  thumbnail: true,
-                }
+                { thumbnail: true },
+                ['lgThumbnail', 'lgZoom']
               )
             )}
           </div>

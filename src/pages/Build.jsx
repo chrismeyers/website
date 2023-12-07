@@ -1,4 +1,3 @@
-import lgZoom from 'lightgallery/plugins/zoom';
 import { useParams } from 'react-router-dom';
 import { builds } from '../assets/data';
 import { createLightGallery } from '../components/Lightbox';
@@ -92,9 +91,8 @@ const Build = () => {
                   />
                 </a>,
               ],
-              {
-                plugins: [lgZoom],
-              }
+              {},
+              ['lgZoom']
             )}
           </div>
         )}
