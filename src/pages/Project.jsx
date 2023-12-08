@@ -96,39 +96,33 @@ const Project = () => {
         {data?.images?.length > 0 && (
           <div className={styles.images}>
             {data.images[0].path.toLowerCase().endsWith('.gif') ? (
-              <>
-                {data.images.slice(0, 1).map((image) => (
-                  <Fragment key={image.id}>
-                    <div className={styles.gifOverlay} title="Play GIF">
-                      {createLightGallery(
-                        [
-                          <a href={image.path}>
-                            <img
-                              src={image.thumbnail}
-                              className={`${styles.imagesFull} ${
-                                styles[image.orientation]
-                              }`}
-                              alt={image.title}
-                              title="Click to enlarge"
-                            />
-                          </a>,
-                        ],
-                        {
-                          onBeforeOpen: restartGif,
-                          enableDrag: false,
-                          enableSwipe: false,
-                        }
-                      )}
-                      <PlayIcon
-                        name="play"
-                        className="link-image xlarge play-overlay"
-                        alt="Plays the associated GIF"
-                        title="Play GIF"
+              <div className={styles.gifOverlay} title="Play GIF">
+                {createLightGallery(
+                  [
+                    <a href={data.images[0].path}>
+                      <img
+                        src={data.images[0].thumbnail}
+                        className={`${styles.imagesFull} ${
+                          styles[data.images[0].orientation]
+                        }`}
+                        alt={data.images[0].title}
+                        title="Click to enlarge"
                       />
-                    </div>
-                  </Fragment>
-                ))}
-              </>
+                    </a>,
+                  ],
+                  {
+                    onBeforeOpen: restartGif,
+                    enableDrag: false,
+                    enableSwipe: false,
+                  }
+                )}
+                <PlayIcon
+                  name="play"
+                  className="link-image xlarge play-overlay"
+                  alt="Plays the associated GIF"
+                  title="Play GIF"
+                />
+              </div>
             ) : (
               createLightGallery(
                 [
