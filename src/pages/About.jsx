@@ -1,3 +1,4 @@
+import lgZoom from 'lightgallery/plugins/zoom';
 import { Link } from 'react-router-dom';
 import { summary } from '../assets/generated/resume';
 import { createLightGallery } from '../components/Lightbox';
@@ -63,8 +64,7 @@ const About = () => {
                 majestic beast
               </span>,
             ],
-            { elementClassNames: 'inline' },
-            ['lgZoom']
+            { elementClassNames: 'inline', plugins: [lgZoom] }
           )}
         </li>
       </ul>
