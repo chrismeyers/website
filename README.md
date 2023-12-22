@@ -30,7 +30,3 @@ Refer to the [Docker Compose CLI docs](https://docs.docker.com/compose/reference
 
 This site is hosted on Vercel and [automatically deploys via GitHub Actions](https://vercel.com/guides/how-can-i-use-github-actions-with-vercel) when pushing or merging to the `main` branch.
 Including `[deploy skip]` or `[skip deploy]` in the HEAD commit message will skip the deploy job.
-
-## Credit
-
-The site uses several open source libraries and frameworks. See `package.json` for the full list.
