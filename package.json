@@ -25,15 +25,15 @@
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.0",
+    "react-router-dom": "^6.21.3",
     "react-switch": "^7.0.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/jest-dom": "^6.2.0",
     "@testing-library/react": "^14.1.2",
-    "@types/eslint": "^8.44.9",
+    "@types/eslint": "^8.56.2",
     "@vitejs/plugin-react": "^4.2.1",
-    "@vitest/coverage-v8": "^1.0.4",
+    "@vitest/coverage-v8": "^1.2.1",
     "eslint": "^8.56.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
@@ -41,11 +41,11 @@
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "jsdom": "^23.0.1",
-    "prettier": "3.1.1",
+    "jsdom": "^23.2.0",
+    "prettier": "3.2.4",
     "rimraf": "^5.0.5",
-    "vite": "^5.0.10",
+    "vite": "^5.0.12",
     "vite-plugin-svgr": "^4.2.0",
-    "vitest": "^1.0.4"
+    "vitest": "^1.2.1"
   }
 }
