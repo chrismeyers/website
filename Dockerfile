@@ -1,5 +1,7 @@
 FROM node:20.11.0-alpine AS builder
 
+RUN apk add --no-cache bash
+
 WORKDIR /app
 
 COPY package.json package-lock.json ./
