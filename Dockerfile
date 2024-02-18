@@ -1,4 +1,4 @@
-FROM node:20.11.0-alpine AS builder
+FROM node:20.11.1-alpine AS builder
 
 RUN apk add --no-cache bash
 
@@ -13,7 +13,7 @@ COPY . .
 RUN npm run generate
 RUN npm run build
 
-FROM nginx:1.25.3-alpine-slim
+FROM nginx:1.25.4-alpine-slim
 
 WORKDIR /app
 
