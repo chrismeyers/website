@@ -26,9 +26,7 @@ const restartGif = () => {
 const Project = () => {
   const { id } = useParams();
 
-  const data = projects.find(
-    (item) => item.id === parseInt(id, 10) && item.active
-  );
+  const data = projects.get(Number(id));
 
   if (!data) return <NotFound />;
 

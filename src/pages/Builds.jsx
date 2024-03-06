@@ -10,7 +10,7 @@ const cleanCPU = (cpu) => cpu.split('@')[0].trim();
 const Builds = () => {
   document.title = `Builds | ${SLOGAN}`;
 
-  const data = builds.filter((item) => item.active);
+  const data = Array.from(builds.values());
 
   return (
     <Page header="Builds">

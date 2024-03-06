@@ -10,9 +10,7 @@ import NotFound from './NotFound';
 const Build = () => {
   const { id } = useParams();
 
-  const data = builds.find(
-    (item) => item.id === parseInt(id, 10) && item.active
-  );
+  const data = builds.get(Number(id));
 
   if (!data) return <NotFound />;
 

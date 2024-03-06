@@ -21,38 +21,7 @@ describe('Project page', () => {
   });
 
   it('handles no projects', async () => {
-    vi.spyOn(data, 'projects', 'get').mockReturnValue([]);
-
-    render(
-      <RouterProvider
-        router={createMemoryRouter([{ path: '', element: <Project /> }])}
-      />
-    );
-
-    await waitFor(() => {
-      expect(screen.getByText(/does not exist/)).toBeInTheDocument();
-    });
-
-    expect(screen.getByText('/projects/1')).toBeInTheDocument();
-    expect(lgSpy).toHaveBeenCalledTimes(0);
-  });
-
-  it('handles no active projects', async () => {
-    vi.spyOn(data, 'projects', 'get').mockReturnValue([
-      {
-        id: 1,
-        active: false,
-        title: 'Project Name',
-        webUrl: 'https://hosted.site',
-        codeUrl: 'https://hosted.code',
-        displayDate: 'Test Project, Always and Forever',
-        languages: ['Language 1'],
-        info: 'Something involving code',
-        role: 'Solo project',
-        status: 'Being maintained',
-        images: [],
-      },
-    ]);
+    vi.spyOn(data, 'projects', 'get').mockReturnValue(new Map());
 
     render(
       <RouterProvider
@@ -80,21 +49,26 @@ describe('Project page', () => {
     const status = 'Being maintained';
     const images = [];
 
-    vi.spyOn(data, 'projects', 'get').mockReturnValue([
-      {
-        id,
-        active: true,
-        title,
-        webUrl,
-        codeUrl,
-        displayDate,
-        languages,
-        info,
-        role,
-        status,
-        images,
-      },
-    ]);
+    vi.spyOn(data, 'projects', 'get').mockReturnValue(
+      new Map([
+        [
+          id,
+          {
+            id,
+            active: true,
+            title,
+            webUrl,
+            codeUrl,
+            displayDate,
+            languages,
+            info,
+            role,
+            status,
+            images,
+          },
+        ],
+      ])
+    );
 
     render(<Project />);
 
@@ -148,21 +122,26 @@ describe('Project page', () => {
       },
     ];
 
-    vi.spyOn(data, 'projects', 'get').mockReturnValue([
-      {
-        id,
-        active: true,
-        title,
-        webUrl,
-        codeUrl,
-        displayDate,
-        languages,
-        info,
-        role,
-        status,
-        images,
-      },
-    ]);
+    vi.spyOn(data, 'projects', 'get').mockReturnValue(
+      new Map([
+        [
+          id,
+          {
+            id,
+            active: true,
+            title,
+            webUrl,
+            codeUrl,
+            displayDate,
+            languages,
+            info,
+            role,
+            status,
+            images,
+          },
+        ],
+      ])
+    );
 
     render(<Project />);
 
@@ -191,15 +170,9 @@ describe('Project page', () => {
     const webUrl = null;
     const codeUrl = 'https://hosted.code';
 
-    vi.spyOn(data, 'projects', 'get').mockReturnValue([
-      {
-        id: 1,
-        active: true,
-        webUrl,
-        codeUrl,
-        languages: [],
-      },
-    ]);
+    vi.spyOn(data, 'projects', 'get').mockReturnValue(
+      new Map([[1, { id: 1, active: true, webUrl, codeUrl, languages: [] }]])
+    );
 
     render(<Project />);
 
@@ -227,9 +200,9 @@ describe('Project page', () => {
       },
     ];
 
-    vi.spyOn(data, 'projects', 'get').mockReturnValue([
-      { id: 1, active: true, title, images, languages: [] },
-    ]);
+    vi.spyOn(data, 'projects', 'get').mockReturnValue(
+      new Map([[1, { id: 1, active: true, title, images, languages: [] }]])
+    );
 
     render(<Project />);
 

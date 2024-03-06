@@ -11,15 +11,9 @@ describe('Projects page', () => {
     const displayDate = 'Test Project, Always and Forever';
     const info = 'Something involving code';
 
-    vi.spyOn(data, 'projects', 'get').mockReturnValue([
-      {
-        id,
-        active: true,
-        title,
-        displayDate,
-        info,
-      },
-    ]);
+    vi.spyOn(data, 'projects', 'get').mockReturnValue(
+      new Map([[1, { id, active: true, title, displayDate, info }]])
+    );
 
     render(
       <RouterProvider
@@ -44,10 +38,12 @@ describe('Projects page', () => {
   });
 
   it('displays multiple projects', () => {
-    vi.spyOn(data, 'projects', 'get').mockReturnValue([
-      { id: 1, active: true, title: 'Apples' },
-      { id: 2, active: true, title: 'Bananas' },
-    ]);
+    vi.spyOn(data, 'projects', 'get').mockReturnValue(
+      new Map([
+        [1, { id: 1, active: true, title: 'Apples' }],
+        [2, { id: 2, active: true, title: 'Bananas' }],
+      ])
+    );
 
     render(
       <RouterProvider

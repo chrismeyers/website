@@ -10,9 +10,9 @@ describe('Builds page', () => {
     const displayDate = 'Today - Built for Someone';
     const cpu = 'Intel 1000000K @ 99.9GHz';
 
-    vi.spyOn(data, 'builds', 'get').mockReturnValue([
-      { id, active: true, displayDate, cpu },
-    ]);
+    vi.spyOn(data, 'builds', 'get').mockReturnValue(
+      new Map([[id, { id, active: true, displayDate, cpu }]])
+    );
 
     render(
       <RouterProvider
@@ -46,10 +46,12 @@ describe('Builds page', () => {
   });
 
   it('displays multiple builds', () => {
-    vi.spyOn(data, 'builds', 'get').mockReturnValue([
-      { id: 1, active: true, displayDate: 'Yesterday', cpu: 'ABC @ 123GHz' },
-      { id: 2, active: true, displayDate: 'Today', cpu: 'ZYX @ 987GHz' },
-    ]);
+    vi.spyOn(data, 'builds', 'get').mockReturnValue(
+      new Map([
+        [1, { id: 1, active: true, displayDate: 'Then', cpu: 'ABC @ 123GHz' }],
+        [2, { id: 2, active: true, displayDate: 'Now', cpu: 'ZYX @ 987GHz' }],
+      ])
+    );
 
     render(
       <RouterProvider
@@ -57,7 +59,7 @@ describe('Builds page', () => {
       />
     );
 
-    expect(screen.getByText(/Yesterday/)).toBeInTheDocument();
-    expect(screen.getByText(/Today/)).toBeInTheDocument();
+    expect(screen.getByText(/Then/)).toBeInTheDocument();
+    expect(screen.getByText(/Now/)).toBeInTheDocument();
   });
 });

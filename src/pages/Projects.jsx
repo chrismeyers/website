@@ -8,7 +8,7 @@ import styles from '../styles/Projects.module.css';
 const Projects = () => {
   document.title = `Projects | ${SLOGAN}`;
 
-  const data = projects.filter((item) => item.active);
+  const data = Array.from(projects.values());
 
   return (
     <Page header="Projects">

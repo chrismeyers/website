@@ -21,40 +21,7 @@ describe('Build page', () => {
   });
 
   it('handles no builds', async () => {
-    vi.spyOn(data, 'builds', 'get').mockReturnValue([]);
-
-    render(
-      <RouterProvider
-        router={createMemoryRouter([{ path: '', element: <Build /> }])}
-      />
-    );
-
-    await waitFor(() => {
-      expect(screen.getByText(/does not exist/)).toBeInTheDocument();
-    });
-
-    expect(screen.getByText('/builds/1')).toBeInTheDocument();
-    expect(lgSpy).toHaveBeenCalledTimes(0);
-  });
-
-  it('handles no active builds', async () => {
-    vi.spyOn(data, 'builds', 'get').mockReturnValue([
-      {
-        id: 1,
-        active: false,
-        displayDate: 'Today - Built for Someone',
-        cpu: 'Intel 1000000K CPU @ 99.9GHz',
-        cool: null,
-        mobo: 'Motherboard with a lot of LEDs',
-        ram: '999GB Fast Memory 9999MHz',
-        hdd: null,
-        ssd: null,
-        gpu: 'The best GPU 99GB',
-        image: null,
-        case: 'Shiny Case',
-        psu: 'Powerful PSU',
-      },
-    ]);
+    vi.spyOn(data, 'builds', 'get').mockReturnValue(new Map());
 
     render(
       <RouterProvider
@@ -84,23 +51,28 @@ describe('Build page', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    vi.spyOn(data, 'builds', 'get').mockReturnValue([
-      {
-        id,
-        active: true,
-        displayDate,
-        cpu,
-        cool,
-        mobo,
-        ram,
-        hdd,
-        ssd,
-        gpu,
-        image,
-        case: pcCase,
-        psu,
-      },
-    ]);
+    vi.spyOn(data, 'builds', 'get').mockReturnValue(
+      new Map([
+        [
+          id,
+          {
+            id,
+            active: true,
+            displayDate,
+            cpu,
+            cool,
+            mobo,
+            ram,
+            hdd,
+            ssd,
+            gpu,
+            image,
+            case: pcCase,
+            psu,
+          },
+        ],
+      ])
+    );
 
     render(<Build />);
 
@@ -134,23 +106,28 @@ describe('Build page', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    vi.spyOn(data, 'builds', 'get').mockReturnValue([
-      {
-        id,
-        active: true,
-        displayDate,
-        cpu,
-        cool,
-        mobo,
-        ram,
-        hdd,
-        ssd,
-        gpu,
-        image,
-        case: pcCase,
-        psu,
-      },
-    ]);
+    vi.spyOn(data, 'builds', 'get').mockReturnValue(
+      new Map([
+        [
+          id,
+          {
+            id,
+            active: true,
+            displayDate,
+            cpu,
+            cool,
+            mobo,
+            ram,
+            hdd,
+            ssd,
+            gpu,
+            image,
+            case: pcCase,
+            psu,
+          },
+        ],
+      ])
+    );
 
     render(<Build />);
 
@@ -184,23 +161,28 @@ describe('Build page', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    vi.spyOn(data, 'builds', 'get').mockReturnValue([
-      {
-        id,
-        active: true,
-        displayDate,
-        cpu,
-        cool,
-        mobo,
-        ram,
-        hdd,
-        ssd,
-        gpu,
-        image,
-        case: pcCase,
-        psu,
-      },
-    ]);
+    vi.spyOn(data, 'builds', 'get').mockReturnValue(
+      new Map([
+        [
+          id,
+          {
+            id,
+            active: true,
+            displayDate,
+            cpu,
+            cool,
+            mobo,
+            ram,
+            hdd,
+            ssd,
+            gpu,
+            image,
+            case: pcCase,
+            psu,
+          },
+        ],
+      ])
+    );
 
     render(<Build />);
 
@@ -242,23 +224,28 @@ describe('Build page', () => {
     const pcCase = 'Shiny Case';
     const psu = 'Powerful PSU';
 
-    vi.spyOn(data, 'builds', 'get').mockReturnValue([
-      {
-        id,
-        active: true,
-        displayDate,
-        cpu,
-        cool,
-        mobo,
-        ram,
-        hdd,
-        ssd,
-        gpu,
-        image,
-        case: pcCase,
-        psu,
-      },
-    ]);
+    vi.spyOn(data, 'builds', 'get').mockReturnValue(
+      new Map([
+        [
+          id,
+          {
+            id,
+            active: true,
+            displayDate,
+            cpu,
+            cool,
+            mobo,
+            ram,
+            hdd,
+            ssd,
+            gpu,
+            image,
+            case: pcCase,
+            psu,
+          },
+        ],
+      ])
+    );
 
     render(<Build />);
 
