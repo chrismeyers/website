@@ -366,7 +366,7 @@ const _projects: Project[] = [
     codeUrl: 'https://github.com/chrismeyers/website',
     displayDate: 'Personal Project, Fall 2013',
     startedDate: '2013-09-01T00:00:00.000Z',
-    languages: ['JavaScript'],
+    languages: ['TypeScript'],
     info: `
       A digital representation of myself.
       <br><br>
