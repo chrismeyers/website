@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../assets/images/logos/v3/ccm-logo.svg';
-import { SLOGAN } from '../constants.ts';
 import useClickOutside from '../hooks/useClickOutside.ts';
 import fullStyles from '../styles/FullNav.module.css';
 import mobileStyles from '../styles/MobileNav.module.css';
@@ -30,13 +29,8 @@ export const FullNav = () => {
     <nav>
       <div className={fullStyles.fullMenu}>
         <Link to="/">
-          <span className={fullStyles.sideNavLogo}>
-            <Logo
-              // @ts-expect-error It exists, trust me
-              alt={SLOGAN}
-              className={fullStyles.bannerImg}
-              title="Home"
-            />
+          <span className={fullStyles.sideNavLogo} title="Home">
+            <Logo className={fullStyles.bannerImg} />
           </span>
         </Link>
         <ul className={fullStyles.sideNavItems}>
@@ -86,13 +80,8 @@ export const MobileNav = () => {
       <div className={mobileStyles.mobileMenu}>
         <div className={mobileStyles.header}>
           <div className={mobileStyles.smallNavLogo}>
-            <Link to="/">
-              <Logo
-                // @ts-expect-error It exists, trust me
-                alt={SLOGAN}
-                className={mobileStyles.bannerImgSmall}
-                title="Home"
-              />
+            <Link to="/" title="Home">
+              <Logo className={mobileStyles.bannerImgSmall} />
             </Link>
           </div>
           <div className={mobileStyles.menuIcon} ref={menuIconRef}>

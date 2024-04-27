@@ -72,7 +72,6 @@ const Project = () => {
             {data.webUrl !== null && (
               <dd className="link-image">
                 <ExternalLinkIcon
-                  // @ts-expect-error It exists, trust me
                   className="link-image small"
                   title="External website"
                   alt="Link to external website"
@@ -84,7 +83,6 @@ const Project = () => {
             )}
             <dd className="link-image">
               <GithubIcon
-                // @ts-expect-error It exists, trust me
                 className="link-image small"
                 title="GitHub repository"
                 alt="Link to GitHub repository"
@@ -120,7 +118,6 @@ const Project = () => {
                   }
                 )}
                 <PlayIcon
-                  // @ts-expect-error It exists, trust me
                   name="play"
                   className="link-image xlarge play-overlay"
                   alt="Plays the associated GIF"

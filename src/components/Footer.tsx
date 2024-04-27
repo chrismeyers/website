@@ -20,24 +20,17 @@ const Footer = ({ inMenu = false }: Props) => {
     <footer className={inMenu ? styles.inMenu : ''}>
       <div className={styles.links}>
         <div className={styles.social}>
-          <a href={GITHUB_URL} className="no-decoration">
-            <GithubIcon
-              // @ts-expect-error It exists, trust me
-              className="link-image large"
-              title="GitHub"
-              alt="Find me on GitHub"
-            />
+          <a href={GITHUB_URL} title="GitHub" className="no-decoration">
+            <GithubIcon className="link-image large" alt="Find me on GitHub" />
           </a>
         </div>
 
         <div className={styles.bullets}>&bull;</div>
 
         <div className={styles.social}>
-          <a href={LINKEDIN_URL} className="no-decoration">
+          <a href={LINKEDIN_URL} title="LinkedIn" className="no-decoration">
             <LinkedInIcon
-              // @ts-expect-error It exists, trust me
               className="link-image large"
-              title="LinkedIn"
               alt="Connect with me on LinkedIn"
             />
           </a>
@@ -52,11 +45,7 @@ const Footer = ({ inMenu = false }: Props) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <MailIcon
-              // @ts-expect-error It exists, trust me
-              className="link-image large"
-              alt="Send Message"
-            />
+            <MailIcon className="link-image large" alt="Send Message" />
           </a>
         </div>
 
@@ -71,18 +60,8 @@ const Footer = ({ inMenu = false }: Props) => {
             aria-label="Toggle website theme"
             height={20}
             width={48}
-            checkedIcon={
-              <MoonIcon
-                // @ts-expect-error It exists, trust me
-                className="link-image small theme on"
-              />
-            }
-            uncheckedIcon={
-              <SunIcon
-                // @ts-expect-error It exists, trust me
-                className="link-image small theme off"
-              />
-            }
+            checkedIcon={<MoonIcon className="link-image small theme on" />}
+            uncheckedIcon={<SunIcon className="link-image small theme off" />}
           />
         </div>
       </div>
