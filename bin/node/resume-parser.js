@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import prettier from 'prettier'; // eslint-disable-line import/no-extraneous-dependencies
-import prettierrc from '../../.prettierrc.js';
+import prettierrc from '../../prettier.config.js';
 
 export default class ResumeParser {
   #rawSections = {};

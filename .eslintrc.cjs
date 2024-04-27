@@ -6,7 +6,14 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ['eslint:recommended', 'airbnb', 'airbnb/hooks', 'prettier'],
+  extends: [
+    'eslint:recommended',
+    'airbnb',
+    'airbnb/hooks',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+  ],
+  parser: '@typescript-eslint/parser',
   rules: {
     'no-param-reassign': ['error', { props: false }],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
@@ -26,7 +33,7 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: ['test/**', '**/vite.config.mjs', '**/.eslintrc.js'],
+        devDependencies: ['test/**', '**/vite.config.ts', '**/.eslintrc.cjs'],
         optionalDependencies: false,
       },
     ],
