@@ -29,7 +29,7 @@ describe('Builds page', () => {
       `/builds/${id}`
     );
     expect(
-      screen.getByText((content, node) => {
+      screen.getByText((_content, node) => {
         const hasText = (n: Element | null) =>
           n?.textContent?.match(/An Intel 1000000K/) ?? false;
         const nodeHasText = hasText(node);
