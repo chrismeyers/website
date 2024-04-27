@@ -5,11 +5,15 @@ import LinkedInIcon from '../assets/images/icons/linkedin.svg';
 import MailIcon from '../assets/images/icons/mail.svg';
 import MoonIcon from '../assets/images/icons/moon.svg';
 import SunIcon from '../assets/images/icons/sun.svg';
-import { GITHUB_URL, LINKEDIN_URL, MAILTO_MESSAGE } from '../constants';
-import { ThemeContext } from '../context/contexts';
+import { GITHUB_URL, LINKEDIN_URL, MAILTO_MESSAGE } from '../constants.ts';
+import { ThemeContext } from '../context/contexts.ts';
 import styles from '../styles/Footer.module.css';
 
-const Footer = ({ inMenu = false }) => {
+interface Props {
+  inMenu?: boolean;
+}
+
+const Footer = ({ inMenu = false }: Props) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
@@ -18,6 +22,7 @@ const Footer = ({ inMenu = false }) => {
         <div className={styles.social}>
           <a href={GITHUB_URL} className="no-decoration">
             <GithubIcon
+              // @ts-expect-error It exists, trust me
               className="link-image large"
               title="GitHub"
               alt="Find me on GitHub"
@@ -30,6 +35,7 @@ const Footer = ({ inMenu = false }) => {
         <div className={styles.social}>
           <a href={LINKEDIN_URL} className="no-decoration">
             <LinkedInIcon
+              // @ts-expect-error It exists, trust me
               className="link-image large"
               title="LinkedIn"
               alt="Connect with me on LinkedIn"
@@ -46,7 +52,11 @@ const Footer = ({ inMenu = false }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <MailIcon className="link-image large" alt="Send Message" />
+            <MailIcon
+              // @ts-expect-error It exists, trust me
+              className="link-image large"
+              alt="Send Message"
+            />
           </a>
         </div>
 
@@ -61,8 +71,18 @@ const Footer = ({ inMenu = false }) => {
             aria-label="Toggle website theme"
             height={20}
             width={48}
-            checkedIcon={<MoonIcon className="link-image small theme on" />}
-            uncheckedIcon={<SunIcon className="link-image small theme off" />}
+            checkedIcon={
+              <MoonIcon
+                // @ts-expect-error It exists, trust me
+                className="link-image small theme on"
+              />
+            }
+            uncheckedIcon={
+              <SunIcon
+                // @ts-expect-error It exists, trust me
+                className="link-image small theme off"
+              />
+            }
           />
         </div>
       </div>

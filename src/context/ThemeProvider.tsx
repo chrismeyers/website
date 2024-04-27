@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
-import { ThemeContext } from './contexts';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
+import { ThemeContext } from './contexts.ts';
 
-const ThemeProvider = ({ children }) => {
+const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState(localStorage.getItem('theme'));
 
   const systemThemeDarkMediaQuery = '(prefers-color-scheme: dark)';
@@ -18,12 +18,12 @@ const ThemeProvider = ({ children }) => {
       }
     }
 
-    localStorage.setItem('theme', theme);
-    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme as string);
+    document.documentElement.setAttribute('data-theme', theme as string);
   }, [theme]);
 
   useEffect(() => {
-    const systemThemeChangeFn = (e) => {
+    const systemThemeChangeFn = (e: MediaQueryListEvent) => {
       const which = e.matches ? 'dark' : 'light';
       setTheme(which);
     };
@@ -58,7 +58,7 @@ const ThemeProvider = ({ children }) => {
           toggleTheme: () => {
             setTheme(theme === 'light' ? 'dark' : 'light');
           },
-          applyTheme: (which) => {
+          applyTheme: (which: string) => {
             if (['light', 'dark'].includes(which)) {
               setTheme(which);
             }

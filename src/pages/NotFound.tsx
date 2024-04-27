@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import Page from '../components/Page';
+import Page from '../components/Page.tsx';
 
 const NotFound = () => {
   const location = useLocation();

@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ThemeContext } from '../context/contexts';
+import { ThemeContext } from '../context/contexts.ts';
 import styles from '../styles/Prompt.module.css';
 
 let CONSOLE_MESSAGE_DISPLAYED = false;
@@ -11,18 +11,18 @@ const Prompt = () => {
   const [promptVisible, setPromptVisible] = useState(false);
   const [outputWindowVisible, setOutputWindowVisible] = useState(false);
   const [arrowDirection, setArrowDirection] = useState('up');
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [output, setOutput] = useState('');
   const [command, setCommand] = useState('');
 
-  const outputWindowRef = useRef(null);
-  const promptRef = useRef(null);
+  const outputWindowRef = useRef<HTMLTextAreaElement>(null);
+  const promptRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const ARROWS = {
+  const ARROWS: Record<string, string> = {
     up: '&#9650;',
     down: '&#9660;',
   };
@@ -67,7 +67,7 @@ const Prompt = () => {
   };
 
   const stdout = useCallback(
-    (text) => {
+    (text: string) => {
       setOutput((prev) => `${prev}\n${text}`.trim());
       setTimeout(() => scrollOutputWindowToBottom(), 0);
     },
@@ -90,15 +90,17 @@ const Prompt = () => {
   );
 
   const setTheme = useCallback(
-    (which) => {
+    (which: string) => {
       applyTheme(which);
     },
     [applyTheme]
   );
 
   const moveCursorToEnd = () => {
-    promptRef.current.selectionStart = promptRef.current.value.length;
-    promptRef.current.selectionEnd = promptRef.current.value.length;
+    if (promptRef.current) {
+      promptRef.current.selectionStart = promptRef.current.value.length;
+      promptRef.current.selectionEnd = promptRef.current.value.length;
+    }
   };
 
   useEffect(() => {
@@ -124,7 +126,7 @@ const Prompt = () => {
   }, [historyIndex]);
 
   const echo = useCallback(
-    (args) => {
+    (args: string[]) => {
       stdout(args.join(' '));
       showOutputWindow({ bottom: true });
     },
@@ -132,7 +134,7 @@ const Prompt = () => {
   );
 
   const cd = useCallback(
-    (args) => {
+    (args: string[]) => {
       let path = args[0];
       if (args.length < 1) {
         path = '';
@@ -176,12 +178,12 @@ const Prompt = () => {
   }, [showOutputWindow, stdout]);
 
   const run = useCallback(
-    ({ cmd = null, recordHistory = true }) => {
+    ({ cmd = '', recordHistory = true }) => {
       if (cmd === '') return;
 
       if (recordHistory) {
         // Push to top of history stack
-        setHistory((prevHistory) => [cmd, ...prevHistory]);
+        setHistory((prevHistory: string[]) => [cmd, ...prevHistory]);
         stdout(`$ ${cmd}`);
       }
 
@@ -226,7 +228,7 @@ const Prompt = () => {
   );
 
   useEffect(() => {
-    const keyupFn = (e) => {
+    const keyupFn = (e: KeyboardEvent) => {
       if (e.code === 'Backquote') {
         e.preventDefault(); // Prevents adding ` when opening the prompt
         showPrompt();
@@ -234,7 +236,7 @@ const Prompt = () => {
         hidePrompt();
       } else if (e.code === 'Enter') {
         if (promptVisible) {
-          run({ cmd: command, event: e });
+          run({ cmd: command });
         }
       } else if (e.code === 'ArrowUp') {
         if (promptVisible) {
@@ -272,21 +274,21 @@ const Prompt = () => {
             value={output}
             className={`${styles.outputWindow} ${styles.hackerman}`}
             ref={outputWindowRef}
-            readOnly="readonly"
+            readOnly
           />
         )}
         <input
           className={`${styles.ps1} ${styles.hackerman}`}
           value="$"
-          maxLength="1"
-          readOnly="readonly"
+          maxLength={1}
+          readOnly
         />
         <input
           value={command}
           onChange={(e) => setCommand(e.target.value)}
           className={`${styles.prompt} ${styles.hackerman}`}
           ref={promptRef}
-          maxLength="75"
+          maxLength={75}
           autoComplete="off"
           autoFocus // eslint-disable-line jsx-a11y/no-autofocus
         />

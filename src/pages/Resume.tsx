@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
-import { full as resume } from '../assets/generated/resume';
-import Page from '../components/Page';
-import { MAILTO_RESUME, SLOGAN } from '../constants';
+import { full as resume } from '../assets/generated/resume.ts';
+import Page from '../components/Page.tsx';
+import { MAILTO_RESUME, SLOGAN } from '../constants.ts';
 import styles from '../styles/Resume.module.css';
 
 const Resume = () => {

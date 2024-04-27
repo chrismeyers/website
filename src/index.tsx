@@ -6,13 +6,13 @@ import './assets/vendor/hamburgers/hamburgers.min.css';
 import 'lightgallery/css/lightgallery.css';
 import 'lightgallery/css/lg-zoom.css';
 import 'lightgallery/css/lg-thumbnail.css';
-import router from './router';
+import router from './router.tsx';
 
 if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'auto';
 }
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <RouterProvider router={router} />
   </StrictMode>

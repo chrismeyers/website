@@ -44,6 +44,8 @@ module.exports = {
       { namedComponents: 'arrow-function' },
     ],
     'react/prop-types': 'off',
+    'react/require-default-props': 'off',
+    'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.ts'] }],
   },
   parserOptions: {
     ecmaVersion: 'latest',

@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../assets/images/logos/v3/ccm-logo.svg';
-import { SLOGAN } from '../constants';
-import useClickOutside from '../hooks/useClickOutside';
+import { SLOGAN } from '../constants.ts';
+import useClickOutside from '../hooks/useClickOutside.ts';
 import fullStyles from '../styles/FullNav.module.css';
 import mobileStyles from '../styles/MobileNav.module.css';
-import Footer from './Footer';
+import Footer from './Footer.tsx';
 
 const NAVIGATION = [
   { name: 'About', path: '/', hasChildren: false },
@@ -14,7 +14,7 @@ const NAVIGATION = [
   { name: 'Builds', path: '/builds', hasChildren: true },
 ];
 
-const setBodyScrollable = (enabled) =>
+const setBodyScrollable = (enabled: boolean) =>
   enabled
     ? document.body.classList.remove('prevent-scroll')
     : document.body.classList.add('prevent-scroll');
@@ -31,7 +31,12 @@ export const FullNav = () => {
       <div className={fullStyles.fullMenu}>
         <Link to="/">
           <span className={fullStyles.sideNavLogo}>
-            <Logo alt={SLOGAN} className={fullStyles.bannerImg} title="Home" />
+            <Logo
+              // @ts-expect-error It exists, trust me
+              alt={SLOGAN}
+              className={fullStyles.bannerImg}
+              title="Home"
+            />
           </span>
         </Link>
         <ul className={fullStyles.sideNavItems}>
@@ -60,8 +65,8 @@ export const FullNav = () => {
 export const MobileNav = () => {
   const [menuDisplayed, setMenuDisplayed] = useState(false);
   const location = useLocation();
-  const menuRef = useRef(null);
-  const menuIconRef = useRef(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const menuIconRef = useRef<HTMLDivElement>(null);
 
   useClickOutside(menuRef, () => setMenuDisplayed(false), [menuIconRef]);
 
@@ -83,6 +88,7 @@ export const MobileNav = () => {
           <div className={mobileStyles.smallNavLogo}>
             <Link to="/">
               <Logo
+                // @ts-expect-error It exists, trust me
                 alt={SLOGAN}
                 className={mobileStyles.bannerImgSmall}
                 title="Home"

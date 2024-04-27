@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import _throttle from 'lodash/throttle';
-import { MOBILE_BREAKPOINT } from '../constants';
+import { MOBILE_BREAKPOINT } from '../constants.ts';
 
 const useScreenResize = () => {
-  const [isMobileWidth, setIsMobileWidth] = useState(null);
+  const [isMobileWidth, setIsMobileWidth] = useState<boolean | null>(null);
 
   useEffect(() => {
     const onResize = () => {

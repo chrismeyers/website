@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { builds } from '../assets/data';
-import Page from '../components/Page';
-import { SLOGAN } from '../constants';
+import { builds } from '../assets/data.ts';
+import Page from '../components/Page.tsx';
+import { SLOGAN } from '../constants.ts';
 import styles from '../styles/Builds.module.css';
 
-const cleanCPU = (cpu) => cpu.split('@')[0].trim();
+const cleanCPU = (cpu: string) => cpu.split('@')[0].trim();
 
 const Builds = () => {
   document.title = `Builds | ${SLOGAN}`;

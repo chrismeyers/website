@@ -1,6 +1,46 @@
 /* eslint-disable no-underscore-dangle */
 
-const _images = [
+interface Image {
+  id: number;
+  path: string;
+  thumbnail: string | null;
+  title: string;
+  orientation: 'landscape' | 'portrait' | 'square';
+}
+
+interface Build {
+  id: number;
+  active: boolean;
+  displayDate: string;
+  startedDate: string;
+  cpu: string;
+  cool: string | null;
+  mobo: string;
+  ram: string;
+  hdd: string[];
+  ssd: string[] | null;
+  gpu: string;
+  case: string;
+  psu: string;
+  image?: Image;
+}
+
+interface Project {
+  id: number;
+  active: boolean;
+  title: string;
+  webUrl: string | null;
+  codeUrl: string;
+  displayDate: string;
+  startedDate: string;
+  languages: string[];
+  info: string;
+  role: string;
+  status: string;
+  images: (Image | undefined)[];
+}
+
+const _images: Image[] = [
   {
     id: 1,
     path: '/images/builds/mattBuild.jpg',
@@ -211,7 +251,7 @@ const _images = [
 
 export const images = new Map(_images.map((image) => [image.id, image]));
 
-const _builds = [
+const _builds: Build[] = [
   {
     id: 1,
     active: true,
@@ -317,7 +357,7 @@ export const builds = new Map(
   _builds.filter((build) => build.active).map((build) => [build.id, build])
 );
 
-const _projects = [
+const _projects: Project[] = [
   {
     id: 1,
     active: true,

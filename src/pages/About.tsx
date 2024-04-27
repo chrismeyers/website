@@ -1,9 +1,9 @@
 import lgZoom from 'lightgallery/plugins/zoom';
 import { Link } from 'react-router-dom';
-import { summary } from '../assets/generated/resume';
-import { createLightGallery } from '../components/Lightbox';
-import Page from '../components/Page';
-import { MAILTO_MESSAGE, SLOGAN } from '../constants';
+import { summary } from '../assets/generated/resume.ts';
+import { createLightGallery } from '../components/Lightbox.tsx';
+import Page from '../components/Page.tsx';
+import { MAILTO_MESSAGE, SLOGAN } from '../constants.ts';
 
 const About = () => {
   document.title = SLOGAN;

@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { projects } from '../assets/data';
-import Page from '../components/Page';
-import { SLOGAN } from '../constants';
+import { projects } from '../assets/data.ts';
+import Page from '../components/Page.tsx';
+import { SLOGAN } from '../constants.ts';
 import styles from '../styles/Projects.module.css';
 
 const Projects = () => {

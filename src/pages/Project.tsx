@@ -2,23 +2,26 @@ import { Fragment } from 'react';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import lgZoom from 'lightgallery/plugins/zoom';
 import { useParams } from 'react-router-dom';
-import { projects } from '../assets/data';
+import { projects } from '../assets/data.ts';
 import GithubIcon from '../assets/images/icons/github.svg';
 import ExternalLinkIcon from '../assets/images/icons/link-external.svg';
 import PlayIcon from '../assets/images/icons/play.svg';
-import { createLightGallery } from '../components/Lightbox';
-import Page from '../components/Page';
-import { SLOGAN } from '../constants';
+import { createLightGallery } from '../components/Lightbox.tsx';
+import Page from '../components/Page.tsx';
+import { SLOGAN } from '../constants.ts';
 import styles from '../styles/Project.module.css';
-import NotFound from './NotFound';
+import NotFound from './NotFound.tsx';
 
 const restartGif = () => {
   // Restart the GIF each time it's opened
   setTimeout(() => {
-    const gif = document.getElementsByClassName('lg-image')[0];
+    const gif = document.getElementsByClassName(
+      'lg-image'
+    )[0] as HTMLImageElement;
 
     if (gif) {
-      document.getElementsByClassName('lg-image')[0].src = gif.src;
+      (document.getElementsByClassName('lg-image')[0] as HTMLImageElement).src =
+        gif.src;
     }
   }, 100);
 };
@@ -69,6 +72,7 @@ const Project = () => {
             {data.webUrl !== null && (
               <dd className="link-image">
                 <ExternalLinkIcon
+                  // @ts-expect-error It exists, trust me
                   className="link-image small"
                   title="External website"
                   alt="Link to external website"
@@ -80,6 +84,7 @@ const Project = () => {
             )}
             <dd className="link-image">
               <GithubIcon
+                // @ts-expect-error It exists, trust me
                 className="link-image small"
                 title="GitHub repository"
                 alt="Link to GitHub repository"
@@ -93,13 +98,13 @@ const Project = () => {
 
         {data?.images?.length > 0 && (
           <div className={styles.images}>
-            {data.images[0].path.toLowerCase().endsWith('.gif') ? (
+            {data.images[0]?.path.toLowerCase().endsWith('.gif') ? (
               <div className={styles.gifOverlay} title="Play GIF">
                 {createLightGallery(
                   [
                     <a href={data.images[0].path}>
                       <img
-                        src={data.images[0].thumbnail}
+                        src={data.images[0].thumbnail ?? ''}
                         className={`${styles.imagesFull} ${
                           styles[data.images[0].orientation]
                         }`}
@@ -115,6 +120,7 @@ const Project = () => {
                   }
                 )}
                 <PlayIcon
+                  // @ts-expect-error It exists, trust me
                   name="play"
                   className="link-image xlarge play-overlay"
                   alt="Plays the associated GIF"
@@ -125,30 +131,30 @@ const Project = () => {
               createLightGallery(
                 [
                   data.images.map((image, index) => (
-                    <Fragment key={image.id}>
+                    <Fragment key={image?.id}>
                       {index === 0 ? (
-                        <a href={image.path}>
+                        <a href={image?.path}>
                           <img
-                            src={image.path}
+                            src={image?.path}
                             className={`${styles.imagesFull} ${
-                              styles[image.orientation]
+                              styles[image?.orientation ?? 'square']
                             }`}
-                            alt={image.title}
+                            alt={image?.title}
                             title="Click to enlarge"
                           />
                         </a>
                       ) : (
                         <div
                           className={styles.imagesSmall}
-                          data-src={image.path}
+                          data-src={image?.path}
                         >
-                          <a href={image.path}>
+                          <a href={image?.path}>
                             <img
-                              src={image.path}
+                              src={image?.path}
                               className={`${styles.imagesSmall} ${
-                                styles[image.orientation]
+                                styles[image?.orientation ?? 'square']
                               }`}
-                              alt={image.title}
+                              alt={image?.title}
                               title="Click to enlarge"
                             />
                           </a>

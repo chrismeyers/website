@@ -1,11 +1,11 @@
 import lgZoom from 'lightgallery/plugins/zoom';
 import { useParams } from 'react-router-dom';
-import { builds } from '../assets/data';
-import { createLightGallery } from '../components/Lightbox';
-import Page from '../components/Page';
-import { SLOGAN } from '../constants';
+import { builds } from '../assets/data.ts';
+import { createLightGallery } from '../components/Lightbox.tsx';
+import Page from '../components/Page.tsx';
+import { SLOGAN } from '../constants.ts';
 import styles from '../styles/Build.module.css';
-import NotFound from './NotFound';
+import NotFound from './NotFound.tsx';
 
 const Build = () => {
   const { id } = useParams();
