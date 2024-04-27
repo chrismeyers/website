@@ -5,6 +5,7 @@
   "engines": {
     "node": "20"
   },
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "generate": "bin/generate.sh",
@@ -43,6 +44,7 @@
     "jsdom": "^24.0.0",
     "prettier": "3.2.5",
     "rimraf": "^5.0.5",
+    "typescript": "5.4.5",
     "vite": "^5.2.10",
     "vite-plugin-svgr": "^4.2.0",
     "vitest": "^1.5.1"

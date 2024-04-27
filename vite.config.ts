@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
@@ -8,7 +8,7 @@ export default defineConfig({
     outDir: 'build',
   },
   server: {
-    port: '8080',
+    port: 8080,
   },
   plugins: [react(), svgr({ include: '**/*.svg' })],
   test: {
