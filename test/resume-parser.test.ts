@@ -3,7 +3,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import ResumeParser from '../bin/node/resume-parser';
 
 describe('Resume Parser', () => {
-  let parser;
+  let parser: ResumeParser;
 
   beforeAll(() => {
     parser = new ResumeParser(

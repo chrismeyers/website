@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import * as resume from '../../src/assets/generated/resume';
-import Resume from '../../src/pages/Resume';
+import * as resume from '../../src/assets/generated/resume.ts';
+import Resume from '../../src/pages/Resume.tsx';
 import styles from '../../src/styles/Resume.module.css';
 
 describe('Resume page', () => {
@@ -15,7 +15,7 @@ describe('Resume page', () => {
           info: [['Did this thing', 'Did that thing']],
         },
       ],
-    });
+    } as typeof resume.full);
 
     render(<Resume />);
 
@@ -48,7 +48,7 @@ describe('Resume page', () => {
           secondLine: [['Wizard', 'Jan. 1234 &ndash; Present']],
         },
       ],
-    });
+    } as typeof resume.full);
 
     render(<Resume />);
 
@@ -86,7 +86,7 @@ describe('Resume page', () => {
           ],
         },
       ],
-    });
+    } as typeof resume.full);
 
     render(<Resume />);
 
@@ -134,7 +134,7 @@ describe('Resume page', () => {
           info: [['Took a class', 'Took another class']],
         },
       ],
-    });
+    } as typeof resume.full);
 
     render(<Resume />);
 
@@ -165,7 +165,7 @@ describe('Resume page', () => {
           secondLine: [['School', 'Jan. 9999 &ndash; Dec. 9999']],
         },
       ],
-    });
+    } as typeof resume.full);
 
     render(<Resume />);
 
@@ -190,7 +190,7 @@ describe('Resume page', () => {
       skills: [
         {
           mainItem: 'Multiple subitems',
-          subItems: ['Sub 1', 'Sub 2'],
+          subItems: ['Sub 1', 'Sub 2a'],
         },
         {
           mainItem: 'One subitem',
@@ -201,7 +201,7 @@ describe('Resume page', () => {
           subItems: [],
         },
       ],
-    });
+    } as typeof resume.full);
 
     render(<Resume />);
 
@@ -211,11 +211,11 @@ describe('Resume page', () => {
 
     const multiple = screen.getByText('Multiple subitems');
     expect(multiple).toHaveClass('skill-wrapper');
-    expect(multiple.querySelector('ul').children.length).toBe(2);
+    expect(multiple.querySelector('ul')?.children.length).toBe(2);
 
     const one = screen.getByText('One subitem');
     expect(one).toHaveClass('skill-wrapper');
-    expect(one.querySelector('ul').children.length).toBe(1);
+    expect(one.querySelector('ul')?.children.length).toBe(1);
 
     const none = screen.getByText('No subitems');
     expect(none).toHaveClass('skill-wrapper');

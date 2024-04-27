@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import * as data from '../../src/assets/data';
-import * as lightbox from '../../src/components/Lightbox';
-import Project from '../../src/pages/Project';
+import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
+import * as data from '../../src/assets/data.ts';
+import * as lightbox from '../../src/components/Lightbox.tsx';
+import Project from '../../src/pages/Project.tsx';
 
 vi.mock('react-router-dom', async () => ({
   ...(await vi.importActual('react-router-dom')),
@@ -12,12 +12,13 @@ vi.mock('react-router-dom', async () => ({
 }));
 
 describe('Project page', () => {
-  let lgSpy;
+  let lgSpy: MockInstance;
 
   beforeEach(() => {
     lgSpy = vi
       .spyOn(lightbox, 'createLightGallery')
-      .mockImplementation(() => {});
+      // eslint-disable-next-line react/jsx-no-useless-fragment
+      .mockImplementation(() => <></>);
   });
 
   it('handles no projects', async () => {
@@ -47,7 +48,6 @@ describe('Project page', () => {
     const info = 'Something involving code';
     const role = 'Solo project';
     const status = 'Being maintained';
-    const images = [];
 
     vi.spyOn(data, 'projects', 'get').mockReturnValue(
       new Map([
@@ -60,11 +60,12 @@ describe('Project page', () => {
             webUrl,
             codeUrl,
             displayDate,
+            startedDate: '',
             languages,
             info,
             role,
             status,
-            images,
+            images: [],
           },
         ],
       ])
@@ -109,16 +110,14 @@ describe('Project page', () => {
         path: '/path/to/1.png',
         thumbnail: null,
         title: 'Image 1',
-        position: 1,
-        orientation: 'square',
+        orientation: 'square' as const,
       },
       {
         id: 2,
         path: '/path/to/2.png',
         thumbnail: null,
         title: 'Image 2',
-        position: 2,
-        orientation: 'landscape',
+        orientation: 'landscape' as const,
       },
     ];
 
@@ -133,6 +132,7 @@ describe('Project page', () => {
             webUrl,
             codeUrl,
             displayDate,
+            startedDate: '',
             languages,
             info,
             role,
@@ -171,7 +171,18 @@ describe('Project page', () => {
     const codeUrl = 'https://hosted.code';
 
     vi.spyOn(data, 'projects', 'get').mockReturnValue(
-      new Map([[1, { id: 1, active: true, webUrl, codeUrl, languages: [] }]])
+      new Map([
+        [
+          1,
+          {
+            id: 1,
+            active: true,
+            webUrl,
+            codeUrl,
+            languages: [''],
+          } as data.Project,
+        ],
+      ])
     );
 
     render(<Project />);
@@ -195,13 +206,23 @@ describe('Project page', () => {
         path: '/path/to/animated.gif',
         thumbnail: '/path/to/thumbnail.png',
         title: 'Image 1',
-        position: 1,
         orientation: 'square',
       },
     ];
 
     vi.spyOn(data, 'projects', 'get').mockReturnValue(
-      new Map([[1, { id: 1, active: true, title, images, languages: [] }]])
+      new Map([
+        [
+          1,
+          {
+            id: 1,
+            active: true,
+            title,
+            images,
+            languages: [''],
+          } as data.Project,
+        ],
+      ])
     );
 
     render(<Project />);

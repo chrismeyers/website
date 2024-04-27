@@ -1,8 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
-import * as data from '../../src/assets/data';
-import Projects from '../../src/pages/Projects';
+import * as data from '../../src/assets/data.ts';
+import Projects from '../../src/pages/Projects.tsx';
 
 describe('Projects page', () => {
   it('displays project summary correctly', async () => {
@@ -12,7 +12,9 @@ describe('Projects page', () => {
     const info = 'Something involving code';
 
     vi.spyOn(data, 'projects', 'get').mockReturnValue(
-      new Map([[1, { id, active: true, title, displayDate, info }]])
+      new Map([
+        [1, { id, active: true, title, displayDate, info } as data.Project],
+      ])
     );
 
     render(
@@ -40,8 +42,8 @@ describe('Projects page', () => {
   it('displays multiple projects', () => {
     vi.spyOn(data, 'projects', 'get').mockReturnValue(
       new Map([
-        [1, { id: 1, active: true, title: 'Apples' }],
-        [2, { id: 2, active: true, title: 'Bananas' }],
+        [1, { id: 1, active: true, title: 'Apples' } as data.Project],
+        [2, { id: 2, active: true, title: 'Bananas' } as data.Project],
       ])
     );
 

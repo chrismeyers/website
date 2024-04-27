@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 
-interface Image {
+export interface Image {
   id: number;
   path: string;
   thumbnail: string | null;
@@ -8,7 +8,7 @@ interface Image {
   orientation: 'landscape' | 'portrait' | 'square';
 }
 
-interface Build {
+export interface Build {
   id: number;
   active: boolean;
   displayDate: string;
@@ -17,7 +17,7 @@ interface Build {
   cool: string | null;
   mobo: string;
   ram: string;
-  hdd: string[];
+  hdd: string[] | null;
   ssd: string[] | null;
   gpu: string;
   case: string;
@@ -25,7 +25,7 @@ interface Build {
   image?: Image;
 }
 
-interface Project {
+export interface Project {
   id: number;
   active: boolean;
   title: string;

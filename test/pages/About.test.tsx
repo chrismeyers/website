@@ -1,17 +1,18 @@
 import { render, screen } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import * as resume from '../../src/assets/generated/resume';
-import * as lightbox from '../../src/components/Lightbox';
-import About from '../../src/pages/About';
+import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
+import * as resume from '../../src/assets/generated/resume.ts';
+import * as lightbox from '../../src/components/Lightbox.tsx';
+import About from '../../src/pages/About.tsx';
 
 describe('About page', () => {
-  let lgSpy;
+  let lgSpy: MockInstance;
 
   beforeEach(() => {
     lgSpy = vi
       .spyOn(lightbox, 'createLightGallery')
-      .mockImplementation(() => {});
+      // eslint-disable-next-line react/jsx-no-useless-fragment
+      .mockImplementation(() => <></>);
   });
 
   it('excludes employment info is not currently employed', () => {
@@ -19,7 +20,7 @@ describe('About page', () => {
       mostRecentJob: {
         employed: false,
       },
-    });
+    } as typeof resume.summary);
 
     render(
       <RouterProvider
@@ -39,7 +40,7 @@ describe('About page', () => {
         company: 'Somewhere',
         title: 'Wizard',
       },
-    });
+    } as typeof resume.summary);
 
     render(
       <RouterProvider
@@ -58,7 +59,9 @@ describe('About page', () => {
   });
 
   it('excludes language experience if missing', () => {
-    vi.spyOn(resume, 'summary', 'get').mockReturnValue({});
+    vi.spyOn(resume, 'summary', 'get').mockReturnValue(
+      {} as typeof resume.summary
+    );
 
     render(
       <RouterProvider
@@ -82,7 +85,7 @@ describe('About page', () => {
         ],
         web: ['Language 4', 'Language 5 (Something 3)'],
       },
-    });
+    } as typeof resume.summary);
 
     render(
       <RouterProvider

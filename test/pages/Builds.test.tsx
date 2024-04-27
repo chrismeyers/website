@@ -1,8 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
-import * as data from '../../src/assets/data';
-import Builds from '../../src/pages/Builds';
+import * as data from '../../src/assets/data.ts';
+import Builds from '../../src/pages/Builds.tsx';
 
 describe('Builds page', () => {
   it('displays build summary correctly', async () => {
@@ -11,7 +11,7 @@ describe('Builds page', () => {
     const cpu = 'Intel 1000000K @ 99.9GHz';
 
     vi.spyOn(data, 'builds', 'get').mockReturnValue(
-      new Map([[id, { id, active: true, displayDate, cpu }]])
+      new Map([[id, { id, active: true, displayDate, cpu } as data.Build]])
     );
 
     render(
@@ -30,9 +30,10 @@ describe('Builds page', () => {
     );
     expect(
       screen.getByText((content, node) => {
-        const hasText = (n) => n.textContent.match(/An Intel 1000000K/);
+        const hasText = (n: Element | null) =>
+          n?.textContent?.match(/An Intel 1000000K/) ?? false;
         const nodeHasText = hasText(node);
-        const childrenDontHaveText = Array.from(node.children).every(
+        const childrenDontHaveText = Array.from(node?.children ?? []).every(
           (child) => !hasText(child)
         );
 
@@ -48,8 +49,24 @@ describe('Builds page', () => {
   it('displays multiple builds', () => {
     vi.spyOn(data, 'builds', 'get').mockReturnValue(
       new Map([
-        [1, { id: 1, active: true, displayDate: 'Then', cpu: 'ABC @ 123GHz' }],
-        [2, { id: 2, active: true, displayDate: 'Now', cpu: 'ZYX @ 987GHz' }],
+        [
+          1,
+          {
+            id: 1,
+            active: true,
+            displayDate: 'Then',
+            cpu: 'ABC @ 123GHz',
+          } as data.Build,
+        ],
+        [
+          2,
+          {
+            id: 2,
+            active: true,
+            displayDate: 'Now',
+            cpu: 'ZYX @ 987GHz',
+          } as data.Build,
+        ],
       ])
     );
 
