@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
 import { ThemeContext } from './contexts';
 
 const ThemeProvider = ({ children }) => {
@@ -71,10 +70,6 @@ const ThemeProvider = ({ children }) => {
       {children}
     </ThemeContext.Provider>
   );
-};
-
-ThemeProvider.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default ThemeProvider;

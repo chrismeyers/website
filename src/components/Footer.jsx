@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import PropTypes from 'prop-types';
 import Switch from 'react-switch';
 import GithubIcon from '../assets/images/icons/github.svg';
 import LinkedInIcon from '../assets/images/icons/linkedin.svg';
@@ -10,7 +9,7 @@ import { GITHUB_URL, LINKEDIN_URL, MAILTO_MESSAGE } from '../constants';
 import { ThemeContext } from '../context/contexts';
 import styles from '../styles/Footer.module.css';
 
-const Footer = ({ inMenu }) => {
+const Footer = ({ inMenu = false }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
@@ -73,14 +72,6 @@ const Footer = ({ inMenu }) => {
       </span>
     </footer>
   );
-};
-
-Footer.defaultProps = {
-  inMenu: false,
-};
-
-Footer.propTypes = {
-  inMenu: PropTypes.bool,
 };
 
 export default Footer;

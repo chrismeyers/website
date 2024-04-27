@@ -36,6 +36,7 @@ module.exports = {
       'error',
       { namedComponents: 'arrow-function' },
     ],
+    'react/prop-types': 'off',
   },
   parserOptions: {
     ecmaVersion: 'latest',
