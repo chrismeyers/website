@@ -250,7 +250,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
         '',
         `export const summary = ${JSON.stringify(parsed.summary)};`,
       ].join('\n'),
-      { parser: 'babel', ...prettierrc }
+      { parser: 'typescript', ...prettierrc }
     )
   );
 }
