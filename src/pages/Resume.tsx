@@ -73,8 +73,10 @@ const Resume = () => {
           className={styles.italicSpacer}
           key={`school-${school.firstLine[0]}`}
         >
-          <li className={`${styles.leftColumn} ${styles.degree}`}>
-            {school.firstLine[0]}
+          <li className={`${styles.leftColumn} ${styles.school}`}>
+            <a className="fancytxt" href={school.url}>
+              {school.firstLine[0]}
+            </a>
           </li>
           <li className={`${styles.rightColumn} ${styles.location}`}>
             {school.firstLine[1]}
@@ -82,11 +84,9 @@ const Resume = () => {
           {school.secondLine.map((secondLine, index) => (
             <Fragment key={`school-secondLine-${secondLine[0]}`}>
               <li
-                className={`${styles.leftColumn} ${styles.subLeftColumn} ${styles.school}`}
+                className={`${styles.leftColumn} ${styles.subLeftColumn} ${styles.degree}`}
               >
-                <a className="fancytxt" href={school.url}>
-                  {secondLine[0]}
-                </a>
+                {secondLine[0]}
               </li>
               <li
                 className={`${styles.rightColumn} ${styles.tenure}`}

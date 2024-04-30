@@ -62,11 +62,11 @@
   \item
   \headerrow
     % URL https://www.school.edu
-    {\textbf{Degree}}
+    {\textbf{School}}
     {\textbf{Planet Earth}}
   \\
   \headerrow
-    {\emph{School}}
+    {\emph{Degree}}
     {\emph{Jan. 9999 -- Dec. 9999}}
   % BLOCK END
 % END Education

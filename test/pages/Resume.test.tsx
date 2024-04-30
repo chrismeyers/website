@@ -129,8 +129,8 @@ describe('Resume page', () => {
       education: [
         {
           url: 'https://school.edu',
-          firstLine: ['Degree', 'Anywhere, Earth'],
-          secondLine: [['School', 'Jan. 9999 &ndash; Dec. 9999']],
+          firstLine: ['School', 'Anywhere, Earth'],
+          secondLine: [['Degree', 'Jan. 9999 &ndash; Dec. 9999']],
           info: [['Took a class', 'Took another class']],
         },
       ],
@@ -161,8 +161,8 @@ describe('Resume page', () => {
       education: [
         {
           url: 'https://school.edu',
-          firstLine: ['Degree', 'Anywhere, Earth'],
-          secondLine: [['School', 'Jan. 9999 &ndash; Dec. 9999']],
+          firstLine: ['School', 'Anywhere, Earth'],
+          secondLine: [['Degree', 'Jan. 9999 &ndash; Dec. 9999']],
         },
       ],
     } as typeof resume.full);

@@ -40,8 +40,8 @@ describe('Resume Parser', () => {
       expect(items).toStrictEqual([
         {
           url: 'https://www.school.edu',
-          firstLine: ['Degree', 'Planet Earth'],
-          secondLine: [['School', 'Jan. 9999 &ndash; Dec. 9999']],
+          firstLine: ['School', 'Planet Earth'],
+          secondLine: [['Degree', 'Jan. 9999 &ndash; Dec. 9999']],
           info: [[]],
         },
       ]);

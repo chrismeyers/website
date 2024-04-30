@@ -30,12 +30,12 @@
   }
 
   .company,
-  .degree,
+  .school,
   .location {
     font-weight: bold;
   }
 
-  .school,
+  .degree,
   .jobTitle,
   .tenure {
     font-style: italic;
@@ -56,25 +56,26 @@
   }
 
   .location,
-  .school,
+  .degree,
   .jobTitle,
   .tenure {
     list-style-type: none;
   }
 
   .company,
-  .degree,
+  .school,
   .location {
     font-weight: bold;
   }
 
-  .school,
+  .degree,
   .jobTitle,
   .tenure {
     font-style: italic;
   }
 
-  .jobTitle.role {
+  .jobTitle.role,
+  .degree {
     margin-top: 5px;
   }
 
