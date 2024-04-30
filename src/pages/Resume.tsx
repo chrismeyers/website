@@ -30,18 +30,18 @@ const Resume = () => {
                 className={`${styles.leftColumn} ${styles.subLeftColumn} ${
                   styles.jobTitle
                 } ${
-                  index > 0 && job.info[index].length > 0
-                    ? styles.sameCompanySpacing
-                    : ''
+                  index > 0 && job.info[index - 1].length > 0
+                    ? styles.additionalRole
+                    : styles.role
                 }`}
               >
                 {secondLine[0]}
               </li>
               <li
                 className={`${styles.rightColumn} ${styles.tenure} ${
-                  index > 0 && job.info[index].length > 0
-                    ? styles.sameCompanySpacing
-                    : ''
+                  index > 0 && job.info[index - 1].length > 0
+                    ? styles.additionalRole
+                    : styles.role
                 }`}
                 dangerouslySetInnerHTML={{ __html: secondLine[1] }} // eslint-disable-line react/no-danger
               />

@@ -41,12 +41,20 @@
     font-style: italic;
   }
 
-  .sameCompanySpacing {
+  .role {
+    margin-top: 0px;
+  }
+
+  .additionalRole {
     margin-top: 20px;
   }
 }
 
 @media screen and (max-width: 911px) {
+  ul.moreInfoWrapper {
+    padding-top: 10px;
+  }
+
   .location,
   .school,
   .jobTitle,
@@ -66,7 +74,11 @@
     font-style: italic;
   }
 
-  .jobTitle.sameCompanySpacing {
+  .jobTitle.role {
+    margin-top: 5px;
+  }
+
+  .jobTitle.additionalRole {
     margin-top: 15px;
   }
 }
