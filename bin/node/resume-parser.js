@@ -159,15 +159,21 @@ export default class ResumeParser {
 
   getLanguages() {
     const languagesPattern = '% LANGUAGES';
-    // Splits the language lists on commas, except within parentheses
-    const regexp = /(?!\(.*),(?![^(]*?\))/;
     const langMap = {};
     const skills = this.parseListSection('TechnicalSkills', false);
 
     skills.forEach((skill) => {
       if (skill.mainItem.includes(languagesPattern)) {
-        const type = skill.mainItem.split(languagesPattern)[1].trim();
-        langMap[type] = skill.subItems[0].split(regexp).map((s) => s.trim());
+        const [type, delimiter] = skill.mainItem
+          .split(languagesPattern)[1]
+          .trim()
+          .split(' ');
+
+        langMap[type] = skill.mainItem
+          .split(delimiter)[1]
+          .split(languagesPattern)[0]
+          .split(/(?!\(.*),(?![^(]*?\))/) // Splits the language lists on commas, except within parentheses
+          .map((s) => s.trim());
       }
     });
 

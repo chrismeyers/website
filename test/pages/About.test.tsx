@@ -78,12 +78,11 @@ describe('About page', () => {
   it('displays language experience', () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
       languages: {
-        desktop: [
+        all: [
           'Language 1 (Something 1, Something 2)',
           'Language 2',
-          'Language 3',
+          'Language 3 (Something 3)',
         ],
-        web: ['Language 4', 'Language 5 (Something 3)'],
       },
     } as typeof resume.summary);
 
@@ -93,14 +92,10 @@ describe('About page', () => {
       />
     );
 
-    const desktopLanguages = screen.getByTestId('desktop-languages');
-    const webLanguages = screen.getByTestId('web-languages');
+    const languages = screen.getByTestId('languages');
 
-    expect(desktopLanguages).toBeInTheDocument();
-    expect(webLanguages).toBeInTheDocument();
-
-    expect(desktopLanguages.children.length).toBe(3);
-    expect(webLanguages.children.length).toBe(2);
+    expect(languages).toBeInTheDocument();
+    expect(languages.children).toHaveLength(3);
 
     expect(lgSpy).toHaveBeenCalledTimes(1);
   });

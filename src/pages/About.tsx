@@ -70,37 +70,23 @@ const About = () => {
       </ul>
 
       <p>
-        Over the years, I&apos;ve gained experience with the following
-        programming languages and frameworks:
+        Over the years, I&apos;ve gained experience developing software ranging
+        from desktop and CLI applications to web applications and REST APIs
+        using:
       </p>
 
-      <ul>
-        <li>
-          Websites, web applications, and REST APIs:
-          {summary?.languages?.web && (
-            <ul data-testid="web-languages">
-              {summary.languages.web.map((item) => (
-                <li key={`web-${item}`}>{item}</li>
-              ))}
-            </ul>
-          )}
-        </li>
-        <li>
-          Desktop and command-line interface (CLI) applications:
-          {summary?.languages?.desktop && (
-            <ul data-testid="desktop-languages">
-              {summary.languages.desktop.map((item) => (
-                <li key={`desktop-${item}`}>{item}</li>
-              ))}
-            </ul>
-          )}
-        </li>
-      </ul>
+      {summary?.languages?.all && (
+        <ul data-testid="languages">
+          {summary.languages.all.map((item) => (
+            <li key={`languages-${item}`}>{item}</li>
+          ))}
+        </ul>
+      )}
 
       <span>
         As a professional software engineer, I strive to write simple, modular,
         and maintainable code. My primary goal is to create innovative and
-        usable applications that solve problems. If you have any questions,
+        usable applications that solve real problems. If you have any questions,
         comments, or would like to work together on a project, please{' '}
         <a
           href={MAILTO_MESSAGE}
