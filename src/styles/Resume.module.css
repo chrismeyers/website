@@ -1,8 +1,12 @@
+.resume {
+  max-width: 850px;
+}
+
 .removeBullets {
   list-style-type: none;
 }
 
-@media screen and (min-width: 912px), print {
+@media screen and (min-width: 1074px), print {
   ul {
     overflow: hidden;
   }
@@ -50,7 +54,7 @@
   }
 }
 
-@media screen and (max-width: 911px) {
+@media screen and (max-width: 1073px) {
   ul.moreInfoWrapper {
     padding-top: 10px;
   }

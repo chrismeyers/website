@@ -8,7 +8,7 @@ const Resume = () => {
   document.title = `Résumé | ${SLOGAN}`;
 
   return (
-    <Page header="Résumé">
+    <Page header="Résumé" contentStyles={[styles.resume]}>
       <h2 className="top">Experience</h2>
       {resume?.experience?.map((job) => (
         <ul
