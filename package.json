@@ -17,8 +17,8 @@
     "test:ci": "CI=true vitest --coverage --run",
     "lint": "eslint . --ext .ts,.tsx,.js,.cjs,.jsx --max-warnings 0",
     "lint:fix": "eslint . --fix  --ext .ts,.tsx,.js,.cjs,.jsx",
-    "format": "prettier --write '**/*.{ts,tsx,js,cjs,jsx}'",
-    "format:check": "prettier --check '**/*.{ts,tsx,js,cjs,jsx}'"
+    "format": "prettier --check '**/*.{ts,tsx,js,cjs,jsx}'",
+    "format:fix": "prettier --write '**/*.{ts,tsx,js,cjs,jsx}'"
   },
   "dependencies": {
     "lightgallery": "^2.7.2",
