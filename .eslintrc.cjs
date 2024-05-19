@@ -8,16 +8,24 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    'airbnb',
-    'airbnb/hooks',
     'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:import/recommended',
+    'plugin:jsx-a11y/recommended',
     'prettier',
   ],
   parser: '@typescript-eslint/parser',
   rules: {
+    // built in
     'no-param-reassign': ['error', { props: false }],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+    'no-console': 'warn',
+    'no-alert': 'warn',
+    'no-debugger': 'error',
     'sort-imports': ['error', { ignoreDeclarationSort: true }],
+
+    // import
     'import/prefer-default-export': 'off',
     'import/order': [
       'error',
@@ -37,7 +45,9 @@ module.exports = {
         optionalDependencies: false,
       },
     ],
-    'testing-library/no-node-access': 'off',
+
+    // react
+    'react/no-danger': 'warn',
     'react/react-in-jsx-scope': 'off',
     'react/function-component-definition': [
       'error',
@@ -46,8 +56,18 @@ module.exports = {
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.tsx', '.ts'] }],
+    'react/jsx-key': 'off', // too many false positives, rely on runtime errors
   },
   parserOptions: {
     ecmaVersion: 'latest',
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+    'import/ignore': [
+      'node_modules',
+      '\\.(coffee|scss|css|less|hbs|svg|json)$',
+    ],
   },
 };

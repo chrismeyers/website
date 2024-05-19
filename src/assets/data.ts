@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-
 export interface Image {
   id: number;
   path: string;

@@ -11,7 +11,6 @@ describe('About page', () => {
   beforeEach(() => {
     lgSpy = vi
       .spyOn(lightbox, 'createLightGallery')
-      // eslint-disable-next-line react/jsx-no-useless-fragment
       .mockImplementation(() => <></>);
   });
 
