@@ -5,6 +5,7 @@ networks:
 services:
   website:
     build: .
+    pull_policy: never
     image: chrismeyers-website:latest
     container_name: chrismeyers-website
     networks:
