@@ -3,13 +3,11 @@ import { Link } from 'react-router-dom';
 import { summary } from '../assets/generated/resume.ts';
 import { createLightGallery } from '../components/Lightbox.tsx';
 import Page from '../components/Page.tsx';
-import { MAILTO_MESSAGE, SLOGAN } from '../constants.ts';
+import { MAILTO_MESSAGE } from '../constants.ts';
 
 const About = () => {
-  document.title = SLOGAN;
-
   return (
-    <Page header="About">
+    <Page metadata={{ header: 'About' }}>
       <span>
         Hey, my name is Chris Meyers and I am a software engineer and technology
         enthusiast. Here are some things you should know about me:

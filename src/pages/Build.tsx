@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { builds } from '../assets/data.ts';
 import { createLightGallery } from '../components/Lightbox.tsx';
 import Page from '../components/Page.tsx';
-import { SLOGAN } from '../constants.ts';
 import styles from '../styles/Build.module.css';
 import NotFound from './NotFound.tsx';
 
@@ -14,10 +13,14 @@ const Build = () => {
 
   if (!data) return <NotFound />;
 
-  document.title = `Build Details | ${data.displayDate} | ${SLOGAN}`;
-
   return (
-    <Page header="Build Details" contentStyles={[styles.build]}>
+    <Page
+      metadata={{
+        header: 'Build Details',
+        title: `Build Details | ${data.displayDate}`,
+      }}
+      contentStyles={[styles.build]}
+    >
       <h2>{data.displayDate}</h2>
       <div className={styles.info}>
         <div className={styles.specs}>

@@ -5,7 +5,7 @@ const NotFound = () => {
   const location = useLocation();
 
   return (
-    <Page header="Page Not Found">
+    <Page metadata={{ header: 'Page Not Found' }}>
       <p className="center">
         The path <span className="pre highlighted">{location.pathname}</span>{' '}
         does not exist

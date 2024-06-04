@@ -2,16 +2,13 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { projects } from '../assets/data.ts';
 import Page from '../components/Page.tsx';
-import { SLOGAN } from '../constants.ts';
 import styles from '../styles/Projects.module.css';
 
 const Projects = () => {
-  document.title = `Projects | ${SLOGAN}`;
-
   const data = Array.from(projects.values());
 
   return (
-    <Page header="Projects">
+    <Page metadata={{ header: 'Projects', title: 'Projects' }}>
       {data?.map((project, index) => (
         <Fragment key={project.id}>
           <div>

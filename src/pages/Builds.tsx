@@ -2,18 +2,15 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { builds } from '../assets/data.ts';
 import Page from '../components/Page.tsx';
-import { SLOGAN } from '../constants.ts';
 import styles from '../styles/Builds.module.css';
 
 const cleanCPU = (cpu: string) => cpu.split('@')[0].trim();
 
 const Builds = () => {
-  document.title = `Builds | ${SLOGAN}`;
-
   const data = Array.from(builds.values());
 
   return (
-    <Page header="Builds">
+    <Page metadata={{ header: 'Builds', title: 'Builds' }}>
       {data?.map((build, index) => (
         <Fragment key={build.id}>
           <div>

@@ -1,14 +1,15 @@
 import { Fragment } from 'react';
 import { full as resume } from '../assets/generated/resume.ts';
 import Page from '../components/Page.tsx';
-import { MAILTO_RESUME, SLOGAN } from '../constants.ts';
+import { MAILTO_RESUME } from '../constants.ts';
 import styles from '../styles/Resume.module.css';
 
 const Resume = () => {
-  document.title = `Résumé | ${SLOGAN}`;
-
   return (
-    <Page header="Résumé" contentStyles={[styles.resume]}>
+    <Page
+      metadata={{ header: 'Résumé', title: 'Résumé' }}
+      contentStyles={[styles.resume]}
+    >
       <h2 className="top">Experience</h2>
       {resume?.experience?.map((job) => (
         <ul

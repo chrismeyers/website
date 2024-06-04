@@ -8,7 +8,6 @@ import ExternalLinkIcon from '../assets/images/icons/link-external.svg';
 import PlayIcon from '../assets/images/icons/play.svg';
 import { createLightGallery } from '../components/Lightbox.tsx';
 import Page from '../components/Page.tsx';
-import { SLOGAN } from '../constants.ts';
 import styles from '../styles/Project.module.css';
 import NotFound from './NotFound.tsx';
 
@@ -33,10 +32,14 @@ const Project = () => {
 
   if (!data) return <NotFound />;
 
-  document.title = `Project Details | ${data.title} | ${SLOGAN}`;
-
   return (
-    <Page header="Project Details" contentStyles={[styles.project]}>
+    <Page
+      metadata={{
+        header: 'Project Details',
+        title: `Project Details | ${data.title}`,
+      }}
+      contentStyles={[styles.project]}
+    >
       <h2>{data.title}</h2>
       <h3>{data.displayDate}</h3>
       <div className={styles.wrapper}>
