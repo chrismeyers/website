@@ -1,12 +1,7 @@
-import { Link, useRouteError } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Page from '../components/Page.tsx';
 
 const Error = () => {
-  const error = useRouteError();
-
-  // eslint-disable-next-line no-console
-  console.error(error);
-
   return (
     <Page metadata={{ header: 'An Error Has Occurred' }}>
       <p className="center">Something went terribly wrong!</p>
