@@ -10,7 +10,7 @@ const Resume = () => {
       metadata={{ header: 'Résumé', title: 'Résumé' }}
       contentStyles={[styles.resume]}
     >
-      <h2 className="top">Experience</h2>
+      <h2>Experience</h2>
       {resume?.experience?.map((job) => (
         <ul
           className={styles.italicSpacer}

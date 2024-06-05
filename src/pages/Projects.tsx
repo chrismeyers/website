@@ -12,7 +12,7 @@ const Projects = () => {
       {data?.map((project, index) => (
         <Fragment key={project.id}>
           <div>
-            <h2 className={index === 0 ? 'first-header' : ''}>
+            <h2>
               <Link
                 className="fancytxt"
                 title={`Click for details of ${project.title}`}

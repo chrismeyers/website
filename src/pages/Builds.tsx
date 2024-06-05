@@ -14,7 +14,7 @@ const Builds = () => {
       {data?.map((build, index) => (
         <Fragment key={build.id}>
           <div>
-            <h2 className={index === 0 ? 'first-header' : ''}>
+            <h2>
               <Link
                 className="fancytxt"
                 title={`Click for details of ${build.displayDate}`}
