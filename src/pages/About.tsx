@@ -8,10 +8,10 @@ import { MAILTO_MESSAGE } from '../constants.ts';
 const About = () => {
   return (
     <Page metadata={{ header: 'About' }}>
-      <span>
+      <p>
         Hey, my name is Chris Meyers and I am a software engineer and technology
         enthusiast. Here are some things you should know about me:
-      </span>
+      </p>
 
       <ul>
         <li>
@@ -67,21 +67,22 @@ const About = () => {
         </li>
       </ul>
 
-      <p>
-        Over the years, I&apos;ve gained experience developing software ranging
-        from desktop and CLI applications to web applications and REST APIs
-        using:
-      </p>
-
       {summary?.languages?.all && (
-        <ul data-testid="languages">
-          {summary.languages.all.map((item) => (
-            <li key={`languages-${item}`}>{item}</li>
-          ))}
-        </ul>
+        <>
+          <p>
+            Over the years, I&apos;ve gained experience developing software
+            ranging from desktop and CLI applications to web applications and
+            REST APIs using:
+          </p>
+          <ul data-testid="languages">
+            {summary.languages.all.map((item) => (
+              <li key={`languages-${item}`}>{item}</li>
+            ))}
+          </ul>
+        </>
       )}
 
-      <span>
+      <p>
         As a professional software engineer, I strive to write simple, modular,
         and maintainable code. My primary goal is to create innovative and
         usable applications that solve real problems. If you have any questions,
@@ -95,7 +96,7 @@ const About = () => {
           send me a message
         </a>
         .
-      </span>
+      </p>
     </Page>
   );
 };
