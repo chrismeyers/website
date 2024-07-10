@@ -54,11 +54,11 @@ describe('Resume Parser', () => {
         {
           mainItem:
             'Language list 100% delimiter Language 1 (Something 1, Something 2), Language 2, Language 3 (Something 3)',
-          subItems: [],
+          subItems: ['Sub item A'],
         },
         {
           mainItem: 'Item 1',
-          subItems: [],
+          subItems: ['Sub item B'],
         },
         {
           mainItem: 'Item 2',

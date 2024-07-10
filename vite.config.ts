@@ -17,7 +17,6 @@ export default defineConfig({
     setupFiles: 'test/_setup.ts',
     coverage: {
       provider: 'v8',
-      ignoreEmptyLines: false,
     },
     reporters: ['verbose'],
   },
