@@ -97,7 +97,7 @@ const Resume = () => {
               {school.info && school.info[index].length > 0 && (
                 <li className={styles.removeBullets}>
                   <ul className={styles.moreInfoWrapper}>
-                    {school.info[index].map((info) => (
+                    {school.info[index].map((info: string) => (
                       <li
                         className="more-info"
                         key={`school-info-item-${info}`}
@@ -123,7 +123,7 @@ const Resume = () => {
             {skill.mainItem}
             {skill.subItems.length > 0 && (
               <ul>
-                {skill.subItems.map((subItem) => (
+                {skill.subItems.map((subItem: string) => (
                   <li key={`skill-subItem-${subItem}`}>{subItem}</li>
                 ))}
               </ul>

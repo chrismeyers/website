@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import prettier from 'prettier'; // eslint-disable-line import/no-extraneous-dependencies
+import prettier from 'prettier';
 import prettierrc from '../../prettier.config.js';
 
 export default class ResumeParser {
@@ -218,7 +218,7 @@ export default class ResumeParser {
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   if (process.argv.length < 4) {
     // eslint-disable-next-line no-console
-    console.error('Usage: node resume-parser.mjs <resumePath> <generatedPath>');
+    console.error('Usage: node resume-parser.js <resumePath> <generatedPath>');
     process.exit(1);
   }
 
