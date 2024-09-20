@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
-import * as data from '../../src/assets/data.ts';
+import * as data from '../../src/assets/generated/data.ts';
 import * as lightbox from '../../src/components/Lightbox.tsx';
 import Build from '../../src/pages/Build.tsx';
 

@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import lgZoom from 'lightgallery/plugins/zoom';
 import { useParams } from 'react-router-dom';
-import { projects } from '../assets/data.ts';
+import { projects } from '../assets/generated/data.ts';
 import GithubIcon from '../assets/images/icons/github.svg';
 import ExternalLinkIcon from '../assets/images/icons/link-external.svg';
 import PlayIcon from '../assets/images/icons/play.svg';

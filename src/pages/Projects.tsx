@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { projects } from '../assets/data.ts';
+import { projects } from '../assets/generated/data.ts';
 import Page from '../components/Page.tsx';
 import styles from '../styles/Projects.module.css';
 

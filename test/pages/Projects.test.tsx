@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
-import * as data from '../../src/assets/data.ts';
+import * as data from '../../src/assets/generated/data.ts';
 import Projects from '../../src/pages/Projects.tsx';
 
 describe('Projects page', () => {
