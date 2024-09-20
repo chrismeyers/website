@@ -15,7 +15,9 @@ describe('Resume page', () => {
           info: [['Did this thing', 'Did that thing']],
         },
       ],
-    } as typeof resume.full);
+      education: [],
+      skills: [],
+    });
 
     render(<Resume />);
 
@@ -46,9 +48,12 @@ describe('Resume page', () => {
           url: 'https://company.com',
           firstLine: ['Somewhere', 'Anywhere, Earth'],
           secondLine: [['Wizard', 'Jan. 1234 &ndash; Present']],
+          info: [[]],
         },
       ],
-    } as typeof resume.full);
+      education: [],
+      skills: [],
+    });
 
     render(<Resume />);
 
@@ -86,7 +91,9 @@ describe('Resume page', () => {
           ],
         },
       ],
-    } as typeof resume.full);
+      education: [],
+      skills: [],
+    });
 
     render(<Resume />);
 
@@ -126,6 +133,7 @@ describe('Resume page', () => {
 
   it('displays education section correctly', async () => {
     vi.spyOn(resume, 'full', 'get').mockReturnValue({
+      experience: [],
       education: [
         {
           url: 'https://school.edu',
@@ -134,7 +142,8 @@ describe('Resume page', () => {
           info: [['Took a class', 'Took another class']],
         },
       ],
-    } as typeof resume.full);
+      skills: [],
+    });
 
     render(<Resume />);
 
@@ -158,14 +167,17 @@ describe('Resume page', () => {
 
   it('displays education section without info correctly', async () => {
     vi.spyOn(resume, 'full', 'get').mockReturnValue({
+      experience: [],
       education: [
         {
           url: 'https://school.edu',
           firstLine: ['School', 'Anywhere, Earth'],
           secondLine: [['Degree', 'Jan. 9999 &ndash; Dec. 9999']],
+          info: [[]],
         },
       ],
-    } as typeof resume.full);
+      skills: [],
+    });
 
     render(<Resume />);
 
@@ -187,6 +199,8 @@ describe('Resume page', () => {
 
   it('displays skills section correctly', async () => {
     vi.spyOn(resume, 'full', 'get').mockReturnValue({
+      experience: [],
+      education: [],
       skills: [
         {
           mainItem: 'Multiple subitems',
@@ -201,7 +215,7 @@ describe('Resume page', () => {
           subItems: [],
         },
       ],
-    } as typeof resume.full);
+    });
 
     render(<Resume />);
 

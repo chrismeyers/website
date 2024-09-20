@@ -1,5 +1,4 @@
 import fs from 'node:fs';
-import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import prettier from 'prettier';
 import prettierrc from '../../prettier.config.js';
@@ -218,16 +217,11 @@ export default class ResumeParser {
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   if (process.argv.length < 4) {
     // eslint-disable-next-line no-console
-    console.error('Usage: node resume-parser.js <resumePath> <generatedPath>');
+    console.error('Usage: node resume-parser.js resumePath generatedPath');
     process.exit(1);
   }
 
-  const resumePath = process.argv[2];
-  const generatedPath = process.argv[3];
-
-  const { dir: generatedDir } = path.parse(generatedPath);
-
-  fs.rmSync(generatedDir, { recursive: true, force: true });
+  const [, , resumePath, generatedPath] = process.argv;
 
   const parser = new ResumeParser(resumePath);
 
@@ -243,19 +237,49 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
     },
   };
 
-  fs.mkdirSync(generatedDir, { recursive: true });
-
   fs.writeFileSync(
     generatedPath,
     await prettier.format(
-      [
-        '// WARNING: This file is generated, do not edit directly!',
-        '// Edit the resume source file and regenerate instead',
-        '',
-        `export const full = ${JSON.stringify(parsed.full)};`,
-        '',
-        `export const summary = ${JSON.stringify(parsed.summary)};`,
-      ].join('\n'),
+      `
+        // WARNING: This file is generated, do not edit directly!
+        // Edit the resume source file and regenerate instead.
+
+        type Resume = {
+          experience: {
+            url: string;
+            firstLine: string[];
+            secondLine: string[][];
+            info: string[][];
+          }[];
+          education: {
+            url: string;
+            firstLine: string[];
+            secondLine: string[][];
+            info: string[][];
+          }[];
+          skills: {
+            mainItem: string;
+            subItems: string[];
+          }[];
+        }
+
+        type ResumeSummary = {
+          languages: {
+            all: string[];
+          };
+          mostRecentJob: {
+            employed: boolean;
+            company: string;
+            url: string;
+            title: string;
+            dates: string[];
+          };
+        }
+
+        export const full: Resume = ${JSON.stringify(parsed.full)};
+
+        export const summary: ResumeSummary = ${JSON.stringify(parsed.summary)};
+      `,
       { parser: 'typescript', ...prettierrc }
     )
   );

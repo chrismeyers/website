@@ -16,10 +16,15 @@ describe('About page', () => {
 
   it('excludes employment info is not currently employed', () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
+      languages: { all: ['N/A'] },
       mostRecentJob: {
         employed: false,
+        company: 'Nope',
+        url: 'http://not.employed',
+        title: 'Nope',
+        dates: ['Jan. 2999', 'Jan. 3999'],
       },
-    } as typeof resume.summary);
+    });
 
     render(
       <RouterProvider
@@ -34,12 +39,15 @@ describe('About page', () => {
 
   it('displays current job if currently employed', () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
+      languages: { all: ['Everything'] },
       mostRecentJob: {
         employed: true,
         company: 'Somewhere',
+        url: 'http://current.job',
         title: 'Wizard',
+        dates: ['Jan. 2999', 'Present'],
       },
-    } as typeof resume.summary);
+    });
 
     render(
       <RouterProvider
@@ -58,9 +66,16 @@ describe('About page', () => {
   });
 
   it('excludes language experience if missing', () => {
-    vi.spyOn(resume, 'summary', 'get').mockReturnValue(
-      {} as typeof resume.summary
-    );
+    vi.spyOn(resume, 'summary', 'get').mockReturnValue({
+      languages: { all: [] },
+      mostRecentJob: {
+        employed: true,
+        company: 'Somewhere',
+        url: 'http://current.job',
+        title: 'Wizard',
+        dates: ['Jan. 2999', 'Present'],
+      },
+    });
 
     render(
       <RouterProvider
@@ -68,8 +83,7 @@ describe('About page', () => {
       />
     );
 
-    expect(screen.queryByTestId('desktop-languages')).toBeNull();
-    expect(screen.queryByTestId('web-languages')).toBeNull();
+    expect(screen.queryByTestId('languages')).not.toBeInTheDocument();
 
     expect(lgSpy).toHaveBeenCalledTimes(1);
   });
@@ -83,7 +97,14 @@ describe('About page', () => {
           'Language 3 (Something 3)',
         ],
       },
-    } as typeof resume.summary);
+      mostRecentJob: {
+        employed: true,
+        company: 'Somewhere',
+        url: 'http://current.job',
+        title: 'Wizard',
+        dates: ['Jan. 2999', 'Present'],
+      },
+    });
 
     render(
       <RouterProvider

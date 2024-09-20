@@ -11,7 +11,7 @@ const Resume = () => {
       contentStyles={[styles.resume]}
     >
       <h2>Experience</h2>
-      {resume?.experience?.map((job) => (
+      {resume.experience.map((job) => (
         <ul
           className={styles.italicSpacer}
           key={`job-${job.firstLine[0]}-${job.secondLine[0][1]}`} // prettier-ignore
@@ -69,7 +69,7 @@ const Resume = () => {
       <hr />
 
       <h2>Education</h2>
-      {resume?.education?.map((school) => (
+      {resume.education.map((school) => (
         <ul
           className={styles.italicSpacer}
           key={`school-${school.firstLine[0]}`}
@@ -97,7 +97,7 @@ const Resume = () => {
               {school.info && school.info[index].length > 0 && (
                 <li className={styles.removeBullets}>
                   <ul className={styles.moreInfoWrapper}>
-                    {school.info[index].map((info: string) => (
+                    {school.info[index].map((info) => (
                       <li
                         className="more-info"
                         key={`school-info-item-${info}`}
@@ -118,12 +118,12 @@ const Resume = () => {
 
       <h2>Technical Skills</h2>
       <ul>
-        {resume?.skills?.map((skill) => (
+        {resume.skills.map((skill) => (
           <li className="skill-wrapper" key={`skill-wrapper-${skill.mainItem}`}>
             {skill.mainItem}
             {skill.subItems.length > 0 && (
               <ul>
-                {skill.subItems.map((subItem: string) => (
+                {skill.subItems.map((subItem) => (
                   <li key={`skill-subItem-${subItem}`}>{subItem}</li>
                 ))}
               </ul>

@@ -11,7 +11,7 @@ const Builds = () => {
 
   return (
     <Page metadata={{ header: 'Builds', title: 'Builds' }}>
-      {data?.map((build, index) => (
+      {data.map((build, index) => (
         <Fragment key={build.id}>
           <div>
             <h2>

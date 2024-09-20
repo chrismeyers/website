@@ -9,7 +9,7 @@ const Projects = () => {
 
   return (
     <Page metadata={{ header: 'Projects', title: 'Projects' }}>
-      {data?.map((project, index) => (
+      {data.map((project, index) => (
         <Fragment key={project.id}>
           <div>
             <h2>

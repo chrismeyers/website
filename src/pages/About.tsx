@@ -21,7 +21,7 @@ const About = () => {
           </a>{' '}
           in Glassboro, NJ and earned a Bachelor of Science in Computer Science
         </li>
-        {summary?.mostRecentJob?.employed && (
+        {summary.mostRecentJob.employed && (
           <li data-testid="employment">
             Currently, I am employed as a {summary.mostRecentJob.title} at{' '}
             <a href={summary.mostRecentJob.url} className="fancytxt">
@@ -67,7 +67,7 @@ const About = () => {
         </li>
       </ul>
 
-      {summary?.languages?.all && (
+      {summary.languages.all.length > 0 && (
         <>
           <p>
             Over the years, I&apos;ve gained experience developing software
