@@ -11,7 +11,7 @@ describe('Builds page', () => {
     const cpu = 'Intel 1000000K @ 99.9GHz';
 
     vi.spyOn(data, 'builds', 'get').mockReturnValue(
-      new Map([[id, { id, active: true, displayDate, cpu } as data.Build]])
+      new Map([[id, { id, displayDate, cpu } as data.Build]])
     );
 
     render(
@@ -53,7 +53,6 @@ describe('Builds page', () => {
           1,
           {
             id: 1,
-            active: true,
             displayDate: 'Then',
             cpu: 'ABC @ 123GHz',
           } as data.Build,
@@ -62,7 +61,6 @@ describe('Builds page', () => {
           2,
           {
             id: 2,
-            active: true,
             displayDate: 'Now',
             cpu: 'ZYX @ 987GHz',
           } as data.Build,

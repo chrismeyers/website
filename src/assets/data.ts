@@ -8,7 +8,6 @@ export interface Image {
 
 export interface Build {
   id: number;
-  active: boolean;
   displayDate: string;
   startedDate: string;
   cpu: string;
@@ -25,7 +24,6 @@ export interface Build {
 
 export interface Project {
   id: number;
-  active: boolean;
   title: string;
   webUrl: string | null;
   codeUrl: string;
@@ -252,7 +250,6 @@ export const images = new Map(_images.map((image) => [image.id, image]));
 const _builds: Build[] = [
   {
     id: 1,
-    active: true,
     displayDate: 'March 2012 - Built for my brother, Matt',
     startedDate: '2012-03-01T00:00:00.000Z',
     cpu: 'AMD 6-core FX-6100 @ 3.3GHz',
@@ -268,7 +265,6 @@ const _builds: Build[] = [
   },
   {
     id: 2,
-    active: true,
     displayDate: 'February 2013 - Built for myself',
     startedDate: '2013-02-01T00:00:00.000Z',
     cpu: 'Intel Core i7 3770K @ 4.2GHz',
@@ -287,7 +283,6 @@ const _builds: Build[] = [
   },
   {
     id: 3,
-    active: true,
     displayDate: 'September 2013 - Built for my Neighbor, Mark',
     startedDate: '2013-09-01T00:00:00.000Z',
     cpu: 'Intel Core i7 4770K @ 3.5GHz',
@@ -303,7 +298,6 @@ const _builds: Build[] = [
   },
   {
     id: 4,
-    active: true,
     displayDate: 'February 2016 - Built for myself',
     startedDate: '2016-02-01T00:00:00.000Z',
     cpu: 'Intel Core i7 6700K @ 4.6GHz',
@@ -319,7 +313,6 @@ const _builds: Build[] = [
   },
   {
     id: 5,
-    active: true,
     displayDate: 'September 2017 - Built for my friend, James',
     startedDate: '2017-09-01T00:00:00.000Z',
     cpu: 'Intel Core i7-7700K @ 4.2GHz',
@@ -335,7 +328,6 @@ const _builds: Build[] = [
   },
   {
     id: 6,
-    active: true,
     displayDate: 'November 2021 - Built for myself',
     startedDate: '2021-11-26T00:00:00.000Z',
     cpu: 'AMD Ryzen 9 5900X @ 3.7 GHz',
@@ -351,14 +343,11 @@ const _builds: Build[] = [
   },
 ];
 
-export const builds = new Map(
-  _builds.filter((build) => build.active).map((build) => [build.id, build])
-);
+export const builds = new Map(_builds.map((build) => [build.id, build]));
 
 const _projects: Project[] = [
   {
     id: 1,
-    active: true,
     title: 'chrismeyers.net, this website',
     webUrl: null,
     codeUrl: 'https://github.com/chrismeyers/website',
@@ -399,7 +388,6 @@ const _projects: Project[] = [
   },
   {
     id: 2,
-    active: true,
     title: 'Genomic Solutions Now! Software',
     webUrl: null,
     codeUrl: 'https://github.com/chrismeyers/Genomic_SWE',
@@ -415,7 +403,6 @@ const _projects: Project[] = [
   },
   {
     id: 3,
-    active: true,
     title: 'Pinelands Tour Maker',
     webUrl: null,
     codeUrl:
@@ -430,7 +417,6 @@ const _projects: Project[] = [
   },
   {
     id: 4,
-    active: true,
     title: 'Tic-Tac-Toe Android App',
     webUrl: null,
     codeUrl: 'https://github.com/chrismeyers/Android-TicTacToe',
@@ -444,7 +430,6 @@ const _projects: Project[] = [
   },
   {
     id: 5,
-    active: true,
     title: 'League of Legends Player Data Parser',
     webUrl: null,
     codeUrl: 'https://github.com/chrismeyers/LoL_player_data',
@@ -465,7 +450,6 @@ const _projects: Project[] = [
   },
   {
     id: 6,
-    active: true,
     title: 'PCA Visualization',
     webUrl: null,
     codeUrl: 'https://github.com/chrismeyers/SeniorProj_BMS_PCA',
@@ -483,7 +467,6 @@ const _projects: Project[] = [
   },
   {
     id: 7,
-    active: true,
     title: 'Cardiomyocyte Data Analysis Automation',
     webUrl: null,
     codeUrl: 'https://github.com/chrismeyers/BMS_Meyers_ExcelAutomation',
@@ -509,7 +492,6 @@ const _projects: Project[] = [
   },
   {
     id: 8,
-    active: true,
     title: 'League of Legends Server Status Checker',
     webUrl: null,
     codeUrl: 'https://github.com/chrismeyers/rito-pls',
@@ -535,7 +517,6 @@ const _projects: Project[] = [
   },
   {
     id: 9,
-    active: true,
     title: 'GPS Importer',
     webUrl: null,
     codeUrl: 'https://github.com/chrismeyers/gps_importer',
@@ -553,7 +534,6 @@ const _projects: Project[] = [
   },
   {
     id: 10,
-    active: true,
     title: 'pleasehold',
     webUrl: null,
     codeUrl: 'https://github.com/chrismeyers/pleasehold',
@@ -574,7 +554,6 @@ const _projects: Project[] = [
   },
   {
     id: 11,
-    active: true,
     title: 'data-shifter',
     webUrl: 'https://www.npmjs.com/package/data-shifter',
     codeUrl: 'https://github.com/chrismeyers/data-shifter',
@@ -604,7 +583,5 @@ const _projects: Project[] = [
 ];
 
 export const projects = new Map(
-  _projects
-    .filter((project) => project.active)
-    .map((project) => [project.id, project])
+  _projects.map((project) => [project.id, project])
 );

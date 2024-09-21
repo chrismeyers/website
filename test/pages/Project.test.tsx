@@ -54,7 +54,6 @@ describe('Project page', () => {
           id,
           {
             id,
-            active: true,
             title,
             webUrl,
             codeUrl,
@@ -126,7 +125,6 @@ describe('Project page', () => {
           id,
           {
             id,
-            active: true,
             title,
             webUrl,
             codeUrl,
@@ -175,7 +173,6 @@ describe('Project page', () => {
           1,
           {
             id: 1,
-            active: true,
             webUrl,
             codeUrl,
             languages: [''],
@@ -215,7 +212,6 @@ describe('Project page', () => {
           1,
           {
             id: 1,
-            active: true,
             title,
             images,
             languages: [''],

@@ -12,9 +12,7 @@ describe('Projects page', () => {
     const info = 'Something involving code';
 
     vi.spyOn(data, 'projects', 'get').mockReturnValue(
-      new Map([
-        [1, { id, active: true, title, displayDate, info } as data.Project],
-      ])
+      new Map([[1, { id, title, displayDate, info } as data.Project]])
     );
 
     render(
@@ -42,8 +40,8 @@ describe('Projects page', () => {
   it('displays multiple projects', () => {
     vi.spyOn(data, 'projects', 'get').mockReturnValue(
       new Map([
-        [1, { id: 1, active: true, title: 'Apples' } as data.Project],
-        [2, { id: 2, active: true, title: 'Bananas' } as data.Project],
+        [1, { id: 1, title: 'Apples' } as data.Project],
+        [2, { id: 2, title: 'Bananas' } as data.Project],
       ])
     );
 

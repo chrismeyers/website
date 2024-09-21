@@ -56,7 +56,6 @@ describe('Build page', () => {
           id,
           {
             id,
-            active: true,
             displayDate,
             startedDate: '',
             cpu,
@@ -110,7 +109,6 @@ describe('Build page', () => {
           id,
           {
             id,
-            active: true,
             displayDate,
             startedDate: '',
             cpu,
@@ -164,7 +162,6 @@ describe('Build page', () => {
           id,
           {
             id,
-            active: true,
             displayDate,
             startedDate: '',
             cpu,
@@ -226,7 +223,6 @@ describe('Build page', () => {
           id,
           {
             id,
-            active: true,
             displayDate,
             startedDate: '',
             cpu,
