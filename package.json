@@ -7,18 +7,18 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "generate": "bin/generate.sh",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
     "test": "vitest --run",
     "test:watch": "vitest",
     "test:coverage": "vitest --coverage --run",
     "test:ci": "CI=true vitest --coverage --run",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --check '**/*.{ts,tsx,js,cjs,jsx}'",
-    "format:fix": "prettier --write '**/*.{ts,tsx,js,cjs,jsx}'"
+    "format:check": "prettier --check '**/*.{ts,tsx,js,cjs,jsx}'",
+    "format:fix": "prettier --write '**/*.{ts,tsx,js,cjs,jsx}'",
+    "dev": "vite",
+    "preview": "vite preview",
+    "generate": "bin/generate.sh",
+    "build": "tsc && vite build"
   },
   "dependencies": {
     "lightgallery": "^2.7.2",
