@@ -56,7 +56,7 @@ const About = () => {
             [
               <span
                 className="fancytxt"
-                data-src="/images/clark/DSC_1564-6.jpg"
+                data-src="https://utfs.io/f/yvFQixwYldZ8HfcCEFqG8Xp5b9WxvNfrmF4lVzaksLMyjC1K"
                 data-sub-html="Clark the Corgi"
               >
                 majestic beast
