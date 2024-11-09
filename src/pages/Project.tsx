@@ -19,8 +19,17 @@ const restartGif = () => {
     )[0] as HTMLImageElement;
 
     if (gif) {
-      (document.getElementsByClassName('lg-image')[0] as HTMLImageElement).src =
-        gif.src;
+      // TODO: Browsers like FireFox and Safari don't restart GIFs when setting
+      // the src attribute. A workaround is to invalidate the cached image by
+      // adding a unique query param (timestamp) to the image URL. This requires
+      // the image to be downloaded each time it's opened, so if this ever gets
+      // fixed in the aforementioned browsers then the following should be used:
+      //
+      // gif.setAttribute('src', gif.src);
+
+      const url = new URL(gif.src);
+      url.searchParams.set('ts', Date.now().toString());
+      gif.src = url.toString();
     }
   }, 100);
 };
