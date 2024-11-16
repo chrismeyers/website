@@ -2,6 +2,7 @@ import './App.css';
 import Footer from './components/Footer.tsx';
 import { FullNav, MobileNav } from './components/Navigation.tsx';
 import Prompt from './components/Prompt.tsx';
+import Router from './Router.tsx';
 import ThemeProvider from './context/ThemeProvider.tsx';
 import useScreenResize from './hooks/useScreenResize.ts';
 
@@ -16,6 +17,7 @@ const App = () => {
     <ThemeProvider>
       {isMobileWidth ? <MobileNav /> : <FullNav />}
       {isMobileWidth ? <div /> : <Prompt />}
+      <Router />
       <Footer />
     </ThemeProvider>
   );
