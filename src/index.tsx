@@ -6,6 +6,7 @@ import 'lightgallery/css/lightgallery.css';
 import 'lightgallery/css/lg-zoom.css';
 import 'lightgallery/css/lg-thumbnail.css';
 import App from './App.tsx';
+import { createRouter } from './router.tsx';
 
 if ('scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'auto';
@@ -14,5 +15,6 @@ if ('scrollRestoration' in window.history) {
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>
     <App />
+    {createRouter()}
   </StrictMode>
 );
