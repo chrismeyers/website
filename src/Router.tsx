@@ -7,7 +7,7 @@ import Project from './pages/Project.tsx';
 import Projects from './pages/Projects.tsx';
 import Resume from './pages/Resume.tsx';
 
-export const createRouter = () => {
+const Router = () => {
   return (
     <Switch>
       <Route path="/" component={About} />
@@ -22,3 +22,5 @@ export const createRouter = () => {
     </Switch>
   );
 };
+
+export default Router;
