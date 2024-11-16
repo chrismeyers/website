@@ -3,7 +3,7 @@ import { Route, Router } from 'wouter';
 import { memoryLocation } from 'wouter/memory-location';
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import * as data from '../../src/assets/data.ts';
-import * as lightbox from '../../src/components/Lightbox.tsx';
+import * as lightbox from '../../src/components/LightBox.tsx';
 import Project from '../../src/pages/Project.tsx';
 
 const createMockRouter = (
@@ -22,9 +22,7 @@ describe('Project page', () => {
   let lgSpy: MockInstance;
 
   beforeEach(() => {
-    lgSpy = vi
-      .spyOn(lightbox, 'createLightGallery')
-      .mockImplementation(() => <></>);
+    lgSpy = vi.spyOn(lightbox, 'default').mockImplementation(() => <></>);
   });
 
   it('handles no projects', async () => {

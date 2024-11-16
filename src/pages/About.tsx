@@ -1,7 +1,6 @@
-import lgZoom from 'lightgallery/plugins/zoom';
 import { Link } from 'wouter';
 import { summary } from '../assets/generated/resume.ts';
-import { createLightGallery } from '../components/Lightbox.tsx';
+import LightBox from '../components/LightBox.tsx';
 import Page from '../components/Page.tsx';
 import { MAILTO_MESSAGE } from '../constants.ts';
 
@@ -52,18 +51,15 @@ const About = () => {
         </li>
         <li>
           I am the owner of this{' '}
-          {createLightGallery(
-            [
-              <span
-                className="fancytxt"
-                data-src="https://utfs.io/f/yvFQixwYldZ8HfcCEFqG8Xp5b9WxvNfrmF4lVzaksLMyjC1K"
-                data-sub-html="Clark the Corgi"
-              >
-                majestic beast
-              </span>,
-            ],
-            { elementClassNames: 'inline', plugins: [lgZoom] }
-          )}
+          <LightBox props={{ elementClassNames: 'inline' }} plugins={['zoom']}>
+            <span
+              className="fancytxt"
+              data-src="https://utfs.io/f/yvFQixwYldZ8HfcCEFqG8Xp5b9WxvNfrmF4lVzaksLMyjC1K"
+              data-sub-html="Clark the Corgi"
+            >
+              majestic beast
+            </span>
+          </LightBox>
         </li>
       </ul>
 

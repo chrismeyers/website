@@ -1,12 +1,10 @@
 import { Fragment } from 'react';
-import lgThumbnail from 'lightgallery/plugins/thumbnail';
-import lgZoom from 'lightgallery/plugins/zoom';
 import { useParams } from 'wouter';
 import { projects } from '../assets/data.ts';
 import GithubIcon from '../assets/images/icons/github.svg';
 import ExternalLinkIcon from '../assets/images/icons/link-external.svg';
 import PlayIcon from '../assets/images/icons/play.svg';
-import { createLightGallery } from '../components/Lightbox.tsx';
+import LightBox from '../components/LightBox.tsx';
 import Page from '../components/Page.tsx';
 import styles from '../styles/Project.module.css';
 import NotFound from './NotFound.tsx';
@@ -110,25 +108,24 @@ const Project = () => {
           <div className={styles.images}>
             {data.images[0]?.path.toLowerCase().endsWith('.gif') ? (
               <div className={styles.gifOverlay} title="Play GIF">
-                {createLightGallery(
-                  [
-                    <a href={data.images[0].path}>
-                      <img
-                        src={data.images[0].thumbnail ?? ''}
-                        className={`${styles.imagesFull} ${
-                          styles[data.images[0].orientation]
-                        }`}
-                        alt={data.images[0].title}
-                        title="Click to enlarge"
-                      />
-                    </a>,
-                  ],
-                  {
+                <LightBox
+                  props={{
                     onBeforeOpen: restartGif,
                     enableDrag: false,
                     enableSwipe: false,
-                  }
-                )}
+                  }}
+                >
+                  <a href={data.images[0].path}>
+                    <img
+                      src={data.images[0].thumbnail ?? ''}
+                      className={`${styles.imagesFull} ${
+                        styles[data.images[0].orientation]
+                      }`}
+                      alt={data.images[0].title}
+                      title="Click to enlarge"
+                    />
+                  </a>
+                </LightBox>
                 <PlayIcon
                   name="play"
                   className="link-image xlarge play-overlay"
@@ -137,43 +134,43 @@ const Project = () => {
                 />
               </div>
             ) : (
-              createLightGallery(
-                [
-                  data.images.map((image, index) => (
-                    <Fragment key={image?.id}>
-                      {index === 0 ? (
+              <LightBox
+                props={{ thumbnail: true }}
+                plugins={['thumbnail', 'zoom']}
+              >
+                {data.images.map((image, index) => (
+                  <Fragment key={image?.id}>
+                    {index === 0 ? (
+                      <a href={image?.path}>
+                        <img
+                          src={image?.path}
+                          className={`${styles.imagesFull} ${
+                            styles[image?.orientation ?? 'square']
+                          }`}
+                          alt={image?.title}
+                          title="Click to enlarge"
+                        />
+                      </a>
+                    ) : (
+                      <div
+                        className={styles.imagesSmall}
+                        data-src={image?.path}
+                      >
                         <a href={image?.path}>
                           <img
                             src={image?.path}
-                            className={`${styles.imagesFull} ${
+                            className={`${styles.imagesSmall} ${
                               styles[image?.orientation ?? 'square']
                             }`}
                             alt={image?.title}
                             title="Click to enlarge"
                           />
                         </a>
-                      ) : (
-                        <div
-                          className={styles.imagesSmall}
-                          data-src={image?.path}
-                        >
-                          <a href={image?.path}>
-                            <img
-                              src={image?.path}
-                              className={`${styles.imagesSmall} ${
-                                styles[image?.orientation ?? 'square']
-                              }`}
-                              alt={image?.title}
-                              title="Click to enlarge"
-                            />
-                          </a>
-                        </div>
-                      )}
-                    </Fragment>
-                  )),
-                ],
-                { thumbnail: true, plugins: [lgThumbnail, lgZoom] }
-              )
+                      </div>
+                    )}
+                  </Fragment>
+                ))}
+              </LightBox>
             )}
           </div>
         )}

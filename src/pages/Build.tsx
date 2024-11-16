@@ -1,7 +1,6 @@
-import lgZoom from 'lightgallery/plugins/zoom';
 import { useParams } from 'wouter';
 import { builds } from '../assets/data.ts';
-import { createLightGallery } from '../components/Lightbox.tsx';
+import LightBox from '../components/LightBox.tsx';
 import Page from '../components/Page.tsx';
 import styles from '../styles/Build.module.css';
 import NotFound from './NotFound.tsx';
@@ -81,20 +80,17 @@ const Build = () => {
         </div>
         {data.image && (
           <div className={styles.pic}>
-            {createLightGallery(
-              [
-                <a href={data.image.path}>
-                  <img
-                    src={data.image.path}
-                    className={styles[data.image.orientation]}
-                    alt={data.image.title}
-                    data-sub-html={data.image.title}
-                    title="Click to enlarge"
-                  />
-                </a>,
-              ],
-              { plugins: [lgZoom] }
-            )}
+            <LightBox plugins={['zoom']}>
+              <a href={data.image.path}>
+                <img
+                  src={data.image.path}
+                  className={styles[data.image.orientation]}
+                  alt={data.image.title}
+                  data-sub-html={data.image.title}
+                  title="Click to enlarge"
+                />
+              </a>
+            </LightBox>
           </div>
         )}
       </div>

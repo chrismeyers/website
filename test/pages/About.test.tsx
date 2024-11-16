@@ -1,16 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import * as resume from '../../src/assets/generated/resume.ts';
-import * as lightbox from '../../src/components/Lightbox.tsx';
+import * as lightbox from '../../src/components/LightBox.tsx';
 import About from '../../src/pages/About.tsx';
 
 describe('About page', () => {
   let lgSpy: MockInstance;
 
   beforeEach(() => {
-    lgSpy = vi
-      .spyOn(lightbox, 'createLightGallery')
-      .mockImplementation(() => <></>);
+    lgSpy = vi.spyOn(lightbox, 'default').mockImplementation(() => <></>);
   });
 
   it('excludes employment info is not currently employed', () => {
