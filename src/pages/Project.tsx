@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import lgZoom from 'lightgallery/plugins/zoom';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'wouter';
 import { projects } from '../assets/data.ts';
 import GithubIcon from '../assets/images/icons/github.svg';
 import ExternalLinkIcon from '../assets/images/icons/link-external.svg';

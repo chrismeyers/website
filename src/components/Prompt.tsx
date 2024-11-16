@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'wouter';
 import { ThemeContext } from '../context/contexts.ts';
 import styles from '../styles/Prompt.module.css';
 
@@ -19,8 +19,7 @@ const Prompt = () => {
   const outputWindowRef = useRef<HTMLTextAreaElement>(null);
   const promptRef = useRef<HTMLInputElement>(null);
 
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [location, setLocation] = useLocation();
 
   const ARROWS: Record<string, string> = {
     up: '&#9650;',
@@ -148,13 +147,13 @@ const Prompt = () => {
 
       path = `/${path}`;
 
-      if (location.pathname === path) {
+      if (location === path) {
         return;
       }
 
-      navigate(path);
+      setLocation(path);
     },
-    [location.pathname, navigate]
+    [location, setLocation]
   );
 
   const exit = useCallback(() => {

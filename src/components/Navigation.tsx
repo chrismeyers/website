@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'wouter';
 import Logo from '../assets/images/logos/v3/ccm-logo.svg';
 import useClickOutside from '../hooks/useClickOutside.ts';
 import fullStyles from '../styles/FullNav.module.css';
@@ -19,7 +19,7 @@ const setBodyScrollable = (enabled: boolean) =>
     : document.body.classList.add('prevent-scroll');
 
 export const FullNav = () => {
-  const location = useLocation();
+  const [location] = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -36,8 +36,8 @@ export const FullNav = () => {
         <ul className={fullStyles.sideNavItems}>
           {NAVIGATION.map((item) => {
             const current = item.hasChildren
-              ? location.pathname.startsWith(item.path)
-              : location.pathname === item.path;
+              ? location.startsWith(item.path)
+              : location === item.path;
 
             return (
               <li key={item.name}>
@@ -58,7 +58,7 @@ export const FullNav = () => {
 
 export const MobileNav = () => {
   const [menuDisplayed, setMenuDisplayed] = useState(false);
-  const location = useLocation();
+  const [location] = useLocation();
   const menuRef = useRef<HTMLDivElement>(null);
   const menuIconRef = useRef<HTMLDivElement>(null);
 
@@ -111,8 +111,8 @@ export const MobileNav = () => {
               <div className={mobileStyles.menu} ref={menuRef}>
                 {NAVIGATION.map((item) => {
                   const current = item.hasChildren
-                    ? location.pathname.startsWith(item.path)
-                    : location.pathname === item.path;
+                    ? location.startsWith(item.path)
+                    : location === item.path;
 
                   return (
                     <Link

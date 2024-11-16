@@ -1,5 +1,4 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 import * as data from '../../src/assets/data.ts';
 import Builds from '../../src/pages/Builds.tsx';
@@ -14,11 +13,7 @@ describe('Builds page', () => {
       new Map([[id, { id, displayDate, cpu } as data.Build]])
     );
 
-    render(
-      <RouterProvider
-        router={createMemoryRouter([{ path: '', element: <Builds /> }])}
-      />
-    );
+    render(<Builds />);
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();
@@ -68,11 +63,7 @@ describe('Builds page', () => {
       ])
     );
 
-    render(
-      <RouterProvider
-        router={createMemoryRouter([{ path: '', element: <Builds /> }])}
-      />
-    );
+    render(<Builds />);
 
     expect(screen.getByText(/Then/)).toBeInTheDocument();
     expect(screen.getByText(/Now/)).toBeInTheDocument();

@@ -1,15 +1,22 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { RouterProvider, createMemoryRouter } from 'react-router-dom';
+import { Route, Router } from 'wouter';
+import { memoryLocation } from 'wouter/memory-location';
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import * as data from '../../src/assets/data.ts';
 import * as lightbox from '../../src/components/Lightbox.tsx';
 import Build from '../../src/pages/Build.tsx';
 
-vi.mock('react-router-dom', async () => ({
-  ...(await vi.importActual('react-router-dom')),
-  useParams: () => ({ id: 1 }),
-  useLocation: () => ({ pathname: '/builds/1' }),
-}));
+const createMockRouter = (
+  component: JSX.Element,
+  path: string = '/builds/1'
+) => {
+  const { hook } = memoryLocation({ path, static: true });
+  return (
+    <Router hook={hook}>
+      <Route path="/builds/:id">{component}</Route>
+    </Router>
+  );
+};
 
 describe('Build page', () => {
   let lgSpy: MockInstance;
@@ -23,11 +30,7 @@ describe('Build page', () => {
   it('handles no builds', async () => {
     vi.spyOn(data, 'builds', 'get').mockReturnValue(new Map());
 
-    render(
-      <RouterProvider
-        router={createMemoryRouter([{ path: '', element: <Build /> }])}
-      />
-    );
+    render(createMockRouter(<Build />));
 
     await waitFor(() => {
       expect(screen.getByText(/does not exist/)).toBeInTheDocument();
@@ -72,7 +75,7 @@ describe('Build page', () => {
       ])
     );
 
-    render(<Build />);
+    render(createMockRouter(<Build />));
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();
@@ -125,7 +128,7 @@ describe('Build page', () => {
       ])
     );
 
-    render(<Build />);
+    render(createMockRouter(<Build />));
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();
@@ -178,7 +181,7 @@ describe('Build page', () => {
       ])
     );
 
-    render(<Build />);
+    render(createMockRouter(<Build />));
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();
@@ -240,7 +243,7 @@ describe('Build page', () => {
       ])
     );
 
-    render(<Build />);
+    render(createMockRouter(<Build />));
 
     await waitFor(() => {
       expect(screen.getByText(displayDate)).toBeInTheDocument();

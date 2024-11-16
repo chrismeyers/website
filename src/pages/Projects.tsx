@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'wouter';
 import { projects } from '../assets/data.ts';
 import Page from '../components/Page.tsx';
 import styles from '../styles/Projects.module.css';

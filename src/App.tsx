@@ -1,10 +1,10 @@
-import { Outlet } from 'react-router-dom';
 import './App.css';
 import Footer from './components/Footer.tsx';
 import { FullNav, MobileNav } from './components/Navigation.tsx';
 import Prompt from './components/Prompt.tsx';
 import ThemeProvider from './context/ThemeProvider.tsx';
 import useScreenResize from './hooks/useScreenResize.ts';
+import { createRouter } from './router.tsx';
 
 const App = () => {
   const { isMobileWidth } = useScreenResize();
@@ -17,7 +17,7 @@ const App = () => {
     <ThemeProvider>
       {isMobileWidth ? <MobileNav /> : <FullNav />}
       {isMobileWidth ? <div /> : <Prompt />}
-      <Outlet />
+      {createRouter()}
       <Footer />
     </ThemeProvider>
   );

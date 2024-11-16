@@ -1,5 +1,5 @@
 import lgZoom from 'lightgallery/plugins/zoom';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'wouter';
 import { builds } from '../assets/data.ts';
 import { createLightGallery } from '../components/Lightbox.tsx';
 import Page from '../components/Page.tsx';

@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import { RouterProvider, createMemoryRouter } from 'react-router-dom';
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import * as resume from '../../src/assets/generated/resume.ts';
 import * as lightbox from '../../src/components/Lightbox.tsx';
@@ -26,11 +25,7 @@ describe('About page', () => {
       },
     });
 
-    render(
-      <RouterProvider
-        router={createMemoryRouter([{ path: '', element: <About /> }])}
-      />
-    );
+    render(<About />);
 
     expect(screen.queryByTestId('employment')).toBeNull();
 
@@ -49,11 +44,7 @@ describe('About page', () => {
       },
     });
 
-    render(
-      <RouterProvider
-        router={createMemoryRouter([{ path: '', element: <About /> }])}
-      />
-    );
+    render(<About />);
 
     const employment = screen.getByTestId('employment');
 
@@ -77,11 +68,7 @@ describe('About page', () => {
       },
     });
 
-    render(
-      <RouterProvider
-        router={createMemoryRouter([{ path: '', element: <About /> }])}
-      />
-    );
+    render(<About />);
 
     expect(screen.queryByTestId('languages')).not.toBeInTheDocument();
 
@@ -106,11 +93,7 @@ describe('About page', () => {
       },
     });
 
-    render(
-      <RouterProvider
-        router={createMemoryRouter([{ path: '', element: <About /> }])}
-      />
-    );
+    render(<About />);
 
     const languages = screen.getByTestId('languages');
 

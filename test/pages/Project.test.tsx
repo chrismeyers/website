@@ -1,15 +1,22 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { RouterProvider, createMemoryRouter } from 'react-router-dom';
+import { Route, Router } from 'wouter';
+import { memoryLocation } from 'wouter/memory-location';
 import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
 import * as data from '../../src/assets/data.ts';
 import * as lightbox from '../../src/components/Lightbox.tsx';
 import Project from '../../src/pages/Project.tsx';
 
-vi.mock('react-router-dom', async () => ({
-  ...(await vi.importActual('react-router-dom')),
-  useParams: () => ({ id: 1 }),
-  useLocation: () => ({ pathname: '/projects/1' }),
-}));
+const createMockRouter = (
+  component: JSX.Element,
+  path: string = '/projects/1'
+) => {
+  const { hook } = memoryLocation({ path, static: true });
+  return (
+    <Router hook={hook}>
+      <Route path="/projects/:id">{component}</Route>
+    </Router>
+  );
+};
 
 describe('Project page', () => {
   let lgSpy: MockInstance;
@@ -23,11 +30,7 @@ describe('Project page', () => {
   it('handles no projects', async () => {
     vi.spyOn(data, 'projects', 'get').mockReturnValue(new Map());
 
-    render(
-      <RouterProvider
-        router={createMemoryRouter([{ path: '', element: <Project /> }])}
-      />
-    );
+    render(createMockRouter(<Project />));
 
     await waitFor(() => {
       expect(screen.getByText(/does not exist/)).toBeInTheDocument();
@@ -69,7 +72,7 @@ describe('Project page', () => {
       ])
     );
 
-    render(<Project />);
+    render(createMockRouter(<Project />));
 
     await waitFor(() => {
       expect(screen.getByText('Project Name')).toBeInTheDocument();
@@ -140,7 +143,7 @@ describe('Project page', () => {
       ])
     );
 
-    render(<Project />);
+    render(createMockRouter(<Project />));
 
     await waitFor(() => {
       expect(screen.getByText('Project Name')).toBeInTheDocument();
@@ -181,7 +184,7 @@ describe('Project page', () => {
       ])
     );
 
-    render(<Project />);
+    render(createMockRouter(<Project />));
 
     await waitFor(() => {
       expect(screen.getByText('Code')).toHaveAttribute(
@@ -220,7 +223,7 @@ describe('Project page', () => {
       ])
     );
 
-    render(<Project />);
+    render(createMockRouter(<Project />));
 
     expect(lgSpy).toHaveBeenCalledTimes(1);
   });
