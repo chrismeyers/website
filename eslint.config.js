@@ -11,17 +11,18 @@ export default tseslint.config(
   { ignores: ['build', 'coverage', 'node_modules'] },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
+  // TODO: eslint-plugin-react types are broken but the plugin still works, ignore until fixed
+  //   - https://github.com/jsx-eslint/eslint-plugin-react/issues/3838
+  // @ts-expect-error: See above
   react.configs.flat.recommended,
   // TODO: Update to recommended shorthand once eslint-plugin-react-hooks officially supports flat config
+  //   - https://github.com/facebook/react/issues/28313
   {
     plugins: {
-      // @ts-expect-error: Not officially supported
       'react-hooks': reactHooks,
     },
-    // @ts-expect-error: Not officially supported
     rules: reactHooks.configs.recommended.rules,
   },
-  // TODO: Add back eslint-plugin-import once eslint v9 and flat config is supported? Is it even needed?
   jsxA11y.flatConfigs.recommended,
   {
     rules: {
