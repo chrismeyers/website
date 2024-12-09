@@ -87,7 +87,6 @@ export const MobileNav = () => {
           <div className={mobileStyles.menuIcon} ref={menuIconRef}>
             <div>
               <button
-                style={{ outline: 'none' }}
                 className={`hamburger hamburger--spin ${
                   menuDisplayed ? 'is-active' : ''
                 }`}
