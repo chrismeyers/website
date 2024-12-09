@@ -5,7 +5,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Generated output
-build/
+dist/
 coverage/
 .vercel/
 generated/

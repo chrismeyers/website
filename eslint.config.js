@@ -8,7 +8,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 
 export default tseslint.config(
-  { ignores: ['build', 'coverage', 'node_modules'] },
+  { ignores: ['dist', 'coverage', 'node_modules'] },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   // TODO: eslint-plugin-react types are broken but the plugin still works, ignore until fixed

@@ -17,5 +17,5 @@ FROM nginx:mainline-alpine-slim
 
 WORKDIR /app
 
-COPY --from=builder /app/build .
+COPY --from=builder /app/dist .
 COPY config/docker/nginx.conf /etc/nginx/nginx.conf
