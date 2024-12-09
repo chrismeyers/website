@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { Route, Router } from 'wouter';
 import { memoryLocation } from 'wouter/memory-location';
@@ -7,7 +8,7 @@ import * as lightbox from '../../src/components/LightBox.tsx';
 import Project from '../../src/pages/Project.tsx';
 
 const createMockRouter = (
-  component: JSX.Element,
+  component: ReactNode,
   path: string = '/projects/1'
 ) => {
   const { hook } = memoryLocation({ path, static: true });
