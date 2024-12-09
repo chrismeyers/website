@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import Switch from 'react-switch';
 import GithubIcon from '../assets/images/icons/github.svg';
 import LinkedInIcon from '../assets/images/icons/linkedin.svg';
 import MailIcon from '../assets/images/icons/mail.svg';
@@ -52,17 +51,24 @@ const Footer = ({ inMenu = false }: Props) => {
         <div className={styles.bullets}>&bull;</div>
 
         <div className={styles.theme}>
-          <Switch
-            onChange={toggleTheme}
-            checked={theme === 'dark'}
-            onColor="#5bb75b"
-            offColor="#bbbbbb"
+          <div
+            onClick={toggleTheme}
+            onKeyUp={(e) =>
+              e.code === 'Enter' ? toggleTheme() : e.stopPropagation()
+            }
+            className={styles.toggleTheme}
+            role="switch"
+            aria-checked={theme === 'dark'}
+            tabIndex={0}
+            title="Toggle website theme"
             aria-label="Toggle website theme"
-            height={20}
-            width={48}
-            checkedIcon={<MoonIcon className="link-image small theme on" />}
-            uncheckedIcon={<SunIcon className="link-image small theme off" />}
-          />
+          >
+            {theme === 'dark' ? (
+              <MoonIcon className="link-image large" />
+            ) : (
+              <SunIcon className="link-image large" />
+            )}
+          </div>
         </div>
       </div>
 
