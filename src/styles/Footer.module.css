@@ -48,10 +48,6 @@ footer.inMenu {
   margin-left: 5px;
 }
 
-.toggleTheme:hover {
-  cursor: pointer;
-}
-
 @media screen and (max-width: 969px) {
   footer {
     width: 100%;
