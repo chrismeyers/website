@@ -1,10 +1,10 @@
-import { MutableRefObject, useEffect } from 'react';
+import { RefObject, useEffect } from 'react';
 
 // Adapted from: https://stackoverflow.com/a/42234988
 const useClickOutside = (
-  ref: MutableRefObject<HTMLElement | null>,
+  ref: RefObject<HTMLElement | null>,
   cb: () => void,
-  ignoreRefs: MutableRefObject<HTMLElement | null>[] = []
+  ignoreRefs: RefObject<HTMLElement | null>[] = []
 ) => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
