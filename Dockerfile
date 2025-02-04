@@ -1,4 +1,4 @@
-FROM node:22.12.0-alpine AS builder
+FROM node:22.13.1-alpine AS builder
 
 RUN apk add --no-cache bash
 

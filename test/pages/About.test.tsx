@@ -8,6 +8,7 @@ describe('About page', () => {
   let lgSpy: MockInstance;
 
   beforeEach(() => {
+    vi.resetAllMocks();
     lgSpy = vi.spyOn(lightbox, 'default').mockImplementation(() => <></>);
   });
 

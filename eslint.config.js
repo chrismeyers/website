@@ -11,16 +11,15 @@ export default tseslint.config(
   { ignores: ['dist', 'coverage', 'node_modules'] },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
-  // TODO: eslint-plugin-react types are broken but the plugin still works, ignore until fixed
-  //   - https://github.com/jsx-eslint/eslint-plugin-react/issues/3838
-  // @ts-expect-error: See above
   react.configs.flat.recommended,
   // TODO: Update to recommended shorthand once eslint-plugin-react-hooks officially supports flat config
   //   - https://github.com/facebook/react/issues/28313
   {
     plugins: {
+      // @ts-expect-error: See above
       'react-hooks': reactHooks,
     },
+    // @ts-expect-error: See above
     rules: reactHooks.configs.recommended.rules,
   },
   jsxA11y.flatConfigs.recommended,
