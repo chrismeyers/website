@@ -12,16 +12,7 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   react.configs.flat.recommended,
-  // TODO: Update to recommended shorthand once eslint-plugin-react-hooks officially supports flat config
-  //   - https://github.com/facebook/react/issues/28313
-  {
-    plugins: {
-      // @ts-expect-error: See above
-      'react-hooks': reactHooks,
-    },
-    // @ts-expect-error: See above
-    rules: reactHooks.configs.recommended.rules,
-  },
+  reactHooks.configs['recommended-latest'],
   jsxA11y.flatConfigs.recommended,
   {
     rules: {
