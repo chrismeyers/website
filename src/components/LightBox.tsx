@@ -1,27 +1,29 @@
 import 'lightgallery/css/lightgallery.css';
-import 'lightgallery/css/lg-zoom.css';
 import 'lightgallery/css/lg-thumbnail.css';
+import 'lightgallery/css/lg-zoom.css';
 import { ReactNode } from 'react';
+import { LightGallery as LG } from 'lightgallery/lightgallery';
+import { LgQuery } from 'lightgallery/lgQuery';
 import LightGallery, { LightGalleryProps } from 'lightgallery/react';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import lgZoom from 'lightgallery/plugins/zoom';
 import { LIGHTGALLERY_LICENSE } from '../constants.ts';
 
+type Plugin = 'thumbnail' | 'zoom';
+
 interface Props {
   children: ReactNode;
   props?: LightGalleryProps;
-  plugins?: ('zoom' | 'thumbnail')[];
+  plugins?: Plugin[];
 }
 
+const PLUGINS: Record<Plugin, new (instance: LG, $LG: LgQuery) => any> = {
+  thumbnail: lgThumbnail,
+  zoom: lgZoom,
+};
+
 const LightBox = ({ children, props = {}, plugins = [] }: Props) => {
-  props.plugins = [];
-  plugins.forEach((plugin) => {
-    if (plugin === 'zoom') {
-      props.plugins?.push(lgZoom);
-    } else if (plugin === 'thumbnail') {
-      props.plugins?.push(lgThumbnail);
-    }
-  });
+  props.plugins = plugins.map((plugin) => PLUGINS[plugin]);
 
   return (
     <LightGallery licenseKey={LIGHTGALLERY_LICENSE} download={false} {...props}>
