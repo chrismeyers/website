@@ -54,7 +54,7 @@ const About = () => {
           <LightBox props={{ elementClassNames: 'inline' }} plugins={['zoom']}>
             <span
               className="fancytxt"
-              data-src="https://utfs.io/f/yvFQixwYldZ8HfcCEFqG8Xp5b9WxvNfrmF4lVzaksLMyjC1K"
+              data-src="https://c0dok9ur2fyehfvp.public.blob.vercel-storage.com/clark/DSC_1564-6-kM88rnnFhEe3SlZakJPk3bsNe3jTBa.jpg"
               data-sub-html="Clark the Corgi"
             >
               majestic beast
