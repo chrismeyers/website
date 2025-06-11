@@ -8,12 +8,6 @@
   padding: 0;
 }
 
-.images > img,
-.images > div,
-.imagesSmall > img {
-  cursor: pointer;
-}
-
 .imagesSmall {
   display: inline-block;
 }
@@ -118,8 +112,7 @@
   }
 
   .imagesFull.square {
-    max-width: 415px;
-    max-width: 415px;
+    max-width: 100%;
   }
 
   .imagesSmall {
