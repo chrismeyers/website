@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { useParams } from 'wouter';
 import { projects } from '../assets/data.ts';
 import GithubIcon from '../assets/images/icons/github.svg';
@@ -135,25 +134,27 @@ const Project = () => {
               </div>
             ) : (
               <LightBox
-                props={{ thumbnail: true }}
+                props={{ thumbnail: true, selector: '.image' }}
                 plugins={['thumbnail', 'zoom']}
               >
-                {data.images.map((image, index) => (
-                  <Fragment key={image?.id}>
-                    {index === 0 ? (
-                      <a href={image?.path}>
-                        <img
-                          src={image?.path}
-                          className={`${styles.imagesFull} ${
-                            styles[image?.orientation ?? 'square']
-                          }`}
-                          alt={image?.title}
-                          title="Click to enlarge"
-                        />
-                      </a>
-                    ) : (
+                <a className="image" href={data.images[0]?.path}>
+                  <img
+                    src={data.images[0]?.path}
+                    className={`${styles.imagesFull} ${
+                      styles[data.images[0]?.orientation ?? 'square']
+                    }`}
+                    alt={data.images[0]?.title}
+                    title="Click to enlarge"
+                  />
+                </a>
+
+                {data.images.length > 1 && (
+                  <>
+                    <br />
+                    {data.images.slice(1).map((image) => (
                       <div
-                        className={styles.imagesSmall}
+                        key={image?.id}
+                        className={`image ${styles.imagesSmall}`}
                         data-src={image?.path}
                       >
                         <a href={image?.path}>
@@ -167,9 +168,9 @@ const Project = () => {
                           />
                         </a>
                       </div>
-                    )}
-                  </Fragment>
-                ))}
+                    ))}
+                  </>
+                )}
               </LightBox>
             )}
           </div>

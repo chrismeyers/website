@@ -112,7 +112,15 @@
   }
 
   .imagesFull.square {
-    max-width: 100%;
+    max-width: 400px;
+  }
+
+  .imagesFull.landscape {
+    max-width: 600px;
+  }
+
+  .imagesFull.portrait {
+    max-width: 400px;
   }
 
   .imagesSmall {
