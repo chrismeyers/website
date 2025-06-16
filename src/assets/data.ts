@@ -243,6 +243,14 @@ const _images: Image[] = [
     title: 'My Computer 2021',
     orientation: 'portrait',
   },
+  {
+    id: 30,
+    path: 'https://raw.githubusercontent.com/chrismeyers/spotify-cli/main/vhs/demo.gif',
+    thumbnail:
+      'https://raw.githubusercontent.com/chrismeyers/spotify-cli/main/vhs/thumbnail.png',
+    title: 'Demo of spotify-cli',
+    orientation: 'landscape',
+  },
 ];
 
 export const images = new Map(_images.map((image) => [image.id, image]));
@@ -579,6 +587,27 @@ const _projects: Project[] = [
     role: 'Solo Project',
     status: 'In Development',
     images: [],
+  },
+  {
+    id: 12,
+    title: 'spotify-cli',
+    webUrl: null,
+    codeUrl: 'https://github.com/chrismeyers/spotify-cli',
+    displayDate: 'Personal Project, June 2025',
+    startedDate: '2025-06-01T00:00:00.000Z',
+    languages: ['Go'],
+    info: `
+      spotify-cli is a command-line interface for interacting with Spotify from the terminal.
+      Currently, it supports searching Spotify and displaying the results in a terminal user
+      interface.
+      <br><br>
+      This project was started as a way to learn more about Go and its ecosystem, specifically
+      <a href="https://github.com/charmbracelet/bubbletea" class="fancytxt">Bubble Tea</a> for
+      building terminal applications.
+    `,
+    role: 'Solo Project',
+    status: 'In Development',
+    images: [images.get(30)],
   },
 ];
 
