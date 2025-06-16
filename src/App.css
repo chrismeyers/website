@@ -63,6 +63,10 @@ h2.top {
   fill: var(--icon-color);
 }
 
+.link-image.play-overlay > g {
+  fill: #e9e9e9;
+}
+
 .link-image.small {
   height: 16px;
   width: 16px;
