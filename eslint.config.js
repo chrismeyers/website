@@ -62,7 +62,11 @@ export default tseslint.config(
     ...tseslint.configs.disableTypeChecked,
   },
   {
-    files: ['bin/**/*.js'],
+    files: ['bin/**/*.js', 'bin/**/*.ts'],
+    rules: {
+      // built in
+      'no-console': 'off',
+    },
     languageOptions: {
       globals: globals.node,
     },

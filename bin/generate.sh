@@ -7,7 +7,7 @@ rm -rf src/assets/generated
 mkdir -p src/assets/generated
 
 printf "Generating resume module..."
-node bin/node/resume-parser.js resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.tex src/assets/generated/resume.ts
+node --experimental-strip-types bin/node/resume-parser.ts resume/LaTeX/Meyers_Chris/Meyers_Chris_Resume.tex src/assets/generated/resume.ts
 printf "done\n"
 
 popd > /dev/null

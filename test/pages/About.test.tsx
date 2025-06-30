@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { MockInstance, beforeEach, describe, expect, it, vi } from 'vitest';
+import type { MockInstance } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as resume from '../../src/assets/generated/resume.ts';
 import * as lightbox from '../../src/components/LightBox.tsx';
 import About from '../../src/pages/About.tsx';

@@ -1,16 +1,17 @@
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
-import prettier from 'prettier';
+import prettier, { type Config } from 'prettier';
+// @ts-expect-error: Could not find a declaration file for module '../../prettier.config.js'
 import prettierrc from '../../prettier.config.js';
 
 export default class ResumeParser {
-  #rawSections = {};
+  #rawSections: Record<string, string[]> = {};
 
-  constructor(resumePath) {
+  constructor(resumePath: string) {
     this.#load(resumePath);
   }
 
-  #load(resumePath) {
+  #load(resumePath: string) {
     const data = fs.readFileSync(resumePath, { encoding: 'utf-8' });
     const lines = data.split('\n');
 
@@ -40,7 +41,7 @@ export default class ResumeParser {
     });
   }
 
-  parseComplexSection(section, removeInlineComments = true) {
+  parseComplexSection(section: string, removeInlineComments: boolean = true) {
     const urlPattern = '% URL';
     const firstLinePattern = String.raw`{\textbf{`;
     const secondLinePattern = String.raw`{\emph{`;
@@ -49,14 +50,19 @@ export default class ResumeParser {
     const sameCompanyPattern = '% SAME COMPANY';
     const blockEndPattern = '% BLOCK END';
 
-    const items = [];
+    const items: {
+      url: string | null;
+      firstLine: string[];
+      secondLine: string[][];
+      info: string[][];
+    }[] = [];
 
-    let url = null;
-    let firstLine = [];
-    let secondLine = [];
-    let info = [];
-    let currentSecondLine = [];
-    let currentInfo = [];
+    let url: string | null = null;
+    let firstLine: string[] = [];
+    let secondLine: string[][] = [];
+    let info: string[][] = [];
+    let currentSecondLine: string[] = [];
+    let currentInfo: string[] = [];
 
     this.#rawSections[section].forEach((line) => {
       if (line.startsWith(urlPattern)) {
@@ -118,13 +124,16 @@ export default class ResumeParser {
     return items;
   }
 
-  parseListSection(section, removeInlineComments = true) {
+  parseListSection(section: string, removeInlineComments: boolean = true) {
     const itemPattern = String.raw`\item`;
     const circleItemPattern = String.raw`\item[$\circ$]`;
     const beginSubPattern = String.raw`\begin{itemize*}`;
     const endSubPattern = String.raw`\end{itemize*}`;
 
-    const items = [];
+    const items: {
+      mainItem: string;
+      subItems: string[];
+    }[] = [];
     let subItem = false;
     let count = 0;
 
@@ -158,7 +167,7 @@ export default class ResumeParser {
 
   getLanguages() {
     const languagesPattern = '% LANGUAGES';
-    const langMap = {};
+    const langMap: Record<string, string[]> = {};
     const skills = this.parseListSection('TechnicalSkills', false);
 
     skills.forEach((skill) => {
@@ -193,7 +202,7 @@ export default class ResumeParser {
     };
   }
 
-  static #cleanString(input, removeInlineComments) {
+  static #cleanString(input: string, removeInlineComments: boolean) {
     let output = input.trim();
 
     if (removeInlineComments) {
@@ -216,7 +225,6 @@ export default class ResumeParser {
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   if (process.argv.length < 4) {
-    // eslint-disable-next-line no-console
     console.error('Usage: node resume-parser.js resumePath generatedPath');
     process.exit(1);
   }
@@ -246,13 +254,13 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
 
         type Resume = {
           experience: {
-            url: string;
+            url: string | null;
             firstLine: string[];
             secondLine: string[][];
             info: string[][];
           }[];
           education: {
-            url: string;
+            url: string | null;
             firstLine: string[];
             secondLine: string[][];
             info: string[][];
@@ -280,7 +288,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
 
         export const summary: ResumeSummary = ${JSON.stringify(parsed.summary)};
       `,
-      { parser: 'typescript', ...prettierrc }
+      { parser: 'typescript', ...(prettierrc as Config) }
     )
   );
 }

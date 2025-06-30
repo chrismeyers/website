@@ -17,7 +17,7 @@ const Resume = () => {
           key={`job-${job.firstLine[0]}-${job.secondLine[0][1]}`} // prettier-ignore
         >
           <li className={`${styles.leftColumn} ${styles.company}`}>
-            <a className="fancytxt" href={job.url}>
+            <a className="fancytxt" href={job.url ?? ''}>
               {job.firstLine[0]}
             </a>
           </li>
@@ -75,7 +75,7 @@ const Resume = () => {
           key={`school-${school.firstLine[0]}`}
         >
           <li className={`${styles.leftColumn} ${styles.school}`}>
-            <a className="fancytxt" href={school.url}>
+            <a className="fancytxt" href={school.url ?? ''}>
               {school.firstLine[0]}
             </a>
           </li>
