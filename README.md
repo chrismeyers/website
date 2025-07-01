@@ -6,7 +6,7 @@ This is the codebase for my personal website currently located at [https://chris
 
 ## Setup
 
-1. Install Node.js (see [nvm](https://github.com/nvm-sh/nvm) or [nodejs.org](https://nodejs.org/en/download))
+1. Install Node.js (see [fnm](https://github.com/Schniz/fnm) or [nodejs.org](https://nodejs.org/en/download))
 1. Quick Start:
     ```sh
     $ npm install
@@ -24,7 +24,7 @@ In general, the only command needed is:
 $ docker compose up
 ```
 
-Refer to the [Docker Compose CLI docs](https://docs.docker.com/compose/reference/) for more information.
+Refer to the [Docker Compose CLI docs](https://docs.docker.com/reference/cli/docker/compose/) for more information.
 
 ## Deployment
 

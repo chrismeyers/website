@@ -1,6 +1,6 @@
 export const MOBILE_BREAKPOINT = 970; // px
 export const GITHUB_URL = 'https://github.com/chrismeyers';
-export const LINKEDIN_URL = 'https://www.linkedin.com/in/chris-meyers';
+export const LINKEDIN_URL = 'https://www.linkedin.com/in/chris-meyers/';
 export const EMAIL_ADDRESS = 'chris@chrismeyers.net';
 export const MAILTO_MESSAGE = `mailto:${EMAIL_ADDRESS}?subject=Message%20from%20chrismeyers.net`;
 export const MAILTO_RESUME = `mailto:${EMAIL_ADDRESS}?subject=Résumé%20PDF%20request`;

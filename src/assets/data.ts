@@ -381,13 +381,13 @@ const _projects: Project[] = [
         <li>
           In the Spring of 2021, I decided to incrementally rewrite the website again due to the
           sunsetting of the Aqueduct framework. This version of the website was a monorepo that
-          used <a href="https://www.fastify.io" class="fancytxt">Fastify</a> and
-          <a href="https://reactjs.org" class="fancytxt">React</a>. The implementation of this
+          used <a href="https://fastify.dev" class="fancytxt">Fastify</a> and
+          <a href="https://react.dev" class="fancytxt">React</a>. The implementation of this
           version can be found <a href="https://github.com/chrismeyers/website/tree/fastify-react-monorepo" class="fancytxt">here</a>.
         </li>
         <li>
-          The current version of the website was simplified to only use <a href="https://reactjs.org" class="fancytxt">React</a>
-          and <a href="https://vitejs.dev" class="fancytxt">Vite</a> in September 2022.
+          The current version of the website was simplified to only use <a href="https://react.dev" class="fancytxt">React</a>
+          and <a href="https://vite.dev" class="fancytxt">Vite</a> in September 2022.
         </li>
       </ol>`,
     role: 'Solo project',

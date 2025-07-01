@@ -10,7 +10,7 @@ const App = () => {
   const { isMobileWidth } = useScreenResize();
 
   // Return early if width has not been determined yet to reduce Cumulative
-  // Layout Shift (https://web.dev/cls/)
+  // Layout Shift (https://web.dev/articles/cls)
   if (isMobileWidth === null) return <div />;
 
   return (
