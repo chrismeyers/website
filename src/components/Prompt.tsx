@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { use, useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'wouter';
 import { ThemeContext } from '../context/contexts.ts';
 import styles from '../styles/Prompt.module.css';
@@ -6,7 +6,7 @@ import styles from '../styles/Prompt.module.css';
 let CONSOLE_MESSAGE_DISPLAYED = false;
 
 const Prompt = () => {
-  const { applyTheme } = useContext(ThemeContext);
+  const { applyTheme } = use(ThemeContext);
 
   const [promptVisible, setPromptVisible] = useState(false);
   const [outputWindowVisible, setOutputWindowVisible] = useState(false);

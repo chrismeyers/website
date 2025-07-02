@@ -51,7 +51,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <ThemeContext.Provider
+    <ThemeContext
       value={useMemo(
         () => ({
           theme,
@@ -68,7 +68,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
       )}
     >
       {children}
-    </ThemeContext.Provider>
+    </ThemeContext>
   );
 };
 

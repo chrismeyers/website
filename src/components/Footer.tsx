@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { use } from 'react';
 import Switch from 'react-switch';
 import GithubIcon from '../assets/images/icons/github.svg';
 import LinkedInIcon from '../assets/images/icons/linkedin.svg';
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const Footer = ({ inMenu = false }: Props) => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { theme, toggleTheme } = use(ThemeContext);
 
   return (
     <footer className={inMenu ? styles.inMenu : ''}>
