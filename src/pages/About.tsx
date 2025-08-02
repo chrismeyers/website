@@ -1,6 +1,5 @@
 import { Link } from 'wouter';
 import { summary } from '../assets/generated/resume.ts';
-import LightBox from '../components/LightBox.tsx';
 import Page from '../components/Page.tsx';
 import { MAILTO_MESSAGE } from '../constants.ts';
 
@@ -48,18 +47,6 @@ const About = () => {
             </li>
             <li>Chess</li>
           </ul>
-        </li>
-        <li>
-          I am the owner of this{' '}
-          <LightBox props={{ elementClassNames: 'inline' }} plugins={['zoom']}>
-            <span
-              className="fancytxt"
-              data-src="https://c0dok9ur2fyehfvp.public.blob.vercel-storage.com/clark/DSC_1564-6-kM88rnnFhEe3SlZakJPk3bsNe3jTBa.jpg"
-              data-sub-html="Clark the Corgi"
-            >
-              majestic beast
-            </span>
-          </LightBox>
         </li>
       </ul>
 

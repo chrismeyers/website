@@ -1,18 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import type { MockInstance } from 'vitest';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import * as resume from '../../src/assets/generated/resume.ts';
-import * as lightbox from '../../src/components/LightBox.tsx';
 import About from '../../src/pages/About.tsx';
 
 describe('About page', () => {
-  let lgSpy: MockInstance;
-
-  beforeEach(() => {
-    vi.resetAllMocks();
-    lgSpy = vi.spyOn(lightbox, 'default').mockImplementation(() => <></>);
-  });
-
   it('excludes employment info is not currently employed', () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
       languages: { all: ['N/A'] },
@@ -28,8 +19,6 @@ describe('About page', () => {
     render(<About />);
 
     expect(screen.queryByTestId('employment')).toBeNull();
-
-    expect(lgSpy).toHaveBeenCalledTimes(1);
   });
 
   it('displays current job if currently employed', () => {
@@ -52,8 +41,6 @@ describe('About page', () => {
     expect(employment).toHaveTextContent(
       'Currently, I am employed as a Wizard at Somewhere'
     );
-
-    expect(lgSpy).toHaveBeenCalledTimes(1);
   });
 
   it('excludes language experience if missing', () => {
@@ -71,8 +58,6 @@ describe('About page', () => {
     render(<About />);
 
     expect(screen.queryByTestId('languages')).not.toBeInTheDocument();
-
-    expect(lgSpy).toHaveBeenCalledTimes(1);
   });
 
   it('displays language experience', () => {
@@ -99,7 +84,5 @@ describe('About page', () => {
 
     expect(languages).toBeInTheDocument();
     expect(languages.children).toHaveLength(3);
-
-    expect(lgSpy).toHaveBeenCalledTimes(1);
   });
 });
