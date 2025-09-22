@@ -289,7 +289,7 @@ const Prompt = () => {
           ref={promptRef}
           maxLength={75}
           autoComplete="off"
-          autoFocus // eslint-disable-line jsx-a11y/no-autofocus
+          autoFocus
         />
         <button
           type="button"
