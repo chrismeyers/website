@@ -23,10 +23,13 @@ const PLUGINS: Record<Plugin, new (instance: LG, $LG: LgQuery) => any> = {
 };
 
 const LightBox = ({ children, props = {}, plugins = [] }: Props) => {
-  props.plugins = plugins.map((plugin) => PLUGINS[plugin]);
-
   return (
-    <LightGallery licenseKey={LIGHTGALLERY_LICENSE} download={false} {...props}>
+    <LightGallery
+      licenseKey={LIGHTGALLERY_LICENSE}
+      download={false}
+      {...props}
+      plugins={plugins.map((plugin) => PLUGINS[plugin])}
+    >
       {children}
     </LightGallery>
   );

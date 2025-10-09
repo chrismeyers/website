@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { SLOGAN } from '../constants.ts';
 
 interface Metadata {
@@ -13,8 +13,10 @@ interface Props {
 }
 
 const Page = ({ metadata, children, contentStyles = [] }: Props) => {
-  const title = metadata.title ? `${metadata.title} | ${SLOGAN}` : SLOGAN;
-  document.title = title;
+  useEffect(() => {
+    const title = metadata.title ? `${metadata.title} | ${SLOGAN}` : SLOGAN;
+    document.title = title;
+  }, [metadata.title]);
 
   return (
     <div className="content">

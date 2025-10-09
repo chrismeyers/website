@@ -12,7 +12,7 @@ export default defineConfig(
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   react.configs.flat.recommended,
-  reactHooks.configs['recommended-latest'],
+  reactHooks.configs.flat.recommended,
   {
     rules: {
       // built in

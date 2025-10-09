@@ -6,18 +6,18 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   const systemThemeDarkMediaQuery = '(prefers-color-scheme: dark)';
 
-  useEffect(() => {
-    if (!theme) {
-      if (window.matchMedia) {
-        const init = window.matchMedia(systemThemeDarkMediaQuery).matches
-          ? 'dark'
-          : 'light';
-        setTheme(init);
-      } else {
-        setTheme('light');
-      }
+  if (!theme) {
+    if (window.matchMedia) {
+      const init = window.matchMedia(systemThemeDarkMediaQuery).matches
+        ? 'dark'
+        : 'light';
+      setTheme(init);
+    } else {
+      setTheme('light');
     }
+  }
 
+  useEffect(() => {
     localStorage.setItem('theme', theme as string);
     document.documentElement.setAttribute('data-theme', theme as string);
   }, [theme]);

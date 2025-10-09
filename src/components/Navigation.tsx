@@ -65,8 +65,10 @@ export const MobileNav = () => {
   useClickOutside(menuRef, () => setMenuDisplayed(false), [menuIconRef]);
 
   useEffect(() => {
-    setMenuDisplayed(false);
-    window.scrollTo(0, 0);
+    return () => {
+      setMenuDisplayed(false);
+      window.scrollTo(0, 0);
+    };
   }, [location]);
 
   useEffect(() => {

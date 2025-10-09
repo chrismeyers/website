@@ -53,17 +53,24 @@ const Prompt = () => {
     setArrowDirection('up');
   };
 
+  const toggleOutputWindow = useCallback(
+    () =>
+      outputWindowVisible
+        ? hideOutputWindow()
+        : showOutputWindow({ bottom: true }),
+    [outputWindowVisible, showOutputWindow]
+  );
+
   const showPrompt = () => {
     setPromptVisible(true);
   };
 
-  const clearCommand = () => {
+  const hidePrompt = useCallback(() => {
+    setPromptVisible(false);
+    setHistoryIndex(-1);
+    hideOutputWindow();
     setCommand('');
-  };
-
-  const clearOutput = () => {
-    setOutput('');
-  };
+  }, []);
 
   const stdout = useCallback(
     (text: string) => {
@@ -73,28 +80,6 @@ const Prompt = () => {
     [scrollOutputWindowToBottom]
   );
 
-  const hidePrompt = useCallback(() => {
-    setPromptVisible(false);
-    setHistoryIndex(-1);
-    hideOutputWindow();
-    clearCommand();
-  }, []);
-
-  const toggleOutputWindow = useCallback(
-    () =>
-      outputWindowVisible
-        ? hideOutputWindow()
-        : showOutputWindow({ bottom: true }),
-    [outputWindowVisible, showOutputWindow]
-  );
-
-  const setTheme = useCallback(
-    (which: string) => {
-      applyTheme(which);
-    },
-    [applyTheme]
-  );
-
   const moveCursorToEnd = () => {
     if (promptRef.current) {
       promptRef.current.selectionStart = promptRef.current.value.length;
@@ -102,27 +87,27 @@ const Prompt = () => {
     }
   };
 
-  useEffect(() => {
-    if (history[historyIndex] === undefined) {
-      clearCommand();
-    } else {
-      setCommand(history[historyIndex]);
-    }
-  }, [history, historyIndex]);
-
   const prev = useCallback(() => {
     if (historyIndex < history.length - 1) {
-      setHistoryIndex((currentHistoryIndex) => currentHistoryIndex + 1);
+      setHistoryIndex((currentIndex) => {
+        const newIndex = currentIndex + 1;
+        setCommand(history[newIndex] ?? '');
+        return newIndex;
+      });
     }
     moveCursorToEnd();
-  }, [history.length, historyIndex]);
+  }, [history, historyIndex]);
 
   const next = useCallback(() => {
     if (historyIndex >= 0) {
-      setHistoryIndex((currentHistoryIndex) => currentHistoryIndex - 1);
+      setHistoryIndex((currentIndex) => {
+        const newIndex = currentIndex - 1;
+        setCommand(history[newIndex] ?? '');
+        return newIndex;
+      });
     }
     moveCursorToEnd();
-  }, [historyIndex]);
+  }, [history, historyIndex]);
 
   const echo = useCallback(
     (args: string[]) => {
@@ -204,10 +189,10 @@ const Prompt = () => {
           toggleOutputWindow();
           break;
         case 'theme':
-          setTheme(args[0]);
+          applyTheme(args[0]);
           break;
         case 'clear':
-          clearOutput();
+          setOutput('');
           break;
         case 'exit':
           exit();
@@ -221,9 +206,9 @@ const Prompt = () => {
       }
 
       setHistoryIndex(-1);
-      clearCommand();
+      setCommand('');
     },
-    [cd, echo, exit, help, setTheme, stdout, toggleOutputWindow]
+    [applyTheme, cd, echo, exit, help, stdout, toggleOutputWindow]
   );
 
   useEffect(() => {
