@@ -6,7 +6,7 @@ This is the codebase for my personal website currently located at [https://chris
 
 ## Setup
 
-1. Install Node.js (see [fnm](https://github.com/Schniz/fnm) or [nodejs.org](https://nodejs.org/en/download))
+1. Install Node.js (see [mise](https://github.com/jdx/mise), [fnm](https://github.com/Schniz/fnm), or [nodejs.org](https://nodejs.org/en/download))
 1. Quick Start:
     ```sh
     $ npm install
