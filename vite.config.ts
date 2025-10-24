@@ -15,6 +15,6 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
     },
-    reporters: ['verbose'],
+    reporters: process.env.CI ? ['verbose'] : ['tree'],
   },
 });
