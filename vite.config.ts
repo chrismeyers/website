@@ -8,7 +8,14 @@ export default defineConfig({
   server: {
     port: 8080,
   },
-  plugins: [react(), svgr({ include: '**/*.svg' })],
+  plugins: [
+    react({
+      babel: {
+        plugins: ['babel-plugin-react-compiler'],
+      },
+    }),
+    svgr({ include: '**/*.svg' }),
+  ],
   test: {
     environment: 'jsdom',
     setupFiles: 'test/_setup.ts',

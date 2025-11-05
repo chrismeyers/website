@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useMemo, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { ThemeContext } from './contexts.ts';
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
@@ -52,20 +52,17 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <ThemeContext
-      value={useMemo(
-        () => ({
-          theme,
-          toggleTheme: () => {
-            setTheme(theme === 'light' ? 'dark' : 'light');
-          },
-          applyTheme: (which: string) => {
-            if (['light', 'dark'].includes(which)) {
-              setTheme(which);
-            }
-          },
-        }),
-        [theme]
-      )}
+      value={{
+        theme,
+        toggleTheme: () => {
+          setTheme(theme === 'light' ? 'dark' : 'light');
+        },
+        applyTheme: (which: string) => {
+          if (['light', 'dark'].includes(which)) {
+            setTheme(which);
+          }
+        },
+      }}
     >
       {children}
     </ThemeContext>
