@@ -1,4 +1,10 @@
-import { type ReactNode, useEffect, useState } from 'react';
+import {
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { ThemeContext } from './contexts.ts';
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
@@ -50,23 +56,22 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
-  return (
-    <ThemeContext
-      value={{
-        theme,
-        toggleTheme: () => {
-          setTheme(theme === 'light' ? 'dark' : 'light');
-        },
-        applyTheme: (which: string) => {
-          if (['light', 'dark'].includes(which)) {
-            setTheme(which);
-          }
-        },
-      }}
-    >
-      {children}
-    </ThemeContext>
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+  }, []);
+
+  const applyTheme = useCallback((which: string) => {
+    if (['light', 'dark'].includes(which)) {
+      setTheme(which);
+    }
+  }, []);
+
+  const value = useMemo(
+    () => ({ theme, toggleTheme, applyTheme }),
+    [theme, toggleTheme, applyTheme]
   );
+
+  return <ThemeContext value={value}>{children}</ThemeContext>;
 };
 
 export default ThemeProvider;
