@@ -1,8 +1,41 @@
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
+import ts from 'typescript';
 import prettier, { type Config } from 'prettier';
 // @ts-expect-error: Could not find a declaration file for module '../../prettier.config.js'
 import prettierrc from '../../prettier.config.js';
+
+type Resume = {
+  experience: {
+    url: string | null;
+    firstLine: string[];
+    secondLine: string[][];
+    info: string[][];
+  }[];
+  education: {
+    url: string | null;
+    firstLine: string[];
+    secondLine: string[][];
+    info: string[][];
+  }[];
+  skills: {
+    mainItem: string;
+    subItems: string[];
+  }[];
+};
+
+type ResumeSummary = {
+  languages: {
+    [key: string]: string[];
+  };
+  mostRecentJob: {
+    employed: boolean;
+    company: string;
+    url: string | null;
+    title: string;
+    dates: string[];
+  };
+};
 
 export default class ResumeParser {
   #rawSections: Record<string, string[]> = {};
@@ -232,8 +265,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const [, , resumePath, generatedPath] = process.argv;
 
   const parser = new ResumeParser(resumePath);
-
-  const parsed = {
+  const parsed: { full: Resume; summary: ResumeSummary } = {
     full: {
       experience: parser.parseComplexSection('Experience'),
       education: parser.parseComplexSection('Education'),
@@ -245,6 +277,30 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
     },
   };
 
+  const srcPath = new URL(import.meta.url).pathname;
+  const program = ts.createProgram([srcPath], {
+    target: ts.ScriptTarget.ESNext,
+    module: ts.ModuleKind.ESNext,
+  });
+  const srcFile = program.getSourceFile(srcPath);
+  if (!srcFile) {
+    throw new Error(`Could not read source file for types: ${srcPath}`);
+  }
+  const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
+
+  const printTypeAlias = (name: string) => {
+    if (!srcFile) throw new Error('Source file not available');
+    for (const stmt of srcFile.statements) {
+      if (ts.isTypeAliasDeclaration(stmt) && stmt.name.text === name) {
+        return printer.printNode(ts.EmitHint.Unspecified, stmt, srcFile);
+      }
+    }
+    throw new Error(`Type alias "${name}" not found in ${srcPath}`);
+  };
+
+  const resumeType = printTypeAlias('Resume');
+  const resumeSummaryType = printTypeAlias('ResumeSummary');
+
   fs.writeFileSync(
     generatedPath,
     await prettier.format(
@@ -252,37 +308,9 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
         // WARNING: This file is generated, do not edit directly!
         // Edit the resume source file and regenerate instead.
 
-        type Resume = {
-          experience: {
-            url: string | null;
-            firstLine: string[];
-            secondLine: string[][];
-            info: string[][];
-          }[];
-          education: {
-            url: string | null;
-            firstLine: string[];
-            secondLine: string[][];
-            info: string[][];
-          }[];
-          skills: {
-            mainItem: string;
-            subItems: string[];
-          }[];
-        }
+        ${resumeType}
 
-        type ResumeSummary = {
-          languages: {
-            all: string[];
-          };
-          mostRecentJob: {
-            employed: boolean;
-            company: string;
-            url: string;
-            title: string;
-            dates: string[];
-          };
-        }
+        ${resumeSummaryType}
 
         export const full: Resume = ${JSON.stringify(parsed.full)};
 

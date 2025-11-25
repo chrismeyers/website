@@ -22,9 +22,13 @@ const About = () => {
         {summary.mostRecentJob.employed && (
           <li data-testid="employment">
             Currently, I am employed as a {summary.mostRecentJob.title} at{' '}
-            <a href={summary.mostRecentJob.url} className="fancytxt">
-              {summary.mostRecentJob.company}
-            </a>
+            {summary.mostRecentJob.url ? (
+              <a href={summary.mostRecentJob.url} className="fancytxt">
+                {summary.mostRecentJob.company}
+              </a>
+            ) : (
+              <span>{summary.mostRecentJob.company}</span>
+            )}
           </li>
         )}
 
