@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { beforeAll, describe, expect, it } from 'vitest';
-import ResumeParser from '../bin/node/resume-parser';
+import ResumeParser from '../bin/resume-parser.ts';
 
 describe('Resume Parser', () => {
   let parser: ResumeParser;

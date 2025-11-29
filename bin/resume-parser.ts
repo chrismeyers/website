@@ -2,8 +2,8 @@ import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import ts from 'typescript';
 import prettier, { type Config } from 'prettier';
-// @ts-expect-error: Could not find a declaration file for module '../../prettier.config.js'
-import prettierrc from '../../prettier.config.js';
+// @ts-expect-error: Could not find a declaration file for module '../prettier.config.js'
+import prettierrc from '../prettier.config.js';
 
 type Resume = {
   experience: {
