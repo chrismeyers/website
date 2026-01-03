@@ -251,6 +251,14 @@ const _images: Image[] = [
     title: 'Demo of spotify-cli',
     orientation: 'landscape',
   },
+  {
+    id: 31,
+    path: 'https://raw.githubusercontent.com/chrismeyers/gex/main/vhs/demo.gif',
+    thumbnail:
+      'https://raw.githubusercontent.com/chrismeyers/gex/main/vhs/thumbnail.png',
+    title: 'Demo of gex',
+    orientation: 'landscape',
+  },
 ];
 
 export const images = new Map(_images.map((image) => [image.id, image]));
@@ -608,6 +616,19 @@ const _projects: Project[] = [
     role: 'Solo Project',
     status: 'In Development',
     images: [images.get(30)],
+  },
+  {
+    id: 13,
+    title: 'gex - (G)o h(ex) dump',
+    webUrl: null,
+    codeUrl: 'https://github.com/chrismeyers/gex',
+    displayDate: 'Personal Project, December 2025',
+    startedDate: '2025-12-01T00:00:00.000Z',
+    languages: ['Go'],
+    info: 'A simple <a href="https://en.wikipedia.org/wiki/Hex_dump" class="fancytxt">hex dump</a> utility. The behavior of this program mimics <code>hexdump(1)</code>.',
+    role: 'Solo Project',
+    status: 'In Development',
+    images: [images.get(31)],
   },
 ];
 
