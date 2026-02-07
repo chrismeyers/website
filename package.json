@@ -13,7 +13,7 @@
     "test:ci": "CI=true vitest run --coverage",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
-    "format:check": "prettier --experimental-cli --check '**/*.{ts,tsx,js,cjs,jsx}'",
+    "format": "prettier --experimental-cli --check '**/*.{ts,tsx,js,cjs,jsx}'",
     "format:fix": "prettier --experimental-cli --write '**/*.{ts,tsx,js,cjs,jsx}'",
     "dev": "vite",
     "preview": "vite preview",
