@@ -1,5 +1,6 @@
 /// <reference types="vitest/config" />
-import react from '@vitejs/plugin-react';
+import react, { reactCompilerPreset } from '@vitejs/plugin-react';
+import babel from '@rolldown/plugin-babel';
 import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
@@ -9,10 +10,9 @@ export default defineConfig({
     port: 8080,
   },
   plugins: [
-    react({
-      babel: {
-        plugins: ['babel-plugin-react-compiler'],
-      },
+    react(),
+    babel({
+      presets: [reactCompilerPreset()],
     }),
     svgr({ include: '**/*.svg' }),
   ],
