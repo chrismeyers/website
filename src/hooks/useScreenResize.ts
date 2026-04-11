@@ -3,7 +3,9 @@ import _throttle from 'lodash/throttle';
 import { MOBILE_BREAKPOINT } from '../constants.ts';
 
 const useScreenResize = () => {
-  const [isMobileWidth, setIsMobileWidth] = useState<boolean | null>(null);
+  const [isMobileWidth, setIsMobileWidth] = useState<boolean | null>(() =>
+    typeof window === 'undefined' ? null : window.innerWidth < MOBILE_BREAKPOINT
+  );
 
   useEffect(() => {
     const onResize = () => {
@@ -11,7 +13,6 @@ const useScreenResize = () => {
       setIsMobileWidth(width < MOBILE_BREAKPOINT);
     };
     const throttledResizeFn = _throttle(onResize, 50);
-    onResize();
 
     window.addEventListener('resize', throttledResizeFn);
 

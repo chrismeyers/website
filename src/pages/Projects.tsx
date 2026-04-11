@@ -24,7 +24,7 @@ const Projects = () => {
             <h3>{project.displayDate}</h3>
             <div className={styles.overview}>
               <p
-                dangerouslySetInnerHTML={{ __html: project.info }} // eslint-disable-line react/no-danger
+                dangerouslySetInnerHTML={{ __html: project.info }} // eslint-disable-line @eslint-react/dom-no-dangerously-set-innerhtml
               />
               <p className="right">
                 <Link

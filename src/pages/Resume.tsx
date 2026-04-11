@@ -44,7 +44,7 @@ const Resume = () => {
                     ? styles.additionalRole
                     : styles.role
                 }`}
-                dangerouslySetInnerHTML={{ __html: secondLine[1] }} // eslint-disable-line react/no-danger
+                dangerouslySetInnerHTML={{ __html: secondLine[1] }} // eslint-disable-line @eslint-react/dom-no-dangerously-set-innerhtml
               />
 
               {job.info && job.info[index].length > 0 && (
@@ -54,7 +54,7 @@ const Resume = () => {
                       <li
                         className="more-info"
                         key={`job-info-item-${info}`}
-                        dangerouslySetInnerHTML={{ __html: info }} // eslint-disable-line react/no-danger
+                        dangerouslySetInnerHTML={{ __html: info }} // eslint-disable-line @eslint-react/dom-no-dangerously-set-innerhtml
                       />
                     ))}
                   </ul>
@@ -91,7 +91,7 @@ const Resume = () => {
               </li>
               <li
                 className={`${styles.rightColumn} ${styles.tenure}`}
-                dangerouslySetInnerHTML={{ __html: secondLine[1] }} // eslint-disable-line react/no-danger
+                dangerouslySetInnerHTML={{ __html: secondLine[1] }} // eslint-disable-line @eslint-react/dom-no-dangerously-set-innerhtml
               />
 
               {school.info && school.info[index].length > 0 && (

@@ -1,4 +1,4 @@
-import { use } from 'react';
+import { use, useState } from 'react';
 import Switch from 'react-switch';
 import GithubIcon from '../assets/images/icons/github.svg';
 import LinkedInIcon from '../assets/images/icons/linkedin.svg';
@@ -15,6 +15,7 @@ interface Props {
 
 const Footer = ({ inMenu = false }: Props) => {
   const { theme, toggleTheme } = use(ThemeContext);
+  const [currentYear] = useState(() => new Date().getFullYear());
 
   return (
     <footer className={inMenu ? styles.inMenu : ''}>
@@ -67,7 +68,7 @@ const Footer = ({ inMenu = false }: Props) => {
       </div>
 
       <span className={styles.years}>
-        Designed and Developed by Chris Meyers, 2013-{new Date().getFullYear()}
+        Designed and Developed by Chris Meyers, 2013-{currentYear}
       </span>
     </footer>
   );

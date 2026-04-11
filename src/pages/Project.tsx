@@ -45,14 +45,14 @@ const Project = () => {
               <b>Language(s)</b>
             </dt>
             <dd
-              dangerouslySetInnerHTML={{ __html: data.languages.join(', ') }} // eslint-disable-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: data.languages.join(', ') }} // eslint-disable-line @eslint-react/dom-no-dangerously-set-innerhtml
             />
 
             <dt className="dt-mod">
               <b>Description</b>
             </dt>
             <dd
-              dangerouslySetInnerHTML={{ __html: data.info }} // eslint-disable-line react/no-danger
+              dangerouslySetInnerHTML={{ __html: data.info }} // eslint-disable-line @eslint-react/dom-no-dangerously-set-innerhtml
             />
 
             <dt className="dt-mod">

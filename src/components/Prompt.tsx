@@ -281,7 +281,7 @@ const Prompt = () => {
           aria-label="Toggle prompt output window"
           className={`${styles.outputWindowBtn} ${styles.hackerman}`}
           onClick={() => run({ cmd: 'toggle', recordHistory: false })}
-          dangerouslySetInnerHTML={{ __html: ARROWS[arrowDirection] }} // eslint-disable-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: ARROWS[arrowDirection] }} // eslint-disable-line @eslint-react/dom-no-dangerously-set-innerhtml
         />
       </div>
     )

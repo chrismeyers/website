@@ -4,15 +4,15 @@ import eslint from '@eslint/js';
 import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 import globals from 'globals';
-import react from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
+import eslintReact from '@eslint-react/eslint-plugin';
+import eslintReactKit, { merge } from '@eslint-react/kit';
 
 export default defineConfig(
   { ignores: ['dist', 'coverage', 'node_modules'] },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
-  react.configs.flat.recommended,
-  reactHooks.configs.flat.recommended,
+  eslintReact.configs['recommended-typescript'],
+  eslintReactKit().use(functionComponentDefinition).getConfig(),
   {
     rules: {
       // built in
@@ -26,21 +26,6 @@ export default defineConfig(
       // @typescript-eslint
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/return-await': ['error', 'in-try-catch'],
-
-      // react
-      'react/no-danger': 'warn',
-      'react/react-in-jsx-scope': 'off',
-      'react/function-component-definition': [
-        'error',
-        { namedComponents: 'arrow-function' },
-      ],
-      'react/prop-types': 'off',
-      'react/require-default-props': 'off',
-      'react/jsx-filename-extension': [
-        'error',
-        { extensions: ['.tsx', '.ts'] },
-      ],
-      'react/jsx-key': 'off', // too many false positives, rely on runtime errors
     },
     languageOptions: {
       ecmaVersion: 'latest',
@@ -48,11 +33,6 @@ export default defineConfig(
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
-      },
-    },
-    settings: {
-      react: {
-        version: 'detect',
       },
     },
   },
@@ -71,3 +51,75 @@ export default defineConfig(
     },
   }
 );
+
+/** @returns {import('@eslint-react/kit').RuleFunction} */
+function functionComponentDefinition() {
+  return (context, { collect, hint }) => {
+    const { query, visitor } = collect.components(context, {
+      hint:
+        hint.component.Default &
+        ~hint.component.DoNotIncludeFunctionDefinedAsObjectMethod,
+    });
+    return merge(visitor, {
+      'Program:exit'(program) {
+        for (const { node } of query.all(program)) {
+          if (node.type === 'ArrowFunctionExpression') continue;
+          context.report({
+            node,
+            message:
+              'Function components must be defined with arrow functions.',
+            suggest: [
+              {
+                desc: 'Convert to arrow function.',
+                fix(fixer) {
+                  const src = context.sourceCode;
+                  if (node.generator) return null;
+                  const prefix = node.async ? 'async ' : '';
+                  const typeParams = node.typeParameters
+                    ? src.getText(node.typeParameters)
+                    : '';
+                  const params = `(${node.params.map((p) => src.getText(p)).join(', ')})`;
+                  const returnType = node.returnType
+                    ? src.getText(node.returnType)
+                    : '';
+                  const body = src.getText(node.body);
+                  // function Foo(params) { ... } -> const Foo = (params) => { ... };
+                  if (node.type === 'FunctionDeclaration' && node.id) {
+                    // dprint-ignore
+                    return fixer.replaceText(
+                      node,
+                      `const ${node.id.name} = ${prefix}${typeParams}${params}${returnType} => ${body};`
+                    );
+                  }
+                  // const Foo = function(params) { ... } -> const Foo = (params) => { ... }
+                  if (
+                    node.type === 'FunctionExpression' &&
+                    node.parent.type === 'VariableDeclarator'
+                  ) {
+                    // dprint-ignore
+                    return fixer.replaceText(
+                      node,
+                      `${prefix}${typeParams}${params}${returnType} => ${body}`
+                    );
+                  }
+                  // { Foo(params) { ... } } -> { Foo: (params) => { ... } }
+                  if (
+                    node.type === 'FunctionExpression' &&
+                    node.parent.type === 'Property'
+                  ) {
+                    // dprint-ignore
+                    return fixer.replaceText(
+                      node.parent,
+                      `${src.getText(node.parent.key)}: ${prefix}${typeParams}${params}${returnType} => ${body}`
+                    );
+                  }
+                  return null;
+                },
+              },
+            ],
+          });
+        }
+      },
+    });
+  };
+}

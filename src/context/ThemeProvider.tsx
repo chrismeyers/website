@@ -7,52 +7,49 @@ import {
 } from 'react';
 import { ThemeContext } from './contexts.ts';
 
+const SYSTEM_THEME_DARK_MEDIA_QUERY = '(prefers-color-scheme: dark)';
+
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState(localStorage.getItem('theme'));
-
-  const systemThemeDarkMediaQuery = '(prefers-color-scheme: dark)';
-
-  if (!theme) {
-    if (window.matchMedia) {
-      const init = window.matchMedia(systemThemeDarkMediaQuery).matches
-        ? 'dark'
-        : 'light';
-      setTheme(init);
-    } else {
-      setTheme('light');
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const fromStorage = localStorage.getItem('theme');
+    if (fromStorage === 'light' || fromStorage === 'dark') {
+      return fromStorage;
     }
-  }
+
+    if (window.matchMedia?.(SYSTEM_THEME_DARK_MEDIA_QUERY).matches) {
+      return 'dark';
+    }
+
+    return 'light';
+  });
 
   useEffect(() => {
-    localStorage.setItem('theme', theme as string);
-    document.documentElement.setAttribute('data-theme', theme as string);
+    localStorage.setItem('theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
   useEffect(() => {
-    const systemThemeChangeFn = (e: MediaQueryListEvent) => {
-      const which = e.matches ? 'dark' : 'light';
-      setTheme(which);
-    };
-
-    const systemThemeAvailable =
-      window.matchMedia &&
-      typeof window.matchMedia(systemThemeDarkMediaQuery).addEventListener ===
-        'function' &&
-      typeof window.matchMedia(systemThemeDarkMediaQuery)
-        .removeEventListener === 'function';
-
-    if (systemThemeAvailable) {
-      window
-        .matchMedia(systemThemeDarkMediaQuery)
-        .addEventListener('change', systemThemeChangeFn);
+    const mediaQuery = window.matchMedia?.(SYSTEM_THEME_DARK_MEDIA_QUERY);
+    if (!mediaQuery) {
+      return undefined;
     }
 
+    const systemThemeChangeFn = (e: MediaQueryListEvent) => {
+      setTheme(e.matches ? 'dark' : 'light');
+    };
+
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', systemThemeChangeFn);
+
+      return () => {
+        mediaQuery.removeEventListener('change', systemThemeChangeFn);
+      };
+    }
+
+    mediaQuery.addListener(systemThemeChangeFn);
+
     return () => {
-      if (systemThemeAvailable) {
-        window
-          .matchMedia(systemThemeDarkMediaQuery)
-          .removeEventListener('change', systemThemeChangeFn);
-      }
+      mediaQuery.removeListener(systemThemeChangeFn);
     };
   }, []);
 
@@ -61,7 +58,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const applyTheme = useCallback((which: string) => {
-    if (['light', 'dark'].includes(which)) {
+    if (which === 'light' || which === 'dark') {
       setTheme(which);
     }
   }, []);
