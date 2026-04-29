@@ -1,6 +1,6 @@
 # website
 
-[![Actions Status](https://github.com/chrismeyers/website/actions/workflows/website.yml/badge.svg)](https://github.com/chrismeyers/website/actions/workflows/website.yml)
+[![Actions Status](https://github.com/chrismeyers/website/actions/workflows/cicd.yml/badge.svg)](https://github.com/chrismeyers/website/actions/workflows/cicd.yml)
 
 This is the codebase for my personal website currently located at [https://chrismeyers.net](https://chrismeyers.net).
 
@@ -28,5 +28,5 @@ Refer to the [Docker Compose CLI docs](https://docs.docker.com/reference/cli/doc
 
 ## Deployment
 
-This site is hosted on Vercel and [automatically deploys via GitHub Actions](https://vercel.com/guides/how-can-i-use-github-actions-with-vercel) when pushing or merging to the `main` branch.
+This site is hosted on Cloudflare Workers and [automatically deploys via GitHub Actions](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/) when pushing or merging to the `main` branch.
 Including `[deploy skip]` or `[skip deploy]` in the HEAD commit message will skip the deploy job.
