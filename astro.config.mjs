@@ -8,6 +8,10 @@ export default defineConfig({
   server: {
     port: 8080,
   },
+  trailingSlash: 'never',
+  build: {
+    format: 'file',
+  },
   integrations: [
     react({
       babel: {
