@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Logo from '../assets/images/logos/v3/ccm-logo.svg?react';
 import useClickOutside from '../hooks/useClickOutside.ts';
 import { isNavCurrent, NAVIGATION } from '../navigation.ts';
@@ -19,7 +19,17 @@ const MobileNav = ({ pathname }: Props) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const menuIconRef = useRef<HTMLDivElement>(null);
 
-  useClickOutside(menuRef, () => setMenuDisplayed(false), [menuIconRef]);
+  const closeMenu = useCallback(() => setMenuDisplayed(false), []);
+
+  useClickOutside(menuRef, closeMenu, [menuIconRef]);
+
+  useEffect(() => {
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) closeMenu();
+    };
+    window.addEventListener('pageshow', handlePageShow);
+    return () => window.removeEventListener('pageshow', handlePageShow);
+  }, [closeMenu]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -32,11 +42,11 @@ const MobileNav = ({ pathname }: Props) => {
   useEffect(() => () => setBodyScrollable(true), []);
 
   return (
-    <nav className={`nav-mobile ${mobileStyles.mobile}`} key={pathname}>
+    <nav className={`nav-mobile ${mobileStyles.mobile}`}>
       <div className={mobileStyles.mobileMenu}>
         <div className={mobileStyles.header}>
           <div className={mobileStyles.smallNavLogo}>
-            <a href="/" title="Home">
+            <a href="/" title="Home" onClick={closeMenu}>
               <Logo className={mobileStyles.bannerImgSmall} />
             </a>
           </div>
@@ -69,6 +79,7 @@ const MobileNav = ({ pathname }: Props) => {
                     className={`nav-link ${isNavCurrent(pathname, item) ? 'nav-selected' : ''}`}
                     href={item.path}
                     key={item.name}
+                    onClick={closeMenu}
                   >
                     <div className={mobileStyles.menuItem}>{item.name}</div>
                   </a>

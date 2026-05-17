@@ -10,7 +10,7 @@ interface Props {
 
 const ThemeShell = ({ pathname, children }: Props) => (
   <ThemeProvider>
-    <MobileNav pathname={pathname} />
+    <MobileNav pathname={pathname} key={pathname} />
     {children}
     <Footer />
   </ThemeProvider>
