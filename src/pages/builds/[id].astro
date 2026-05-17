@@ -20,7 +20,7 @@ const { build } = Astro.props;
 ---
 
 <BaseLayout
-  title={`PC Build — ${build.displayDate}`}
+  title={build.displayDate}
   description={buildDescription(build)}
   image={build.image?.path}
 >
