@@ -1,8 +1,27 @@
-#root {
+.site-root {
   font-family: 'Open Sans', sans-serif;
   flex: 1;
   display: -webkit-flex;
   display: flex;
+  min-height: 100vh;
+}
+
+.nav-desktop {
+  display: block;
+}
+
+.nav-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 969px) {
+  .nav-desktop {
+    display: none;
+  }
+
+  .nav-mobile {
+    display: block;
+  }
 }
 
 h2.top {

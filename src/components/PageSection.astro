@@ -1,0 +1,17 @@
+---
+interface Props {
+  header: string;
+  contentStyles?: string[];
+}
+
+const { header, contentStyles = [] } = Astro.props;
+---
+
+<div class="content">
+  <div class="section-header section-header-size">
+    <div>{header}</div>
+  </div>
+  <div class:list={['content-text', ...contentStyles]}>
+    <slot />
+  </div>
+</div>

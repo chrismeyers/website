@@ -1,8 +1,7 @@
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import ts from 'typescript';
-import prettier, { type Config } from 'prettier';
-// @ts-expect-error: Could not find a declaration file for module '../prettier.config.js'
+import prettier from 'prettier';
 import prettierrc from '../prettier.config.js';
 
 type Resume = {
@@ -316,7 +315,7 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
 
         export const summary: ResumeSummary = ${JSON.stringify(parsed.summary)};
       `,
-      { parser: 'typescript', ...(prettierrc as Config) }
+      { parser: 'typescript', ...prettierrc }
     )
   );
 }

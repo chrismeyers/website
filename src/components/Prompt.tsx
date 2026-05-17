@@ -1,5 +1,5 @@
 import { use, useCallback, useEffect, useRef, useState } from 'react';
-import { useLocation } from 'wouter';
+import { createPortal } from 'react-dom';
 import { ThemeContext } from '../context/contexts.ts';
 import styles from '../styles/Prompt.module.css';
 
@@ -18,8 +18,6 @@ const Prompt = () => {
 
   const outputWindowRef = useRef<HTMLTextAreaElement>(null);
   const promptRef = useRef<HTMLInputElement>(null);
-
-  const [location, setLocation] = useLocation();
 
   const ARROWS: Record<string, string> = {
     up: '&#9650;',
@@ -117,29 +115,26 @@ const Prompt = () => {
     [showOutputWindow, stdout]
   );
 
-  const cd = useCallback(
-    (args: string[]) => {
-      let path = args[0];
-      if (args.length < 1) {
-        path = '';
-      }
-      if (path.startsWith('/')) {
-        path = path.substring(1);
-      }
-      if (path.endsWith('/')) {
-        path = path.slice(0, -1);
-      }
+  const cd = useCallback((args: string[]) => {
+    let path = args[0];
+    if (args.length < 1) {
+      path = '';
+    }
+    if (path.startsWith('/')) {
+      path = path.substring(1);
+    }
+    if (path.endsWith('/')) {
+      path = path.slice(0, -1);
+    }
 
-      path = `/${path}`;
+    path = `/${path}`;
 
-      if (location === path) {
-        return;
-      }
+    if (window.location.pathname === path) {
+      return;
+    }
 
-      setLocation(path);
-    },
-    [location, setLocation]
-  );
+    window.location.assign(path);
+  }, []);
 
   const exit = useCallback(() => {
     hidePrompt();
@@ -166,7 +161,6 @@ const Prompt = () => {
       if (cmd === '') return;
 
       if (recordHistory) {
-        // Push to top of history stack
         setHistory((prevHistory: string[]) => [cmd, ...prevHistory]);
         stdout(`$ ${cmd}`);
       }
@@ -214,7 +208,7 @@ const Prompt = () => {
   useEffect(() => {
     const keyupFn = (e: KeyboardEvent) => {
       if (e.code === 'Backquote') {
-        e.preventDefault(); // Prevents adding ` when opening the prompt
+        e.preventDefault();
         showPrompt();
       } else if (e.code === 'Escape') {
         hidePrompt();
@@ -250,9 +244,12 @@ const Prompt = () => {
     }
   }, []);
 
-  return (
-    promptVisible && (
-      <div className={styles.wrapper}>
+  if (!promptVisible) {
+    return null;
+  }
+
+  return createPortal(
+    <div className={styles.wrapper}>
         {outputWindowVisible && (
           <textarea
             value={output}
@@ -283,8 +280,8 @@ const Prompt = () => {
           onClick={() => run({ cmd: 'toggle', recordHistory: false })}
           dangerouslySetInnerHTML={{ __html: ARROWS[arrowDirection] }} // eslint-disable-line @eslint-react/dom-no-dangerously-set-innerhtml
         />
-      </div>
-    )
+    </div>,
+    document.body
   );
 };
 

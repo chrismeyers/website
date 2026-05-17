@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import * as resume from '../../src/assets/generated/resume.ts';
-import About from '../../src/pages/About.tsx';
+import AboutContent from '../../src/components/content/AboutContent.tsx';
 
 describe('About page', () => {
   it('excludes employment info is not currently employed', () => {
@@ -16,7 +16,7 @@ describe('About page', () => {
       },
     });
 
-    render(<About />);
+    render(<AboutContent />);
 
     expect(screen.queryByTestId('employment')).toBeNull();
   });
@@ -33,7 +33,7 @@ describe('About page', () => {
       },
     });
 
-    render(<About />);
+    render(<AboutContent />);
 
     const employment = screen.getByTestId('employment');
 
@@ -55,7 +55,7 @@ describe('About page', () => {
       },
     });
 
-    render(<About />);
+    render(<AboutContent />);
 
     expect(screen.queryByTestId('languages')).not.toBeInTheDocument();
   });
@@ -78,7 +78,7 @@ describe('About page', () => {
       },
     });
 
-    render(<About />);
+    render(<AboutContent />);
 
     const languages = screen.getByTestId('languages');
 

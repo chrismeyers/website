@@ -1,10 +1,10 @@
 import { use, useState } from 'react';
 import Switch from 'react-switch';
-import GithubIcon from '../assets/images/icons/github.svg';
-import LinkedInIcon from '../assets/images/icons/linkedin.svg';
-import MailIcon from '../assets/images/icons/mail.svg';
-import MoonIcon from '../assets/images/icons/moon.svg';
-import SunIcon from '../assets/images/icons/sun.svg';
+import GithubIcon from '../assets/images/icons/github.svg?react';
+import LinkedInIcon from '../assets/images/icons/linkedin.svg?react';
+import MailIcon from '../assets/images/icons/mail.svg?react';
+import MoonIcon from '../assets/images/icons/moon.svg?react';
+import SunIcon from '../assets/images/icons/sun.svg?react';
 import { GITHUB_URL, LINKEDIN_URL, MAILTO_MESSAGE } from '../constants.ts';
 import { ThemeContext } from '../context/contexts.ts';
 import styles from '../styles/Footer.module.css';

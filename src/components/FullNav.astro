@@ -1,0 +1,38 @@
+---
+import logo from '../assets/images/logos/v3/ccm-logo.svg';
+import { isNavCurrent, NAVIGATION } from '../navigation.ts';
+import fullStyles from '../styles/FullNav.module.css';
+
+interface Props {
+  pathname: string;
+}
+
+const { pathname } = Astro.props;
+---
+
+<nav class="nav-desktop">
+  <div class={fullStyles.fullMenu}>
+    <a href="/">
+      <span class={fullStyles.sideNavLogo} title="Home">
+        <img src={logo.src} alt="" class={fullStyles.bannerImg} />
+      </span>
+    </a>
+    <ul class={fullStyles.sideNavItems}>
+      {
+        NAVIGATION.map((item) => (
+          <li {...{ key: item.name }}>
+            <a
+              class:list={[
+                'nav-link',
+                { 'nav-selected': isNavCurrent(pathname, item) },
+              ]}
+              href={item.path}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>

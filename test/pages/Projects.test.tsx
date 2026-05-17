@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import * as data from '../../src/assets/data.ts';
-import Projects from '../../src/pages/Projects.tsx';
+import ProjectsContent from '../../src/components/content/ProjectsContent.tsx';
 
 describe('Projects page', () => {
   it('displays project summary correctly', async () => {
@@ -14,7 +14,7 @@ describe('Projects page', () => {
       new Map([[1, { id, title, displayDate, info } as data.Project]])
     );
 
-    render(<Projects />);
+    render(<ProjectsContent />);
 
     await waitFor(() => {
       expect(screen.getByText('Project Name')).toBeInTheDocument();
@@ -40,7 +40,7 @@ describe('Projects page', () => {
       ])
     );
 
-    render(<Projects />);
+    render(<ProjectsContent />);
 
     expect(screen.getByText(/Apples/)).toBeInTheDocument();
     expect(screen.getByText(/Bananas/)).toBeInTheDocument();

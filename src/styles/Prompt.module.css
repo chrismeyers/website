@@ -7,9 +7,10 @@
 }
 
 .wrapper {
-  bottom: 30px;
-  margin-left: 310px;
   position: fixed;
+  left: 310px;
+  bottom: 30px;
+  z-index: 10;
 }
 
 .ps1 {

@@ -1,0 +1,25 @@
+---
+import { projects, type Project } from '../../assets/data.ts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageSection from '../../components/PageSection.astro';
+import ProjectDetail from '../../components/content/ProjectDetail.tsx';
+import styles from '../../styles/Project.module.css';
+
+export const getStaticPaths = () =>
+  [...projects.values()].map((project) => ({
+    params: { id: String(project.id) },
+    props: { project },
+  }));
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<BaseLayout title={`Project Details | ${project.title}`}>
+  <PageSection header="Project Details" contentStyles={[styles.project]}>
+    <ProjectDetail data={project} client:only="react" />
+  </PageSection>
+</BaseLayout>
