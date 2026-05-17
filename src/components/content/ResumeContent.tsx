@@ -127,7 +127,7 @@ const ResumeContent = () => (
       target="_blank"
       rel="noopener noreferrer"
     >
-      Request the PDF version of my résumé
+      Request the PDF version of my resume
     </a>
   </>
 );
