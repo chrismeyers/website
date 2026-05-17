@@ -121,7 +121,7 @@ describe('canonicalPath', () => {
 describe('pageImageUrl', () => {
   it('returns the default image when none is provided', () => {
     expect(pageImageUrl(undefined)).toBe(
-      'https://chrismeyers.net/og-default.png'
+      'https://chrismeyers.net/og-image-default.png'
     );
   });
 

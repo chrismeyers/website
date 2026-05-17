@@ -5,7 +5,7 @@ import '../assets/vendor/hamburgers/hamburgers.min.css';
 import FullNav from '../components/FullNav.astro';
 import ThemeShell from '../components/ThemeShell.tsx';
 import { SLOGAN } from '../constants.ts';
-import { canonicalPath, pageImageUrl } from '../lib/seo.ts';
+import { absoluteUrl, canonicalPath, pageImageUrl } from '../lib/seo.ts';
 
 interface Props {
   title?: string;
@@ -20,6 +20,7 @@ const pathname = Astro.url.pathname;
 const site = Astro.site ?? new URL('https://chrismeyers.net');
 const canonicalURL = new URL(canonicalPath(pathname), site);
 const ogImage = pageImageUrl(image, site.href);
+const ogLogo = absoluteUrl('/og-logo.png', site.href);
 const ogTitle = pageTitle;
 const twitterCard = 'summary_large_image';
 ---
@@ -38,6 +39,7 @@ const twitterCard = 'summary_large_image';
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL.href} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:logo" content={ogLogo} />
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content={twitterCard} />
     <meta name="twitter:title" content={ogTitle} />

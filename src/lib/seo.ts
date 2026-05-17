@@ -1,5 +1,5 @@
 import type { Build, Project } from '../assets/data.ts';
-import { DEFAULT_OG_IMAGE, SITE_URL } from '../constants.ts';
+import { SITE_URL } from '../constants.ts';
 
 const DESCRIPTION_MAX_LENGTH = 160;
 
@@ -53,7 +53,7 @@ export function pageImageUrl(
   site = SITE_URL
 ): string {
   if (!image) {
-    return absoluteUrl(DEFAULT_OG_IMAGE, site);
+    return absoluteUrl('/og-image-default.png', site);
   }
 
   if (image.startsWith('http://') || image.startsWith('https://')) {
