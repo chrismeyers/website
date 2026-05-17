@@ -17,4 +17,11 @@ describe('isNavCurrent', () => {
     expect(isNavCurrent('/projects/1', item('Projects'))).toBe(true);
     expect(isNavCurrent('/builds/1/', item('Builds'))).toBe(true);
   });
+
+  it('matches file-format production paths', () => {
+    expect(isNavCurrent('/index.html', item('About'))).toBe(true);
+    expect(isNavCurrent('/resume.html', item('Resume'))).toBe(true);
+    expect(isNavCurrent('/projects.html', item('Projects'))).toBe(true);
+    expect(isNavCurrent('/projects/1.html', item('Projects'))).toBe(true);
+  });
 });

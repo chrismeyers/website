@@ -11,8 +11,15 @@ export const NAVIGATION: NavItem[] = [
   { name: 'Builds', path: '/builds', hasChildren: true },
 ];
 
-const normalizePath = (path: string) =>
-  path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
+const normalizePath = (path: string) => {
+  let normalized =
+    path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
+  normalized = normalized.replace(/\.html$/, '');
+  if (normalized === '/index' || normalized === '') {
+    normalized = '/';
+  }
+  return normalized;
+};
 
 export const isNavCurrent = (pathname: string, item: NavItem) => {
   const current = normalizePath(pathname);
