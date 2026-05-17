@@ -6,14 +6,21 @@ import tseslint from 'typescript-eslint';
 import globals from 'globals';
 import eslintReact from '@eslint-react/eslint-plugin';
 import eslintReactKit, { merge } from '@eslint-react/kit';
+import eslintPluginAstro from 'eslint-plugin-astro';
 
 export default defineConfig(
-  { ignores: ['dist', 'coverage', 'node_modules'] },
+  { ignores: ['dist', 'coverage', 'node_modules', '.astro'] },
   eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
+  ...eslintPluginAstro.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked.map((config) => ({
+    ...config,
+    files: ['**/*.{ts,tsx}'],
+    ignores: ['vitest.config.ts'],
+  })),
   eslintReact.configs['recommended-typescript'],
   eslintReactKit().use(functionComponentDefinition).getConfig(),
   {
+    files: ['**/*.{ts,tsx}'],
     rules: {
       // built in
       'no-param-reassign': ['error', { props: false }],
@@ -41,9 +48,15 @@ export default defineConfig(
     ...tseslint.configs.disableTypeChecked,
   },
   {
+    files: ['astro.config.mjs', 'vitest.config.ts'],
+    ...tseslint.configs.disableTypeChecked,
+    languageOptions: {
+      globals: globals.node,
+    },
+  },
+  {
     files: ['bin/**/*.js', 'bin/**/*.ts'],
     rules: {
-      // built in
       'no-console': 'off',
     },
     languageOptions: {
@@ -107,7 +120,6 @@ function functionComponentDefinition() {
                     node.type === 'FunctionExpression' &&
                     node.parent.type === 'Property'
                   ) {
-                    // dprint-ignore
                     return fixer.replaceText(
                       node.parent,
                       `${src.getText(node.parent.key)}: ${prefix}${typeParams}${params}${returnType} => ${body}`

@@ -11,6 +11,10 @@ const SYSTEM_THEME_DARK_MEDIA_QUERY = '(prefers-color-scheme: dark)';
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window === 'undefined') {
+      return 'light';
+    }
+
     const fromStorage = localStorage.getItem('theme');
     if (fromStorage === 'light' || fromStorage === 'dark') {
       return fromStorage;
@@ -34,22 +38,14 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
       return undefined;
     }
 
-    const systemThemeChangeFn = (e: MediaQueryListEvent) => {
+    const onSystemThemeChange = (e: MediaQueryListEvent) => {
       setTheme(e.matches ? 'dark' : 'light');
     };
 
-    if (typeof mediaQuery.addEventListener === 'function') {
-      mediaQuery.addEventListener('change', systemThemeChangeFn);
-
-      return () => {
-        mediaQuery.removeEventListener('change', systemThemeChangeFn);
-      };
-    }
-
-    mediaQuery.addListener(systemThemeChangeFn);
+    mediaQuery.addEventListener('change', onSystemThemeChange);
 
     return () => {
-      mediaQuery.removeListener(systemThemeChangeFn);
+      mediaQuery.removeEventListener('change', onSystemThemeChange);
     };
   }, []);
 

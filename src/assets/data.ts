@@ -394,8 +394,13 @@ const _projects: Project[] = [
           version can be found <a href="https://github.com/chrismeyers/website/tree/fastify-react-monorepo" class="fancytxt">here</a>.
         </li>
         <li>
-          The current version of the website was simplified to only use <a href="https://react.dev" class="fancytxt">React</a>
-          and <a href="https://vite.dev" class="fancytxt">Vite</a> in September 2022.
+          The website was simplified to only use <a href="https://react.dev" class="fancytxt">React</a>
+          and <a href="https://vite.dev" class="fancytxt">Vite</a> in September 2022. The implementation of this
+          version can be found <a href="https://github.com/chrismeyers/website/tree/react-vite" class="fancytxt">here</a>.
+        </li>
+        <li>
+          In May 2026, the website was rewritten to use <a href="https://astro.build" class="fancytxt">Astro</a>
+          and <a href="https://react.dev" class="fancytxt">React</a>.
         </li>
       </ol>`,
     role: 'Solo project',

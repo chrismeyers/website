@@ -1,0 +1,25 @@
+---
+import { builds, type Build } from '../../assets/data.ts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageSection from '../../components/PageSection.astro';
+import BuildDetail from '../../components/content/BuildDetail.tsx';
+import styles from '../../styles/Build.module.css';
+
+export const getStaticPaths = () =>
+  [...builds.values()].map((build) => ({
+    params: { id: String(build.id) },
+    props: { build },
+  }));
+
+interface Props {
+  build: Build;
+}
+
+const { build } = Astro.props;
+---
+
+<BaseLayout title={`Build Details | ${build.displayDate}`}>
+  <PageSection header="Build Details" contentStyles={[styles.build]}>
+    <BuildDetail data={build} client:only="react" />
+  </PageSection>
+</BaseLayout>

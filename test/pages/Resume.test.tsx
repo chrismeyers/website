@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import * as resume from '../../src/assets/generated/resume.ts';
-import Resume from '../../src/pages/Resume.tsx';
+import ResumeContent from '../../src/components/content/ResumeContent.tsx';
 import styles from '../../src/styles/Resume.module.css';
 
 describe('Resume page', () => {
@@ -19,7 +19,7 @@ describe('Resume page', () => {
       skills: [],
     });
 
-    render(<Resume />);
+    render(<ResumeContent />);
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -55,7 +55,7 @@ describe('Resume page', () => {
       skills: [],
     });
 
-    render(<Resume />);
+    render(<ResumeContent />);
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -95,7 +95,7 @@ describe('Resume page', () => {
       skills: [],
     });
 
-    render(<Resume />);
+    render(<ResumeContent />);
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -145,7 +145,7 @@ describe('Resume page', () => {
       skills: [],
     });
 
-    render(<Resume />);
+    render(<ResumeContent />);
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -179,7 +179,7 @@ describe('Resume page', () => {
       skills: [],
     });
 
-    render(<Resume />);
+    render(<ResumeContent />);
 
     await waitFor(() => {
       expect(screen.getByText('Anywhere, Earth')).toBeInTheDocument();
@@ -217,7 +217,7 @@ describe('Resume page', () => {
       ],
     });
 
-    render(<Resume />);
+    render(<ResumeContent />);
 
     await waitFor(() => {
       expect(screen.getByText('Multiple subitems')).toBeInTheDocument();

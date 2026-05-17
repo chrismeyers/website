@@ -4,7 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      VITE_LIGHTGALLERY_LICENSE: ${{ secrets.VITE_LIGHTGALLERY_LICENSE }}
+      PUBLIC_LIGHTGALLERY_LICENSE: ${{ secrets.PUBLIC_LIGHTGALLERY_LICENSE }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
@@ -12,7 +12,6 @@ jobs:
           node-version-file: 'package.json'
           cache: 'npm'
       - run: npm ci
-      - run: npm run generate
       - run: npm run build
       - run: npm run format
       - run: npm run lint
@@ -20,7 +19,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      VITE_LIGHTGALLERY_LICENSE: ${{ secrets.VITE_LIGHTGALLERY_LICENSE }}
+      PUBLIC_LIGHTGALLERY_LICENSE: ${{ secrets.PUBLIC_LIGHTGALLERY_LICENSE }}
     needs: build
     if: |
       github.ref == 'refs/heads/main' &&
@@ -33,7 +32,7 @@ jobs:
           node-version-file: 'package.json'
           cache: 'npm'
       - run: npm ci
-      - run: npm run generate && npm run build
+      - run: npm run build
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
