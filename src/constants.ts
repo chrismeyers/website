@@ -3,6 +3,8 @@ export const LINKEDIN_URL = 'https://www.linkedin.com/in/chris-meyers/';
 export const EMAIL_ADDRESS = 'chris@chrismeyers.net';
 export const MAILTO_MESSAGE = `mailto:${EMAIL_ADDRESS}?subject=Message%20from%20chrismeyers.net`;
 export const MAILTO_RESUME = `mailto:${EMAIL_ADDRESS}?subject=Resume%20PDF%20request`;
+export const SITE_URL = 'https://chrismeyers.net';
+export const DEFAULT_OG_IMAGE = '/og-default.png';
 export const SLOGAN = 'Chris Meyers - Developer, Tech Enthusiast';
 export const LIGHTGALLERY_LICENSE =
   import.meta.env.PUBLIC_LIGHTGALLERY_LICENSE || '0000-0000-000-0000';

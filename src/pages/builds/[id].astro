@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageSection from '../../components/PageSection.astro';
 import BuildDetail from '../../components/content/BuildDetail.tsx';
 import styles from '../../styles/Build.module.css';
+import { buildDescription } from '../../lib/seo.ts';
 
 export const getStaticPaths = () =>
   [...builds.values()].map((build) => ({
@@ -18,7 +19,11 @@ interface Props {
 const { build } = Astro.props;
 ---
 
-<BaseLayout title={`Build Details | ${build.displayDate}`}>
+<BaseLayout
+  title={`PC Build — ${build.displayDate}`}
+  description={buildDescription(build)}
+  image={build.image?.path}
+>
   <PageSection header="Build Details" contentStyles={[styles.build]}>
     <BuildDetail data={build} client:only="react" />
   </PageSection>

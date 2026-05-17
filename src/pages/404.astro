@@ -4,7 +4,11 @@ import PageSection from '../components/PageSection.astro';
 import NotFoundContent from '../components/content/NotFoundContent.tsx';
 ---
 
-<BaseLayout title="Page Not Found">
+<BaseLayout
+  title="Page Not Found"
+  description="The page you requested could not be found on chrismeyers.net."
+  noindex
+>
   <PageSection header="Page Not Found">
     <NotFoundContent />
   </PageSection>

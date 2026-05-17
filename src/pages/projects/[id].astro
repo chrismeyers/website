@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageSection from '../../components/PageSection.astro';
 import ProjectDetail from '../../components/content/ProjectDetail.tsx';
 import styles from '../../styles/Project.module.css';
+import { projectDescription } from '../../lib/seo.ts';
 
 export const getStaticPaths = () =>
   [...projects.values()].map((project) => ({
@@ -18,7 +19,11 @@ interface Props {
 const { project } = Astro.props;
 ---
 
-<BaseLayout title={`Project Details | ${project.title}`}>
+<BaseLayout
+  title={project.title}
+  description={projectDescription(project)}
+  image={project.images.find((img) => img?.path)?.path}
+>
   <PageSection header="Project Details" contentStyles={[styles.project]}>
     <ProjectDetail data={project} client:only="react" />
   </PageSection>

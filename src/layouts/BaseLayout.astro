@@ -5,14 +5,23 @@ import '../assets/vendor/hamburgers/hamburgers.min.css';
 import FullNav from '../components/FullNav.astro';
 import ThemeShell from '../components/ThemeShell.tsx';
 import { SLOGAN } from '../constants.ts';
+import { canonicalPath, pageImageUrl } from '../lib/seo.ts';
 
 interface Props {
   title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, description = SLOGAN, image, noindex = false } = Astro.props;
 const pageTitle = title ? `${title} | ${SLOGAN}` : SLOGAN;
 const pathname = Astro.url.pathname;
+const site = Astro.site ?? new URL('https://chrismeyers.net');
+const canonicalURL = new URL(canonicalPath(pathname), site);
+const ogImage = pageImageUrl(image, site.href);
+const ogTitle = pageTitle;
+const twitterCard = 'summary_large_image';
 ---
 
 <!doctype html>
@@ -20,7 +29,20 @@ const pathname = Astro.url.pathname;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={SLOGAN} />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonicalURL.href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SLOGAN} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content={twitterCard} />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
