@@ -1,7 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import * as data from '../../src/assets/data.ts';
-import BuildsContent from '../../src/components/content/BuildsContent.tsx';
+import BuildsContent from '../../src/components/content/BuildsContent.astro';
+import { renderAstro } from '../_astro-container.ts';
 
 describe('Builds page', () => {
   it('displays build summary correctly', async () => {
@@ -13,18 +13,15 @@ describe('Builds page', () => {
       new Map([[id, { id, displayDate, cpu } as data.Build]])
     );
 
-    render(<BuildsContent />);
+    const page = await renderAstro(BuildsContent);
 
-    await waitFor(() => {
-      expect(screen.getByText(displayDate)).toBeInTheDocument();
-    });
-
-    expect(screen.getByText(displayDate)).toHaveAttribute(
+    expect(page.getByText(displayDate)).toBeInTheDocument();
+    expect(page.getByText(displayDate)).toHaveAttribute(
       'href',
       `/builds/${id}`
     );
     expect(
-      screen.getByText((_content, node) => {
+      page.getByText((_content, node) => {
         const hasText = (n: Element | null) =>
           n?.textContent?.match(/An Intel 1000000K/) ?? false;
         const nodeHasText = hasText(node);
@@ -32,16 +29,16 @@ describe('Builds page', () => {
           (child) => !hasText(child)
         );
 
-        return nodeHasText && childrenDontHaveText;
+        return Boolean(nodeHasText && childrenDontHaveText);
       })
     ).toBeInTheDocument();
-    expect(screen.getByText(/Build Details/)).toHaveAttribute(
+    expect(page.getByText(/Build Details/)).toHaveAttribute(
       'href',
       `/builds/${id}`
     );
   });
 
-  it('displays multiple builds', () => {
+  it('displays multiple builds', async () => {
     vi.spyOn(data, 'builds', 'get').mockReturnValue(
       new Map([
         [
@@ -63,9 +60,9 @@ describe('Builds page', () => {
       ])
     );
 
-    render(<BuildsContent />);
+    const page = await renderAstro(BuildsContent);
 
-    expect(screen.getByText(/Then/)).toBeInTheDocument();
-    expect(screen.getByText(/Now/)).toBeInTheDocument();
+    expect(page.getByText(/Then/)).toBeInTheDocument();
+    expect(page.getByText(/Now/)).toBeInTheDocument();
   });
 });

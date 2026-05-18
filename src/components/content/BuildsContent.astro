@@ -1,0 +1,44 @@
+---
+import { builds } from '../../assets/data.ts';
+import styles from '../../styles/Builds.module.css';
+
+const cleanCPU = (cpu: string) => cpu.split('@')[0].trim();
+const data = Array.from(builds.values());
+---
+
+{
+  data.map((build, index) => (
+    <div>
+      <h2>
+        <a
+          class="fancytxt"
+          title={`Click for details of ${build.displayDate}`}
+          href={`/builds/${build.id}`}
+        >
+          {build.displayDate}
+        </a>
+      </h2>
+      <div class={styles.overview}>
+        <p>
+          An <span class="highlighted">{cleanCPU(build.cpu)}</span> based system
+        </p>
+        <p class="right">
+          <a
+            class="subtle fancytxt"
+            title={`Click for details of ${build.displayDate}`}
+            href={`/builds/${build.id}`}
+          >
+            Build Details &gt;
+          </a>
+        </p>
+      </div>
+
+      {index < data.length - 1 && (
+        <>
+          <br />
+          <hr />
+        </>
+      )}
+    </div>
+  ))
+}

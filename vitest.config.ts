@@ -1,14 +1,11 @@
 /// <reference types="vitest/config" />
-import { defineConfig } from 'vite';
-import react from '@astrojs/react';
-import svgr from 'vite-plugin-svgr';
+import { getViteConfig } from 'astro/config';
 
-export default defineConfig({
-  plugins: [react(), svgr({ include: '**/*.svg?react' })],
+export default getViteConfig({
   envDir: '.',
   envPrefix: 'PUBLIC_',
   test: {
-    environment: 'jsdom',
+    environment: 'node',
     setupFiles: 'test/_setup.ts',
     coverage: {
       provider: 'v8',

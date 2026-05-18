@@ -1,0 +1,143 @@
+---
+import Logo from './Logo.astro';
+import { isNavCurrent, NAVIGATION } from '../navigation.ts';
+import mobileStyles from '../styles/MobileNav.module.css';
+import Footer from './Footer.astro';
+
+interface Props {
+  pathname: string;
+}
+
+const { pathname } = Astro.props;
+---
+
+<nav class={`nav-mobile ${mobileStyles.mobile}`} data-pathname={pathname}>
+  <div class={mobileStyles.mobileMenu}>
+    <div class={mobileStyles.header}>
+      <div class={mobileStyles.smallNavLogo}>
+        <a href="/" title="Home" data-nav-close>
+          <Logo class={mobileStyles.bannerImgSmall} />
+        </a>
+      </div>
+      <div class={mobileStyles.menuIcon} data-menu-icon>
+        <div>
+          <button
+            class="hamburger hamburger--spin"
+            type="button"
+            aria-label="Menu"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+            data-menu-toggle
+          >
+            <span class="hamburger-box" style="height: 26px">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="mobile-menu" hidden data-mobile-menu>
+      <div class={mobileStyles.menuOverlay} data-menu-overlay></div>
+      <div class={mobileStyles.menu} data-menu-panel>
+        {
+          NAVIGATION.map((item) => (
+            <a
+              class:list={[
+                'nav-link',
+                { 'nav-selected': isNavCurrent(pathname, item) },
+              ]}
+              href={item.path}
+              data-nav-close
+            >
+              <div class={mobileStyles.menuItem}>{item.name}</div>
+            </a>
+          ))
+        }
+        <Footer inMenu />
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const setBodyScrollable = (enabled: boolean) => {
+    if (enabled) {
+      document.body.classList.remove('prevent-scroll');
+    } else {
+      document.body.classList.add('prevent-scroll');
+    }
+  };
+
+  const nav = document.querySelector<HTMLElement>('nav[data-pathname]');
+  if (!nav) {
+    throw new Error('Mobile nav root not found');
+  }
+
+  const menu = nav.querySelector<HTMLElement>('[data-mobile-menu]');
+  const menuPanel = nav.querySelector<HTMLElement>('[data-menu-panel]');
+  const menuIcon = nav.querySelector<HTMLElement>('[data-menu-icon]');
+  const toggle = nav.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+
+  if (!menu || !menuPanel || !menuIcon || !toggle) {
+    throw new Error('Mobile nav controls not found');
+  }
+
+  const closeMenu = () => {
+    menu.hidden = true;
+    toggle.classList.remove('is-active');
+    toggle.setAttribute('aria-expanded', 'false');
+    setBodyScrollable(true);
+  };
+
+  const openMenu = () => {
+    menu.hidden = false;
+    toggle.classList.add('is-active');
+    toggle.setAttribute('aria-expanded', 'true');
+    setBodyScrollable(false);
+  };
+
+  toggle.addEventListener('click', () => {
+    if (menu.hidden) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener('mousedown', (event) => {
+    if (menu.hidden) {
+      return;
+    }
+
+    const target = event.target as Node;
+    if (menuPanel.contains(target) || menuIcon.contains(target)) {
+      return;
+    }
+
+    closeMenu();
+  });
+
+  nav.querySelectorAll('[data-nav-close]').forEach((element) => {
+    element.addEventListener('click', closeMenu);
+  });
+
+  nav
+    .querySelector('[data-menu-overlay]')
+    ?.addEventListener('click', closeMenu);
+
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+      closeMenu();
+    }
+  });
+
+  window.addEventListener('beforeunload', () => {
+    setBodyScrollable(true);
+  });
+
+  const pathname = nav.dataset.pathname;
+  if (pathname) {
+    window.scrollTo(0, 0);
+  }
+</script>

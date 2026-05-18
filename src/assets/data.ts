@@ -399,8 +399,7 @@ const _projects: Project[] = [
           version can be found <a href="https://github.com/chrismeyers/website/tree/react-vite" class="fancytxt">here</a>.
         </li>
         <li>
-          In May 2026, the website was rewritten to use <a href="https://astro.build" class="fancytxt">Astro</a>
-          and <a href="https://react.dev" class="fancytxt">React</a>.
+          In May 2026, the website was rewritten to use <a href="https://astro.build" class="fancytxt">Astro</a>.
         </li>
       </ol>`,
     role: 'Solo project',

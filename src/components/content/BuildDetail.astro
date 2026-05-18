@@ -1,0 +1,94 @@
+---
+import type { Build } from '../../assets/data.ts';
+import LightGallery from '../LightGallery.astro';
+import styles from '../../styles/Build.module.css';
+
+interface Props {
+  data: Build;
+}
+
+const { data } = Astro.props;
+---
+
+<h2>{data.displayDate}</h2>
+<div class={styles.info}>
+  <div class={styles.specs}>
+    <dl>
+      <dt class="dt-mod">
+        <b>GPU</b>
+      </dt>
+      <dd>{data.gpu}</dd>
+      <dt class="dt-mod">
+        <b>CPU</b>
+      </dt>
+      <dd>{data.cpu}</dd>
+      {
+        data.cool !== null && (
+          <>
+            <dt class="dt-mod">
+              <b>Cooling</b>
+            </dt>
+            <dd>{data.cool}</dd>
+          </>
+        )
+      }
+      <dt class="dt-mod">
+        <b>Motherboard</b>
+      </dt>
+      <dd>{data.mobo}</dd>
+      <dt class="dt-mod">
+        <b>RAM</b>
+      </dt>
+      <dd>{data.ram}</dd>
+      {
+        data.ssd !== null && (
+          <>
+            <dt class="dt-mod">
+              <b>SSD</b>
+            </dt>
+            {data.ssd.map((ssd) => (
+              <dd>{ssd.trim()}</dd>
+            ))}
+          </>
+        )
+      }
+      {
+        data.hdd !== null && (
+          <>
+            <dt class="dt-mod">
+              <b>HDD</b>
+            </dt>
+            {data.hdd.map((hdd) => (
+              <dd>{hdd.trim()}</dd>
+            ))}
+          </>
+        )
+      }
+      <dt class="dt-mod">
+        <b>Case</b>
+      </dt>
+      <dd>{data.case}</dd>
+      <dt class="dt-mod">
+        <b>PSU</b>
+      </dt>
+      <dd>{data.psu}</dd>
+    </dl>
+  </div>
+  {
+    data.image && (
+      <div class={styles.pic}>
+        <LightGallery plugins={['zoom']}>
+          <a href={data.image.path}>
+            <img
+              src={data.image.path}
+              class={styles[data.image.orientation]}
+              alt={data.image.title}
+              data-sub-html={data.image.title}
+              title="Click to enlarge"
+            />
+          </a>
+        </LightGallery>
+      </div>
+    )
+  }
+</div>

@@ -20,7 +20,7 @@ nav {
   height: 100%;
 }
 
-.bannerImg > :global(.cls-1) {
+.bannerImg :global(.cls-1) {
   fill: var(--main-theme-color);
 }
 

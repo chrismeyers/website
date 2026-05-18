@@ -2,8 +2,9 @@
 import '../index.css';
 import '../App.css';
 import '../assets/vendor/hamburgers/hamburgers.min.css';
+import Footer from '../components/Footer.astro';
 import FullNav from '../components/FullNav.astro';
-import ThemeShell from '../components/ThemeShell.tsx';
+import MobileNav from '../components/MobileNav.astro';
 import { SLOGAN } from '../constants.ts';
 import { absoluteUrl, canonicalPath, pageImageUrl } from '../lib/seo.ts';
 
@@ -71,15 +72,34 @@ const twitterCard = 'summary_large_image';
               ? 'dark'
               : 'light';
         document.documentElement.setAttribute('data-theme', theme);
+
+        const syncToggleAria = () => {
+          document.querySelectorAll('.theme-toggle').forEach((toggle) => {
+            toggle.setAttribute(
+              'aria-checked',
+              theme === 'dark' ? 'true' : 'false'
+            );
+          });
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', syncToggleAria);
+        } else {
+          syncToggleAria();
+        }
       })();
+    </script>
+    <script>
+      import { initTheme } from '../lib/theme.ts';
+      initTheme();
     </script>
   </head>
   <body>
     <div class="site-root">
       <FullNav pathname={pathname} />
-      <ThemeShell pathname={pathname} client:only="react">
-        <slot />
-      </ThemeShell>
+      <MobileNav pathname={pathname} />
+      <slot />
+      <Footer />
     </div>
   </body>
 </html>

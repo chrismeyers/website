@@ -1,0 +1,23 @@
+.lg-sub-html,
+.lg-counter {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.lg-container .lg-icon,
+.lg-container .lg-icon::before,
+.lg-container .lg-icon::after {
+  font-family: 'lg' !important;
+}
+
+.lg-thumb-item {
+  border-color: #707070 !important;
+}
+
+.lg-thumb-item:hover {
+  border-color: #ffffff !important;
+}
+
+.lg-thumb-item.active,
+.lg-thumb-item.active:hover {
+  border-color: var(--main-theme-color) !important;
+}

@@ -1,0 +1,42 @@
+---
+import { projects } from '../../assets/data.ts';
+import styles from '../../styles/Projects.module.css';
+
+const data = Array.from(projects.values());
+---
+
+{
+  data.map((project, index) => (
+    <div>
+      <h2>
+        <a
+          class="fancytxt"
+          title={`Click for details of ${project.title}`}
+          href={`/projects/${project.id}`}
+        >
+          {project.title}
+        </a>
+      </h2>
+      <h3>{project.displayDate}</h3>
+      <div class={styles.overview}>
+        <p set:html={project.info} />
+        <p class="right">
+          <a
+            class="subtle fancytxt"
+            title={`Click for details of ${project.title}`}
+            href={`/projects/${project.id}`}
+          >
+            Project Details &gt;
+          </a>
+        </p>
+      </div>
+
+      {index < data.length - 1 && (
+        <>
+          <br />
+          <hr />
+        </>
+      )}
+    </div>
+  ))
+}

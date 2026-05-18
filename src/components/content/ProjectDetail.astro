@@ -1,0 +1,146 @@
+---
+import type { Image, Project } from '../../assets/data.ts';
+import Icon from '../Icon.astro';
+import LightGallery from '../LightGallery.astro';
+import styles from '../../styles/Project.module.css';
+
+interface Props {
+  data: Project;
+}
+
+const { data } = Astro.props;
+
+const images = (data.images ?? []).filter(
+  (image): image is Image => image !== undefined
+);
+const firstImage = images[0];
+const isGif = firstImage?.path.toLowerCase().endsWith('.gif') ?? false;
+---
+
+<h2>{data.title}</h2>
+<h3>{data.displayDate}</h3>
+<div class={styles.wrapper}>
+  <div class={styles.description}>
+    <dl>
+      <dt class="dt-mod">
+        <b>Language(s)</b>
+      </dt>
+      <dd set:html={data.languages.join(', ')} />
+
+      <dt class="dt-mod">
+        <b>Description</b>
+      </dt>
+      <dd set:html={data.info} />
+
+      <dt class="dt-mod">
+        <b>My Role</b>
+      </dt>
+      <dd>{data.role}</dd>
+
+      <dt class="dt-mod">
+        <b>Status</b>
+      </dt>
+      <dd>{data.status}</dd>
+
+      <dt class="dt-mod dt-links">
+        <b>Links</b>
+      </dt>
+      {
+        data.webUrl !== null && (
+          <dd class="link-image">
+            <Icon
+              name="link-external"
+              class="link-image small"
+              title="External website"
+              ariaLabel="Link to external website"
+            />{' '}
+            <a href={data.webUrl} class="fancytxt">
+              Website
+            </a>
+          </dd>
+        )
+      }
+      <dd class="link-image">
+        <Icon
+          name="github"
+          class="link-image small"
+          title="GitHub repository"
+          ariaLabel="Link to GitHub repository"
+        />{' '}
+        <a href={data.codeUrl} class="fancytxt"> Code </a>
+      </dd>
+    </dl>
+  </div>
+
+  {
+    firstImage && (
+      <div class={styles.images}>
+        {isGif ? (
+          <div class={styles.gifOverlay} title="Play GIF">
+            <LightGallery enableDrag={false} enableSwipe={false} gifRestart>
+              <a href={firstImage.path}>
+                <img
+                  src={firstImage.thumbnail ?? ''}
+                  class:list={[
+                    styles.imagesFull,
+                    styles[firstImage.orientation],
+                  ]}
+                  alt={firstImage.title}
+                  title="Click to enlarge"
+                />
+              </a>
+            </LightGallery>
+            <Icon
+              name="play"
+              class="link-image xlarge play-overlay"
+              title="Play GIF"
+              ariaLabel="Plays the associated GIF"
+            />
+          </div>
+        ) : (
+          <LightGallery
+            thumbnail
+            selector=".image"
+            plugins={['thumbnail', 'zoom']}
+          >
+            <a class="image" href={firstImage.path}>
+              <img
+                src={firstImage.path}
+                class:list={[
+                  styles.imagesFull,
+                  styles[firstImage.orientation ?? 'square'],
+                ]}
+                alt={firstImage.title}
+                title="Click to enlarge"
+              />
+            </a>
+
+            {images.length > 1 && (
+              <>
+                <br />
+                {images.slice(1).map((image) => (
+                  <div
+                    class:list={['image', styles.imagesSmall]}
+                    data-src={image.path}
+                  >
+                    <a href={image.path}>
+                      <img
+                        src={image.path}
+                        class:list={[
+                          styles.imagesSmall,
+                          styles[image.orientation ?? 'square'],
+                        ]}
+                        alt={image.title}
+                        title="Click to enlarge"
+                      />
+                    </a>
+                  </div>
+                ))}
+              </>
+            )}
+          </LightGallery>
+        )}
+      </div>
+    )
+  }
+</div>

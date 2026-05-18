@@ -1,0 +1,135 @@
+---
+import Icon from './Icon.astro';
+---
+
+<button
+  type="button"
+  class="theme-toggle"
+  aria-label="Toggle website theme"
+  aria-checked="false"
+>
+  <span class="theme-toggle-bg">
+    <span class="theme-toggle-icon theme-toggle-icon--checked">
+      <Icon name="moon" class="link-image small theme-icon-moon" />
+    </span>
+    <span class="theme-toggle-icon theme-toggle-icon--unchecked">
+      <Icon name="sun" class="link-image small theme-icon-sun" />
+    </span>
+  </span>
+  <span class="theme-toggle-handle" aria-hidden="true"></span>
+</button>
+
+<script>
+  import { bindThemeToggle } from '../lib/theme.ts';
+
+  document
+    .querySelectorAll<HTMLButtonElement>(
+      '.theme-toggle:not([data-theme-bound])'
+    )
+    .forEach((toggle) => {
+      toggle.dataset.themeBound = 'true';
+      bindThemeToggle(toggle);
+    });
+</script>
+
+<style>
+  .theme-toggle {
+    --toggle-width: 48px;
+    --toggle-height: 20px;
+    --handle-size: 18px;
+    --icon-size: 16px;
+    --handle-unchecked-x: 1px;
+    --handle-checked-x: 29px;
+
+    position: relative;
+    display: inline-block;
+    width: var(--toggle-width);
+    height: var(--toggle-height);
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+
+  .theme-toggle-bg {
+    position: relative;
+    display: block;
+    width: var(--toggle-width);
+    height: var(--toggle-height);
+    border-radius: calc(var(--toggle-height) / 2);
+    background-color: #bbbbbb;
+    transition: background-color 0.25s;
+  }
+
+  :global(html[data-theme='dark']) .theme-toggle .theme-toggle-bg {
+    background-color: #5bb75b;
+  }
+
+  .theme-toggle-icon {
+    position: absolute;
+    top: 50%;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    margin: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+
+  .theme-toggle-icon :global(svg) {
+    display: block;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    margin: 0;
+  }
+
+  /* Moon: centered in the left colored section (handle on the right) */
+  .theme-toggle-icon--checked {
+    left: calc((var(--handle-checked-x) - var(--icon-size)) / 2);
+    opacity: 0;
+  }
+
+  /* Sun: centered in the right colored section (handle on the left) */
+  .theme-toggle-icon--unchecked {
+    left: calc(
+      var(--handle-unchecked-x) + var(--handle-size) +
+        (
+          var(--toggle-width) - var(--handle-unchecked-x) - var(--handle-size) -
+            var(--icon-size)
+        ) /
+        2
+    );
+    opacity: 1;
+  }
+
+  :global(html[data-theme='dark']) .theme-toggle .theme-toggle-icon--checked {
+    opacity: 1;
+  }
+
+  :global(html[data-theme='dark']) .theme-toggle .theme-toggle-icon--unchecked {
+    opacity: 0;
+  }
+
+  .theme-toggle-handle {
+    position: absolute;
+    top: calc((var(--toggle-height) - var(--handle-size)) / 2);
+    left: 0;
+    z-index: 2;
+    width: var(--handle-size);
+    height: var(--handle-size);
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+    transform: translateX(var(--handle-unchecked-x));
+    transition:
+      transform 0.25s,
+      background-color 0.25s,
+      box-shadow 0.15s;
+    pointer-events: none;
+  }
+
+  :global(html[data-theme='dark']) .theme-toggle .theme-toggle-handle {
+    transform: translateX(var(--handle-checked-x));
+  }
+</style>

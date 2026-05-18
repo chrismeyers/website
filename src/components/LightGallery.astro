@@ -1,0 +1,76 @@
+---
+import type { LightGalleryPlugin } from '../lib/lightgallery.ts';
+
+interface Props {
+  id?: string;
+  plugins?: LightGalleryPlugin[];
+  thumbnail?: boolean;
+  selector?: string;
+  enableDrag?: boolean;
+  enableSwipe?: boolean;
+  gifRestart?: boolean;
+}
+
+const {
+  id = `lg-${crypto.randomUUID()}`,
+  plugins = [],
+  thumbnail,
+  selector,
+  enableDrag,
+  enableSwipe,
+  gifRestart,
+} = Astro.props;
+---
+
+<div
+  id={id}
+  class="lightgallery-root"
+  data-lightgallery
+  data-lg-id={id}
+  data-lg-plugins={plugins.join(',')}
+  data-lg-thumbnail={thumbnail}
+  data-lg-selector={selector}
+  data-lg-enable-drag={enableDrag}
+  data-lg-enable-swipe={enableSwipe}
+  data-lg-gif-restart={gifRestart}
+>
+  <slot />
+</div>
+
+<script>
+  import {
+    initLightGallery,
+    type LightGalleryPlugin,
+  } from '../lib/lightgallery.ts';
+
+  const parsePlugins = (value: string | undefined): LightGalleryPlugin[] => {
+    if (!value) {
+      return [];
+    }
+
+    return value.split(',').filter(Boolean) as LightGalleryPlugin[];
+  };
+
+  const parseOptionalBoolean = (
+    value: string | undefined
+  ): boolean | undefined => {
+    if (value === undefined) {
+      return undefined;
+    }
+
+    return value === 'true';
+  };
+
+  document
+    .querySelectorAll<HTMLElement>('[data-lightgallery]')
+    .forEach((element) => {
+      initLightGallery(element, {
+        plugins: parsePlugins(element.dataset.lgPlugins),
+        thumbnail: parseOptionalBoolean(element.dataset.lgThumbnail),
+        selector: element.dataset.lgSelector,
+        enableDrag: parseOptionalBoolean(element.dataset.lgEnableDrag),
+        enableSwipe: parseOptionalBoolean(element.dataset.lgEnableSwipe),
+        gifRestart: parseOptionalBoolean(element.dataset.lgGifRestart),
+      });
+    });
+</script>

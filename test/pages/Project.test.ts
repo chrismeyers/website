@@ -1,18 +1,9 @@
-import { render, screen, waitFor } from '@testing-library/react';
-import type { MockInstance } from 'vitest';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import type { Project } from '../../src/assets/data.ts';
-import * as lightbox from '../../src/components/LightBox.tsx';
-import ProjectDetail from '../../src/components/content/ProjectDetail.tsx';
+import ProjectDetail from '../../src/components/content/ProjectDetail.astro';
+import { renderAstro } from '../_astro-container.ts';
 
 describe('Project page', () => {
-  let lgSpy: MockInstance;
-
-  beforeEach(() => {
-    vi.resetAllMocks();
-    lgSpy = vi.spyOn(lightbox, 'default').mockImplementation(() => <></>);
-  });
-
   it('displays project details without images correctly', async () => {
     const project: Project = {
       id: 1,
@@ -28,27 +19,24 @@ describe('Project page', () => {
       images: [],
     };
 
-    render(<ProjectDetail data={project} />);
+    const page = await renderAstro(ProjectDetail, { props: { data: project } });
 
-    await waitFor(() => {
-      expect(screen.getByText('Project Name')).toBeInTheDocument();
-    });
-
+    expect(page.getByText('Project Name')).toBeInTheDocument();
     expect(
-      screen.getByText('Test Project, Always and Forever')
+      page.getByText('Test Project, Always and Forever')
     ).toBeInTheDocument();
-    expect(screen.getByText('Something involving code')).toBeInTheDocument();
-    expect(screen.getByText('Solo project')).toBeInTheDocument();
-    expect(screen.getByText('Being maintained')).toBeInTheDocument();
-    expect(screen.getByText('Website')).toHaveAttribute(
+    expect(page.getByText('Something involving code')).toBeInTheDocument();
+    expect(page.getByText('Solo project')).toBeInTheDocument();
+    expect(page.getByText('Being maintained')).toBeInTheDocument();
+    expect(page.getByText('Website')).toHaveAttribute(
       'href',
       'https://hosted.site'
     );
-    expect(screen.getByText('Code')).toHaveAttribute(
+    expect(page.getByText('Code')).toHaveAttribute(
       'href',
       'https://hosted.code'
     );
-    expect(lgSpy).toHaveBeenCalledTimes(0);
+    expect(page.html).not.toContain('data-lightgallery');
   });
 
   it('displays project details with images correctly', async () => {
@@ -81,27 +69,24 @@ describe('Project page', () => {
       ],
     };
 
-    render(<ProjectDetail data={project} />);
+    const page = await renderAstro(ProjectDetail, { props: { data: project } });
 
-    await waitFor(() => {
-      expect(screen.getByText('Project Name')).toBeInTheDocument();
-    });
-
+    expect(page.getByText('Project Name')).toBeInTheDocument();
     expect(
-      screen.getByText('Test Project, Always and Forever')
+      page.getByText('Test Project, Always and Forever')
     ).toBeInTheDocument();
-    expect(screen.getByText('Something involving code')).toBeInTheDocument();
-    expect(screen.getByText('Solo project')).toBeInTheDocument();
-    expect(screen.getByText('Being maintained')).toBeInTheDocument();
-    expect(screen.getByText('Website')).toHaveAttribute(
+    expect(page.getByText('Something involving code')).toBeInTheDocument();
+    expect(page.getByText('Solo project')).toBeInTheDocument();
+    expect(page.getByText('Being maintained')).toBeInTheDocument();
+    expect(page.getByText('Website')).toHaveAttribute(
       'href',
       'https://hosted.site'
     );
-    expect(screen.getByText('Code')).toHaveAttribute(
+    expect(page.getByText('Code')).toHaveAttribute(
       'href',
       'https://hosted.code'
     );
-    expect(lgSpy).toHaveBeenCalledTimes(1);
+    expect(page.html).toContain('data-lightgallery');
   });
 
   it('displays project details without a web URL correctly', async () => {
@@ -112,20 +97,17 @@ describe('Project page', () => {
       languages: [''],
     } as Project;
 
-    render(<ProjectDetail data={project} />);
+    const page = await renderAstro(ProjectDetail, { props: { data: project } });
 
-    await waitFor(() => {
-      expect(screen.getByText('Code')).toHaveAttribute(
-        'href',
-        'https://hosted.code'
-      );
-    });
-
-    expect(screen.queryByAltText('Website')).toBeNull();
-    expect(lgSpy).toHaveBeenCalledTimes(0);
+    expect(page.getByText('Code')).toHaveAttribute(
+      'href',
+      'https://hosted.code'
+    );
+    expect(page.queryByAltText('Website')).toBeNull();
+    expect(page.html).not.toContain('data-lightgallery');
   });
 
-  it('displays gif thumbnail correctly', () => {
+  it('displays gif thumbnail correctly', async () => {
     const project = {
       id: 1,
       title: 'Project Name',
@@ -141,8 +123,9 @@ describe('Project page', () => {
       languages: [''],
     } as Project;
 
-    render(<ProjectDetail data={project} />);
+    const page = await renderAstro(ProjectDetail, { props: { data: project } });
 
-    expect(lgSpy).toHaveBeenCalledTimes(1);
+    expect(page.html).toContain('data-lightgallery');
+    expect(page.html).toContain('data-lg-gif-restart="true"');
   });
 });

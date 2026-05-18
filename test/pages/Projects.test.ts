@@ -1,7 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import * as data from '../../src/assets/data.ts';
-import ProjectsContent from '../../src/components/content/ProjectsContent.tsx';
+import ProjectsContent from '../../src/components/content/ProjectsContent.astro';
+import { renderAstro } from '../_astro-container.ts';
 
 describe('Projects page', () => {
   it('displays project summary correctly', async () => {
@@ -14,25 +14,22 @@ describe('Projects page', () => {
       new Map([[1, { id, title, displayDate, info } as data.Project]])
     );
 
-    render(<ProjectsContent />);
+    const page = await renderAstro(ProjectsContent);
 
-    await waitFor(() => {
-      expect(screen.getByText('Project Name')).toBeInTheDocument();
-    });
-
-    expect(screen.getByText('Project Name')).toHaveAttribute(
+    expect(page.getByText('Project Name')).toBeInTheDocument();
+    expect(page.getByText('Project Name')).toHaveAttribute(
       'href',
       `/projects/${id}`
     );
-    expect(screen.getByText(displayDate)).toBeInTheDocument();
-    expect(screen.getByText(info)).toBeInTheDocument();
-    expect(screen.getByText(/Project Details/)).toHaveAttribute(
+    expect(page.getByText(displayDate)).toBeInTheDocument();
+    expect(page.getByText(info)).toBeInTheDocument();
+    expect(page.getByText(/Project Details/)).toHaveAttribute(
       'href',
       `/projects/${id}`
     );
   });
 
-  it('displays multiple projects', () => {
+  it('displays multiple projects', async () => {
     vi.spyOn(data, 'projects', 'get').mockReturnValue(
       new Map([
         [1, { id: 1, title: 'Apples' } as data.Project],
@@ -40,9 +37,9 @@ describe('Projects page', () => {
       ])
     );
 
-    render(<ProjectsContent />);
+    const page = await renderAstro(ProjectsContent);
 
-    expect(screen.getByText(/Apples/)).toBeInTheDocument();
-    expect(screen.getByText(/Bananas/)).toBeInTheDocument();
+    expect(page.getByText(/Apples/)).toBeInTheDocument();
+    expect(page.getByText(/Bananas/)).toBeInTheDocument();
   });
 });

@@ -1,5 +1,5 @@
 ---
-import logo from '../assets/images/logos/v3/ccm-logo.svg';
+import Logo from './Logo.astro';
 import { isNavCurrent, NAVIGATION } from '../navigation.ts';
 import fullStyles from '../styles/FullNav.module.css';
 
@@ -14,7 +14,7 @@ const { pathname } = Astro.props;
   <div class={fullStyles.fullMenu}>
     <a href="/">
       <span class={fullStyles.sideNavLogo} title="Home">
-        <img src={logo.src} alt="" class={fullStyles.bannerImg} />
+        <Logo class={fullStyles.bannerImg} />
       </span>
     </a>
     <ul class={fullStyles.sideNavItems}>

@@ -1,0 +1,130 @@
+---
+import { full as resume } from '../../assets/generated/resume.ts';
+import { MAILTO_RESUME } from '../../constants.ts';
+import styles from '../../styles/Resume.module.css';
+---
+
+<h2>Experience</h2>
+{
+  resume.experience.map((job) => (
+    <ul class={styles.italicSpacer}>
+      <li class={`${styles.leftColumn} ${styles.company}`}>
+        <a class="fancytxt" href={job.url ?? ''}>
+          {job.firstLine[0]}
+        </a>
+      </li>
+      <li class={`${styles.rightColumn} ${styles.location}`}>
+        {job.firstLine[1]}
+      </li>
+
+      {job.secondLine.map((secondLine, index) => (
+        <>
+          <li
+            class:list={[
+              styles.leftColumn,
+              styles.subLeftColumn,
+              styles.jobTitle,
+              index > 0 && job.info[index - 1].length > 0
+                ? styles.additionalRole
+                : styles.role,
+            ]}
+          >
+            {secondLine[0]}
+          </li>
+          <li
+            class:list={[
+              styles.rightColumn,
+              styles.tenure,
+              index > 0 && job.info[index - 1].length > 0
+                ? styles.additionalRole
+                : styles.role,
+            ]}
+            set:html={secondLine[1]}
+          />
+
+          {job.info && job.info[index].length > 0 && (
+            <li class={styles.removeBullets}>
+              <ul class={styles.moreInfoWrapper}>
+                {job.info[index].map((info) => (
+                  <li class="more-info" set:html={info} />
+                ))}
+              </ul>
+            </li>
+          )}
+        </>
+      ))}
+    </ul>
+  ))
+}
+
+<br />
+<hr />
+
+<h2>Education</h2>
+{
+  resume.education.map((school) => (
+    <ul class={styles.italicSpacer}>
+      <li class={`${styles.leftColumn} ${styles.school}`}>
+        <a class="fancytxt" href={school.url ?? ''}>
+          {school.firstLine[0]}
+        </a>
+      </li>
+      <li class={`${styles.rightColumn} ${styles.location}`}>
+        {school.firstLine[1]}
+      </li>
+      {school.secondLine.map((secondLine, index) => (
+        <>
+          <li
+            class={`${styles.leftColumn} ${styles.subLeftColumn} ${styles.degree}`}
+          >
+            {secondLine[0]}
+          </li>
+          <li
+            class={`${styles.rightColumn} ${styles.tenure}`}
+            set:html={secondLine[1]}
+          />
+
+          {school.info && school.info[index].length > 0 && (
+            <li class={styles.removeBullets}>
+              <ul class={styles.moreInfoWrapper}>
+                {school.info[index].map((info) => (
+                  <li class="more-info">{info}</li>
+                ))}
+              </ul>
+            </li>
+          )}
+        </>
+      ))}
+    </ul>
+  ))
+}
+
+<br />
+<hr />
+
+<h2>Technical Skills</h2>
+<ul>
+  {
+    resume.skills.map((skill) => (
+      <li class="skill-wrapper">
+        {skill.mainItem}
+        {skill.subItems.length > 0 && (
+          <ul>
+            {skill.subItems.map((subItem) => (
+              <li>{subItem}</li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))
+  }
+</ul>
+
+<a
+  class="subtle fancytxt"
+  href={MAILTO_RESUME}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Request the PDF version of my resume
+</a>

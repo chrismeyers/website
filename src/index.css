@@ -86,21 +86,3 @@ code {
 .hamburger-inner:before {
   background-color: var(--hamburgers-color) !important;
 }
-
-/* Global lightGallery overrides */
-.lg-container {
-  font-family: 'Open-Sans', sans-serif !important;
-}
-
-.lg-thumb-item {
-  border-color: #707070 !important;
-}
-.lg-thumb-item:hover {
-  border-color: #FFFFFF !important;
-}
-.lg-thumb-item.active {
-  border-color: var(--main-theme-color) !important;
-}
-.lg-thumb-item.active:hover {
-  border-color: var(--main-theme-color) !important;
-}

@@ -1,10 +1,10 @@
-import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import * as resume from '../../src/assets/generated/resume.ts';
-import AboutContent from '../../src/components/content/AboutContent.tsx';
+import AboutContent from '../../src/components/content/AboutContent.astro';
+import { renderAstro } from '../_astro-container.ts';
 
 describe('About page', () => {
-  it('excludes employment info is not currently employed', () => {
+  it('excludes employment info is not currently employed', async () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
       languages: { all: ['N/A'] },
       mostRecentJob: {
@@ -16,12 +16,12 @@ describe('About page', () => {
       },
     });
 
-    render(<AboutContent />);
+    const page = await renderAstro(AboutContent);
 
-    expect(screen.queryByTestId('employment')).toBeNull();
+    expect(page.queryByTestId('employment')).toBeNull();
   });
 
-  it('displays current job if currently employed', () => {
+  it('displays current job if currently employed', async () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
       languages: { all: ['Everything'] },
       mostRecentJob: {
@@ -33,9 +33,9 @@ describe('About page', () => {
       },
     });
 
-    render(<AboutContent />);
+    const page = await renderAstro(AboutContent);
 
-    const employment = screen.getByTestId('employment');
+    const employment = page.getByTestId('employment');
 
     expect(employment).toBeInTheDocument();
     expect(employment).toHaveTextContent(
@@ -43,7 +43,7 @@ describe('About page', () => {
     );
   });
 
-  it('excludes language experience if missing', () => {
+  it('excludes language experience if missing', async () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
       languages: { all: [] },
       mostRecentJob: {
@@ -55,12 +55,12 @@ describe('About page', () => {
       },
     });
 
-    render(<AboutContent />);
+    const page = await renderAstro(AboutContent);
 
-    expect(screen.queryByTestId('languages')).not.toBeInTheDocument();
+    expect(page.queryByTestId('languages')).not.toBeInTheDocument();
   });
 
-  it('displays language experience', () => {
+  it('displays language experience', async () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
       languages: {
         all: [
@@ -78,9 +78,9 @@ describe('About page', () => {
       },
     });
 
-    render(<AboutContent />);
+    const page = await renderAstro(AboutContent);
 
-    const languages = screen.getByTestId('languages');
+    const languages = page.getByTestId('languages');
 
     expect(languages).toBeInTheDocument();
     expect(languages.children).toHaveLength(3);

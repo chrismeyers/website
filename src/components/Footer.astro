@@ -1,0 +1,62 @@
+---
+import Icon from './Icon.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { GITHUB_URL, LINKEDIN_URL, MAILTO_MESSAGE } from '../constants.ts';
+import styles from '../styles/Footer.module.css';
+
+interface Props {
+  inMenu?: boolean;
+}
+
+const { inMenu = false } = Astro.props;
+const currentYear = new Date().getFullYear();
+---
+
+<footer class:list={[inMenu && styles.inMenu]}>
+  <div class={styles.links}>
+    <div class={styles.social}>
+      <a href={GITHUB_URL} title="GitHub" class="no-decoration">
+        <Icon
+          name="github"
+          class="link-image large"
+          ariaLabel="Find me on GitHub"
+        />
+      </a>
+    </div>
+
+    <div class={styles.bullets}>&bull;</div>
+
+    <div class={styles.social}>
+      <a href={LINKEDIN_URL} title="LinkedIn" class="no-decoration">
+        <Icon
+          name="linkedin"
+          class="link-image large"
+          ariaLabel="Connect with me on LinkedIn"
+        />
+      </a>
+    </div>
+
+    <div class={styles.bullets}>&bull;</div>
+
+    <div class={styles.social}>
+      <a
+        href={MAILTO_MESSAGE}
+        title="Send Message"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon name="mail" class="link-image large" ariaLabel="Send Message" />
+      </a>
+    </div>
+
+    <div class={styles.bullets}>&bull;</div>
+
+    <div class={styles.theme}>
+      <ThemeToggle />
+    </div>
+  </div>
+
+  <span class={styles.years}>
+    Designed and Developed by Chris Meyers, 2013-{currentYear}
+  </span>
+</footer>

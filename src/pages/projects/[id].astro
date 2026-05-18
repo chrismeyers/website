@@ -2,7 +2,7 @@
 import { projects, type Project } from '../../assets/data.ts';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageSection from '../../components/PageSection.astro';
-import ProjectDetail from '../../components/content/ProjectDetail.tsx';
+import ProjectDetail from '../../components/content/ProjectDetail.astro';
 import styles from '../../styles/Project.module.css';
 import { projectDescription } from '../../lib/seo.ts';
 
@@ -25,6 +25,6 @@ const { project } = Astro.props;
   image={project.images.find((img) => img?.path)?.path}
 >
   <PageSection header="Project Details" contentStyles={[styles.project]}>
-    <ProjectDetail data={project} client:only="react" />
+    <ProjectDetail data={project} />
   </PageSection>
 </BaseLayout>
