@@ -57,6 +57,14 @@ const currentYear = new Date().getFullYear();
   </div>
 
   <span class={styles.years}>
-    Designed and Developed by Chris Meyers, 2013-{currentYear}
+    Designed and Developed by Chris Meyers, 2013-<span data-footer-year
+      >{currentYear}</span
+    >
   </span>
 </footer>
+
+<script is:inline>
+  document.querySelectorAll('[data-footer-year]').forEach((el) => {
+    el.textContent = String(new Date().getFullYear());
+  });
+</script>
