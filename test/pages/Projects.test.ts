@@ -8,10 +8,10 @@ describe('Projects page', () => {
     const id = 1;
     const title = 'Project Name';
     const displayDate = 'Test Project, Always and Forever';
-    const info = 'Something involving code';
+    const summary = 'Something involving code';
 
     vi.spyOn(data, 'projects', 'get').mockReturnValue(
-      new Map([[1, { id, title, displayDate, info } as data.Project]])
+      new Map([[1, { id, title, displayDate, summary } as data.Project]])
     );
 
     const page = await renderAstro(ProjectsContent);
@@ -22,7 +22,7 @@ describe('Projects page', () => {
       `/projects/${id}`
     );
     expect(page.getByText(displayDate)).toBeInTheDocument();
-    expect(page.getByText(info)).toBeInTheDocument();
+    expect(page.getByText(summary)).toBeInTheDocument();
     expect(page.getByText(/Project Details/)).toHaveAttribute(
       'href',
       `/projects/${id}`

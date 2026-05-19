@@ -1,20 +1,7 @@
 import type { Build, Project } from '../assets/data.ts';
 import { SITE_URL } from '../constants.ts';
 
-const DESCRIPTION_MAX_LENGTH = 160;
-
-export function stripHtml(html: string): string {
-  return html
-    .replace(/<[^>]*>/g, ' ')
-    .replace(/&nbsp;/gi, ' ')
-    .replace(/&amp;/gi, '&')
-    .replace(/&lt;/gi, '<')
-    .replace(/&gt;/gi, '>')
-    .replace(/&quot;/gi, '"')
-    .replace(/&#39;/gi, "'")
-    .replace(/\s+/g, ' ')
-    .trim();
-}
+const DESCRIPTION_MAX_LENGTH = 200;
 
 export function truncate(text: string, max = DESCRIPTION_MAX_LENGTH): string {
   if (text.length <= max) {
@@ -65,14 +52,13 @@ export function pageImageUrl(
 
 export function projectDescription(project: Project): string {
   const languages = project.languages.join(', ');
-  const summary = stripHtml(project.info);
   const prefix = `${project.title} — ${languages}, ${project.displayDate}.`;
 
-  if (!summary) {
+  if (!project.summary) {
     return truncate(prefix);
   }
 
-  return truncate(`${prefix} ${summary}`);
+  return truncate(`${prefix} ${project.summary}`);
 }
 
 export function buildDescription(build: Build): string {

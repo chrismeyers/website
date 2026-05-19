@@ -14,6 +14,7 @@ describe('Project page', () => {
       startedDate: '',
       languages: ['Language 1'],
       info: 'Something involving code',
+      summary: 'Something',
       role: 'Solo project',
       status: 'Being maintained',
       images: [],
@@ -49,6 +50,7 @@ describe('Project page', () => {
       startedDate: '',
       languages: ['Language 1'],
       info: 'Something involving code',
+      summary: 'Something',
       role: 'Solo project',
       status: 'Being maintained',
       images: [
