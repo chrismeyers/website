@@ -3,6 +3,19 @@ import { SITE_URL } from '../constants.ts';
 
 const DESCRIPTION_MAX_LENGTH = 200;
 
+export function stripHtml(html: string): string {
+  return html
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 export function truncate(text: string, max = DESCRIPTION_MAX_LENGTH): string {
   if (text.length <= max) {
     return text;
@@ -52,13 +65,14 @@ export function pageImageUrl(
 
 export function projectDescription(project: Project): string {
   const languages = project.languages.join(', ');
+  const summary = stripHtml(project.summary);
   const prefix = `${project.title} — ${languages}, ${project.displayDate}.`;
 
-  if (!project.summary) {
+  if (!summary) {
     return truncate(prefix);
   }
 
-  return truncate(`${prefix} ${project.summary}`);
+  return truncate(`${prefix} ${summary}`);
 }
 
 export function buildDescription(build: Build): string {

@@ -8,6 +8,7 @@ import {
   pageImageUrl,
   projectDescription,
   projectOgImage,
+  stripHtml,
   truncate,
 } from '../src/lib/seo.ts';
 
@@ -24,7 +25,7 @@ const sampleProject: Project = {
     <br><br>
     Built with <a href="https://example.com">modern tools</a>.
   `,
-  summary: 'A cool project built with modern tools.',
+  summary: 'A <strong>cool</strong> project built with modern tools.',
   role: 'Developer',
   status: 'Complete',
   images: [
@@ -60,6 +61,14 @@ const sampleBuild: Build = {
   },
 };
 
+describe('stripHtml', () => {
+  it('removes tags and collapses whitespace', () => {
+    expect(stripHtml(sampleProject.info)).toBe(
+      'A cool project. Built with modern tools .'
+    );
+  });
+});
+
 describe('truncate', () => {
   it('returns short text unchanged', () => {
     expect(truncate('hello')).toBe('hello');
@@ -81,7 +90,7 @@ describe('projectDescription', () => {
     expect(description).toContain('Sample Project');
     expect(description).toContain('TypeScript, React');
     expect(description).toContain('Fall 2020');
-    expect(description).toContain(sampleProject.summary);
+    expect(description).toContain('A cool project built with modern tools.');
     expect(description).not.toContain('<strong>');
   });
 });
