@@ -28,5 +28,5 @@ Refer to the [Docker Compose CLI docs](https://docs.docker.com/reference/cli/doc
 
 ## Deployment
 
-This site is hosted on Cloudflare Workers and [automatically deploys via GitHub Actions](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/) when pushing or merging to the `main` branch.
+This site is hosted on Cloudflare and [automatically deploys via GitHub Actions](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/) when pushing or merging to the `main` branch.
 Including `[deploy skip]` or `[skip deploy]` in the HEAD commit message will skip the deploy job.

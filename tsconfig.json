@@ -4,7 +4,6 @@
     ".astro/types.d.ts",
     "src/**/*",
     "test/**/*",
-    "astro.config.mjs",
     "vitest.config.ts",
     "bin/**/*.ts"
   ],

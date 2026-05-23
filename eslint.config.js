@@ -44,7 +44,7 @@ export default defineConfig(
     ...tseslint.configs.disableTypeChecked,
   },
   {
-    files: ['astro.config.mjs', 'vitest.config.ts'],
+    files: ['astro.config.js', 'vitest.config.ts'],
     ...tseslint.configs.disableTypeChecked,
     languageOptions: {
       globals: globals.node,
