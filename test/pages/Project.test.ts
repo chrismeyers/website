@@ -89,6 +89,7 @@ describe('Project page', () => {
       'https://hosted.code'
     );
     expect(page.html).toContain('data-lightgallery');
+    expect(page.html).toContain('id="lg-project-1"');
   });
 
   it('displays project details without a web URL correctly', async () => {
@@ -129,5 +130,6 @@ describe('Project page', () => {
 
     expect(page.html).toContain('data-lightgallery');
     expect(page.html).toContain('data-lg-gif-restart="true"');
+    expect(page.html).toContain('id="lg-project-1"');
   });
 });

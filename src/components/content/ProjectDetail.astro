@@ -77,7 +77,12 @@ const isGif = firstImage?.path.toLowerCase().endsWith('.gif') ?? false;
       <div class={styles.images}>
         {isGif ? (
           <div class={styles.gifOverlay} title="Play GIF">
-            <LightGallery enableDrag={false} enableSwipe={false} gifRestart>
+            <LightGallery
+              id={`lg-project-${data.id}`}
+              enableDrag={false}
+              enableSwipe={false}
+              gifRestart
+            >
               <a href={firstImage.path}>
                 <img
                   src={firstImage.thumbnail ?? ''}
@@ -99,6 +104,7 @@ const isGif = firstImage?.path.toLowerCase().endsWith('.gif') ?? false;
           </div>
         ) : (
           <LightGallery
+            id={`lg-project-${data.id}`}
             thumbnail
             selector=".image"
             plugins={['thumbnail', 'zoom']}

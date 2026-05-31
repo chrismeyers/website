@@ -117,5 +117,6 @@ describe('Build page', () => {
 
     expect(page.getByText(build.displayDate)).toBeInTheDocument();
     expect(page.html).toContain('data-lightgallery');
+    expect(page.html).toContain('id="lg-build-1"');
   });
 });

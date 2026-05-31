@@ -77,7 +77,7 @@ const { data } = Astro.props;
   {
     data.image && (
       <div class={styles.pic}>
-        <LightGallery plugins={['zoom']}>
+        <LightGallery id={`lg-build-${data.id}`} plugins={['zoom']}>
           <a href={data.image.path}>
             <img
               src={data.image.path}
