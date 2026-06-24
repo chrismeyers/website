@@ -10,8 +10,15 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version-file: 'package.json'
-          cache: 'npm'
       - run: npm ci
+      - name: Verify install script allowlist
+        run: |
+          pending=$(npm approve-scripts --allow-scripts-pending)
+          echo "$pending"
+          if ! echo "$pending" | grep -q 'No packages with unreviewed install scripts'; then
+            echo '::error::allowScripts in package.json is out of date. Review pending packages and run `npm approve-scripts`.'
+            exit 1
+          fi
       - run: npm run build
       - run: npm run check
       - run: npm run format
