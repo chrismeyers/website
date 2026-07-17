@@ -6,7 +6,7 @@ import { renderAstro } from '../_astro-container.ts';
 describe('About page', () => {
   it('excludes employment info is not currently employed', async () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
-      languages: { all: ['N/A'] },
+      languages: ['N/A'],
       mostRecentJob: {
         employed: false,
         company: 'Nope',
@@ -23,7 +23,7 @@ describe('About page', () => {
 
   it('displays current job if currently employed', async () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
-      languages: { all: ['Everything'] },
+      languages: ['Everything'],
       mostRecentJob: {
         employed: true,
         company: 'Somewhere',
@@ -45,7 +45,7 @@ describe('About page', () => {
 
   it('excludes language experience if missing', async () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
-      languages: { all: [] },
+      languages: [],
       mostRecentJob: {
         employed: true,
         company: 'Somewhere',
@@ -62,13 +62,11 @@ describe('About page', () => {
 
   it('displays language experience', async () => {
     vi.spyOn(resume, 'summary', 'get').mockReturnValue({
-      languages: {
-        all: [
-          'Language 1 (Something 1, Something 2)',
-          'Language 2',
-          'Language 3 (Something 3)',
-        ],
-      },
+      languages: [
+        'Language 1 (Something 1, Something 2)',
+        'Language 2',
+        'Language 3 (Something 3)',
+      ],
       mostRecentJob: {
         employed: true,
         company: 'Somewhere',

@@ -188,15 +188,15 @@ describe('Resume page', () => {
       education: [],
       skills: [
         {
-          mainItem: 'Multiple subitems',
+          mainItem: { title: 'Multiple subitems:', items: [] },
           subItems: ['Sub 1', 'Sub 2a'],
         },
         {
-          mainItem: 'One subitem',
+          mainItem: { title: 'One subitem:', items: [] },
           subItems: ['Sub 3'],
         },
         {
-          mainItem: 'No subitems',
+          mainItem: { title: '', items: ['Simple line'] },
           subItems: [],
         },
       ],
@@ -204,16 +204,16 @@ describe('Resume page', () => {
 
     const page = await renderAstro(ResumeContent);
 
-    const multiple = page.getByText('Multiple subitems');
-    expect(multiple).toHaveClass('skill-wrapper');
-    expect(multiple.querySelector('ul')?.children.length).toBe(2);
+    const multi = page.getByText('Multiple subitems:');
+    expect(multi.parentElement).toHaveClass('skill-wrapper');
+    expect(multi.parentElement?.querySelector('ul')?.children.length).toBe(2);
 
-    const one = page.getByText('One subitem');
-    expect(one).toHaveClass('skill-wrapper');
-    expect(one.querySelector('ul')?.children.length).toBe(1);
+    const one = page.getByText('One subitem:');
+    expect(one.parentElement).toHaveClass('skill-wrapper');
+    expect(one.parentElement?.querySelector('ul')?.children.length).toBe(1);
 
-    const none = page.getByText('No subitems');
-    expect(none).toHaveClass('skill-wrapper');
-    expect(none.querySelector('ul')).toBeNull();
+    const simple = page.getByText('Simple line');
+    expect(simple).toHaveClass('skill-wrapper');
+    expect(simple.querySelector('ul')).toBeNull();
   });
 });

@@ -18,15 +18,13 @@ type Resume = {
     info: string[][];
   }[];
   skills: {
-    mainItem: string;
+    mainItem: { title: string; items: string[] };
     subItems: string[];
   }[];
 };
 
 type ResumeSummary = {
-  languages: {
-    [key: string]: string[];
-  };
+  languages: string[];
   mostRecentJob: {
     employed: boolean;
     company: string;
@@ -158,39 +156,42 @@ export default class ResumeParser {
 
   parseListSection(section: string, removeInlineComments: boolean = true) {
     const itemPattern = String.raw`\item`;
-    const circleItemPattern = String.raw`\item[$\circ$]`;
-    const beginSubPattern = String.raw`\begin{itemize*}`;
-    const endSubPattern = String.raw`\end{itemize*}`;
+    const titleBeginPattern = String.raw`\textbf{`;
+    const titleEndPattern = '}';
 
     const items: {
-      mainItem: string;
+      mainItem: { title: string; items: string[] };
       subItems: string[];
     }[] = [];
-    let subItem = false;
-    let count = 0;
 
     this.#rawSections[section].forEach((line) => {
-      if (line.startsWith(beginSubPattern)) {
-        subItem = true;
-      } else if (line.startsWith(endSubPattern)) {
-        subItem = false;
-      } else if (line.startsWith(itemPattern)) {
-        if (subItem) {
-          const cleaned = ResumeParser.#cleanString(
-            line.substring(circleItemPattern.length + 1),
+      if (line.startsWith(itemPattern)) {
+        const data = { title: '', items: [] as string[] };
+        const trimmed = line.replace(itemPattern, '').trim();
+
+        if (trimmed.startsWith(titleBeginPattern)) {
+          const beginPatternIndex =
+            trimmed.indexOf(titleBeginPattern) + titleBeginPattern.length;
+          const endPatternIndex = trimmed.indexOf(titleEndPattern);
+
+          data.title = ResumeParser.#cleanString(
+            trimmed
+              .substring(beginPatternIndex, endPatternIndex)
+              .replaceAll(titleEndPattern, ''),
             removeInlineComments
           );
 
-          items[count - 1].subItems.push(cleaned);
+          data.items = trimmed
+            .substring(endPatternIndex + titleEndPattern.length + 1)
+            .split(/(?!\(.*),(?![^(]*?\))/) // Splits the language lists on commas, except within parentheses
+            .map((s) => ResumeParser.#cleanString(s, removeInlineComments));
         } else {
-          const cleaned = ResumeParser.#cleanString(
-            line.substring(itemPattern.length + 1),
-            removeInlineComments
-          );
-
-          items.push({ mainItem: cleaned, subItems: [] });
-          count += 1;
+          data.items = [
+            ResumeParser.#cleanString(trimmed, removeInlineComments),
+          ];
         }
+
+        items.push({ mainItem: data, subItems: [] });
       }
     });
 
@@ -198,26 +199,15 @@ export default class ResumeParser {
   }
 
   getLanguages() {
-    const languagesPattern = '% LANGUAGES';
-    const langMap: Record<string, string[]> = {};
     const skills = this.parseListSection('TechnicalSkills', false);
+    const languages = skills.find(
+      (skill) =>
+        skill.mainItem.title.toLowerCase().replace(':', '') === 'languages'
+    );
 
-    skills.forEach((skill) => {
-      if (skill.mainItem.includes(languagesPattern)) {
-        const [type, delimiter] = skill.mainItem
-          .split(languagesPattern)[1]
-          .trim()
-          .split(' ');
+    if (!languages) return [];
 
-        langMap[type] = skill.mainItem
-          .split(delimiter)[1]
-          .split(languagesPattern)[0]
-          .split(/(?!\(.*),(?![^(]*?\))/) // Splits the language lists on commas, except within parentheses
-          .map((s) => s.trim());
-      }
-    });
-
-    return langMap;
+    return languages.mainItem.items;
   }
 
   getMostRecentJob() {

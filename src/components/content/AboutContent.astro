@@ -47,14 +47,14 @@ import { MAILTO_MESSAGE } from '../../constants.ts';
 </ul>
 
 {
-  summary.languages.all.length > 0 && (
+  summary.languages.length > 0 && (
     <>
       <p>
         Over the years, I've gained experience developing software ranging from
         desktop and CLI applications to web applications and REST APIs using:
       </p>
       <ul data-testid="languages">
-        {summary.languages.all.map((item) => (
+        {summary.languages.map((item) => (
           <li>{item}</li>
         ))}
       </ul>

@@ -52,20 +52,28 @@ describe('Resume Parser', () => {
 
       expect(items).toStrictEqual([
         {
-          mainItem:
-            'Language list 100% delimiter Language 1 (Something 1, Something 2), Language 2, Language 3 (Something 3)',
-          subItems: ['Sub item A'],
-        },
-        {
-          mainItem: 'Item 1',
-          subItems: ['Sub item B'],
-        },
-        {
-          mainItem: 'Item 2',
+          mainItem: {
+            title: 'Languages:',
+            items: [
+              'Language 1 (Something 1, Something 2)',
+              'Language 2',
+              'Language 3 (Something 3)',
+            ],
+          },
           subItems: [],
         },
         {
-          mainItem: 'Item 3',
+          mainItem: {
+            title: 'Stuff:',
+            items: ['A', 'B', 'C'],
+          },
+          subItems: [],
+        },
+        {
+          mainItem: {
+            title: '',
+            items: ['This is just a 100% normal line'],
+          },
           subItems: [],
         },
       ]);
@@ -76,13 +84,11 @@ describe('Resume Parser', () => {
     it('parses language summary', () => {
       const item = parser.getLanguages();
 
-      expect(item).toStrictEqual({
-        all: [
-          'Language 1 (Something 1, Something 2)',
-          'Language 2',
-          'Language 3 (Something 3)',
-        ],
-      });
+      expect(item).toStrictEqual([
+        'Language 1 (Something 1, Something 2)',
+        'Language 2',
+        'Language 3 (Something 3)',
+      ]);
     });
 
     it('parses most recent job', () => {

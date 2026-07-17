@@ -107,7 +107,8 @@ import styles from '../../styles/Resume.module.css';
   {
     resume.skills.map((skill) => (
       <li class="skill-wrapper">
-        {skill.mainItem}
+        {skill.mainItem.title !== '' && <b>{skill.mainItem.title}&nbsp;</b>}
+        {skill.mainItem.items.join(', ')}
         {skill.subItems.length > 0 && (
           <ul>
             {skill.subItems.map((subItem) => (
