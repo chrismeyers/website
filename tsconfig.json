@@ -4,8 +4,11 @@
     ".astro/types.d.ts",
     "src/**/*",
     "test/**/*",
-    "vitest.config.ts",
-    "bin/**/*.ts"
+    "bin/**/*.ts",
+    "astro.config.ts",
+    "oxfmt.config.ts",
+    "oxlint.config.ts",
+    "vitest.config.ts"
   ],
   "exclude": ["dist", "node_modules"],
   "compilerOptions": {
