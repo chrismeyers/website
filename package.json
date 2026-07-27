@@ -7,10 +7,6 @@
       "name": "node",
       "version": "24.18.0",
       "onFail": "warn"
-    },
-    "packageManager": {
-      "name": "npm",
-      "onFail": "error"
     }
   },
   "type": "module",
