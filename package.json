@@ -17,8 +17,8 @@
     "test:ci": "CI=true vitest run --coverage",
     "lint": "oxlint .",
     "lint:fix": "oxlint . --fix",
-    "format": "oxfmt '**/*.{ts,js,mjs,cjs}' && prettier --experimental-cli --write '**/*.astro'",
-    "format:check": "oxfmt --check '**/*.{ts,js,mjs,cjs}' && prettier --experimental-cli --check '**/*.astro'",
+    "format": "prettier --experimental-cli --write '**/*.{ts,js,mjs,cjs,astro}'",
+    "format:check": "prettier --experimental-cli --check '**/*.{ts,js,mjs,cjs,astro}'",
     "check": "astro check",
     "dev": "astro dev",
     "generate": "bin/generate.sh",
@@ -40,7 +40,6 @@
     "@vitest/coverage-v8": "^4.1.10",
     "astro": "^7.1.5",
     "jsdom": "^30.0.0",
-    "oxfmt": "^0.61.0",
     "oxlint": "^1.76.0",
     "oxlint-tsgolint": "^7.0.2001",
     "prettier": "3.9.6",
@@ -52,7 +51,6 @@
   "allowScripts": {
     "esbuild@0.28.1": true,
     "fsevents@2.3.3": true,
-    "sharp@0.34.5": true,
     "workerd@1.20260722.1": true
   }
 }

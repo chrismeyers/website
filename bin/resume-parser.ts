@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import ts from 'typescript';
-import { format } from 'oxfmt';
-import oxfmtConfig from '../oxfmt.config.ts';
+import prettier from 'prettier';
+import prettierrc from '../prettier.config.ts';
 
 type Resume = {
   experience: {
@@ -290,25 +290,22 @@ if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const resumeType = printTypeAlias('Resume');
   const resumeSummaryType = printTypeAlias('ResumeSummary');
 
-  const source = `
-    // WARNING: This file is generated, do not edit directly!
-    // Edit the resume source file and regenerate instead.
+  fs.writeFileSync(
+    generatedPath,
+    await prettier.format(
+      `
+        // WARNING: This file is generated, do not edit directly!
+        // Edit the resume source file and regenerate instead.
 
-    ${resumeType}
+        ${resumeType}
 
-    ${resumeSummaryType}
+        ${resumeSummaryType}
 
-    export const full: Resume = ${JSON.stringify(parsed.full)};
+        export const full: Resume = ${JSON.stringify(parsed.full)};
 
-    export const summary: ResumeSummary = ${JSON.stringify(parsed.summary)};
-  `;
-  const { code, errors } = await format(generatedPath, source, oxfmtConfig);
-
-  if (errors.length > 0) {
-    throw new Error(
-      `Failed to format generated resume module: ${errors.map((error) => error.message).join('\n')}`
-    );
-  }
-
-  fs.writeFileSync(generatedPath, code);
+        export const summary: ResumeSummary = ${JSON.stringify(parsed.summary)};
+      `,
+      { parser: 'typescript', ...prettierrc }
+    )
+  );
 }

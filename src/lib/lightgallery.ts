@@ -30,8 +30,7 @@ export interface LightGalleryOptions {
 const restartGif = () => {
   setTimeout(() => {
     const gif = document.getElementsByClassName('lg-image')[0] as
-      | HTMLImageElement
-      | undefined;
+      HTMLImageElement | undefined;
 
     if (gif) {
       // TODO: Browsers like FireFox and Safari don't restart GIFs when setting

@@ -1,7 +1,6 @@
-// @ts-check
+import { type Config } from 'prettier';
 
-/** @type {import('prettier').Config} */
-export default {
+const config: Config = {
   singleQuote: true,
   trailingComma: 'es5',
   plugins: ['prettier-plugin-astro'],
@@ -14,3 +13,5 @@ export default {
     },
   ],
 };
+
+export default config;
