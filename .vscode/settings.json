@@ -1,0 +1,8 @@
+{
+  "[javascript][typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+}
