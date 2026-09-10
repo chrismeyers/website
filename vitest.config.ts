@@ -11,5 +11,6 @@ export default getViteConfig({
       provider: 'v8',
     },
     reporters: process.env.CI ? ['verbose'] : ['tree'],
+    fsModuleCache: true,
   },
 });

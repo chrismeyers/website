@@ -40,20 +40,18 @@ const { pathname } = Astro.props;
     <div id="mobile-menu" hidden data-mobile-menu>
       <div class={mobileStyles.menuOverlay} data-menu-overlay></div>
       <div class={mobileStyles.menu} data-menu-panel>
-        {
-          NAVIGATION.map((item) => (
-            <a
-              class:list={[
-                'nav-link',
-                { 'nav-selected': isNavCurrent(pathname, item) },
-              ]}
-              href={item.path}
-              data-nav-close
-            >
-              <div class={mobileStyles.menuItem}>{item.name}</div>
-            </a>
-          ))
-        }
+        {NAVIGATION.map((item) => (
+          <a
+            class:list={[
+              'nav-link',
+              { 'nav-selected': isNavCurrent(pathname, item) },
+            ]}
+            href={item.path}
+            data-nav-close
+          >
+            <div class={mobileStyles.menuItem}>{item.name}</div>
+          </a>
+        ))}
         <Footer inMenu />
       </div>
     </div>

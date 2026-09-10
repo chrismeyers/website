@@ -45,21 +45,19 @@ const isGif = firstImage?.path.toLowerCase().endsWith('.gif') ?? false;
       <dt class="dt-mod dt-links">
         <b>Links</b>
       </dt>
-      {
-        data.webUrl !== null && (
-          <dd class="link-image">
-            <Icon
-              name="link-external"
-              class="link-image small"
-              title="External website"
-              ariaLabel="Link to external website"
-            />{' '}
-            <a href={data.webUrl} class="fancytxt">
-              Website
-            </a>
-          </dd>
-        )
-      }
+      {data.webUrl !== null && (
+        <dd class="link-image">
+          <Icon
+            name="link-external"
+            class="link-image small"
+            title="External website"
+            ariaLabel="Link to external website"
+          />{' '}
+          <a href={data.webUrl} class="fancytxt">
+            Website
+          </a>
+        </dd>
+      )}
       <dd class="link-image">
         <Icon
           name="github"
@@ -67,86 +65,84 @@ const isGif = firstImage?.path.toLowerCase().endsWith('.gif') ?? false;
           title="GitHub repository"
           ariaLabel="Link to GitHub repository"
         />{' '}
-        <a href={data.codeUrl} class="fancytxt"> Code </a>
+        <a href={data.codeUrl} class="fancytxt">
+          {' '}
+          Code{' '}
+        </a>
       </dd>
     </dl>
   </div>
 
-  {
-    firstImage && (
-      <div class={styles.images}>
-        {isGif ? (
-          <div class={styles.gifOverlay} title="Play GIF">
-            <LightGallery
-              id={`lg-project-${data.id}`}
-              enableDrag={false}
-              enableSwipe={false}
-              gifRestart
-            >
-              <a href={firstImage.path}>
-                <img
-                  src={firstImage.thumbnail ?? ''}
-                  class:list={[
-                    styles.imagesFull,
-                    styles[firstImage.orientation],
-                  ]}
-                  alt={firstImage.title}
-                  title="Click to enlarge"
-                />
-              </a>
-            </LightGallery>
-            <Icon
-              name="play"
-              class="link-image xlarge play-overlay"
-              title="Play GIF"
-              ariaLabel="Plays the associated GIF"
-            />
-          </div>
-        ) : (
+  {firstImage && (
+    <div class={styles.images}>
+      {isGif ? (
+        <div class={styles.gifOverlay} title="Play GIF">
           <LightGallery
             id={`lg-project-${data.id}`}
-            thumbnail
-            selector=".image"
-            plugins={['thumbnail', 'zoom']}
+            enableDrag={false}
+            enableSwipe={false}
+            gifRestart
           >
-            <a class="image" href={firstImage.path}>
+            <a href={firstImage.path}>
               <img
-                src={firstImage.path}
-                class:list={[
-                  styles.imagesFull,
-                  styles[firstImage.orientation ?? 'square'],
-                ]}
+                src={firstImage.thumbnail ?? ''}
+                class:list={[styles.imagesFull, styles[firstImage.orientation]]}
                 alt={firstImage.title}
                 title="Click to enlarge"
               />
             </a>
-
-            {images.length > 1 && (
-              <>
-                <br />
-                {images.slice(1).map((image) => (
-                  <div
-                    class:list={['image', styles.imagesSmall]}
-                    data-src={image.path}
-                  >
-                    <a href={image.path}>
-                      <img
-                        src={image.path}
-                        class:list={[
-                          styles.imagesSmall,
-                          styles[image.orientation ?? 'square'],
-                        ]}
-                        alt={image.title}
-                        title="Click to enlarge"
-                      />
-                    </a>
-                  </div>
-                ))}
-              </>
-            )}
           </LightGallery>
-        )}
-      </div>
-    )
-  }
+          <Icon
+            name="play"
+            class="link-image xlarge play-overlay"
+            title="Play GIF"
+            ariaLabel="Plays the associated GIF"
+          />
+        </div>
+      ) : (
+        <LightGallery
+          id={`lg-project-${data.id}`}
+          thumbnail
+          selector=".image"
+          plugins={['thumbnail', 'zoom']}
+        >
+          <a class="image" href={firstImage.path}>
+            <img
+              src={firstImage.path}
+              class:list={[
+                styles.imagesFull,
+                styles[firstImage.orientation ?? 'square'],
+              ]}
+              alt={firstImage.title}
+              title="Click to enlarge"
+            />
+          </a>
+
+          {images.length > 1 && (
+            <>
+              <br />
+              {images.slice(1).map((image) => (
+                <div
+                  class:list={['image', styles.imagesSmall]}
+                  data-src={image.path}
+                >
+                  <a href={image.path}>
+                    <img
+                      src={image.path}
+                      class:list={[
+                        styles.imagesSmall,
+                        styles[image.orientation ?? 'square'],
+                      ]}
+                      alt={image.title}
+                      title="Click to enlarge"
+                    />
+                  </a>
+                </div>
+              ))}
+            </>
+          )}
+        </LightGallery>
+      )}
+    </div>
+  )}
 </div>

@@ -18,21 +18,19 @@ const { pathname } = Astro.props;
       </span>
     </a>
     <ul class={fullStyles.sideNavItems}>
-      {
-        NAVIGATION.map((item) => (
-          <li {...{ key: item.name }}>
-            <a
-              class:list={[
-                'nav-link',
-                { 'nav-selected': isNavCurrent(pathname, item) },
-              ]}
-              href={item.path}
-            >
-              {item.name}
-            </a>
-          </li>
-        ))
-      }
+      {NAVIGATION.map((item) => (
+        <li {...{ key: item.name }}>
+          <a
+            class:list={[
+              'nav-link',
+              { 'nav-selected': isNavCurrent(pathname, item) },
+            ]}
+            href={item.path}
+          >
+            {item.name}
+          </a>
+        </li>
+      ))}
     </ul>
   </div>
 </nav>

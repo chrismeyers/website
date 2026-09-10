@@ -11,23 +11,23 @@ import { MAILTO_MESSAGE } from '../../constants.ts';
 <ul>
   <li>
     I studied computer science at{' '}
-    <a class="fancytxt" href="https://www.rowan.edu">Rowan University</a> in Glassboro,
-    NJ and earned a Bachelor of Science in Computer Science
+    <a class="fancytxt" href="https://www.rowan.edu">
+      Rowan University
+    </a>{' '}
+    in Glassboro, NJ and earned a Bachelor of Science in Computer Science
   </li>
-  {
-    summary.mostRecentJob.employed && (
-      <li data-testid="employment">
-        Currently, I am employed as a {summary.mostRecentJob.title} at{' '}
-        {summary.mostRecentJob.url ? (
-          <a href={summary.mostRecentJob.url} class="fancytxt">
-            {summary.mostRecentJob.company}
-          </a>
-        ) : (
-          <span>{summary.mostRecentJob.company}</span>
-        )}
-      </li>
-    )
-  }
+  {summary.mostRecentJob.employed && (
+    <li data-testid="employment">
+      Currently, I am employed as a {summary.mostRecentJob.title} at{' '}
+      {summary.mostRecentJob.url ? (
+        <a href={summary.mostRecentJob.url} class="fancytxt">
+          {summary.mostRecentJob.company}
+        </a>
+      ) : (
+        <span>{summary.mostRecentJob.company}</span>
+      )}
+    </li>
+  )}
 
   <li>
     Some of my hobbies include:
@@ -39,28 +39,28 @@ import { MAILTO_MESSAGE } from '../../constants.ts';
       </li>
       <li>Photography</li>
       <li>
-        <a class="fancytxt" href="/builds">Building custom computers</a>
+        <a class="fancytxt" href="/builds">
+          Building custom computers
+        </a>
       </li>
       <li>Chess</li>
     </ul>
   </li>
 </ul>
 
-{
-  summary.languages.length > 0 && (
-    <>
-      <p>
-        Over the years, I've gained experience developing software ranging from
-        desktop and CLI applications to web applications and REST APIs using:
-      </p>
-      <ul data-testid="languages">
-        {summary.languages.map((item) => (
-          <li>{item}</li>
-        ))}
-      </ul>
-    </>
-  )
-}
+{summary.languages.length > 0 && (
+  <>
+    <p>
+      Over the years, I've gained experience developing software ranging from
+      desktop and CLI applications to web applications and REST APIs using:
+    </p>
+    <ul data-testid="languages">
+      {summary.languages.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
+  </>
+)}
 
 <p>
   As a professional software engineer, I strive to write simple, modular, and
@@ -71,6 +71,9 @@ import { MAILTO_MESSAGE } from '../../constants.ts';
     href={MAILTO_MESSAGE}
     class="fancytxt"
     target="_blank"
-    rel="noopener noreferrer">send me a message</a
-  >.
+    rel="noopener noreferrer"
+  >
+    send me a message
+  </a>
+  .
 </p>

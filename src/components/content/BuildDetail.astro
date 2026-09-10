@@ -22,16 +22,14 @@ const { data } = Astro.props;
         <b>CPU</b>
       </dt>
       <dd>{data.cpu}</dd>
-      {
-        data.cool !== null && (
-          <>
-            <dt class="dt-mod">
-              <b>Cooling</b>
-            </dt>
-            <dd>{data.cool}</dd>
-          </>
-        )
-      }
+      {data.cool !== null && (
+        <>
+          <dt class="dt-mod">
+            <b>Cooling</b>
+          </dt>
+          <dd>{data.cool}</dd>
+        </>
+      )}
       <dt class="dt-mod">
         <b>Motherboard</b>
       </dt>
@@ -40,30 +38,26 @@ const { data } = Astro.props;
         <b>RAM</b>
       </dt>
       <dd>{data.ram}</dd>
-      {
-        data.ssd !== null && (
-          <>
-            <dt class="dt-mod">
-              <b>SSD</b>
-            </dt>
-            {data.ssd.map((ssd) => (
-              <dd>{ssd.trim()}</dd>
-            ))}
-          </>
-        )
-      }
-      {
-        data.hdd !== null && (
-          <>
-            <dt class="dt-mod">
-              <b>HDD</b>
-            </dt>
-            {data.hdd.map((hdd) => (
-              <dd>{hdd.trim()}</dd>
-            ))}
-          </>
-        )
-      }
+      {data.ssd !== null && (
+        <>
+          <dt class="dt-mod">
+            <b>SSD</b>
+          </dt>
+          {data.ssd.map((ssd) => (
+            <dd>{ssd.trim()}</dd>
+          ))}
+        </>
+      )}
+      {data.hdd !== null && (
+        <>
+          <dt class="dt-mod">
+            <b>HDD</b>
+          </dt>
+          {data.hdd.map((hdd) => (
+            <dd>{hdd.trim()}</dd>
+          ))}
+        </>
+      )}
       <dt class="dt-mod">
         <b>Case</b>
       </dt>
@@ -74,21 +68,19 @@ const { data } = Astro.props;
       <dd>{data.psu}</dd>
     </dl>
   </div>
-  {
-    data.image && (
-      <div class={styles.pic}>
-        <LightGallery id={`lg-build-${data.id}`} plugins={['zoom']}>
-          <a href={data.image.path}>
-            <img
-              src={data.image.path}
-              class={styles[data.image.orientation]}
-              alt={data.image.title}
-              data-sub-html={data.image.title}
-              title="Click to enlarge"
-            />
-          </a>
-        </LightGallery>
-      </div>
-    )
-  }
+  {data.image && (
+    <div class={styles.pic}>
+      <LightGallery id={`lg-build-${data.id}`} plugins={['zoom']}>
+        <a href={data.image.path}>
+          <img
+            src={data.image.path}
+            class={styles[data.image.orientation]}
+            alt={data.image.title}
+            data-sub-html={data.image.title}
+            title="Click to enlarge"
+          />
+        </a>
+      </LightGallery>
+    </div>
+  )}
 </div>
