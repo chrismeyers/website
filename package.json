@@ -38,7 +38,7 @@
     "@types/jsdom": "^30.0.0",
     "@types/node": "^24.13.3",
     "@vitest/coverage-v8": "^4.1.10",
-    "astro": "^7.2.1",
+    "astro": "^7.2.8",
     "jsdom": "^30.0.1",
     "oxfmt": "^0.63.0",
     "oxlint": "^1.78.0",
