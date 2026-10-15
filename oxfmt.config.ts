@@ -5,5 +5,5 @@ export default defineConfig({
   trailingComma: 'es5',
   printWidth: 80,
   sortPackageJson: false,
-  ignorePatterns: ['**/*.astro'],
+  astro: true,
 });
